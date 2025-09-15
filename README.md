@@ -30,7 +30,7 @@ It bridges the gap between tourists, local communities, and service providers th
 | 2410030170   | Tanish Oberoi |
 | 2410030316   | Yash Raj  |
 | 2410030304   | Shreesh   |
-| 2410030533   | Nihal Pakkireddy Reddy  |
+| 2410030533   | Pakkireddy Nihal Reddy  |
 | 2410030020   | Sriya Gayatri  |
 | 2410030057   | Kulkarni Sahithi     |
 
