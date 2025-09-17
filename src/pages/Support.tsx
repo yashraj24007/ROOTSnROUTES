@@ -4,11 +4,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, MessageSquare, HelpCircle, BookOpen, Users } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare, HelpCircle, BookOpen, Users, Bot, Zap } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useState } from "react";
 
 const Support = () => {
   const { t } = useLanguage();
+  const [showAISupport, setShowAISupport] = useState(false);
+
+  const handleAISupport = () => {
+    setShowAISupport(true);
+    // Trigger the FloatingAIAssistant to open
+    window.dispatchEvent(new CustomEvent('openAIAssistant'));
+  };
 
   const supportOptions = [
     {
@@ -69,12 +77,12 @@ const Support = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 mt-16 bg-gradient-to-r from-blue-50 to-emerald-50">
+      <section className="relative py-20 mt-16 bg-gradient-hero">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {t('support.title')}
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-forest-300 max-w-3xl mx-auto">
             {t('support.subtitle')}
           </p>
         </div>
@@ -107,8 +115,104 @@ const Support = () => {
         </div>
       </section>
 
+      {/* 24/7 AI Support Section */}
+      <section className="py-20 bg-gradient-to-r from-emerald-50 to-blue-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-foreground mb-6">24/7 AI Travel Assistant</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Get instant support anytime, anywhere with our intelligent AI assistant powered by advanced language models
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="text-center hover:shadow-organic-lg transition-all duration-300">
+              <CardHeader>
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Bot className="w-8 h-8 text-emerald-600" />
+                </div>
+                <CardTitle>Instant Responses</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Get immediate answers to your travel questions, 24 hours a day, 7 days a week.
+                </p>
+                <Button 
+                  onClick={handleAISupport}
+                  className="w-full bg-emerald-600 hover:bg-emerald-700"
+                >
+                  Chat with AI Assistant
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center hover:shadow-organic-lg transition-all duration-300">
+              <CardHeader>
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-8 h-8 text-blue-600" />
+                </div>
+                <CardTitle>Smart Recommendations</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Receive personalized travel suggestions based on your preferences and interests.
+                </p>
+                <Button 
+                  onClick={handleAISupport}
+                  variant="outline" 
+                  className="w-full border-blue-600 text-blue-600 hover:bg-blue-50"
+                >
+                  Get Recommendations
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center hover:shadow-organic-lg transition-all duration-300">
+              <CardHeader>
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MessageSquare className="w-8 h-8 text-purple-600" />
+                </div>
+                <CardTitle>Emergency Support</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Access emergency travel assistance and connect with local support when needed.
+                </p>
+                <Button 
+                  onClick={handleAISupport}
+                  variant="outline" 
+                  className="w-full border-purple-600 text-purple-600 hover:bg-purple-50"
+                >
+                  Emergency Help
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <Card className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white border-0 shadow-2xl">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-bold mb-4">Start Your AI-Powered Support Experience</h3>
+                <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+                  Our AI assistant is trained on comprehensive Jharkhand travel information and can help with bookings, 
+                  itinerary planning, local insights, and emergency situations.
+                </p>
+                <Button 
+                  onClick={handleAISupport}
+                  size="lg" 
+                  className="bg-white text-emerald-600 hover:bg-gray-100 font-semibold"
+                >
+                  <Bot className="w-5 h-5 mr-2" />
+                  Launch AI Assistant
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Form */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gradient-subtle">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">{t('support.sendMessage')}</h2>
@@ -188,9 +292,14 @@ const Support = () => {
               <Phone className="w-5 h-5 mr-2" />
               {t('support.emergency.call')}
             </Button>
-            <Button size="lg" variant="outline" className="border-red-600 text-red-600">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-red-600 text-red-600"
+              onClick={handleAISupport}
+            >
               <MessageSquare className="w-5 h-5 mr-2" />
-              {t('support.emergency.chat')}
+              AI Emergency Support
             </Button>
           </div>
         </div>

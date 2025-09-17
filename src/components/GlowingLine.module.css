@@ -1,0 +1,178 @@
+/* GlowingLine CSS Module - Forest & Autumn Theme - Responsive for all devices */
+.container {
+  background: var(--background, hsl(25 15% 8%));
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.lineContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: hsl(var(--forest-primary) / 0.1);
+  border: 1px solid hsl(var(--forest-primary) / 0.3);
+  width: var(--line-width, min(400px, 90vw));
+  height: var(--line-height, 8px);
+  max-width: 90vw;
+  min-width: 200px;
+  transition-duration: var(--duration, 2000ms);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .lineContainer {
+    width: var(--line-width, min(300px, 85vw));
+    height: var(--line-height, 6px);
+    min-width: 150px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .lineContainer {
+    width: var(--line-width, min(500px, 80vw));
+    height: var(--line-height, 8px);
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 1025px) {
+  .container {
+    padding: 2rem;
+  }
+  
+  .lineContainer {
+    width: var(--line-width, min(600px, 70vw));
+    height: var(--line-height, 10px);
+  }
+}
+
+/* Large screens */
+@media (min-width: 1440px) {
+  .lineContainer {
+    width: var(--line-width, min(800px, 60vw));
+    height: var(--line-height, 12px);
+  }
+}
+
+.glowingLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, 
+    hsl(var(--forest-primary)), 
+    hsl(var(--autumn-primary)), 
+    hsl(var(--golden-500)), 
+    hsl(var(--autumn-primary)), 
+    hsl(var(--forest-primary))
+  );
+  box-shadow: 
+    0 0 min(20px, 4vw) hsl(var(--forest-primary) / 0.6),
+    0 0 min(40px, 8vw) hsl(var(--autumn-primary) / 0.4),
+    0 0 min(60px, 12vw) hsl(var(--forest-primary) / 0.2),
+    inset 0 0 min(20px, 4vw) hsl(var(--autumn-primary) / 0.3);
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: var(--duration, 2000ms);
+}
+
+.glowEffect {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: radial-gradient(ellipse, 
+    hsl(var(--forest-primary) / 0.3) 0%, 
+    hsl(var(--autumn-primary) / 0.2) 40%, 
+    transparent 70%
+  );
+  filter: blur(min(4px, 1vw));
+  height: var(--glow-height, min(24px, 6vw));
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: var(--duration, 2000ms);
+}
+
+/* Responsive glow adjustments */
+@media (max-width: 640px) {
+  .glowingLine {
+    box-shadow: 
+      0 0 10px hsl(var(--forest-primary) / 0.6),
+      0 0 20px hsl(var(--autumn-primary) / 0.4),
+      0 0 30px hsl(var(--forest-primary) / 0.2),
+      inset 0 0 10px hsl(var(--autumn-primary) / 0.3);
+  }
+  
+  .glowEffect {
+    filter: blur(2px);
+    height: var(--glow-height, 18px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .glowingLine {
+    box-shadow: 
+      0 0 25px hsl(var(--forest-primary) / 0.6),
+      0 0 50px hsl(var(--autumn-primary) / 0.4),
+      0 0 75px hsl(var(--forest-primary) / 0.2),
+      inset 0 0 25px hsl(var(--autumn-primary) / 0.3);
+  }
+  
+  .glowEffect {
+    filter: blur(6px);
+    height: var(--glow-height, 36px);
+  }
+}
+
+.lineInitial {
+  width: 0;
+}
+
+.lineAnimated {
+  width: 100%;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Reduce motion for users with motion sensitivity */
+@media (prefers-reduced-motion: reduce) {
+  .glowingLine,
+  .glowEffect {
+    transition-duration: 0.3s;
+  }
+  
+  .pulse {
+    animation: none;
+  }
+}

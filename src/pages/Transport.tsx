@@ -7,14 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import TransportCard from "@/components/TransportCard";
 import { Bus, Car, Train, Truck, Phone, AlertTriangle } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Transport = () => {
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState("All");
 
   const transportTypes = [
-    { name: "All", count: 5, icon: "🚗" },
+    { name: "All", count: 8, icon: "🚗" },
     { name: "Bus", count: 1, icon: "🚌" },
-    { name: "Taxi", count: 1, icon: "🚕" },
+    { name: "Taxi", count: 3, icon: "🚕" },
+    { name: "Bike Taxi", count: 1, icon: "🏍️" },
     { name: "Train", count: 1, icon: "🚂" },
     { name: "Auto-rickshaw", count: 1, icon: "🛺" },
     { name: "Jeep", count: 1, icon: "🚙" },
@@ -31,6 +34,42 @@ const Transport = () => {
       avgFare: "₹250",
       contact: "+91-651-2456789",
       icon: <Bus className="w-6 h-6" />
+    },
+    {
+      name: "Ola Cabs",
+      type: "Taxi",
+      rating: 4.3,
+      description: "Book reliable rides across Jharkhand with the Ola app. Multiple vehicle categories available including Mini, Prime, and Share options.",
+      routes: ["Available in Ranchi, Jamshedpur, Dhanbad", "Airport transfers", "Intercity rides"],
+      timing: "24/7 on-demand via app",
+      avgFare: "₹12/km",
+      contact: "Book via Ola App",
+      bookingUrl: "https://www.olacabs.com/",
+      icon: <Car className="w-6 h-6" />
+    },
+    {
+      name: "Uber",
+      type: "Taxi", 
+      rating: 4.4,
+      description: "Global ride-sharing platform with presence in major Jharkhand cities. Premium and budget options available.",
+      routes: ["Ranchi metropolitan area", "Jamshedpur city", "Airport connections"],
+      timing: "24/7 on-demand via app",
+      avgFare: "₹14/km",
+      contact: "Book via Uber App",
+      bookingUrl: "https://www.uber.com/",
+      icon: <Car className="w-6 h-6" />
+    },
+    {
+      name: "Rapido Bike Taxi",
+      type: "Bike Taxi",
+      rating: 4.2,
+      description: "Quick and affordable bike taxi service for short distances. Beat the traffic with Rapido's bike rides.",
+      routes: ["Ranchi city", "Jamshedpur city", "Local connectivity"],
+      timing: "6 AM - 11 PM via app",
+      avgFare: "₹3/km",
+      contact: "Book via Rapido App",
+      bookingUrl: "https://rapido.bike/",
+      icon: <Truck className="w-6 h-6" />
     },
     {
       name: "Green Wheels Cabs",
@@ -108,9 +147,9 @@ const Transport = () => {
       <section className="pt-24 pb-16 bg-gradient-hero">
         <div className="container mx-auto px-6">
           <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Transportation Hub</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">{t('transport.title')}</h1>
             <p className="text-xl mb-8 max-w-4xl mx-auto">
-              Real-time information on buses, trains, taxis, and local transport across Jharkhand
+              {t('transport.description')}
             </p>
           </div>
         </div>
@@ -181,6 +220,7 @@ const Transport = () => {
                 avgFare={service.avgFare}
                 contact={service.contact}
                 icon={service.icon}
+                bookingUrl={service.bookingUrl}
               />
             ))}
           </div>

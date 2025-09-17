@@ -1,9 +1,14 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Zap, Shield, Users, Headphones } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 
 const Features = () => {
   const { t } = useLanguage();
+
+  const handleAISupport = () => {
+    window.dispatchEvent(new CustomEvent('openAIAssistant'));
+  };
 
   const features = [
     {
@@ -44,17 +49,34 @@ const Features = () => {
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="p-8 bg-card/50 border-border hover:bg-card/80 transition-all duration-300 group">
+            <Card 
+              key={index} 
+              className="
+                p-8 bg-gradient-card border-border hover:bg-card/80 hover:shadow-organic 
+                transition-all duration-300 group cursor-pointer
+              "
+              onClick={feature.titleKey === 'features.support.title' ? handleAISupport : undefined}
+            >
               <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 bg-gradient-card rounded-3xl flex items-center justify-center mb-6 group-hover:shadow-pink transition-all duration-300">
+                <div className="w-20 h-20 bg-gradient-to-br from-forest-500 to-autumn-500 rounded-3xl flex items-center justify-center mb-6 group-hover:shadow-organic group-hover:scale-105 transition-all duration-300">
                   <feature.icon className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-4">
                   {t(feature.titleKey)}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   {t(feature.descriptionKey)}
                 </p>
+                {feature.titleKey === 'features.support.title' && (
+                  <Button 
+                    onClick={handleAISupport}
+                    variant="outline" 
+                    size="sm"
+                    className="mt-2 hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Get AI Support
+                  </Button>
+                )}
               </div>
             </Card>
           ))}

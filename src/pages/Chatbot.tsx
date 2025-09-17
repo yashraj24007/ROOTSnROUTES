@@ -151,7 +151,7 @@ const Chatbot: React.FC = () => {
               <Bot className="w-6 h-6 text-emerald-600" />
               Jharkhand Travel Assistant
             </CardTitle>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Ask me anything about traveling to Jharkhand!
             </p>
           </CardHeader>
@@ -180,11 +180,11 @@ const Chatbot: React.FC = () => {
                       className={`max-w-[70%] p-3 rounded-lg ${
                         message.role === 'user'
                           ? 'bg-emerald-600 text-white'
-                          : 'bg-gray-100 text-gray-900'
+                          : 'bg-card text-foreground border border-border'
                       }`}
                     >
                       <p className="text-sm leading-relaxed">{message.content}</p>
-                      <p className="text-xs opacity-70 mt-1">
+                      <p className="text-xs opacity-70 mt-1 text-muted-foreground">
                         {message.timestamp.toLocaleTimeString()}
                       </p>
                     </div>

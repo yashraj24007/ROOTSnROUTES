@@ -1,0 +1,181 @@
+/* SectionDivider CSS Module - Responsive for all devices */
+.sectionContainer {
+  width: 100%;
+  padding: 1rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color, transparent);
+  overflow: hidden;
+}
+
+/* Mobile-first responsive padding */
+@media (min-width: 640px) {
+  .sectionContainer {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sectionContainer {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.lineContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: rgba(6, 78, 59, 0.3);
+  border: 1px solid rgba(6, 78, 59, 0.5);
+  width: var(--line-width, min(100%, 90vw));
+  height: var(--line-height, max(2px, min(4px, 1vw)));
+  max-width: min(1200px, 95vw);
+  min-width: min(150px, 80vw);
+  transition-duration: var(--duration, 2000ms);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Device-specific line sizing */
+@media (max-width: 640px) {
+  .lineContainer {
+    height: var(--line-height, max(2px, min(3px, 1.5vw)));
+    min-width: min(120px, 75vw);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .lineContainer {
+    height: var(--line-height, max(3px, min(5px, 1.2vw)));
+  }
+}
+
+@media (min-width: 1025px) {
+  .lineContainer {
+    height: var(--line-height, max(4px, min(6px, 1vw)));
+  }
+}
+
+.glowingLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #00ffff, #00e6e6, #00ffff);
+  box-shadow: 
+    0 0 min(15px, 3vw) #00ffff,
+    0 0 min(30px, 6vw) #00ffff,
+    0 0 min(45px, 9vw) #00ffff,
+    inset 0 0 min(15px, 3vw) rgba(0, 255, 255, 0.3);
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: var(--duration, 2000ms);
+}
+
+.glowEffect {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: radial-gradient(ellipse, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+  filter: blur(min(3px, 0.8vw));
+  height: var(--glow-height, min(12px, 3vw));
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: var(--duration, 2000ms);
+}
+
+/* Mobile glow adjustments */
+@media (max-width: 640px) {
+  .glowingLine {
+    box-shadow: 
+      0 0 8px #00ffff,
+      0 0 16px #00ffff,
+      0 0 24px #00ffff,
+      inset 0 0 8px rgba(0, 255, 255, 0.3);
+  }
+  
+  .glowEffect {
+    filter: blur(2px);
+    height: var(--glow-height, 9px);
+  }
+}
+
+/* Tablet glow adjustments */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .glowingLine {
+    box-shadow: 
+      0 0 12px #00ffff,
+      0 0 24px #00ffff,
+      0 0 36px #00ffff,
+      inset 0 0 12px rgba(0, 255, 255, 0.3);
+  }
+  
+  .glowEffect {
+    filter: blur(2.5px);
+    height: var(--glow-height, 15px);
+  }
+}
+
+/* Desktop glow adjustments */
+@media (min-width: 1025px) {
+  .glowingLine {
+    box-shadow: 
+      0 0 18px #00ffff,
+      0 0 36px #00ffff,
+      0 0 54px #00ffff,
+      inset 0 0 18px rgba(0, 255, 255, 0.3);
+  }
+  
+  .glowEffect {
+    filter: blur(4px);
+    height: var(--glow-height, 18px);
+  }
+}
+
+.lineInitial {
+  width: 0;
+}
+
+.lineAnimated {
+  width: 100%;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Accessibility: Reduce motion for users with motion sensitivity */
+@media (prefers-reduced-motion: reduce) {
+  .glowingLine,
+  .glowEffect {
+    transition-duration: 0.3s;
+  }
+  
+  .pulse {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .lineContainer {
+    border: 2px solid #00ffff;
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .glowingLine {
+    background: #00ffff;
+  }
+}

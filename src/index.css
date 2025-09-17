@@ -3,116 +3,135 @@
 @tailwind utilities;
 
 /* ROOTSnROUTES Tourism Platform Design System 
-Dark theme with teal/turquoise primary, pink accents, and modern gradients
-All colors MUST be HSL.
+Forest & Autumn Blend Theme - Professional organic design with seamless light/dark mode support
+All colors MUST be HSL for perfect theme transitions.
 */
 
 @layer base {
   :root {
-    --background: 217 19% 7%;
-    --foreground: 210 40% 98%;
+    /* Light Mode - Forest & Autumn Harmony */
+    --background: 45 25% 98%;            /* Brighter cream white for better contrast */
+    --foreground: 120 40% 12%;           /* Darker forest green for better readability */
 
-    --card: 217 19% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 40 35% 96%;                  /* Lighter warm card for better contrast */
+    --card-foreground: 120 35% 15%;      /* Darker forest green text */
 
-    --popover: 217 19% 9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 42 30% 95%;               /* Lighter popover background */
+    --popover-foreground: 120 40% 12%;   /* Darker green text */
 
-    --primary: 174 100% 50%;
-    --primary-foreground: 217 19% 7%;
+    --primary: 140 45% 40%;              /* Slightly darker forest green for better contrast */
+    --primary-foreground: 45 60% 98%;    /* Near-white text for accessibility */
 
-    --secondary: 217 19% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 35 40% 85%;             /* Lighter autumn beige for better contrast */
+    --secondary-foreground: 120 35% 15%; /* Much darker forest text */
 
-    --muted: 217 19% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 38 30% 92%;                 /* Lighter autumn mist for better contrast */
+    --muted-foreground: 120 25% 30%;     /* Darker muted forest green for readability */
 
-    --accent: 174 100% 50%;
-    --accent-foreground: 217 19% 7%;
+    --accent: 25 70% 60%;                /* Slightly darker autumn orange for contrast */
+    --accent-foreground: 45 50% 98%;     /* Near-white text on accent */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 65% 55%;            /* Darker red for better contrast */
+    --destructive-foreground: 0 0% 100%; /* White text */
 
-    --border: 217 19% 18%;
-    --input: 217 19% 15%;
-    --ring: 174 100% 50%;
+    --border: 35 25% 88%;                /* Slightly darker border for visibility */
+    --input: 40 30% 94%;                 /* Lighter input background */
+    --ring: 140 45% 40%;                 /* Darker focus ring for visibility */
 
     --radius: 1rem;
 
-    /* Natural Jharkhand Tourism Colors */
-    --teal: 174 100% 50%;
-    --teal-light: 174 100% 60%;
-    --forest-green: 120 60% 35%;
-    --earth-brown: 30 40% 45%;
+    /* Forest & Autumn Color Palette - Light Mode */
+    --forest-primary: 140 45% 45%;       /* Rich forest green */
+    --forest-secondary: 120 30% 60%;     /* Sage green */
+    --autumn-primary: 25 70% 65%;        /* Warm orange */
+    --autumn-secondary: 45 60% 75%;      /* Golden yellow */
+    --earth-primary: 30 35% 70%;         /* Warm brown */
+    --earth-secondary: 25 25% 80%;       /* Light tan */
     
-    /* Natural Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(174 100% 40%) 0%, hsl(120 60% 25%) 50%, hsl(30 40% 35%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(174 100% 50%) 0%, hsl(120 60% 40%) 100%);
-    --gradient-nature: linear-gradient(135deg, hsl(120 60% 35%) 0%, hsl(174 100% 50%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(217 19% 12%) 0%, hsl(217 19% 8%) 100%);
+    /* Organic Gradients - Light Mode */
+    --gradient-hero: linear-gradient(135deg, hsl(140 45% 75%) 0%, hsl(25 70% 80%) 50%, hsl(45 60% 85%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(40 35% 95%) 0%, hsl(35 30% 92%) 100%);
+    --gradient-nature: linear-gradient(135deg, hsl(140 45% 85%) 0%, hsl(25 70% 85%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(45 25% 97%) 0%, hsl(40 30% 94%) 100%);
+    --gradient-dashboard: linear-gradient(135deg, hsl(140 45% 90%) 0%, hsl(25 70% 90%) 50%, hsl(45 60% 92%) 100%);
     
-    /* Natural Shadows */
-    --shadow-glow: 0 0 40px hsl(174 100% 50% / 0.3);
-    --shadow-card: 0 10px 30px -10px hsl(217 19% 5% / 0.5);
-    --shadow-nature: 0 0 30px hsl(120 60% 35% / 0.4);
-    
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Organic Shadows - Light Mode */
+    --shadow-glow: 0 0 30px hsl(140 45% 45% / 0.15);
+    --shadow-card: 0 4px 20px hsl(30 35% 60% / 0.08);
+    --shadow-nature: 0 8px 25px hsl(25 70% 65% / 0.12);
+    --shadow-dashboard: 0 6px 30px hsl(140 45% 45% / 0.1);
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar - Light Mode */
+    --sidebar-background: 42 30% 94%;
+    --sidebar-foreground: 120 35% 25%;
+    --sidebar-primary: 140 45% 45%;
+    --sidebar-primary-foreground: 45 60% 95%;
+    --sidebar-accent: 35 30% 88%;
+    --sidebar-accent-foreground: 120 35% 20%;
+    --sidebar-border: 35 25% 82%;
+    --sidebar-ring: 140 45% 45%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark Mode - Deep Forest & Autumn Night */
+    --background: 25 15% 6%;             /* Deeper autumn night for better contrast */
+    --foreground: 45 40% 90%;            /* Brighter cream text for readability */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 30 20% 10%;                  /* Darker warm card for better contrast */
+    --card-foreground: 45 35% 85%;       /* Brighter warm text */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 28 18% 8%;                /* Darker popover */
+    --popover-foreground: 45 40% 90%;    /* Brighter text */
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 140 40% 60%;              /* Brighter forest green for dark mode */
+    --primary-foreground: 25 15% 6%;     /* Very dark text on primary */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 25 30% 20%;             /* Darker autumn brown for contrast */
+    --secondary-foreground: 45 30% 80%;  /* Brighter warm text */
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 30 20% 15%;                 /* Darker muted brown for better contrast */
+    --muted-foreground: 45 25% 70%;      /* Brighter muted text for readability */
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 25 60% 55%;                /* Brighter autumn orange for dark mode */
+    --accent-foreground: 45 40% 90%;     /* Bright text */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 55% 50%;            /* Brighter muted red for visibility */
+    --destructive-foreground: 0 0% 100%; /* White text */
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 30 15% 25%;                /* Lighter border for dark mode visibility */
+    --input: 28 18% 12%;                 /* Darker input with better contrast */
+    --ring: 140 40% 60%;                 /* Brighter focus ring for dark mode */
+
+    /* Forest & Autumn Colors - Dark Mode */
+    --forest-primary: 140 40% 55%;       /* Bright forest green */
+    --forest-secondary: 120 30% 45%;     /* Deep sage */
+    --autumn-primary: 25 60% 50%;        /* Deep orange */
+    --autumn-secondary: 45 50% 55%;      /* Golden amber */
+    --earth-primary: 30 30% 35%;         /* Deep earth brown */
+    --earth-secondary: 25 20% 25%;       /* Dark tan */
+    
+    /* Organic Gradients - Dark Mode */
+    --gradient-hero: linear-gradient(135deg, hsl(140 40% 25%) 0%, hsl(25 60% 30%) 50%, hsl(45 50% 35%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(30 20% 12%) 0%, hsl(28 18% 15%) 100%);
+    --gradient-nature: linear-gradient(135deg, hsl(140 40% 25%) 0%, hsl(25 60% 30%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(25 15% 8%) 0%, hsl(28 18% 12%) 100%);
+    --gradient-dashboard: linear-gradient(135deg, hsl(140 40% 20%) 0%, hsl(25 60% 25%) 50%, hsl(45 50% 30%) 100%);
+    
+    /* Organic Shadows - Dark Mode */
+    --shadow-glow: 0 0 40px hsl(140 40% 55% / 0.2);
+    --shadow-card: 0 8px 30px hsl(25 15% 5% / 0.3);
+    --shadow-nature: 0 12px 35px hsl(25 60% 20% / 0.15);
+    --shadow-dashboard: 0 8px 35px hsl(140 40% 20% / 0.2);
+
+    /* Sidebar - Dark Mode */
+    --sidebar-background: 28 18% 10%;
+    --sidebar-foreground: 45 35% 75%;
+    --sidebar-primary: 140 40% 55%;
+    --sidebar-primary-foreground: 25 15% 8%;
+    --sidebar-accent: 30 20% 18%;
+    --sidebar-accent-foreground: 45 30% 70%;
+    --sidebar-border: 30 15% 22%;
+    --sidebar-ring: 140 40% 55%;
   }
 }
 
@@ -122,6 +141,33 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  /* Enhanced scrollbar for organic theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.6);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+
+  /* Text selection with theme colors */
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
   }
 }

@@ -87,6 +87,109 @@ export const translations = {
         contactUs: 'Contact Us'
       }
     },
+    about: {
+      title: 'About ROOTSnROUTES',
+      mission: {
+        title: 'Our Mission',
+        description: 'To make Jharkhand\'s hidden treasures accessible to every traveler while preserving its natural beauty and empowering local communities through sustainable tourism.'
+      },
+      jharkhand: {
+        title: 'Discover Jharkhand',
+        subtitle: 'The Land of Forests - Where ancient tribal culture meets pristine wilderness',
+        heritage: {
+          title: 'A Land Rich in Heritage',
+          description1: 'Jharkhand, literally meaning "Land of Forests," is a treasure trove of natural beauty, tribal culture, and spiritual significance. Home to 32 distinct tribal communities, this state preserves some of India\'s oldest traditions and wisdom.',
+          description2: 'From the sacred groves of Sarna to the thundering waterfalls of Hundru and Jonha, from the industrial heritage of Jamshedpur to the pristine forests of Betla National Park, Jharkhand offers experiences that touch the soul.',
+          description3: 'The state is blessed with over 32% forest cover, making it one of India\'s greenest states. Its mineral wealth has shaped modern India, while its tribal communities have preserved sustainable living practices for millennia.'
+        },
+        stats: {
+          tribes: 'Tribal Communities',
+          forest: 'Forest Cover',
+          waterfalls: 'Waterfalls',
+          districts: 'Districts'
+        },
+        highlights: {
+          naturalWonders: {
+            title: 'Natural Wonders',
+            description: 'Stunning waterfalls, dense forests, and diverse wildlife make Jharkhand a nature lover\'s paradise.'
+          },
+          tribalCulture: {
+            title: 'Tribal Culture',
+            description: '32 distinct tribal communities preserve ancient traditions, art forms, and sustainable living practices.'
+          },
+          spiritualSites: {
+            title: 'Spiritual Sites',
+            description: 'Sacred groves, ancient temples, and pilgrimage sites offer spiritual solace and cultural insights.'
+          }
+        },
+        languages: {
+          title: 'Languages of Jharkhand',
+          description: 'Jharkhand is home to diverse languages including Hindi, English, Santhali, Ho, Mundari, Kurukh, and Kharia, reflecting its rich cultural tapestry.'
+        }
+      },
+      innovation: {
+        title: 'Powered by Innovation',
+        subtitle: 'Cutting-edge technology meets traditional hospitality'
+      },
+      impact: {
+        title: 'Our Impact',
+        subtitle: 'Creating positive change through sustainable tourism'
+      },
+      values: {
+        title: 'Our Values',
+        subtitle: 'The principles that guide our mission',
+        authenticity: {
+          title: 'Authenticity',
+          description: 'We showcase the genuine culture, traditions, and natural beauty of Jharkhand without commercialization.'
+        },
+        environmental: {
+          title: 'Environmental Responsibility',
+          description: 'Every aspect of our platform promotes sustainable practices and environmental conservation.'
+        },
+        quality: {
+          title: 'Quality Assurance',
+          description: 'All services and experiences are verified and rated to ensure the highest standards for travelers.'
+        },
+        cultural: {
+          title: 'Cultural Preservation',
+          description: 'Supporting local traditions, languages, and heritage through responsible tourism initiatives.'
+        },
+        community: {
+          title: 'Community Empowerment',
+          description: 'Direct support to local communities, artisans, and service providers, ensuring tourism benefits reach grassroots level.'
+        }
+      },
+      team: {
+        title: 'Meet Our Team',
+        subtitle: 'The passionate individuals behind ROOTSnROUTES'
+      },
+      cta: {
+        title: 'Ready to Explore the Heart of India?',
+        subtitle: 'Join thousands of travelers who have discovered the magic of Jharkhand through ROOTSnROUTES',
+        button: 'Start Your Journey'
+      }
+    },
+    transport: {
+      title: 'Transportation Hub',
+      subtitle: 'Your complete guide to getting around Jharkhand',
+      description: 'From bustling cities to remote villages, discover reliable transportation options for every journey.',
+      filters: {
+        all: 'All',
+        bus: 'Bus',
+        taxi: 'Taxi',
+        bikeTaxi: 'Bike Taxi',
+        train: 'Train',
+        autoRickshaw: 'Auto-rickshaw',
+        jeep: 'Jeep'
+      },
+      contact: {
+        title: 'Need Transportation Help?',
+        subtitle: 'Our travel experts are here to assist you',
+        helpline: 'Jharkhand Transport Helpline',
+        emergency: 'Emergency Services',
+        booking: 'Booking Assistance'
+      }
+    },
     support: {
       title: 'Need Help?',
       subtitle: 'We\'re here to assist you 24/7. Get instant support, find answers to common questions, or connect with our travel experts.',
@@ -412,6 +515,109 @@ export const translations = {
         subtitle: 'आज ही हमसे संपर्क करें अपनी यात्रा आवश्यकताओं पर चर्चा करने के लिए और हमें आपके लिए परफेक्ट झारखंड अनुभव बनाने दें।',
         getQuote: 'कोटेशन प्राप्त करें',
         contactUs: 'संपर्क करें'
+      }
+    },
+    about: {
+      title: 'ROOTSnROUTES के बारे में',
+      mission: {
+        title: 'हमारा मिशन',
+        description: 'झारखंड की छुपी हुई संपदाओं को हर यात्री के लिए सुलभ बनाना और साथ ही इसकी प्राकृतिक सुंदरता को संरक्षित करना तथा टिकाऊ पर्यटन के माध्यम से स्थानीय समुदायों को सशक्त बनाना।'
+      },
+      jharkhand: {
+        title: 'झारखंड की खोज करें',
+        subtitle: 'वनों की धरती - जहाँ प्राचीन आदिवासी संस्कृति मिलती है प्राकृतिक वन्यजीवन से',
+        heritage: {
+          title: 'विरासत से भरपूर भूमि',
+          description1: 'झारखंड, जिसका अर्थ है "वनों की भूमि," प्राकृतिक सुंदरता, आदिवासी संस्कृति, और आध्यात्मिक महत्व का खजाना है। 32 विशिष्ट आदिवासी समुदायों का घर, यह राज्य भारत की कुछ सबसे पुरानी परंपराओं और ज्ञान को संरक्षित करता है।',
+          description2: 'सरना के पवित्र ग्रोव से लेकर हुंडरू और जोन्हा के गर्जते झरनों तक, जमशेदपुर की औद्योगिक विरासत से लेकर बेतला राष्ट्रीय उद्यान के प्राकृतिक जंगलों तक, झारखंड ऐसे अनुभव प्रदान करता है जो आत्मा को छूते हैं।',
+          description3: 'यह राज्य 32% से अधिक वन आवरण से धन्य है, जो इसे भारत के सबसे हरे राज्यों में से एक बनाता है। इसकी खनिज संपदा ने आधुनिक भारत को आकार दिया है, जबकि इसके आदिवासी समुदायों ने हजारों सालों से टिकाऊ जीवन प्रथाओं को संरक्षित किया है।'
+        },
+        stats: {
+          tribes: 'आदिवासी समुदाय',
+          forest: 'वन आवरण',
+          waterfalls: 'झरने',
+          districts: 'जिले'
+        },
+        highlights: {
+          naturalWonders: {
+            title: 'प्राकृतिक आश्चर्य',
+            description: 'आश्चर्यजनक झरने, घने जंगल, और विविध वन्यजीव झारखंड को प्रकृति प्रेमियों का स्वर्ग बनाते हैं।'
+          },
+          tribalCulture: {
+            title: 'आदिवासी संस्कृति',
+            description: '32 विशिष्ट आदिवासी समुदाय प्राचीन परंपराओं, कला रूपों, और टिकाऊ जीवन प्रथाओं को संरक्षित करते हैं।'
+          },
+          spiritualSites: {
+            title: 'आध्यात्मिक स्थल',
+            description: 'पवित्र ग्रोव, प्राचीन मंदिर, और तीर्थ स्थल आध्यात्मिक शांति और सांस्कृतिक अंतर्दृष्टि प्रदान करते हैं।'
+          }
+        },
+        languages: {
+          title: 'झारखंड की भाषाएं',
+          description: 'झारखंड हिंदी, अंग्रेजी, संथाली, हो, मुंडारी, कुरुख, और खड़िया सहित विविध भाषाओं का घर है, जो इसकी समृद्ध सांस्कृतिक बुनावट को दर्शाता है।'
+        }
+      },
+      innovation: {
+        title: 'नवाचार से संचालित',
+        subtitle: 'अत्याधुनिक तकनीक मिलती है पारंपरिक आतिथ्य से'
+      },
+      impact: {
+        title: 'हमारा प्रभाव',
+        subtitle: 'टिकाऊ पर्यटन के माध्यम से सकारात्मक बदलाव लाना'
+      },
+      values: {
+        title: 'हमारे मूल्य',
+        subtitle: 'वे सिद्धांत जो हमारे मिशन का मार्गदर्शन करते हैं',
+        authenticity: {
+          title: 'प्रामाणिकता',
+          description: 'हम झारखंड की वास्तविक संस्कृति, परंपराओं, और प्राकृतिक सुंदरता को बिना व्यावसायीकरण के प्रदर्शित करते हैं।'
+        },
+        environmental: {
+          title: 'पर्यावरणीय जिम्मेदारी',
+          description: 'हमारे प्लेटफॉर्म का हर पहलू टिकाऊ प्रथाओं और पर्यावरण संरक्षण को बढ़ावा देता है।'
+        },
+        quality: {
+          title: 'गुणवत्ता आश्वासन',
+          description: 'सभी सेवाएं और अनुभव सत्यापित और रेटेड हैं ताकि यात्रियों के लिए उच्चतम मानक सुनिश्चित हो सके।'
+        },
+        cultural: {
+          title: 'सांस्कृतिक संरक्षण',
+          description: 'जिम्मेदार पर्यटन पहलों के माध्यम से स्थानीय परंपराओं, भाषाओं, और विरासत का समर्थन करना।'
+        },
+        community: {
+          title: 'समुदायिक सशक्तिकरण',
+          description: 'स्थानीय समुदायों, कारीगरों, और सेवा प्रदाताओं को प्रत्यक्ष सहायता, यह सुनिश्चित करते हुए कि पर्यटन के लाभ जमीनी स्तर तक पहुंचें।'
+        }
+      },
+      team: {
+        title: 'हमारी टीम से मिलें',
+        subtitle: 'ROOTSnROUTES के पीछे के जुनूनी व्यक्ति'
+      },
+      cta: {
+        title: 'भारत के हृदय की खोज के लिए तैयार हैं?',
+        subtitle: 'हजारों यात्रियों में शामिल हों जिन्होंने ROOTSnROUTES के माध्यम से झारखंड का जादू खोजा है',
+        button: 'अपनी यात्रा शुरू करें'
+      }
+    },
+    transport: {
+      title: 'परिवहन केंद्र',
+      subtitle: 'झारखंड में घूमने के लिए आपकी संपूर्ण गाइड',
+      description: 'व्यस्त शहरों से लेकर दूरदराज के गांवों तक, हर यात्रा के लिए विश्वसनीय परिवहन विकल्प खोजें।',
+      filters: {
+        all: 'सभी',
+        bus: 'बस',
+        taxi: 'टैक्सी',
+        bikeTaxi: 'बाइक टैक्सी',
+        train: 'ट्रेन',
+        autoRickshaw: 'ऑटो-रिक्शा',
+        jeep: 'जीप'
+      },
+      contact: {
+        title: 'परिवहन सहायता चाहिए?',
+        subtitle: 'हमारे यात्रा विशेषज्ञ आपकी सहायता के लिए यहाँ हैं',
+        helpline: 'झारखंड परिवहन हेल्पलाइन',
+        emergency: 'आपातकालीन सेवाएं',
+        booking: 'बुकिंग सहायता'
       }
     },
     support: {
@@ -741,6 +947,88 @@ export const translations = {
         contactUs: 'संपर्क'
       }
     },
+    about: {
+      title: 'ROOTSnROUTES बाबोत्',
+      mission: {
+        title: 'आलेक् मिशन',
+        description: 'झारखंड़्रेन् लुकान् धन सारा यात्री निमित् सुलभ बानाव् आर साथे इयाक् प्राकृतिक सुंदरता संरक्षित रे टिकाऊ पर्यटन माध्यम रे स्थानीय समुदाय को सशक्त बानाव्।'
+      },
+      jharkhand: {
+        title: 'झारखंड़् खोज',
+        subtitle: 'दारे दिश् - नोवा पुरान आदिवासी संस्कृति मिलाव् प्राकृतिक बनं संग्',
+        heritage: {
+          title: 'विरासत संग् भरपुर भूमि',
+          description1: 'झारखंड़्, मानेत् "दारे दिश्", प्राकृतिक सुंदरता, आदिवासी संस्कृति, आर आध्यात्मिक महत्व रेयाक् खजाना कान। 32 बिशिष्ट आदिवासी समुदाय रेयाक् गुरि, ने राज्य भारत रेयाक् कितुक् सबसे पुरान परंपरा आर ज्ञान संरक्षित मेनाका।',
+          description2: 'सरना रेयाक् पवित्र झुंड ते शुरू हुंडरू आर जोन्हा रेयाक् गर्जना झरना दिश्म, जमशेदपुर रेयाक् औद्योगिक विरासत ते बेतला राष्ट्रीय उद्यान रेयाक् साफ़ दारे दिश्म, झारखंड़् एहेन अनुभव एमा कान मन आत्मा छुंवाका।',
+          description3: 'ने राज्य 32% ते बेसी दारे आवरण संग् आशीर्वाद पावा कान, जे भारत रेयाक् सबसे हरियाली राज्य मध्ये एक तेयार। इयाक् खनिज संपदा आधुनिक भारत आकार एम कान, नोवा इयाक् आदिवासी समुदाय हजार बरिष ते टिकाऊ जीवन प्रथा संरक्षित मेना कान।'
+        },
+        stats: {
+          tribes: 'आदिवासी समुदाय',
+          forest: 'दारे आवरण',
+          waterfalls: 'झरना',
+          districts: 'जिला'
+        },
+        highlights: {
+          naturalWonders: {
+            title: 'प्राकृतिक आश्चर्य',
+            description: 'आश्चर्यजनक झरना, घने दारे, आर विविध जंगली जीव झारखंड़् के प्रकृति प्रेमी स्वर्ग बानाव्का।'
+          },
+          tribalCulture: {
+            title: 'आदिवासी संस्कृति',
+            description: '32 विशिष्ट आदिवासी समुदाय पुरान परंपरा, कला रूप, आर टिकाऊ जीवन प्रथा संरक्षित मेनाका।'
+          },
+          spiritualSites: {
+            title: 'आध्यात्मिक जागा',
+            description: 'पवित्र झुंड, पुरान मंदिर, आर तीर्थ जागा आध्यात्मिक शांति आर सांस्कृतिक समझ एमा।'
+          }
+        },
+        languages: {
+          title: 'झारखंड़्रेन् भाषा',
+          description: 'झारखंड़् हिंदी, अंग्रेजी, संथाली, हो, मुंडारी, कुरुख, आर खड़िया समेत विविध भाषा गुरि कान, जे इयाक् समृद्ध सांस्कृतिक बुनावट देखाव्का।'
+        }
+      },
+      innovation: {
+        title: 'नवाचार ते चालित',
+        subtitle: 'अत्याधुनिक तकनीक मिलाव् पारंपरिक आतिथ्य संग्'
+      },
+      impact: {
+        title: 'आलेक् प्रभाव',
+        subtitle: 'टिकाऊ पर्यटन माध्यम रे सकारात्मक बदलाव आनान्'
+      },
+      values: {
+        title: 'आलेक् मूल्य',
+        subtitle: 'से सिद्धांत आलेक् मिशन मार्गदर्शन मेनाका',
+        authenticity: {
+          title: 'प्रामाणिकता',
+          description: 'आले झारखंड़्रेन् वास्तविक संस्कृति, परंपरा, आर प्राकृतिक सुंदरता बिना व्यावसायीकरण देखाव्।'
+        },
+        environmental: {
+          title: 'पर्यावरणीय जिम्मेदारी',
+          description: 'आलेक् प्लेटफॉर्म रेयाक् सारा पहलू टिकाऊ प्रथा आर पर्यावरण संरक्षण बढ़ाव्।'
+        },
+        quality: {
+          title: 'गुणवत्ता आश्वासन',
+          description: 'सारा सेवा आर अनुभव सत्यापित आर रेटेड यात्री निमित् उच्चतम मानक पक्का करे निमित्।'
+        },
+        cultural: {
+          title: 'सांस्कृतिक संरक्षण',
+          description: 'जिम्मेदार पर्यटन पहल माध्यम रे स्थानीय परंपरा, भाषा, आर विरासत सहायता।'
+        },
+        community: {
+          title: 'समुदायिक सशक्तिकरण',
+          description: 'स्थानीय समुदाय, कारीगर, आर सेवा प्रदाता को प्रत्यक्ष सहायता, पक्का करे पर्यटन लाभ जमीनी स्तर दिश्म पहुंचे।'
+        }
+      },
+      team: {
+        title: 'आलेक् टीम संग् भेंट',
+        subtitle: 'ROOTSnROUTES रेयाक् पिछाड़ि जुनून हों'
+      },
+      cta: {
+        title: 'भारत रेयाक् हृदय खोज निमित् तेयार?',
+        subtitle: 'हजार यात्री जुड़ाव् जे ROOTSnROUTES माध्यम रे झारखंड़्रेन् जादू खोज कान',
+        button: 'आमाक् यात्रा शुरू'
+      }
+    },
     support: {
       title: 'साहायता लागतिअ?',
       subtitle: 'आले 24/7 आमाक् साहायता निमित् मेनाका। तुरंत साहायता निमे, सामान्य प्रश्न उत्तर नेल्मे, आमाक् यात्रा विशेषज्ञ संग् जुड़ाव्।',
@@ -978,6 +1266,330 @@ export const translations = {
       emailPlaceholder: 'आमाक् ईमेल ओल्मे',
       subscribe: 'सब्स्क्राइब',
       copyright: '© 2024 ROOTSnROUTES। सारा अधिकार सुरक्षित। झारखंड़् टिकाऊ पर्यटन निमित् ❤️ संग् तेयार।'
+    }
+  },
+  ho: {
+    header: {
+      home: 'ओयोम्',
+      explore: 'तुलाम्',
+      services: 'काम',
+      marketplace: 'हाट',
+      transport: 'बाहान',
+      support: 'सहायता',
+      about: 'बिषयोते',
+      language: 'भाषा'
+    },
+    hero: {
+      title: 'झारखंड़ुक् लुकुनको मोती',
+      subtitle: 'तुलाम्',
+      description: 'अलेक् AI तकनीक ट्रैवल प्लेटफोर्म द्वारा असली गांव जीवन, पर्यावरण पर्यटन और सांस्कृतिक धरोहर देखाम्।',
+      exploreButton: 'जागा तुलाम्',
+      bookButton: 'अनुभव बुकाम्'
+    },
+    features: {
+      title: 'यात्रा भविष्य अनुभव',
+      subtitle: 'आधुनिक तकनीक द्वारा असली, टिकाऊ और सुरक्षित यात्रा अनुभव',
+      aiPowered: {
+        title: 'AI योजना',
+        description: 'व्यक्तिगत यात्रा योजना अलेक् स्मार्ट सहायक संग्'
+      },
+      blockchain: {
+        title: 'ब्लॉकचेन सुरक्षा',
+        description: 'सुरक्षित भुगतान और प्रमाणित सेवा'
+      },
+      community: {
+        title: 'समुदाय चालित',
+        description: 'स्थानीय समुदाय और सांस्कृतिक अनुभव संग् जुड़ाम्'
+      },
+      support: {
+        title: '24/7 सहायता',
+        description: 'सारा दिन यात्रा सहायता'
+      }
+    },
+    footer: {
+      description: 'झारखंड़ के हो समुदाय के लिए सस्टेनेबल टूरिज्म प्लेटफॉर्म।',
+      quickLinks: 'तुरुंत लिंक',
+      destinations: 'जागा',
+      services: 'सेवा',
+      marketplace: 'बाज़ार',
+      transport: 'परिवहन',
+      support: 'सहायता',
+      about: 'बारे में',
+      contact: 'संपर्क',
+      newsletter: 'समाचार',
+      newsletterDesc: 'नए स्थान और विशेष ऑफर की जानकारी पाम्।',
+      emailPlaceholder: 'अम्क् ईमेल दालुम्',
+      subscribe: 'सब्स्क्राइब',
+      copyright: '© 2024 ROOTSnROUTES। सारा अधिकार सुरक्षित। झारखंड़ में टिकाऊ पर्यटन के लिए ❤️ संग् बनाना।'
+    },
+    about: {
+      title: 'ROOTSnROUTES बाबोत्',
+      mission: {
+        title: 'अलेक् मिशन',
+        description: 'झारखंड़्रेन् लुकान् धन सारा यात्री निमित् सुलभ बानाव् आर साथे इयाक् प्राकृतिक सुंदरता संरक्षित रे टिकाऊ पर्यटन माध्यम रे स्थानीय समुदाय को सशक्त बानाव्।'
+      },
+      jharkhand: {
+        title: 'झारखंड़् खोज',
+        subtitle: 'दारे दिश् - नोवा पुरान आदिवासी संस्कृति मिलाव् प्राकृतिक बनं संग्',
+        heritage: {
+          title: 'विरासत संग् भरपुर भूमि',
+          description1: 'झारखंड़्, मानेत् "दारे दिश्", प्राकृतिक सुंदरता, आदिवासी संस्कृति, आर आध्यात्मिक महत्व रेयाक् खजाना कान।',
+          description2: 'हुंडरू आर जोन्हा झरना, बेतला राष्ट्रीय उद्यान, झारखंड़् एहेन अनुभव एमा कान मन आत्मा छुंवाका।',
+          description3: 'ने राज्य दारे संग् आशीर्वाद पावा कान, आदिवासी समुदाय टिकाऊ जीवन प्रथा संरक्षित मेना कान।'
+        }
+      }
+    },
+    transport: {
+      title: 'परिवहन केंद्र',
+      subtitle: 'झारखंड़् घूमान् निमित् आमाक् संपूर्ण गाइड',
+      description: 'व्यस्त शहर ते दूर गांव दिश्म, सारा यात्रा निमित् भरसा बाहान खोजाम्।',
+      contact: {
+        title: 'परिवहन सहायता लागतिअ?',
+        subtitle: 'अलेक् यात्रा विशेषज्ञ आमाक् सहायता निमित् मेनाका'
+      }
+    }
+  },
+  mun: {
+    header: {
+      home: 'ओरा',
+      explore: 'नेलेम्',
+      services: 'काम',
+      marketplace: 'हाट',
+      transport: 'सवारी',
+      support: 'सहायता',
+      about: 'चेतेन्',
+      language: 'भाषा'
+    },
+    hero: {
+      title: 'झारखंड़्रेन् दुब्को रत्न',
+      subtitle: 'नेलेम्',
+      description: 'अलेक् AI तकनीक यात्रा प्लेटफोर्म राय सांची गांव जीविका, पर्यावरण पर्यटन आर सांस्कृतिक धरोहर नेलेम्।',
+      exploreButton: 'जागा नेलेम्',
+      bookButton: 'अनुभव बुकिंग'
+    },
+    features: {
+      title: 'यात्रा भविष्य अनुभव',
+      subtitle: 'आधुनिक तकनीक राय सांची, टिकाऊ आर सुरक्षित यात्रा अनुभव',
+      aiPowered: {
+        title: 'AI योजना',
+        description: 'व्यक्तिगत यात्रा योजना स्मार्ट सहायक संग्'
+      },
+      blockchain: {
+        title: 'ब्लॉकचेन सुरक्षा',
+        description: 'सुरक्षित पैसा आर प्रमाणित सेवा'
+      },
+      community: {
+        title: 'समुदाय संचालित',
+        description: 'स्थानीय समुदाय आर सांस्कृतिक अनुभव संग् जुड़ाव्'
+      },
+      support: {
+        title: '24/7 सहायता',
+        description: 'सारिन् दिना यात्रा सहायता'
+      }
+    },
+    footer: {
+      description: 'झारखंड़्रेन् मुंडारी समुदाय निमित् टिकाऊ पर्यटन प्लेटफॉर्म।',
+      quickLinks: 'लगा लिंक',
+      destinations: 'जागा',
+      services: 'सेवा',
+      marketplace: 'बाज़ार',
+      transport: 'सवारी',
+      support: 'सहायता',
+      about: 'चेतेन्',
+      contact: 'संपर्क',
+      newsletter: 'खबर',
+      newsletterDesc: 'नावा जागा आर खास ऑफर खबर नाम्मे।',
+      emailPlaceholder: 'आमाक् ईमेल एमेम्',
+      subscribe: 'सब्स्क्राइब',
+      copyright: '© 2024 ROOTSnROUTES। सारिन् अधिकार सुरक्षित। झारखंड़् टिकाऊ पर्यटन निमित् ❤️ संग् तेयार।'
+    },
+    about: {
+      title: 'ROOTSnROUTES चेतेन्',
+      mission: {
+        title: 'अलेक् मिशन',
+        description: 'झारखंड़्रेन् लुकान् रत्न सारा यात्री निमित् सुलभ बानाव् आर साथे प्राकृतिक सुंदरता संरक्षित रे टिकाऊ पर्यटन माध्यम रे स्थानीय समुदाय सशक्त बानाव्।'
+      },
+      jharkhand: {
+        title: 'झारखंड़् नेलेम्',
+        subtitle: 'दारे दिश् - नोवा पुरान आदिवासी संस्कृति मिलाव् प्राकृतिक बनं संग्',
+        heritage: {
+          title: 'विरासत संग् भरपुर भूमि',
+          description1: 'झारखंड़्, मतलब "दारे दिश्", प्राकृतिक सुंदरता, आदिवासी संस्कृति रेयाक् खजाना कान।',
+          description2: 'हुंडरू आर जोन्हा झरना, बेतला राष्ट्रीय उद्यान, झारखंड़् आत्मा छुंवाका अनुभव एमा।',
+          description3: 'ने राज्य दारे संग् आशीर्वाद, मुंडारी समुदाय टिकाऊ जीवन प्रथा संरक्षित मेना।'
+        }
+      }
+    },
+    transport: {
+      title: 'परिवहन केंद्र',
+      subtitle: 'झारखंड़् घूमान् निमित् आमाक् संपूर्ण गाइड',
+      description: 'शहर ते गांव दिश्म, सारा यात्रा निमित् भरसा सवारी नेलेम्।',
+      contact: {
+        title: 'सवारी सहायता लागतिअ?',
+        subtitle: 'अलेक् यात्रा विशेषज्ञ आमाक् सहायता निमित् मेनाका'
+      }
+    }
+  },
+  kur: {
+    header: {
+      home: 'घर',
+      explore: 'खोजना',
+      services: 'सेवा',
+      marketplace: 'बाज़ार',
+      transport: 'गाड़ी',
+      support: 'मदद',
+      about: 'बारे',
+      language: 'भासा'
+    },
+    hero: {
+      title: 'झारखंड के छुपे मोती',
+      subtitle: 'खोजना',
+      description: 'हमार AI तकनीक यात्रा प्लेटफॉर्म से असली गांव जिनगी, प्रकृति पर्यटन अउर सांस्कृतिक धरोहर देखना।',
+      exploreButton: 'जगह खोजना',
+      bookButton: 'अनुभव बुक करना'
+    },
+    features: {
+      title: 'यात्रा के भविष्य के अनुभव',
+      subtitle: 'आधुनिक तकनीक से असली, टिकाऊ अउर सुरक्षित यात्रा अनुभव',
+      aiPowered: {
+        title: 'AI योजना',
+        description: 'व्यक्तिगत यात्रा योजना स्मार्ट सहायक के साथ'
+      },
+      blockchain: {
+        title: 'ब्लॉकचेन सुरक्षा',
+        description: 'सुरक्षित पैसा अउर सच्ची सेवा'
+      },
+      community: {
+        title: 'समुदाय चालित',
+        description: 'स्थानीय समुदाय अउर सांस्कृतिक अनुभव के साथ जुड़ना'
+      },
+      support: {
+        title: '24/7 मदद',
+        description: 'पूरा दिन यात्रा में मदद'
+      }
+    },
+    footer: {
+      description: 'झारखंड के कुरुख समुदाय के लिए टिकाऊ पर्यटन प्लेटफॉर्म।',
+      quickLinks: 'जल्दी लिंक',
+      destinations: 'जगह',
+      services: 'सेवा',
+      marketplace: 'बाज़ार',
+      transport: 'गाड़ी',
+      support: 'मदद',
+      about: 'बारे',
+      contact: 'संपर्क',
+      newsletter: 'समाचार',
+      newsletterDesc: 'नई जगह अउर खास ऑफर की खबर पाना।',
+      emailPlaceholder: 'अपन ईमेल डालना',
+      subscribe: 'सब्स्क्राइब',
+      copyright: '© 2024 ROOTSnROUTES। सब अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ से बनाया।'
+    },
+    about: {
+      title: 'ROOTSnROUTES बारे',
+      mission: {
+        title: 'हमार मिशन',
+        description: 'झारखंड के छुपे खजाना सब यात्री के लिए सुलभ बनाना अउर साथ में प्राकृतिक सुंदरता संरक्षित करके टिकाऊ पर्यटन से स्थानीय समुदाय के सशक्त बनाना।'
+      },
+      jharkhand: {
+        title: 'झारखंड खोजना',
+        subtitle: 'जंगल के धरती - जहाँ पुराना आदिवासी संस्कृति मिलता है प्राकृतिक जंगल से',
+        heritage: {
+          title: 'विरासत से भरपूर भूमि',
+          description1: 'झारखंड, मतलब "जंगल के धरती", प्राकृतिक सुंदरता, आदिवासी संस्कृति के खजाना है।',
+          description2: 'हुंडरू अउर जोन्हा झरना, बेतला राष्ट्रीय उद्यान, झारखंड आत्मा छूने वाला अनुभव देता है।',
+          description3: 'ये राज्य जंगल से भरपूर है, कुरुख समुदाय टिकाऊ जीवन प्रथा संरक्षित करता है।'
+        }
+      }
+    },
+    transport: {
+      title: 'परिवहन केंद्र',
+      subtitle: 'झारखंड घूमने के लिए पूरा गाइड',
+      description: 'शहर से गांव तक, सब यात्रा के लिए भरोसेमंद गाड़ी खोजना।',
+      contact: {
+        title: 'गाड़ी मदद चाहिए?',
+        subtitle: 'हमार यात्रा विशेषज्ञ मदद के लिए है'
+      }
+    }
+  },
+  kha: {
+    header: {
+      home: 'घर',
+      explore: 'देखना',
+      services: 'काम',
+      marketplace: 'हाट',
+      transport: 'वाहन',
+      support: 'सहायता',
+      about: 'बारे',
+      language: 'भाषा'
+    },
+    hero: {
+      title: 'झारखंड के छुपे रत्न',
+      subtitle: 'देखना',
+      description: 'हमार AI तकनीक यात्रा प्लेटफॉर्म से सच्चा गांव जीवन, प्रकृति पर्यटन अउर सांस्कृतिक विरासत देखना।',
+      exploreButton: 'जगह देखना',
+      bookButton: 'अनुभव बुक करना'
+    },
+    features: {
+      title: 'यात्रा भविष्य अनुभव',
+      subtitle: 'नया तकनीक से सच्चा, टिकाऊ अउर सुरक्षित यात्रा अनुभव',
+      aiPowered: {
+        title: 'AI योजना',
+        description: 'अपना यात्रा योजना स्मार्ट सहायक के साथ'
+      },
+      blockchain: {
+        title: 'ब्लॉकचेन सुरक्षा',
+        description: 'सुरक्षित पैसा अउर सही सेवा'
+      },
+      community: {
+        title: 'समुदाय आधारित',
+        description: 'स्थानीय समुदाय अउर सांस्कृतिक अनुभव के साथ जुड़ना'
+      },
+      support: {
+        title: '24/7 सहायता',
+        description: 'हमेशा यात्रा में सहायता'
+      }
+    },
+    footer: {
+      description: 'झारखंड के खड़िया समुदाय के लिए टिकाऊ पर्यटन प्लेटफॉर्म।',
+      quickLinks: 'जल्दी लिंक',
+      destinations: 'जगह',
+      services: 'काम',
+      marketplace: 'हाट',
+      transport: 'वाहन',
+      support: 'सहायता',
+      about: 'बारे',
+      contact: 'संपर्क',
+      newsletter: 'समाचार',
+      newsletterDesc: 'नई जगह अउर विशेष ऑफर की जानकारी पाना।',
+      emailPlaceholder: 'अपन ईमेल लिखना',
+      subscribe: 'सब्स्क्राइब',
+      copyright: '© 2024 ROOTSnROUTES। सब अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ से बनाया।'
+    },
+    about: {
+      title: 'ROOTSnROUTES बारे',
+      mission: {
+        title: 'हमार मिशन',
+        description: 'झारखंड के छुपे रत्न सब यात्री के लिए सुलभ बनाना अउर साथ में प्राकृतिक सुंदरता संरक्षित करके टिकाऊ पर्यटन से स्थानीय समुदाय के सशक्त बनाना।'
+      },
+      jharkhand: {
+        title: 'झारखंड देखना',
+        subtitle: 'जंगल के धरती - जहाँ पुराना आदिवासी संस्कृति मिलता है प्राकृतिक जंगल से',
+        heritage: {
+          title: 'विरासत से भरपूर भूमि',
+          description1: 'झारखंड, मतलब "जंगल के धरती", प्राकृतिक सुंदरता, आदिवासी संस्कृति के खजाना है।',
+          description2: 'हुंडरू अउर जोन्हा झरना, बेतला राष्ट्रीय उद्यान, झारखंड आत्मा छूने वाला अनुभव देता है।',
+          description3: 'ये राज्य जंगल से भरपूर है, खड़िया समुदाय टिकाऊ जीवन प्रथा संरक्षित करता है।'
+        }
+      }
+    },
+    transport: {
+      title: 'परिवहन केंद्र',
+      subtitle: 'झारखंड घूमने के लिए पूरा गाइड',
+      description: 'शहर से गांव तक, सब यात्रा के लिए भरोसेमंद वाहन देखना।',
+      contact: {
+        title: 'वाहन सहायता चाहिए?',
+        subtitle: 'हमार यात्रा विशेषज्ञ सहायता के लिए है'
+      }
     }
   }
 };

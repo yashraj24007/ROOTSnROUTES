@@ -4,7 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Send, Bot, User, X, Minimize2, MessageSquare } from 'lucide-react';
+import { Send, Bot, User, X, Minimize2, MessageSquare, Users } from 'lucide-react';
+import Community from './Community';
 
 interface Message {
   id: string;
@@ -16,6 +17,7 @@ interface Message {
 const FloatingAIAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [showCommunity, setShowCommunity] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -35,6 +37,18 @@ const FloatingAIAssistant: React.FC = () => {
       scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
     }
   }, [messages]);
+
+  // Listen for custom event to open AI assistant
+  useEffect(() => {
+    const handleOpenAI = () => {
+      setIsOpen(true);
+      setIsMinimized(false);
+      setShowCommunity(false);
+    };
+
+    window.addEventListener('openAIAssistant', handleOpenAI);
+    return () => window.removeEventListener('openAIAssistant', handleOpenAI);
+  }, []);
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -162,6 +176,15 @@ const FloatingAIAssistant: React.FC = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => setShowCommunity(true)}
+                className="h-6 w-6 p-0 text-white hover:bg-emerald-700"
+                title="Community Stories"
+              >
+                <Users className="w-3 h-3" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setIsMinimized(!isMinimized)}
                 className="h-6 w-6 p-0 text-white hover:bg-emerald-700"
               >
@@ -204,12 +227,12 @@ const FloatingAIAssistant: React.FC = () => {
                       className={`max-w-[80%] p-3 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${
                         message.role === 'user'
                           ? 'bg-emerald-600 text-white rounded-br-sm'
-                          : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm shadow-sm'
+                          : 'bg-card text-foreground border border-border rounded-bl-sm shadow-sm'
                       }`}
                     >
                       <p className="break-words">{message.content}</p>
                       <p className={`text-xs mt-2 opacity-70 ${
-                        message.role === 'user' ? 'text-emerald-100' : 'text-gray-500'
+                        message.role === 'user' ? 'text-emerald-100' : 'text-muted-foreground'
                       }`}>
                         {message.timestamp.toLocaleTimeString()}
                       </p>
@@ -259,6 +282,9 @@ const FloatingAIAssistant: React.FC = () => {
           </CardContent>
         )}
       </Card>
+      
+      {/* Community Modal */}
+      {showCommunity && <Community onClose={() => setShowCommunity(false)} />}
     </div>
   );
 };

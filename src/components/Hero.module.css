@@ -1,0 +1,156 @@
+/* Hero CSS Module */
+.heroContainer {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroContent {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+}
+
+.contentWrapper {
+  text-align: center;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.badge {
+  margin-bottom: 2rem;
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.titleWrapper {
+  margin-bottom: 2rem;
+}
+
+.mainTitle {
+  font-size: clamp(2.5rem, 8vw, 8rem);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  background: linear-gradient(to right, #D4E4D1, #7DD3FC);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: scale-in 0.6s ease-out;
+}
+
+.subtitle {
+  font-size: clamp(1.875rem, 6vw, 7rem);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  background: linear-gradient(to right, #86EFAC, #FED7AA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: scale-in 0.6s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+.decorativeLine {
+  position: relative;
+  margin: 0 auto 2rem;
+  width: 12rem;
+  height: 0.25rem;
+}
+
+.shimmerLine {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #7DD3FC, #86EFAC, #FED7AA);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+.description {
+  font-size: clamp(1.125rem, 3vw, 2rem);
+  max-width: 64rem;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+  color: #C1D4BE;
+  animation: fade-in-up 0.8s ease-out;
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  animation: fade-in-up 0.8s ease-out;
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+
+.featuresGrid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fade-in-up 0.8s ease-out;
+  animation-delay: 0.8s;
+  animation-fill-mode: both;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Dark mode styles */
+.dark .mainTitle {
+  background: linear-gradient(to right, #1E3A1E, #1E40AF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark .subtitle {
+  background: linear-gradient(to right, #166534, #EA580C);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark .shimmerLine {
+  background: linear-gradient(to right, #1E40AF, #166534, #EA580C);
+  background-size: 200% 100%;
+}
+
+.dark .description {
+  color: #2A4A2A;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .buttonWrapper {
+    flex-direction: row;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Background size utility */
+.bgSize200 {
+  background-size: 200% 100%;
+}

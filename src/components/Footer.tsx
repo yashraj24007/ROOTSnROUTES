@@ -1,10 +1,70 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const { toast } = useToast();
+  const [email, setEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubscribing(true);
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert([
+          {
+            email: email.trim(),
+            subscribed_at: new Date().toISOString(),
+            source: 'footer',
+          }
+        ]);
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast({
+            title: "Already subscribed!",
+            description: "This email is already subscribed to our newsletter.",
+            variant: "default",
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "Successfully subscribed!",
+          description: "Thank you for subscribing to our newsletter.",
+          variant: "default",
+        });
+        setEmail("");
+      }
+    } catch (error) {
+      console.error('Subscription error:', error);
+      toast({
+        title: "Subscription failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
 
   return (
     <footer className="bg-gradient-subtle border-t border-border">
@@ -41,18 +101,18 @@ const Footer = () => {
           <div>
             <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.explore')}</h4>
             <div className="space-y-3">
-              <a href="#destinations" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/destinations" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.destinations')}
-              </a>
-              <a href="#marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.marketplace')}
-              </a>
-              <a href="#transport" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/transport" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.transport')}
-              </a>
-              <a href="#about" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.aboutJharkhand')}
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -60,18 +120,18 @@ const Footer = () => {
           <div>
             <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.services')}</h4>
             <div className="space-y-3">
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/authentic-stays" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.homestays')}
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.handicrafts')}
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.tourPackages')}
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.localGuides')}
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -79,18 +139,18 @@ const Footer = () => {
           <div>
             <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.support')}</h4>
             <div className="space-y-3">
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.helpCenter')}
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.contactUs')}
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.privacyPolicy')}
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.termsOfService')}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -105,14 +165,24 @@ const Footer = () => {
               </p>
             </div>
             <div className="flex gap-4 w-full lg:w-auto">
-              <Input
-                type="email"
-                placeholder={t('footer.emailPlaceholder')}
-                className="lg:w-80 bg-card border-border focus:border-primary"
-              />
-              <Button variant="default" className="px-8">
-                {t('footer.subscribe')}
-              </Button>
+              <form onSubmit={handleSubscribe} className="flex gap-4 w-full lg:w-auto">
+                <Input
+                  type="email"
+                  placeholder={t('footer.emailPlaceholder')}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="lg:w-80 bg-card border-border focus:border-primary"
+                  required
+                />
+                <Button 
+                  type="submit" 
+                  variant="default" 
+                  className="px-8 bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600"
+                  disabled={isSubscribing}
+                >
+                  {isSubscribing ? "Subscribing..." : t('footer.subscribe')}
+                </Button>
+              </form>
             </div>
           </div>
         </div>

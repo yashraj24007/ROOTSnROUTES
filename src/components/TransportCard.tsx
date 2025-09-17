@@ -13,6 +13,7 @@ interface TransportCardProps {
   avgFare: string;
   contact: string;
   icon: React.ReactNode;
+  bookingUrl?: string;
 }
 
 const TransportCard = ({ 
@@ -24,7 +25,8 @@ const TransportCard = ({
   timing, 
   avgFare, 
   contact, 
-  icon 
+  icon,
+  bookingUrl
 }: TransportCardProps) => {
   return (
     <Card className="p-6 bg-card border-border hover:shadow-card transition-all duration-300">
@@ -75,13 +77,25 @@ const TransportCard = ({
               Contact: {contact}
             </div>
             <div className="flex gap-2">
+              {!bookingUrl ? (
+                <Button variant="outline" size="sm">
+                  <Phone className="w-4 h-4" />
+                  Call
+                </Button>
+              ) : (
+                <Button 
+                  variant="default" 
+                  size="sm"
+                  onClick={() => window.open(bookingUrl, '_blank')}
+                  className="bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600 text-white"
+                >
+                  <Globe className="w-4 h-4 mr-2" />
+                  Book Now
+                </Button>
+              )}
               <Button variant="outline" size="sm">
                 <Phone className="w-4 h-4" />
-                Call
-              </Button>
-              <Button variant="outline" size="sm">
-                <Globe className="w-4 h-4" />
-                Website
+                Contact
               </Button>
             </div>
           </div>

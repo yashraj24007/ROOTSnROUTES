@@ -7,41 +7,43 @@ import FAQ from "@/components/FAQ";
 import { Zap, Shield, Leaf, Users, Heart, Award, Globe, TreePine } from "lucide-react";
 import { Link } from "react-router-dom";
 import jharkhandHero from "@/assets/jharkhand-hero.jpg";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const About = () => {
+  const { t } = useLanguage();
   const values = [
     {
       icon: Heart,
-      title: "Authenticity",
-      description: "We showcase the genuine culture, traditions, and natural beauty of Jharkhand without commercialization."
+      title: t('about.values.authenticity.title'),
+      description: t('about.values.authenticity.description')
     },
     {
       icon: Leaf,
-      title: "Environmental Responsibility", 
-      description: "Every aspect of our platform promotes sustainable practices and environmental conservation."
+      title: t('about.values.environmental.title'), 
+      description: t('about.values.environmental.description')
     },
     {
       icon: Award,
-      title: "Quality Assurance",
-      description: "All services and experiences are verified and rated to ensure the highest standards for travelers."
+      title: t('about.values.quality.title'),
+      description: t('about.values.quality.description')
     },
     {
       icon: TreePine,
-      title: "Cultural Preservation",
-      description: "Supporting local traditions, languages, and heritage through responsible tourism initiatives."
+      title: t('about.values.cultural.title'),
+      description: t('about.values.cultural.description')
     }
   ];
 
   const features = [
     {
       icon: Zap,
-      title: "AI-Powered Experiences",
-      description: "Intelligent travel planning with personalized recommendations based on your preferences and real-time data analysis."
+      title: t('features.aiPowered.title'),
+      description: t('features.aiPowered.description')
     },
     {
       icon: Shield,
-      title: "Blockchain Security",
-      description: "Secure, transparent transactions and verified service providers through cutting-edge blockchain technology."
+      title: t('features.blockchain.title'),
+      description: t('features.blockchain.description')
     },
     {
       icon: Leaf,
@@ -115,7 +117,7 @@ const About = () => {
         <div className="absolute inset-0 bg-background/40" />
 
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8">About ROOTSnROUTES</h1>
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8">{t('about.title')}</h1>
           <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8 leading-relaxed">
             Connecting travelers with the authentic soul of Jharkhand through technology, sustainability, and community empowerment
           </p>
@@ -129,10 +131,9 @@ const About = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8">Our Mission</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8">{t('about.mission.title')}</h2>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              ROOTSnROUTES is more than a travel platform—it's a bridge between modern technology and ancient wisdom, 
-              between curious travelers and vibrant communities, between sustainable practices and unforgettable experiences.
+              {t('about.mission.description')}
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
               We believe that tourism should benefit everyone: travelers seeking authentic experiences, local communities 
@@ -146,6 +147,106 @@ const About = () => {
               <Link to="/marketplace">
                 <Button variant="outline" size="lg">Join Our Community</Button>
               </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Jharkhand Section */}
+      <section className="py-20 bg-gradient-nature">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">{t('about.jharkhand.title')}</h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                {t('about.jharkhand.subtitle')}
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h3 className="text-3xl font-bold text-foreground mb-6">{t('about.jharkhand.heritage.title')}</h3>
+                <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
+                  <p>
+                    {t('about.jharkhand.heritage.description1')}
+                  </p>
+                  <p>
+                    {t('about.jharkhand.heritage.description2')}
+                  </p>
+                  <p>
+                    {t('about.jharkhand.heritage.description3')}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-card/80 p-6 rounded-2xl border-border">
+                  <h4 className="text-2xl font-bold text-primary mb-2">32+</h4>
+                  <p className="text-muted-foreground">Tribal Communities</p>
+                </div>
+                <div className="bg-card/80 p-6 rounded-2xl border-border">
+                  <h4 className="text-2xl font-bold text-primary mb-2">32%</h4>
+                  <p className="text-muted-foreground">Forest Cover</p>
+                </div>
+                <div className="bg-card/80 p-6 rounded-2xl border-border">
+                  <h4 className="text-2xl font-bold text-primary mb-2">50+</h4>
+                  <p className="text-muted-foreground">Waterfalls</p>
+                </div>
+                <div className="bg-card/80 p-6 rounded-2xl border-border">
+                  <h4 className="text-2xl font-bold text-primary mb-2">24</h4>
+                  <p className="text-muted-foreground">Districts</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="p-6 bg-card/50 border-border">
+                <div className="w-12 h-12 bg-forest-500 rounded-xl flex items-center justify-center mb-4">
+                  <TreePine className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-xl font-bold text-foreground mb-3">Natural Wonders</h4>
+                <p className="text-muted-foreground">
+                  From Hundru Falls to Betla National Park, explore pristine forests, 
+                  majestic waterfalls, and diverse wildlife in their natural habitat.
+                </p>
+              </Card>
+              
+              <Card className="p-6 bg-card/50 border-border">
+                <div className="w-12 h-12 bg-autumn-500 rounded-xl flex items-center justify-center mb-4">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-xl font-bold text-foreground mb-3">Tribal Culture</h4>
+                <p className="text-muted-foreground">
+                  Experience the rich traditions of Santhali, Ho, Munda, and other tribal communities 
+                  through festivals, art, music, and sustainable lifestyle practices.
+                </p>
+              </Card>
+              
+              <Card className="p-6 bg-card/50 border-border">
+                <div className="w-12 h-12 bg-earth-500 rounded-xl flex items-center justify-center mb-4">
+                  <Globe className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-xl font-bold text-foreground mb-3">Spiritual Sites</h4>
+                <p className="text-muted-foreground">
+                  Visit ancient temples like Baidyanath Dham, sacred Sarna groves, 
+                  and pilgrimage sites that have been centers of faith for centuries.
+                </p>
+              </Card>
+            </div>
+
+            <div className="mt-12 text-center">
+              <h3 className="text-2xl font-bold text-foreground mb-4">Languages of Jharkhand</h3>
+              <p className="text-muted-foreground mb-6">
+                Jharkhand is a linguistic tapestry with Hindi as the official language, 
+                alongside regional languages like Santhali, Ho, Mundari, Kurukh, and Kharia.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <span className="px-4 py-2 bg-primary/10 text-primary rounded-full">Hindi</span>
+                <span className="px-4 py-2 bg-primary/10 text-primary rounded-full">Santhali</span>
+                <span className="px-4 py-2 bg-primary/10 text-primary rounded-full">Ho</span>
+                <span className="px-4 py-2 bg-primary/10 text-primary rounded-full">Mundari</span>
+                <span className="px-4 py-2 bg-primary/10 text-primary rounded-full">Kurukh</span>
+                <span className="px-4 py-2 bg-primary/10 text-primary rounded-full">Kharia</span>
+              </div>
             </div>
           </div>
         </div>
