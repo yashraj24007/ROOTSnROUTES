@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-gradient-subtle border-t border-border">
       <div className="container mx-auto px-6 py-16">
@@ -16,8 +19,7 @@ const Footer = () => {
               <span className="text-xl font-bold text-foreground">ROOTSnROUTES</span>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Discover the authentic beauty of Jharkhand through sustainable eco-tourism. 
-              Connect with local communities and experience the rich cultural heritage of our land.
+              {t('footer.tagline')}
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-3">
@@ -37,57 +39,57 @@ const Footer = () => {
 
           {/* Explore Links */}
           <div>
-            <h4 className="text-xl font-bold text-foreground mb-6">Explore</h4>
+            <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.explore')}</h4>
             <div className="space-y-3">
               <a href="#destinations" className="block text-muted-foreground hover:text-primary transition-colors">
-                Destinations
+                {t('footer.destinations')}
               </a>
               <a href="#marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
-                Marketplace
+                {t('footer.marketplace')}
               </a>
               <a href="#transport" className="block text-muted-foreground hover:text-primary transition-colors">
-                Transport
+                {t('footer.transport')}
               </a>
               <a href="#about" className="block text-muted-foreground hover:text-primary transition-colors">
-                About Jharkhand
+                {t('footer.aboutJharkhand')}
               </a>
             </div>
           </div>
 
           {/* Services Links */}
           <div>
-            <h4 className="text-xl font-bold text-foreground mb-6">Services</h4>
+            <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.services')}</h4>
             <div className="space-y-3">
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Homestays
+                {t('footer.homestays')}
               </a>
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Handicrafts
+                {t('footer.handicrafts')}
               </a>
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Tour Packages
+                {t('footer.tourPackages')}
               </a>
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Local Guides
+                {t('footer.localGuides')}
               </a>
             </div>
           </div>
 
           {/* Support Links */}
           <div>
-            <h4 className="text-xl font-bold text-foreground mb-6">Support</h4>
+            <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.support')}</h4>
             <div className="space-y-3">
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Help Center
+                {t('footer.helpCenter')}
               </a>
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Contact Us
+                {t('footer.contactUs')}
               </a>
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Privacy Policy
+                {t('footer.privacyPolicy')}
               </a>
               <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                Terms of Service
+                {t('footer.termsOfService')}
               </a>
             </div>
           </div>
@@ -97,19 +99,19 @@ const Footer = () => {
         <div className="border-t border-border pt-12">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
-              <h4 className="text-2xl font-bold text-foreground mb-2">Stay Connected</h4>
+              <h4 className="text-2xl font-bold text-foreground mb-2">{t('footer.newsletter')}</h4>
               <p className="text-muted-foreground">
-                Get the latest updates on new destinations and exclusive offers.
+                {t('footer.newsletterDesc')}
               </p>
             </div>
             <div className="flex gap-4 w-full lg:w-auto">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('footer.emailPlaceholder')}
                 className="lg:w-80 bg-card border-border focus:border-primary"
               />
               <Button variant="default" className="px-8">
-                Subscribe
+                {t('footer.subscribe')}
               </Button>
             </div>
           </div>
@@ -118,7 +120,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-border mt-12 pt-8 text-center">
           <p className="text-muted-foreground">
-            © 2024 ROOTSnROUTES. All rights reserved. Built with ❤️ for sustainable tourism in Jharkhand.
+            {t('footer.copyright')}
           </p>
         </div>
       </div>

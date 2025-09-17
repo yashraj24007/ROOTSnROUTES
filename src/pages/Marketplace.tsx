@@ -6,11 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { MapPin, Star, Heart, ShoppingBag, Home, Users } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 import dokraElephant from "@/assets/dokra-elephant.jpg";
 import santhaliHome from "@/assets/santhali-home.jpg";
 import ecoLodge from "@/assets/eco-lodge.jpg";
 
 const Marketplace = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("homestays");
 
   const homestays = [

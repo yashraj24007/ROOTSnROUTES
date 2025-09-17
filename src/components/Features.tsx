@@ -1,27 +1,30 @@
 import { Card } from "@/components/ui/card";
 import { Zap, Shield, Users, Headphones } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Features = () => {
+  const { t } = useLanguage();
+
   const features = [
     {
       icon: Zap,
-      title: "AI-Powered Planning",
-      description: "Get personalized itineraries with our intelligent travel assistant",
+      titleKey: 'features.aiPowered.title',
+      descriptionKey: 'features.aiPowered.description',
     },
     {
       icon: Shield,
-      title: "Blockchain Security",
-      description: "Secure payments and verified services through blockchain technology",
+      titleKey: 'features.blockchain.title',
+      descriptionKey: 'features.blockchain.description',
     },
     {
       icon: Users,
-      title: "Community Driven",
-      description: "Connect with local communities and authentic cultural experiences",
+      titleKey: 'features.community.title',
+      descriptionKey: 'features.community.description',
     },
     {
       icon: Headphones,
-      title: "24/7 Support",
-      description: "Round-the-clock assistance for all your travel needs",
+      titleKey: 'features.support.title',
+      descriptionKey: 'features.support.description',
     },
   ];
 
@@ -31,10 +34,10 @@ const Features = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Experience the Future of Travel
+            {t('features.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-            Powered by cutting-edge technology to deliver authentic, sustainable, and secure travel experiences
+            {t('features.subtitle')}
           </p>
         </div>
 
@@ -47,10 +50,10 @@ const Features = () => {
                   <feature.icon className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-4">
-                  {feature.title}
+                  {t(feature.titleKey)}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
+                  {t(feature.descriptionKey)}
                 </p>
               </div>
             </Card>

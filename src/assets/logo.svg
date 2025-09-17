@@ -1,0 +1,42 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#7DD3C0" stroke="#2D5A47" stroke-width="4"/>
+  
+  <!-- Inner circle -->
+  <circle cx="100" cy="80" r="60" fill="#B8E6D0" stroke="#2D5A47" stroke-width="2"/>
+  
+  <!-- Stars -->
+  <circle cx="85" cy="45" r="1.5" fill="#2D5A47"/>
+  <circle cx="95" cy="42" r="1.5" fill="#2D5A47"/>
+  <circle cx="105" cy="42" r="1.5" fill="#2D5A47"/>
+  <circle cx="115" cy="45" r="1.5" fill="#2D5A47"/>
+  
+  <!-- Birds -->
+  <path d="M70 60 Q75 58 80 60" stroke="#2D5A47" stroke-width="1" fill="none"/>
+  <path d="M120 55 Q125 53 130 55" stroke="#2D5A47" stroke-width="1" fill="none"/>
+  <path d="M65 55 Q70 53 75 55" stroke="#2D5A47" stroke-width="1" fill="none"/>
+  
+  <!-- Mountains -->
+  <polygon points="40,100 60,70 80,85 100,65 120,80 140,70 160,100" fill="#2D5A47"/>
+  <polygon points="50,100 70,75 90,90 110,70 130,85 150,75 170,100" fill="#1E3A2E"/>
+  
+  <!-- Text background -->
+  <rect x="20" y="110" width="160" height="25" fill="rgba(255,255,255,0.9)" rx="5"/>
+  
+  <!-- Text -->
+  <text x="100" y="127" text-anchor="middle" font-family="serif" font-size="14" font-weight="bold" fill="#2D5A47">ROOTSNROUTES</text>
+  
+  <!-- Trees at bottom -->
+  <polygon points="70,140 75,155 80,140" fill="#2D5A47"/>
+  <polygon points="85,140 90,155 95,140" fill="#2D5A47"/>
+  <polygon points="100,140 105,155 110,140" fill="#2D5A47"/>
+  <polygon points="115,140 120,155 125,140" fill="#2D5A47"/>
+  <polygon points="130,140 135,155 140,140" fill="#2D5A47"/>
+  
+  <!-- Tree trunks -->
+  <rect x="74" y="155" width="2" height="5" fill="#4A4A4A"/>
+  <rect x="89" y="155" width="2" height="5" fill="#4A4A4A"/>
+  <rect x="104" y="155" width="2" height="5" fill="#4A4A4A"/>
+  <rect x="119" y="155" width="2" height="5" fill="#4A4A4A"/>
+  <rect x="134" y="155" width="2" height="5" fill="#4A4A4A"/>
+</svg>

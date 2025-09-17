@@ -1,9 +1,13 @@
+import { useLanguage } from "@/hooks/useLanguage";
+
 const Stats = () => {
+  const { t } = useLanguage();
+  
   const stats = [
-    { number: "50+", label: "Destinations" },
-    { number: "200+", label: "Homestays" },
-    { number: "500+", label: "Local Artisans" },
-    { number: "10K+", label: "Happy Travelers" },
+    { numberKey: "stats.destinations.number", labelKey: "stats.destinations.label" },
+    { numberKey: "stats.homestays.number", labelKey: "stats.homestays.label" },
+    { numberKey: "stats.artisans.number", labelKey: "stats.artisans.label" },
+    { numberKey: "stats.travelers.number", labelKey: "stats.travelers.label" },
   ];
 
   return (
@@ -13,10 +17,10 @@ const Stats = () => {
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
               <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                {stat.number}
+                {t(stat.numberKey)}
               </div>
               <div className="text-lg text-muted-foreground">
-                {stat.label}
+                {t(stat.labelKey)}
               </div>
             </div>
           ))}

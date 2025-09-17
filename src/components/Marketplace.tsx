@@ -1,31 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, MapPin } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 import dokraElephant from "@/assets/dokra-elephant.jpg";
 import santhaliHome from "@/assets/santhali-home.jpg";
 import ecoLodge from "@/assets/eco-lodge.jpg";
 
 const Marketplace = () => {
+  const { t } = useLanguage();
   const homestays = [
     {
-      name: "Birsa Munda Eco Retreat",
-      location: "Netarhat, Latehar",
-      price: "₹2500/night",
+      nameKey: "marketplace.homestays.birsaMunda.name",
+      locationKey: "marketplace.homestays.birsaMunda.location",
+      priceKey: "marketplace.homestays.birsaMunda.price",
       image: ecoLodge,
     },
     {
-      name: "Santhal Heritage Home",
-      location: "Dumka, Santhal Pargana",
-      price: "₹1800/night",
+      nameKey: "marketplace.homestays.santhalHeritage.name",
+      locationKey: "marketplace.homestays.santhalHeritage.location",
+      priceKey: "marketplace.homestays.santhalHeritage.price",
       image: santhaliHome,
     },
   ];
 
   const handicrafts = [
     {
-      name: "Dokra Art Elephant",
-      artist: "by Sunil Mahto",
-      price: "₹2850",
+      nameKey: "marketplace.handicrafts.dokraElephant.name",
+      artistKey: "marketplace.handicrafts.dokraElephant.artist",
+      priceKey: "marketplace.handicrafts.dokraElephant.price",
       image: dokraElephant,
     },
   ];
@@ -36,19 +38,19 @@ const Marketplace = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Local Marketplace
+            {t('marketplace.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Connect with local artisans and experience authentic homestays
+            {t('marketplace.subtitle')}
           </p>
         </div>
 
         {/* Homestays Section */}
         <div className="mb-16">
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-3xl font-bold text-foreground">Cozy Homestays</h3>
+            <h3 className="text-3xl font-bold text-foreground">{t('marketplace.homestaysTitle')}</h3>
             <Button variant="outline" className="gap-2">
-              View All
+              {t('marketplace.viewAll')}
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
@@ -58,23 +60,23 @@ const Marketplace = () => {
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={homestay.image}
-                    alt={homestay.name}
+                    alt={t(homestay.nameKey)}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-6">
                   <h4 className="text-xl font-bold text-foreground mb-2">
-                    {homestay.name}
+                    {t(homestay.nameKey)}
                   </h4>
                   <div className="flex items-center gap-2 text-muted-foreground mb-4">
                     <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{homestay.location}</span>
+                    <span className="text-sm">{t(homestay.locationKey)}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-primary">
-                      {homestay.price}
+                      {t(homestay.priceKey)}
                     </span>
-                    <Button variant="default">Book Now</Button>
+                    <Button variant="default">{t('marketplace.bookNow')}</Button>
                   </div>
                 </div>
               </Card>
@@ -85,9 +87,9 @@ const Marketplace = () => {
         {/* Handicrafts Section */}
         <div>
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-3xl font-bold text-foreground">Authentic Handicrafts</h3>
+            <h3 className="text-3xl font-bold text-foreground">{t('marketplace.handicraftsTitle')}</h3>
             <Button variant="outline" className="gap-2">
-              View All
+              {t('marketplace.viewAll')}
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
@@ -97,20 +99,20 @@ const Marketplace = () => {
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={item.image}
-                    alt={item.name}
+                    alt={t(item.nameKey)}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-6">
                   <h4 className="text-xl font-bold text-foreground mb-2">
-                    {item.name}
+                    {t(item.nameKey)}
                   </h4>
-                  <p className="text-muted-foreground mb-4">{item.artist}</p>
+                  <p className="text-muted-foreground mb-4">{t(item.artistKey)}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-primary">
-                      {item.price}
+                      {t(item.priceKey)}
                     </span>
-                    <Button variant="default">View Details</Button>
+                    <Button variant="default">{t('marketplace.viewDetails')}</Button>
                   </div>
                 </div>
               </Card>
