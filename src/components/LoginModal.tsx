@@ -4,15 +4,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { X, Eye, EyeOff, Mail, Lock, User, Chrome, Phone } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { Link } from "react-router-dom";
 
-interface LoginPageProps {
-  onClose?: () => void;
+interface LoginModalProps {
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -70,7 +71,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
       } else {
         await signUp(formData.email, formData.password);
       }
-      if (onClose) onClose();
+      onClose();
+      resetForm();
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : "An error occurred";
       setError(errorMessage);
@@ -83,7 +85,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
     try {
       setError("");
       await signInWithGoogle();
-      if (onClose) onClose();
+      onClose();
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : "Google sign in failed";
       setError(errorMessage);
@@ -106,25 +108,30 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
     resetForm();
   };
 
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <Card className="w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl">
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent className="sm:max-w-md bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl">
+        <DialogHeader>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute right-4 top-4 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={handleClose}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </DialogHeader>
+
+        <Card className="border-0 shadow-none bg-transparent">
           {/* Header */}
-          <CardHeader className="space-y-1 relative pb-6">
-            {onClose && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="absolute right-2 top-2 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800"
-                onClick={onClose}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            )}
-            
-            <div className="text-center space-y-2 pt-2">
-              <CardTitle className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          <CardHeader className="space-y-1 pb-6 pt-2">            
+            <div className="text-center space-y-2">
+              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {isLogin ? "Welcome Back!" : "Join ROOTSnROUTES"}
               </CardTitle>
               <CardDescription className="text-gray-600 dark:text-gray-400">
@@ -136,10 +143,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
             </div>
           </CardHeader>
 
-          <CardContent className="space-y-6 pb-8">
+          <CardContent className="space-y-6 pb-6">
             {/* Error Message */}
             {error && (
-              <div className="p-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:border-red-800 dark:text-red-400">
+              <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:border-red-800 dark:text-red-400">
                 {error}
               </div>
             )}
@@ -149,18 +156,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
               {/* Name Field (Sign Up Only) */}
               {!isLogin && (
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Full Name
-                  </Label>
+                  <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
                       id="name"
                       type="text"
                       placeholder="Enter your full name"
                       value={formData.name}
                       onChange={(e) => handleInputChange("name", e.target.value)}
-                      className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                      className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required={!isLogin}
                     />
                   </div>
@@ -170,18 +175,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
               {/* Phone Field (Sign Up Only) */}
               {!isLogin && (
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Phone Number
-                  </Label>
+                  <Label htmlFor="phone" className="text-sm font-medium">Phone Number</Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
                       id="phone"
                       type="tel"
                       placeholder="Enter your phone number"
                       value={formData.phone}
                       onChange={(e) => handleInputChange("phone", e.target.value)}
-                      className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                      className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required={!isLogin}
                     />
                   </div>
@@ -190,18 +193,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
 
               {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Email Address
-                </Label>
+                <Label htmlFor="email" className="text-sm font-medium">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                    className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
@@ -209,31 +210,30 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
 
               {/* Password Field */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Password
-                </Label>
+                <Label htmlFor="password" className="text-sm font-medium">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={(e) => handleInputChange("password", e.target.value)}
-                    className="pl-10 pr-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                    className="pl-10 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                    className="absolute right-2 top-2 h-7 w-7 p-0 hover:bg-transparent"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? 
-                      <EyeOff className="h-4 w-4 text-gray-400" /> : 
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-400" />
+                    ) : (
                       <Eye className="h-4 w-4 text-gray-400" />
-                    }
+                    )}
                   </Button>
                 </div>
               </div>
@@ -241,31 +241,30 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
               {/* Confirm Password Field (Sign Up Only) */}
               {!isLogin && (
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Confirm Password
-                  </Label>
+                  <Label htmlFor="confirmPassword" className="text-sm font-medium">Confirm Password</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
                       id="confirmPassword"
                       type={showConfirmPassword ? "text" : "password"}
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                      className="pl-10 pr-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                      className="pl-10 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required={!isLogin}
                     />
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                      className="absolute right-2 top-2 h-7 w-7 p-0 hover:bg-transparent"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
-                      {showConfirmPassword ? 
-                        <EyeOff className="h-4 w-4 text-gray-400" /> : 
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-4 w-4 text-gray-400" />
+                      ) : (
                         <Eye className="h-4 w-4 text-gray-400" />
-                      }
+                      )}
                     </Button>
                   </div>
                 </div>
@@ -274,24 +273,17 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium text-base transition-all duration-200"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2.5 transition-all duration-200"
                 disabled={loading}
               >
-                {loading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    <span>Please wait...</span>
-                  </div>
-                ) : (
-                  isLogin ? "Sign In" : "Create Account"
-                )}
+                {loading ? "Processing..." : (isLogin ? "Sign In" : "Create Account")}
               </Button>
             </form>
 
             {/* Divider */}
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <Separator className="w-full" />
+                <Separator />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-white dark:bg-gray-900 px-2 text-gray-500">Or continue with</span>
@@ -300,60 +292,33 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
 
             {/* Google Sign In */}
             <Button
-              variant="outline"
-              className="w-full h-11 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-              onClick={handleGoogleSignIn}
               type="button"
+              variant="outline"
+              className="w-full border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+              onClick={handleGoogleSignIn}
             >
-              <Chrome className="mr-2 h-5 w-5" />
+              <Chrome className="h-4 w-4 mr-2" />
               Continue with Google
             </Button>
 
             {/* Toggle Mode */}
             <div className="text-center text-sm">
               <span className="text-gray-600 dark:text-gray-400">
-                {isLogin ? "Don't have an account?" : "Already have an account?"}
+                {isLogin ? "Don't have an account? " : "Already have an account? "}
               </span>
-              <Button
-                variant="link"
-                className="p-0 ml-1 h-auto text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-                onClick={toggleMode}
+              <button
                 type="button"
+                onClick={toggleMode}
+                className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
               >
                 {isLogin ? "Sign up" : "Sign in"}
-              </Button>
+              </button>
             </div>
-
-            {/* Guest Option (if modal) */}
-            {onClose && isLogin && (
-              <div className="text-center">
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm"
-                  onClick={onClose}
-                  type="button"
-                >
-                  Continue as guest
-                </Button>
-              </div>
-            )}
           </CardContent>
         </Card>
-
-        {/* Footer */}
-        <div className="text-center text-xs text-gray-500 dark:text-gray-400 mt-4">
-          By continuing, you agree to our{" "}
-          <Link to="/terms" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link to="/privacy" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">
-            Privacy Policy
-          </Link>
-        </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default LoginPage;
+export default LoginModal;

@@ -6,18 +6,21 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Globe, Languages, ChevronDown, User, LogOut, Menu, X } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Cloud, Settings, Heart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
-import LoginPage from "@/pages/Login";
+import LoginModal from "@/components/LoginModal";
 import { useState } from "react";
 import logoSvg from "@/assets/logo.svg";
 
 const Header = () => {
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
-  const [showLogin, setShowLogin] = useState(false);
+  const { user, signOut } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const isActive = (path: string) => {
@@ -115,6 +118,16 @@ const Header = () => {
               {t('header.marketplace')}
             </Link>
             <Link 
+              to="/weather" 
+              className={`transition-colors text-sm flex items-center space-x-1 ${
+                isActive('/weather') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              }`}
+              onClick={() => handleNavClick('/weather', 'Weather')}
+            >
+              <Cloud className="h-4 w-4" />
+              <span>Weather</span>
+            </Link>
+            <Link 
               to="/about" 
               className={`transition-colors text-sm ${
                 isActive('/about') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
@@ -208,6 +221,19 @@ const Header = () => {
                       {t('header.marketplace')}
                     </Link>
                     <Link 
+                      to="/weather" 
+                      className={`p-3 rounded-lg transition-colors flex items-center space-x-2 ${
+                        isActive('/weather') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                      }`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleNavClick('/weather', 'Weather');
+                      }}
+                    >
+                      <Cloud className="h-4 w-4" />
+                      <span>Weather</span>
+                    </Link>
+                    <Link 
                       to="/transport" 
                       className={`p-3 rounded-lg transition-colors ${
                         isActive('/transport') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
@@ -244,17 +270,52 @@ const Header = () => {
                   
                   {/* Mobile Actions */}
                   <div className="mt-auto p-4 border-t space-y-3">
-                    {/* Mobile Login Button */}
-                    <Button
-                      onClick={() => {
-                        setShowLogin(true);
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600"
-                    >
-                      <User className="w-4 h-4 mr-2" />
-                      Login
-                    </Button>
+                    {/* Mobile Login/Profile Section */}
+                    {user ? (
+                      <div className="space-y-3">
+                        {/* User Profile Button */}
+                        <Link
+                          to="/profile"
+                          className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <Avatar className="h-8 w-8">
+                            <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
+                            <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xs">
+                              {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 text-left">
+                            <p className="font-medium text-sm">{user.user_metadata?.name || 'User'}</p>
+                            <p className="text-xs text-muted-foreground">{user.email}</p>
+                          </div>
+                        </Link>
+                        
+                        {/* Sign Out Button */}
+                        <Button
+                          onClick={async () => {
+                            await signOut();
+                            setMobileMenuOpen(false);
+                          }}
+                          variant="outline"
+                          className="w-full"
+                        >
+                          <LogOut className="w-4 h-4 mr-2" />
+                          Sign Out
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          setShowLoginModal(true);
+                          setMobileMenuOpen(false);
+                        }}
+                        className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                      >
+                        <User className="w-4 h-4 mr-2" />
+                        Login
+                      </Button>
+                    )}
                     
                     {/* Mobile Language Selector */}
                     <DropdownMenu>
@@ -458,34 +519,81 @@ const Header = () => {
               </DropdownMenu>
             </div>
             
-            {/* Login Button - Rightmost - Hidden on mobile */}
-            <Button
-              onClick={() => setShowLogin(true)}
-              variant="default"
-              size="sm"
-              className="
-                hidden lg:flex items-center space-x-1 xl:space-x-2 
-                bg-gradient-to-r from-forest-500 to-autumn-500
-                hover:from-forest-600 hover:to-autumn-600
-                text-white font-medium
-                border-0
-                shadow-lg hover:shadow-xl
-                transition-all duration-300 ease-smooth
-                hover:scale-105
-                px-2 xl:px-3 py-2
-                text-xs xl:text-sm
-                min-w-[60px] xl:min-w-[80px]
-              "
-            >
-              <User className="w-3 h-3 xl:w-4 xl:h-4" />
-              <span className="hidden xl:inline">Login</span>
-            </Button>
+            {/* Login/Profile Section - Rightmost - Hidden on mobile */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="hidden lg:flex items-center space-x-2 hover:bg-accent">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
+                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-sm">
+                        {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm font-medium">{user.user_metadata?.name || 'User'}</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile" className="flex items-center space-x-2">
+                      <User className="h-4 w-4" />
+                      <span>Profile</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/settings" className="flex items-center space-x-2">
+                      <Settings className="h-4 w-4" />
+                      <span>Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/favorites" className="flex items-center space-x-2">
+                      <Heart className="h-4 w-4" />
+                      <span>Favorites</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={signOut}
+                    className="text-red-600 focus:text-red-600"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    <span>Sign Out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button
+                onClick={() => setShowLoginModal(true)}
+                variant="default"
+                size="sm"
+                className="
+                  hidden lg:flex items-center space-x-1 xl:space-x-2 
+                  bg-gradient-to-r from-blue-500 to-purple-600
+                  hover:from-blue-600 hover:to-purple-700
+                  text-white font-medium
+                  border-0
+                  shadow-lg hover:shadow-xl
+                  transition-all duration-300 ease-smooth
+                  hover:scale-105
+                  px-2 xl:px-3 py-2
+                  text-xs xl:text-sm
+                  min-w-[60px] xl:min-w-[80px]
+                "
+              >
+                <User className="w-3 h-3 xl:w-4 xl:h-4" />
+                <span className="hidden xl:inline">Login</span>
+              </Button>
+            )}
           </div>
         </div>
       </div>
       
       {/* Login Modal */}
-      {showLogin && <LoginPage onClose={() => setShowLogin(false)} />}
+      <LoginModal 
+        isOpen={showLoginModal} 
+        onClose={() => setShowLoginModal(false)} 
+      />
     </header>
   );
 };

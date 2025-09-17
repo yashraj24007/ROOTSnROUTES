@@ -29,5 +29,6 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
-.env.example
+# Note: .env.example should be committed to show required variables
 *.env
+!.env.example

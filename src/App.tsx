@@ -14,6 +14,10 @@ import Transport from "./pages/Transport";
 import Services from "./pages/Services";
 import Support from "./pages/Support";
 import Chatbot from "./pages/Chatbot";
+import WeatherDashboard from "./pages/WeatherDashboard";
+import AuthDiagnostic from "./pages/AuthDiagnostic";
+import UserProfile from "./pages/UserProfile";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import GlowingLineDemo from "./pages/GlowingLineDemo";
 import NaturalWonders from "./pages/NaturalWonders";
@@ -41,6 +45,10 @@ const App = () => (
                 <Route path="/support" element={<Support />} />
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/transport" element={<Transport />} />
+                <Route path="/weather" element={<WeatherDashboard />} />
+                <Route path="/auth-diagnostic" element={<AuthDiagnostic />} />
+                <Route path="/profile" element={<UserProfile />} />
+                <Route path="/settings" element={<Settings />} />
                 <Route path="/chatbot" element={<Chatbot />} />
                 <Route path="/natural-wonders" element={<NaturalWonders />} />
                 <Route path="/cultural-heritage" element={<CulturalHeritage />} />
