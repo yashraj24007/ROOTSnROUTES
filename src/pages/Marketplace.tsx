@@ -177,8 +177,9 @@ const Marketplace = () => {
                   <div className="relative h-64 overflow-hidden">
                     <img
                       src={homestay.image}
-                      alt={homestay.name}
+                      alt={`${homestay.name} homestay in ${homestay.location} - Traditional accommodation with ${homestay.rating} star rating`}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
                     />
                     <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
                       <Star className="w-4 h-4 text-yellow-400 fill-current" />
@@ -257,8 +258,9 @@ const Marketplace = () => {
                   <div className="relative h-64 overflow-hidden">
                     <img
                       src={item.image}
-                      alt={item.name}
+                      alt={`${item.name} - Traditional ${item.category} by artist ${item.artist}, rated ${item.rating} stars, priced at ${item.price}`}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
                     />
                     <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
                       <Star className="w-4 h-4 text-yellow-400 fill-current" />

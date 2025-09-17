@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 const Features = () => {
   const { t } = useLanguage();
 
+  const handleAISupport = () => {
+    window.dispatchEvent(new CustomEvent('openAIAssistant'));
+  };
+
   const primaryFeatures = [
     {
       icon: Zap,
@@ -83,11 +87,12 @@ const Features = () => {
                       </Button>
                     </Link>
                   ) : (
-                    <Link to="/chatbot">
-                      <Button className="btn-brand-primary">
-                        Try AI Assistant
-                      </Button>
-                    </Link>
+                    <Button 
+                      onClick={handleAISupport}
+                      className="btn-brand-primary"
+                    >
+                      Try AI Assistant
+                    </Button>
                   )}
                 </div>
               </div>
@@ -130,11 +135,13 @@ const Features = () => {
                   Start Exploring
                 </Button>
               </Link>
-              <Link to="/chatbot">
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                  Get AI Recommendations
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                onClick={handleAISupport}
+                className="border-white/30 text-white hover:bg-white/10"
+              >
+                Get AI Recommendations
+              </Button>
             </div>
           </Card>
         </div>

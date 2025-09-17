@@ -7,16 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock, MessageSquare, HelpCircle, BookOpen, Users, Bot, Zap } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Support = () => {
   const { t } = useLanguage();
-  const [showAISupport, setShowAISupport] = useState(false);
-
-  const handleAISupport = () => {
-    setShowAISupport(true);
-    // Trigger the FloatingAIAssistant to open
-    window.dispatchEvent(new CustomEvent('openAIAssistant'));
-  };
 
   const supportOptions = [
     {
@@ -137,12 +131,11 @@ const Support = () => {
                 <p className="text-muted-foreground mb-4">
                   Get immediate answers to your travel questions, 24 hours a day, 7 days a week.
                 </p>
-                <Button 
-                  onClick={handleAISupport}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700"
-                >
-                  Chat with AI Assistant
-                </Button>
+                <Link to="/chatbot" className="w-full">
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+                    Chat with AI Assistant
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
             
@@ -157,13 +150,14 @@ const Support = () => {
                 <p className="text-muted-foreground mb-4">
                   Receive personalized travel suggestions based on your preferences and interests.
                 </p>
-                <Button 
-                  onClick={handleAISupport}
-                  variant="outline" 
-                  className="w-full border-blue-600 text-blue-600 hover:bg-blue-50"
-                >
-                  Get Recommendations
-                </Button>
+                <Link to="/chatbot" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-blue-600 text-blue-600 hover:bg-blue-50"
+                  >
+                    Get Recommendations
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
             
@@ -178,13 +172,14 @@ const Support = () => {
                 <p className="text-muted-foreground mb-4">
                   Access emergency travel assistance and connect with local support when needed.
                 </p>
-                <Button 
-                  onClick={handleAISupport}
-                  variant="outline" 
-                  className="w-full border-purple-600 text-purple-600 hover:bg-purple-50"
-                >
-                  Emergency Help
-                </Button>
+                <Link to="/chatbot" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-purple-600 text-purple-600 hover:bg-purple-50"
+                  >
+                    Emergency Help
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -197,14 +192,15 @@ const Support = () => {
                   Our AI assistant is trained on comprehensive Jharkhand travel information and can help with bookings, 
                   itinerary planning, local insights, and emergency situations.
                 </p>
-                <Button 
-                  onClick={handleAISupport}
-                  size="lg" 
-                  className="bg-white text-emerald-600 hover:bg-gray-100 font-semibold"
-                >
-                  <Bot className="w-5 h-5 mr-2" />
-                  Launch AI Assistant
-                </Button>
+                <Link to="/chatbot">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-emerald-600 hover:bg-gray-100 font-semibold"
+                  >
+                    <Bot className="w-5 h-5 mr-2" />
+                    Launch AI Assistant
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -292,15 +288,16 @@ const Support = () => {
               <Phone className="w-5 h-5 mr-2" />
               {t('support.emergency.call')}
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-red-600 text-red-600"
-              onClick={handleAISupport}
-            >
-              <MessageSquare className="w-5 h-5 mr-2" />
-              AI Emergency Support
-            </Button>
+            <Link to="/chatbot">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-red-600 text-red-600"
+              >
+                <MessageSquare className="w-5 h-5 mr-2" />
+                AI Emergency Support
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

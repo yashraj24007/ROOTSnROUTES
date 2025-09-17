@@ -131,8 +131,9 @@ const NaturalWonders = () => {
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={wonder.image}
-                    alt={wonder.name}
+                    alt={`${wonder.name} - ${wonder.description.slice(0, 100)}...`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div className="absolute top-4 left-4">
                     <Badge className="bg-forest-500 text-white">

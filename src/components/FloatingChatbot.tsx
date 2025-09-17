@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Send, Bot, User, X, Minimize2 } from 'lucide-react';
+import { Send, Bot, User, X, Minimize2, MessageSquare } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -13,67 +13,60 @@ interface Message {
   timestamp: Date;
 }
 
-interface ChatWidgetProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
+const FloatingChatbot: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       role: 'assistant',
-      content: 'Hello! I\'m here to help you plan your trip to Jharkhand. Ask me about destinations, transportation, local culture, or anything else!',
+      content: 'Hello! I\'m your Jharkhand travel assistant. Ask me about destinations, transportation, local culture, or anything else about your trip!',
       timestamp: new Date()
     }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
 
-  // Debug: Log API key status (without exposing the actual key)
-  useEffect(() => {
-    const testAPIConnection = async () => {
-      try {
-        const response = await fetch('https://api.groq.com/openai/v1/models', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-          },
-        });
-        
-        console.log('🧪 API test response status:', response.status);
-        
-        if (response.ok) {
-          const data = await response.json();
-          console.log('✅ API connection successful! Available models:', data.data?.length || 0);
-        } else {
-          const errorText = await response.text();
-          console.log('❌ API test failed:', response.status, errorText);
-        }
-      } catch (error) {
-        console.log('❌ API test error:', error);
+  const testAPIConnection = useCallback(async () => {
+    try {
+      const response = await fetch('https://api.groq.com/openai/v1/models', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+        },
+      });
+      
+      console.log('🧪 API test response status:', response.status);
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('✅ API connection successful! Available models:', data.data?.length || 0);
+      } else {
+        const errorText = await response.text();
+        console.log('❌ API test failed:', response.status, errorText);
       }
-    };
-
-    console.log('🔍 Environment check:');
-    console.log('API Key loaded:', apiKey ? 'Yes' : 'No');
-    console.log('API Key length:', apiKey ? apiKey.length : 0);
-    console.log('API Key starts with gsk_:', apiKey ? apiKey.startsWith('gsk_') : false);
-    console.log('All env vars:', Object.keys(import.meta.env));
-    
-    // Test API connection on component mount
-    if (apiKey) {
-      console.log('🧪 Testing API connection...');
-      testAPIConnection();
+    } catch (error) {
+      console.log('❌ API test error:', error);
     }
   }, [apiKey]);
 
   useEffect(() => {
-    // Scroll to bottom when new messages are added
+    // Debug API key
+    console.log('🔑 FloatingChatbot - API Key loaded:', apiKey ? 'Yes' : 'No');
+    console.log('🔑 API Key length:', apiKey ? apiKey.length : 0);
+    console.log('🔑 API Key starts with gsk_:', apiKey ? apiKey.startsWith('gsk_') : false);
+    
+    // Test API connection
+    if (apiKey) {
+      console.log('🧪 Testing API connection...');
+      testAPIConnection();
+    }
+  }, [apiKey, testAPIConnection]);
+
+  useEffect(() => {
     if (scrollAreaRef.current) {
       scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
     }
@@ -83,15 +76,13 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
     if (!input.trim() || loading) return;
 
     if (!apiKey) {
-      console.error('Groq API key not found');
+      console.error('❌ No API key found');
       alert('Please set your VITE_GROQ_API_KEY in the environment variables');
       return;
     }
 
-    console.log('🚀 Starting API call...');
+    console.log('🚀 FloatingChatbot - Starting API call...');
     console.log('📝 User input:', input);
-    console.log('🔑 API Key present:', !!apiKey);
-    console.log('🔑 API Key length:', apiKey.length);
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -107,11 +98,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
 
     try {
       const requestBody = {
-        model: 'llama3-8b-8192',
+        model: 'llama-3.1-8b-instant',
         messages: [
           {
             role: 'system',
-            content: 'You are a helpful travel assistant specializing in Jharkhand tourism. Provide helpful, accurate information about destinations, transportation, culture, and travel tips for Jharkhand, India.'
+            content: 'You are a helpful travel assistant specializing in Jharkhand tourism. Provide helpful, accurate information about destinations, transportation, culture, and travel tips for Jharkhand, India. Keep responses concise but informative.'
           },
           ...messages.map(msg => ({
             role: msg.role,
@@ -122,7 +113,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
             content: currentInput
           }
         ],
-        max_tokens: 1000,
+        max_tokens: 800,
         temperature: 0.7,
       };
 
@@ -138,25 +129,16 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
       });
 
       console.log('📡 Response status:', response.status);
-      console.log('📡 Response statusText:', response.statusText);
-      console.log('📡 Response headers:', Object.fromEntries(response.headers.entries()));
-
-      const responseText = await response.text();
-      console.log('📄 Raw response:', responseText);
+      console.log('📡 Response ok:', response.ok);
 
       if (!response.ok) {
-        console.error('❌ API Error Response:', responseText);
-        throw new Error(`API request failed: ${response.status} ${response.statusText} - ${responseText}`);
+        const errorText = await response.text();
+        console.error('❌ API Error Response:', errorText);
+        throw new Error(`API request failed: ${response.status} - ${errorText}`);
       }
 
-      let data;
-      try {
-        data = JSON.parse(responseText);
-        console.log('✅ Parsed response data:', data);
-      } catch (parseError) {
-        console.error('❌ JSON parse error:', parseError);
-        throw new Error(`Failed to parse response: ${parseError}`);
-      }
+      const data = await response.json();
+      console.log('✅ Response data:', data);
       
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -172,19 +154,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
       
       let errorMsg = 'Sorry, I encountered an error. Please try again later.';
       if (error instanceof Error) {
-        console.error('💥 Error name:', error.name);
-        console.error('💥 Error message:', error.message);
-        console.error('💥 Error stack:', error.stack);
-        
-        // More specific error messages
         if (error.message.includes('Failed to fetch')) {
-          errorMsg = 'Network error: Unable to connect to Groq API. Please check your internet connection.';
+          errorMsg = 'Network error: Unable to connect. Please check your internet connection.';
         } else if (error.message.includes('401')) {
-          errorMsg = 'Authentication error: Invalid API key. Please check your Groq API key.';
+          errorMsg = 'Authentication error: Invalid API key.';
         } else if (error.message.includes('429')) {
-          errorMsg = 'Rate limit exceeded: Too many requests. Please try again in a moment.';
-        } else if (error.message.includes('403')) {
-          errorMsg = 'Access forbidden: Please check your API key permissions.';
+          errorMsg = 'Rate limit exceeded: Please try again in a moment.';
         } else {
           errorMsg = `Error: ${error.message}`;
         }
@@ -209,18 +184,31 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  if (!isOpen) return null;
+  // Floating button when closed
+  if (!isOpen) {
+    return (
+      <div className="fixed bottom-6 right-6 z-[9999]">
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-2xl border-0 transition-all duration-300 hover:scale-110"
+          aria-label="Open Jharkhand Travel Assistant"
+        >
+          <MessageSquare className="w-6 h-6" />
+        </Button>
+      </div>
+    );
+  }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <Card className={`w-[450px] shadow-xl border transition-all duration-300 ${
-        isMinimized ? 'h-12' : 'h-[calc(60vh)]'
+    <div className="fixed bottom-6 right-6 z-[9999]">
+      <Card className={`w-[420px] shadow-2xl border-2 border-emerald-200 transition-all duration-300 ${
+        isMinimized ? 'h-14' : 'h-[500px]'
       }`}>
         <CardHeader className="p-3 border-b bg-emerald-600 text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-sm font-medium">
               <Bot className="w-4 h-4" />
-              Travel Assistant
+              Jharkhand Travel Assistant
             </CardTitle>
             <div className="flex gap-1">
               <Button
@@ -228,14 +216,16 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
                 size="sm"
                 onClick={() => setIsMinimized(!isMinimized)}
                 className="h-6 w-6 p-0 text-white hover:bg-emerald-700"
+                aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
               >
                 <Minimize2 className="w-3 h-3" />
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={onClose}
+                onClick={() => setIsOpen(false)}
                 className="h-6 w-6 p-0 text-white hover:bg-emerald-700"
+                aria-label="Close chat"
               >
                 <X className="w-3 h-3" />
               </Button>
@@ -244,7 +234,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
         </CardHeader>
         
         {!isMinimized && (
-          <CardContent className="flex flex-col p-0" style={{ height: 'calc(60vh - 60px)' }}>
+          <CardContent className="flex flex-col h-[440px] p-0">
             <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
               <div className="space-y-4">
                 {messages.map((message) => (
@@ -255,25 +245,25 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
                     }`}
                   >
                     <Avatar className="w-7 h-7 flex-shrink-0 mt-1">
-                      <AvatarFallback className="text-xs bg-gray-200">
+                      <AvatarFallback className="text-xs bg-emerald-100">
                         {message.role === 'user' ? (
-                          <User className="w-3 h-3" />
+                          <User className="w-3 h-3 text-emerald-700" />
                         ) : (
-                          <Bot className="w-3 h-3" />
+                          <Bot className="w-3 h-3 text-emerald-700" />
                         )}
                       </AvatarFallback>
                     </Avatar>
                     
                     <div
-                      className={`max-w-[85%] p-3 rounded-lg text-sm leading-relaxed whitespace-pre-wrap ${
+                      className={`max-w-[80%] p-3 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${
                         message.role === 'user'
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-gray-100 text-gray-800 border'
+                          ? 'bg-emerald-600 text-white rounded-br-sm'
+                          : 'bg-card text-foreground border border-border rounded-bl-sm shadow-sm'
                       }`}
                     >
                       <p className="break-words">{message.content}</p>
                       <p className={`text-xs mt-2 opacity-70 ${
-                        message.role === 'user' ? 'text-emerald-100' : 'text-gray-500'
+                        message.role === 'user' ? 'text-emerald-100' : 'text-muted-foreground'
                       }`}>
                         {message.timestamp.toLocaleTimeString()}
                       </p>
@@ -284,15 +274,15 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
                 {loading && (
                   <div className="flex gap-3 items-start">
                     <Avatar className="w-7 h-7 mt-1">
-                      <AvatarFallback className="text-xs bg-gray-200">
-                        <Bot className="w-3 h-3" />
+                      <AvatarFallback className="text-xs bg-emerald-100">
+                        <Bot className="w-3 h-3 text-emerald-700" />
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-gray-100 p-3 rounded-lg border">
+                    <div className="bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
                       <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                        <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce [animation-delay:0.1s]"></div>
+                        <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
                       </div>
                     </div>
                   </div>
@@ -300,21 +290,21 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
               </div>
             </ScrollArea>
             
-            <div className="border-t p-4 bg-gray-50">
+            <div className="border-t bg-gray-50 p-4">
               <div className="flex gap-2">
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Ask me anything about Jharkhand tourism..."
+                  placeholder="Ask me about Jharkhand tourism..."
                   disabled={loading}
-                  className="flex-1 h-10 text-sm px-3 border-gray-300 rounded-full"
+                  className="flex-1 h-10 text-sm px-4 border-gray-300 rounded-full focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
                 <Button
                   onClick={sendMessage}
                   disabled={loading || !input.trim()}
                   size="sm"
-                  className="h-10 w-10 p-0 bg-emerald-600 hover:bg-emerald-700 rounded-full"
+                  className="h-10 w-10 p-0 bg-emerald-600 hover:bg-emerald-700 rounded-full shadow-lg"
                 >
                   <Send className="w-4 h-4" />
                 </Button>
@@ -327,4 +317,4 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ isOpen, onClose }) => {
   );
 };
 
-export default ChatWidget;
+export default FloatingChatbot;

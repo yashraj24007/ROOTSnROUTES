@@ -73,7 +73,7 @@ const Chatbot: React.FC = () => {
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'llama3-8b-8192', // You can change this to other Groq models
+          model: 'llama-3.1-8b-instant', // Fast and reliable model
           messages: [
             {
               role: 'system',

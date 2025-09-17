@@ -15,9 +15,16 @@ import {
   Activity
 } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const { t } = useLanguage();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const stats = [
     {
@@ -113,11 +120,13 @@ const Dashboard = () => {
   ];
 
   return (
-  <div className="min-h-screen bg-gradient-dashboard p-8 md:p-12 transition-all duration-500 ease-smooth">
-  <div className="max-w-7xl mx-auto space-y-12">
+    <div className={`min-h-screen bg-gradient-dashboard p-8 md:p-12 transition-all duration-1000 ${
+      isVisible ? 'opacity-100' : 'opacity-0'
+    }`}>
+      <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
-  <div className="text-center space-y-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <div className="text-center space-y-6 stagger-item">
+          <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
             Tourism Dashboard
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -126,13 +135,13 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <Card 
               key={index} 
               className={`
-                relative overflow-hidden transition-all duration-500 ease-smooth
-                hover:scale-105 hover:shadow-organic-lg
+                card-enhanced hover-lift stagger-item
+                relative overflow-hidden transition-all duration-500
                 ${stat.color === 'forest' ? 'bg-gradient-forest border-forest-200 dark:bg-gradient-forest-dark dark:border-forest-700' : ''}
                 ${stat.color === 'autumn' ? 'bg-gradient-autumn border-autumn-200 dark:bg-gradient-autumn-dark dark:border-autumn-700' : ''}
                 ${stat.color === 'golden' ? 'bg-gradient-golden border-golden-200 dark:bg-gradient-golden dark:border-golden-700' : ''}
@@ -145,7 +154,7 @@ const Dashboard = () => {
                   {stat.title}
                 </CardTitle>
                 <stat.icon className={`
-                  h-5 w-5 transition-colors duration-300 drop-shadow-sm
+                  h-5 w-5 transition-all duration-300 drop-shadow-sm icon-pulse
                   ${stat.color === 'forest' ? 'text-forest-700 dark:text-forest-300' : ''}
                   ${stat.color === 'autumn' ? 'text-autumn-500 dark:text-autumn-300' : ''}
                   ${stat.color === 'golden' ? 'text-golden-500 dark:text-golden-300' : ''}

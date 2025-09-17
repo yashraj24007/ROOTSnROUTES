@@ -13,7 +13,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
 import LoginModal from "@/components/LoginModal";
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import logoSvg from "@/assets/logo.svg";
 
 const Header = () => {
@@ -58,44 +58,95 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+    <>
+      {/* Skip Links for Accessibility */}
+      <div className="skip-links">
+        <a 
+          href="#main-content" 
+          className="skip-nav sr-only-focusable"
+          onClick={(e) => {
+            e.preventDefault();
+            const mainContent = document.getElementById('main-content') || document.querySelector('main');
+            if (mainContent) {
+              (mainContent as HTMLElement).focus();
+              (mainContent as HTMLElement).scrollIntoView();
+            }
+          }}
+        >
+          Skip to main content
+        </a>
+        <a 
+          href="#navigation" 
+          className="skip-nav sr-only-focusable"
+          onClick={(e) => {
+            e.preventDefault();
+            const navigation = document.getElementById('navigation') || document.querySelector('nav');
+            if (navigation) {
+              (navigation as HTMLElement).focus();
+              (navigation as HTMLElement).scrollIntoView();
+            }
+          }}
+        >
+          Skip to navigation
+        </a>
+      </div>
+
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 nav-brand border-b border-border/50 transition-all duration-300"
+        role="banner"
+        aria-label="Main navigation"
+      >
+      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
+        <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link 
+            to="/" 
+            className="logo-enhanced flex-shrink-0"
+            aria-label="ROOTSnROUTES - Go to homepage"
+          >
             <img 
               src={logoSvg} 
-              alt="ROOTSnROUTES Logo" 
-              className="w-12 h-12 rounded-lg shadow-md"
+              alt="ROOTSnROUTES Tourism Platform Logo" 
+              className="logo-icon w-10 h-10 md:w-12 md:h-12 rounded-lg shadow-md"
             />
-            <span className="text-2xl font-bold text-foreground">ROOTSnROUTES</span>
+            <span className="logo-text text-lg md:text-2xl">ROOTSnROUTES</span>
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
+          <nav 
+            id="navigation"
+            className="hidden lg:flex items-center space-x-4 xl:space-x-6"
+            role="navigation"
+            aria-label="Primary navigation"
+          >
             <Link 
               to="/" 
-              className={`font-medium transition-colors text-sm ${
-                isActive('/') ? 'text-primary' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-sm ${
+                isActive('/') ? 'active' : ''
               }`}
+              aria-current={isActive('/') ? 'page' : undefined}
             >
               {t('header.home')}
             </Link>
             <Link 
               to="/destinations" 
-              className={`transition-colors text-sm ${
-                isActive('/destinations') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-sm ${
+                isActive('/destinations') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/destinations', 'Explore')}
+              aria-current={isActive('/destinations') ? 'page' : undefined}
+              aria-label="Explore destinations in Jharkhand"
             >
               {t('header.explore')}
             </Link>
             <Link 
               to="/transport" 
-              className={`transition-colors text-sm ${
-                isActive('/transport') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-sm ${
+                isActive('/transport') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/transport', 'Transport')}
+              aria-current={isActive('/transport') ? 'page' : undefined}
+              aria-label="Transportation options and booking"
             >
               {t('header.transport')}
             </Link>
@@ -105,6 +156,8 @@ const Header = () => {
                 isActive('/services') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/services', 'Services')}
+              aria-current={isActive('/services') ? 'page' : undefined}
+              aria-label="Tourism services and packages"
             >
               {t('header.services')}
             </Link>
@@ -114,6 +167,8 @@ const Header = () => {
                 isActive('/marketplace') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/marketplace', 'Marketplace')}
+              aria-current={isActive('/marketplace') ? 'page' : undefined}
+              aria-label="Local marketplace for authentic Jharkhand products"
             >
               {t('header.marketplace')}
             </Link>
@@ -123,8 +178,10 @@ const Header = () => {
                 isActive('/weather') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/weather', 'Weather')}
+              aria-current={isActive('/weather') ? 'page' : undefined}
+              aria-label="Current weather conditions in Jharkhand"
             >
-              <Cloud className="h-4 w-4" />
+              <Cloud className="h-4 w-4" aria-hidden="true" />
               <span>Weather</span>
             </Link>
             <Link 
@@ -132,6 +189,8 @@ const Header = () => {
               className={`transition-colors text-sm ${
                 isActive('/about') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
+              aria-current={isActive('/about') ? 'page' : undefined}
+              aria-label="About ROOTSnROUTES platform and mission"
             >
               {t('header.about')}
             </Link>
@@ -141,20 +200,23 @@ const Header = () => {
                 isActive('/support') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/support', 'Support')}
+              aria-current={isActive('/support') ? 'page' : undefined}
+              aria-label="Customer support and help center"
             >
               {t('header.support')}
             </Link>
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-1 md:space-x-2 lg:space-x-3">
+          <div className="flex items-center space-x-1 md:space-x-2">
             {/* Mobile Menu Button - Only on small screens */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="lg:hidden p-2"
+                  className="lg:hidden p-2 w-9 h-9"
+                  aria-label="Open mobile menu"
                 >
                   <Menu className="w-4 h-4" />
                 </Button>
@@ -174,13 +236,19 @@ const Header = () => {
                   </div>
                   
                   {/* Mobile Navigation Links */}
-                  <nav className="flex flex-col space-y-0 p-4">
+                  <nav 
+                    className="flex flex-col space-y-0 p-4"
+                    role="navigation"
+                    aria-label="Mobile navigation"
+                  >
                     <Link 
                       to="/" 
                       className={`p-3 rounded-lg transition-colors ${
                         isActive('/') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
+                      aria-current={isActive('/') ? 'page' : undefined}
+                      aria-label="Home - ROOTSnROUTES main page"
                     >
                       {t('header.home')}
                     </Link>
@@ -388,37 +456,37 @@ const Header = () => {
             </Sheet>
 
             {/* Theme Toggle - Hidden on mobile */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <ThemeToggle />
             </div>
             
-            {/* Language Dropdown - Hidden on mobile */}
-            <div className="hidden lg:block">
+            {/* Language Dropdown - Compact on medium, full on large */}
+            <div className="hidden md:block">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
                     size="sm"
                     className="
-                      flex items-center space-x-1 xl:space-x-2 
+                      flex items-center space-x-1 lg:space-x-2 
                       border-border
                       bg-forest-50 dark:bg-forest-900
                       hover:bg-autumn-100 dark:hover:bg-autumn-800
                       text-foreground
-                      min-w-[100px] xl:min-w-[120px] h-8 xl:h-9
+                      min-w-[80px] lg:min-w-[120px] h-8 lg:h-9
                       transition-all duration-300 ease-smooth
                       backdrop-blur-sm
                       shadow-organic
-                      px-2 xl:px-3
+                      px-2 lg:px-3
                     "
                   >
-                    <Globe className="w-3 h-3 xl:w-4 xl:h-4" />
-                    <span className="text-xs xl:text-sm font-medium flex items-center space-x-1">
+                    <Globe className="w-3 h-3 lg:w-4 lg:h-4" />
+                    <span className="text-xs lg:text-sm font-medium flex items-center space-x-1">
                       <span>{getLanguageDisplay(language).flag}</span>
-                      <span className="hidden xl:inline">{getLanguageDisplay(language).icon}</span>
-                      <span className="hidden xl:inline">{getLanguageDisplay(language).name}</span>
+                      <span className="hidden lg:inline">{getLanguageDisplay(language).icon}</span>
+                      <span className="hidden lg:inline">{getLanguageDisplay(language).name}</span>
                     </span>
-                    <ChevronDown className="w-2 h-2 xl:w-3 xl:h-3" />
+                    <ChevronDown className="w-2 h-2 lg:w-3 lg:h-3" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
@@ -523,14 +591,14 @@ const Header = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="hidden lg:flex items-center space-x-2 hover:bg-accent">
-                    <Avatar className="h-8 w-8">
+                  <Button variant="ghost" className="hidden md:flex items-center space-x-2 hover:bg-accent p-2">
+                    <Avatar className="h-7 w-7 lg:h-8 lg:w-8">
                       <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
-                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-sm">
+                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xs lg:text-sm">
                         {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="text-sm font-medium">{user.user_metadata?.name || 'User'}</span>
+                    <span className="text-xs lg:text-sm font-medium hidden lg:inline">{user.user_metadata?.name || 'User'}</span>
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -568,7 +636,7 @@ const Header = () => {
                 variant="default"
                 size="sm"
                 className="
-                  hidden lg:flex items-center space-x-1 xl:space-x-2 
+                  hidden md:flex items-center space-x-1 lg:space-x-2 
                   bg-gradient-to-r from-blue-500 to-purple-600
                   hover:from-blue-600 hover:to-purple-700
                   text-white font-medium
@@ -576,13 +644,13 @@ const Header = () => {
                   shadow-lg hover:shadow-xl
                   transition-all duration-300 ease-smooth
                   hover:scale-105
-                  px-2 xl:px-3 py-2
-                  text-xs xl:text-sm
-                  min-w-[60px] xl:min-w-[80px]
+                  px-2 lg:px-3 py-2
+                  text-xs lg:text-sm
+                  min-w-[50px] lg:min-w-[80px]
                 "
               >
-                <User className="w-3 h-3 xl:w-4 xl:h-4" />
-                <span className="hidden xl:inline">Login</span>
+                <User className="w-3 h-3 lg:w-4 lg:h-4" />
+                <span className="hidden lg:inline">Login</span>
               </Button>
             )}
           </div>
@@ -595,6 +663,7 @@ const Header = () => {
         onClose={() => setShowLoginModal(false)} 
       />
     </header>
+    </>
   );
 };
 

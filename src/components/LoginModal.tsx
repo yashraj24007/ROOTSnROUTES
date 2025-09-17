@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { X, Eye, EyeOff, Mail, Lock, User, Chrome, Phone } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useFocusManagement, useAnnouncements } from "@/hooks/useAccessibility";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -28,6 +29,56 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const [error, setError] = useState("");
 
   const { signIn, signUp, signInWithGoogle } = useAuth();
+  const { trapFocus } = useFocusManagement();
+  const modalRef = useRef<HTMLDivElement>(null);
+  const firstInputRef = useRef<HTMLInputElement>(null);
+  const announcementRef = useRef<HTMLDivElement>(null);
+
+  // Simple announce function
+  const announce = useCallback((message: string) => {
+    if (announcementRef.current) {
+      announcementRef.current.textContent = message;
+      setTimeout(() => {
+        if (announcementRef.current) {
+          announcementRef.current.textContent = '';
+        }
+      }, 1000);
+    }
+  }, []);
+
+  const resetForm = () => {
+    setFormData({
+      email: "",
+      password: "",
+      confirmPassword: "",
+      name: "",
+      phone: ""
+    });
+    setError("");
+  };
+
+  const handleClose = useCallback(() => {
+    resetForm();
+    onClose();
+  }, [onClose]);
+
+  // Focus management
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      const cleanup = trapFocus(modalRef.current);
+      
+      announce(`${isLogin ? 'Login' : 'Sign up'} dialog opened`);
+      
+      return cleanup;
+    }
+  }, [isOpen, isLogin, trapFocus, announce, handleClose]);
+
+  // Announce form mode changes
+  useEffect(() => {
+    if (isOpen) {
+      announce(`Switched to ${isLogin ? 'login' : 'sign up'} form`);
+    }
+  }, [isLogin, isOpen, announce]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -92,81 +143,95 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const resetForm = () => {
-    setFormData({
-      email: "",
-      password: "",
-      confirmPassword: "",
-      name: "",
-      phone: ""
-    });
-    setError("");
-  };
-
   const toggleMode = () => {
     setIsLogin(!isLogin);
     resetForm();
   };
 
-  const handleClose = () => {
-    resetForm();
-    onClose();
-  };
-
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl">
-        <DialogHeader>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute right-4 top-4 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800"
-            onClick={handleClose}
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        </DialogHeader>
+    <>
+      {/* ARIA Live Region for announcements */}
+      <div 
+        ref={announcementRef}
+        aria-live="polite" 
+        aria-atomic="true" 
+        className="sr-only"
+      />
+      
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent 
+          ref={modalRef}
+          className="sm:max-w-md bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl"
+          aria-labelledby="login-title"
+          aria-describedby="login-description"
+        >
+          <DialogHeader>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="absolute right-4 top-4 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800"
+              onClick={handleClose}
+              aria-label="Close dialog"
+            >
+              <X className="h-4 w-4" aria-hidden="true" />
+            </Button>
+          </DialogHeader>
 
-        <Card className="border-0 shadow-none bg-transparent">
-          {/* Header */}
-          <CardHeader className="space-y-1 pb-6 pt-2">            
-            <div className="text-center space-y-2">
-              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {isLogin ? "Welcome Back!" : "Join ROOTSnROUTES"}
-              </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-400">
-                {isLogin 
-                  ? "Sign in to explore Jharkhand's hidden gems" 
-                  : "Create your account to start your Jharkhand adventure"
-                }
-              </CardDescription>
-            </div>
-          </CardHeader>
-
-          <CardContent className="space-y-6 pb-6">
-            {/* Error Message */}
-            {error && (
-              <div className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:border-red-800 dark:text-red-400">
-                {error}
+          <Card className="border-0 shadow-none bg-transparent">
+            {/* Header */}
+            <CardHeader className="space-y-1 pb-6 pt-2">            
+              <div className="text-center space-y-2">
+                <CardTitle 
+                  id="login-title"
+                  className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                >
+                  {isLogin ? "Welcome Back!" : "Join ROOTSnROUTES"}
+                </CardTitle>
+                <CardDescription 
+                  id="login-description"
+                  className="text-gray-600 dark:text-gray-400"
+                >
+                  {isLogin 
+                    ? "Sign in to explore Jharkhand's hidden gems" 
+                    : "Create your account to start your Jharkhand adventure"
+                  }
+                </CardDescription>
               </div>
-            )}
+            </CardHeader>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Name Field (Sign Up Only) */}
-              {!isLogin && (
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+            <CardContent className="space-y-6 pb-6">
+              {/* Error Message */}
+              {error && (
+                <div 
+                  id="error-message"
+                  role="alert"
+                  aria-live="assertive"
+                  className="p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg dark:bg-red-900/20 dark:border-red-800 dark:text-red-400"
+                >
+                  {error}
+                </div>
+              )}
+
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                {/* Name Field (Sign Up Only) */}
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
                     <Input
                       id="name"
+                      ref={firstInputRef}
                       type="text"
                       placeholder="Enter your full name"
                       value={formData.name}
                       onChange={(e) => handleInputChange("name", e.target.value)}
                       className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required={!isLogin}
+                      aria-required={!isLogin}
+                      aria-describedby={error ? "error-message" : undefined}
+                      aria-invalid={!!error}
                     />
                   </div>
                 </div>
@@ -177,7 +242,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-sm font-medium">Phone Number</Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
                     <Input
                       id="phone"
                       type="tel"
@@ -186,6 +251,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                       onChange={(e) => handleInputChange("phone", e.target.value)}
                       className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required={!isLogin}
+                      aria-required={!isLogin}
+                      aria-describedby={error ? "error-message" : undefined}
+                      aria-invalid={!!error}
                     />
                   </div>
                 </div>
@@ -195,15 +263,20 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-sm font-medium">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
                   <Input
                     id="email"
+                    ref={isLogin ? firstInputRef : undefined}
                     type="email"
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     required
+                    aria-required="true"
+                    aria-describedby={error ? "error-message" : undefined}
+                    aria-invalid={!!error}
+                    autoComplete="email"
                   />
                 </div>
               </div>
@@ -212,7 +285,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-sm font-medium">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -221,6 +294,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                     onChange={(e) => handleInputChange("password", e.target.value)}
                     className="pl-10 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     required
+                    aria-required="true"
+                    aria-describedby={error ? "error-message" : "password-help"}
+                    aria-invalid={!!error}
+                    autoComplete={isLogin ? "current-password" : "new-password"}
                   />
                   <Button
                     type="button"
@@ -228,14 +305,21 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                     size="sm"
                     className="absolute right-2 top-2 h-7 w-7 p-0 hover:bg-transparent"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-pressed={showPassword}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-gray-400" />
+                      <EyeOff className="h-4 w-4 text-gray-400" aria-hidden="true" />
                     ) : (
-                      <Eye className="h-4 w-4 text-gray-400" />
+                      <Eye className="h-4 w-4 text-gray-400" aria-hidden="true" />
                     )}
                   </Button>
                 </div>
+                {!isLogin && (
+                  <p id="password-help" className="text-xs text-gray-500 dark:text-gray-400">
+                    Password must be at least 6 characters long
+                  </p>
+                )}
               </div>
 
               {/* Confirm Password Field (Sign Up Only) */}
@@ -243,7 +327,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword" className="text-sm font-medium">Confirm Password</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
                     <Input
                       id="confirmPassword"
                       type={showConfirmPassword ? "text" : "password"}
@@ -252,6 +336,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                       onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
                       className="pl-10 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required={!isLogin}
+                      aria-required={!isLogin}
+                      aria-describedby={error ? "error-message" : "confirm-password-help"}
+                      aria-invalid={!!error}
+                      autoComplete="new-password"
                     />
                     <Button
                       type="button"
@@ -259,14 +347,19 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                       size="sm"
                       className="absolute right-2 top-2 h-7 w-7 p-0 hover:bg-transparent"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                      aria-pressed={showConfirmPassword}
                     >
                       {showConfirmPassword ? (
-                        <EyeOff className="h-4 w-4 text-gray-400" />
+                        <EyeOff className="h-4 w-4 text-gray-400" aria-hidden="true" />
                       ) : (
-                        <Eye className="h-4 w-4 text-gray-400" />
+                        <Eye className="h-4 w-4 text-gray-400" aria-hidden="true" />
                       )}
                     </Button>
                   </div>
+                  <p id="confirm-password-help" className="text-xs text-gray-500 dark:text-gray-400">
+                    Please enter the same password again
+                  </p>
                 </div>
               )}
 
@@ -275,6 +368,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2.5 transition-all duration-200"
                 disabled={loading}
+                aria-describedby={error ? "error-message" : undefined}
               >
                 {loading ? "Processing..." : (isLogin ? "Sign In" : "Create Account")}
               </Button>
@@ -296,8 +390,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               variant="outline"
               className="w-full border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
               onClick={handleGoogleSignIn}
+              disabled={loading}
+              aria-label="Continue with Google account"
             >
-              <Chrome className="h-4 w-4 mr-2" />
+              <Chrome className="h-4 w-4 mr-2" aria-hidden="true" />
               Continue with Google
             </Button>
 
@@ -310,6 +406,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 type="button"
                 onClick={toggleMode}
                 className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                aria-label={isLogin ? "Switch to sign up form" : "Switch to sign in form"}
               >
                 {isLogin ? "Sign up" : "Sign in"}
               </button>
@@ -318,6 +415,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
         </Card>
       </DialogContent>
     </Dialog>
+    </>
   );
 };
 

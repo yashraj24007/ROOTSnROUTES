@@ -1,12 +1,19 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, MapPin, Calendar, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import VideoBackground from "@/components/VideoBackground";
 import jharkhandHero from "@/assets/jharkhand-hero.jpg";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
   const { t } = useLanguage();
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -23,9 +30,11 @@ const Hero = () => {
       >
         {/* Hero Content */}
         <div className="min-h-screen flex items-center justify-center px-6">
-          <div className="text-center max-w-6xl mx-auto">
+          <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
             {/* Animated Badge */}
-            <div className="mb-8 animate-fade-in-up">
+            <div className="mb-8 stagger-item">
               <span className="
                 inline-flex items-center px-8 py-4 rounded-full text-lg font-bold
                 bg-white/95 dark:bg-forest-900/95
