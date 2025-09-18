@@ -30,6 +30,7 @@ import AuthenticStays from "./pages/AuthenticStays";
 import ExploreDistricts from "./pages/ExploreDistricts";
 import DistrictDestinations from "./pages/DistrictDestinations";
 import DestinationsList from "./pages/DestinationsList";
+import CommunityChat from "./pages/CommunityChat";
 
 const queryClient = new QueryClient();
 
@@ -58,7 +59,8 @@ const AccessibilityWrapper = ({ children }: { children: React.ReactNode }) => {
       '/cultural-heritage': 'Cultural Heritage',
       '/authentic-stays': 'Authentic Stays',
       '/explore-districts': 'Explore Districts',
-      '/district-destinations': 'District Destinations'
+      '/district-destinations': 'District Destinations',
+      '/community-chat': 'Community Chat'
     };
     
     const currentRouteName = routeNames[location.pathname] || 'Page';
@@ -104,6 +106,7 @@ const App = () => (
                     <Route path="/explore-districts" element={<ExploreDistricts />} />
                     <Route path="/district-destinations" element={<DistrictDestinations />} />
                     <Route path="/destinations-list" element={<DestinationsList />} />
+                    <Route path="/community-chat" element={<CommunityChat />} />
                     <Route path="/glowing-line-demo" element={<GlowingLineDemo />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />

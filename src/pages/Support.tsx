@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import EmergencyDialer from "@/components/EmergencyDialer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -105,6 +106,23 @@ const Support = () => {
                 </Card>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Emergency Support Section */}
+      <section className="py-20 bg-red-50 dark:bg-red-950/10">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-red-800 dark:text-red-200 mb-4">
+              🚨 Emergency Support
+            </h2>
+            <p className="text-lg text-red-700 dark:text-red-300 max-w-2xl mx-auto">
+              In case of emergency during your travel, use these quick dial options for immediate assistance
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <EmergencyDialer />
           </div>
         </div>
       </section>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ROOTSnROUTES Tourism Platform Design System 
-Forest & Autumn Blend Theme - Professional organic design with seamless light/dark mode support
+Forest & Autumn Theme - Professional organic design with seamless light/dark mode support
 All colors MUST be HSL for perfect theme transitions.
 */
 
@@ -51,15 +51,19 @@ All colors MUST be HSL for perfect theme transitions.
     /* Organic Gradients - Light Mode */
     --gradient-hero: linear-gradient(135deg, hsl(140 45% 75%) 0%, hsl(25 70% 80%) 50%, hsl(45 60% 85%) 100%);
     --gradient-card: linear-gradient(135deg, hsl(40 35% 95%) 0%, hsl(35 30% 92%) 100%);
-    --gradient-nature: linear-gradient(135deg, hsl(140 45% 85%) 0%, hsl(25 70% 85%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(45 25% 97%) 0%, hsl(40 30% 94%) 100%);
-    --gradient-dashboard: linear-gradient(135deg, hsl(140 45% 90%) 0%, hsl(25 70% 90%) 50%, hsl(45 60% 92%) 100%);
+    --gradient-nature: linear-gradient(135deg, hsl(210 25% 96%) 0%, hsl(200 30% 94%) 50%, hsl(190 25% 97%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(210 30% 98%) 0%, hsl(200 25% 96%) 100%);
+    --gradient-dashboard: linear-gradient(135deg, hsl(210 30% 97%) 0%, hsl(200 25% 95%) 50%, hsl(190 30% 98%) 100%);
     
     /* Organic Shadows - Light Mode */
     --shadow-glow: 0 0 30px hsl(140 45% 45% / 0.15);
     --shadow-card: 0 4px 20px hsl(30 35% 60% / 0.08);
     --shadow-nature: 0 8px 25px hsl(25 70% 65% / 0.12);
     --shadow-dashboard: 0 6px 30px hsl(140 45% 45% / 0.1);
+
+    /* Video Background Overlays */
+    --overlay-gradient-light: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.3) 100%);
+    --overlay-gradient-dark: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.5) 100%);
 
     /* Sidebar - Light Mode */
     --sidebar-background: 42 30% 94%;
@@ -74,33 +78,33 @@ All colors MUST be HSL for perfect theme transitions.
 
   .dark {
     /* Dark Mode - Deep Forest & Autumn Night */
-    --background: 25 15% 6%;             /* Deeper autumn night for better contrast */
-    --foreground: 45 40% 90%;            /* Brighter cream text for readability */
+    --background: 25 15% 6%;             /* Deep dark background */
+    --foreground: 45 35% 85%;            /* Light cream text for good contrast */
 
-    --card: 30 20% 10%;                  /* Darker warm card for better contrast */
-    --card-foreground: 45 35% 85%;       /* Brighter warm text */
+    --card: 30 20% 10%;                  /* Dark warm card */
+    --card-foreground: 45 30% 80%;       /* Light warm text on cards */
 
-    --popover: 28 18% 8%;                /* Darker popover */
-    --popover-foreground: 45 40% 90%;    /* Brighter text */
+    --popover: 28 18% 8%;                /* Dark popover */
+    --popover-foreground: 45 35% 85%;    /* Light text in popovers */
 
-    --primary: 140 40% 60%;              /* Brighter forest green for dark mode */
-    --primary-foreground: 25 15% 6%;     /* Very dark text on primary */
+    --primary: 140 40% 60%;              /* Bright forest green */
+    --primary-foreground: 25 15% 6%;     /* Dark text on primary buttons */
 
-    --secondary: 25 30% 20%;             /* Darker autumn brown for contrast */
-    --secondary-foreground: 45 30% 80%;  /* Brighter warm text */
+    --secondary: 25 30% 20%;             /* Dark autumn brown */
+    --secondary-foreground: 45 25% 75%;  /* Light warm text on secondary */
 
-    --muted: 30 20% 15%;                 /* Darker muted brown for better contrast */
-    --muted-foreground: 45 25% 70%;      /* Brighter muted text for readability */
+    --muted: 30 20% 15%;                 /* Dark muted background */
+    --muted-foreground: 45 20% 65%;      /* Medium-light muted text */
 
-    --accent: 25 60% 55%;                /* Brighter autumn orange for dark mode */
-    --accent-foreground: 45 40% 90%;     /* Bright text */
+    --accent: 25 60% 55%;                /* Bright autumn orange */
+    --accent-foreground: 45 35% 85%;     /* Light text on accent */
 
-    --destructive: 0 55% 50%;            /* Brighter muted red for visibility */
-    --destructive-foreground: 0 0% 100%; /* White text */
+    --destructive: 0 55% 50%;            /* Bright red for warnings */
+    --destructive-foreground: 0 0% 100%; /* White text on destructive */
 
-    --border: 30 15% 25%;                /* Lighter border for dark mode visibility */
-    --input: 28 18% 12%;                 /* Darker input with better contrast */
-    --ring: 140 40% 60%;                 /* Brighter focus ring for dark mode */
+    --border: 30 15% 25%;                /* Visible border for dark mode */
+    --input: 28 18% 12%;                 /* Dark input background */
+    --ring: 140 40% 60%;                 /* Bright focus ring */
 
     /* Forest & Autumn Colors - Dark Mode */
     --forest-primary: 140 40% 55%;       /* Bright forest green */

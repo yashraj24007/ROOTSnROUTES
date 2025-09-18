@@ -29,7 +29,7 @@ const Hero = () => {
         overlayOpacity={0.3}
       >
         {/* Hero Content */}
-        <div className="min-h-screen flex items-center justify-center px-6">
+        <div className="relative z-20 min-h-screen flex items-center justify-center px-6">
           <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
@@ -160,9 +160,10 @@ const Hero = () => {
 
             {/* Feature Highlights */}
             <div className="
-              mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto
+              relative z-30 
+              mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto
               animate-fade-in-up
-            " style={{ animationDelay: '0.8s' }}>
+            "  >
               <Link to="/natural-wonders" className="
                 text-center p-6 rounded-2xl
                 bg-forest-100/40 dark:bg-forest-900/40
@@ -223,21 +224,6 @@ const Hero = () => {
                 </p>
               </Link>
             </div>
-          </div>
-        </div>
-
-        {/* Elegant Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className="
-            w-8 h-12 border-2 border-primary/60
-            rounded-full flex justify-center
-            animate-gentle-float
-            backdrop-blur-sm
-          ">
-            <div className="
-              w-1 h-4 bg-gradient-to-b from-forest-500 to-autumn-500
-              rounded-full mt-2 animate-water-flow
-            " />
           </div>
         </div>
       </VideoBackground>

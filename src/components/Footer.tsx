@@ -6,6 +6,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
+import NewsletterService from "@/services/newsletterService";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -26,6 +27,11 @@ const Footer = () => {
 
     setIsSubscribing(true);
     try {
+      // Check if Supabase is available
+      if (!supabase) {
+        throw new Error('Database connection unavailable');
+      }
+
       const { error } = await supabase
         .from('newsletter_subscriptions')
         .insert([
@@ -37,12 +43,18 @@ const Footer = () => {
         ]);
 
       if (error) {
+        console.error('Supabase error:', error);
         if (error.code === '23505') { // Unique constraint violation
           toast({
             title: "Already subscribed!",
             description: "This email is already subscribed to our newsletter.",
             variant: "default",
           });
+          setEmail("");
+          return;
+        } else if (error.code === '42P01') { // Table doesn't exist
+          // Fall back to local storage
+          throw new Error('Database table not found');
         } else {
           throw error;
         }
@@ -56,11 +68,52 @@ const Footer = () => {
       }
     } catch (error) {
       console.error('Subscription error:', error);
-      toast({
-        title: "Subscription failed",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
+      
+      // Fallback to local storage
+      try {
+        // Check if already subscribed locally
+        if (NewsletterService.isSubscribedLocally(email.trim())) {
+          toast({
+            title: "Already subscribed!",
+            description: "This email is already subscribed to our newsletter.",
+            variant: "default",
+          });
+          setEmail("");
+          return;
+        }
+
+        // Save to local storage
+        const saved = NewsletterService.saveToLocalStorage(email.trim(), 'footer');
+        if (saved) {
+          toast({
+            title: "Subscription saved!",
+            description: "Your subscription has been saved locally and will be processed when our service is available.",
+            variant: "default",
+          });
+          setEmail("");
+        } else {
+          throw new Error('Failed to save locally');
+        }
+      } catch (fallbackError) {
+        console.error('Fallback error:', fallbackError);
+        
+        // Final error handling
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        
+        if (errorMessage.includes('fetch') || errorMessage.includes('network') || errorMessage.includes('connection')) {
+          toast({
+            title: "Connection Error",
+            description: "Please check your internet connection and try again.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Subscription failed",
+            description: "Please try again later or contact support if the issue persists.",
+            variant: "destructive",
+          });
+        }
+      }
     } finally {
       setIsSubscribing(false);
     }
@@ -99,9 +152,13 @@ const Footer = () => {
 
           {/* Explore Links */}
           <div>
-            <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.explore')}</h4>
+            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+              <span className="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent">
+                {t('footer.explore')}
+              </span>
+            </h4>
             <div className="space-y-3">
-              <Link to="/destinations" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/destinations" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
                 {t('footer.destinations')}
               </Link>
               <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -141,10 +198,17 @@ const Footer = () => {
 
           {/* Support Links */}
           <div>
-            <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.support')}</h4>
+            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+              <span className="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+                {t('footer.support')}
+              </span>
+            </h4>
             <div className="space-y-3">
-              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
                 {t('footer.helpCenter')}
+              </Link>
+              <Link to="/community-chat" className="block text-muted-foreground hover:text-primary transition-colors">
+                Community Chat
               </Link>
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.contactUs')}

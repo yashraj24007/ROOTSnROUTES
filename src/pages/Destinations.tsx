@@ -5,8 +5,9 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Star, Clock, IndianRupee, Camera, Eye, EyeOff, Filter, Search } from "lucide-react";
+import { MapPin, Star, Clock, IndianRupee, Camera, Eye, EyeOff, Filter, Search, ArrowRight } from "lucide-react";
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { allDestinations } from "@/data/completeDestinations";
 
 const Destinations = () => {
@@ -297,9 +298,12 @@ const Destinations = () => {
                     </div>
                   )}
 
-                  <Button variant="default" className="w-full">
-                    View Full Details
-                  </Button>
+                  <Link to={`/destination/${destination.id}`} className="w-full">
+                    <Button variant="default" className="w-full group">
+                      View Full Details
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             ))}

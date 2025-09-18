@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { MapPin, Star, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { allDestinations } from "@/data/completeDestinations";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 const Destinations = () => {
@@ -31,25 +31,25 @@ const Destinations = () => {
   }, [isAutoScrolling]);
 
   // Manual navigation functions
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setIsAutoScrolling(false);
-    setCurrentIndex(currentIndex === 0 ? allDestinations.length - 1 : currentIndex - 1);
-  };
+    setCurrentIndex(prev => prev === 0 ? allDestinations.length - 1 : prev - 1);
+  }, []);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setIsAutoScrolling(false);
-    setCurrentIndex(currentIndex >= allDestinations.length - 1 ? 0 : currentIndex + 1);
-  };
+    setCurrentIndex(prev => prev >= allDestinations.length - 1 ? 0 : prev + 1);
+  }, []);
 
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     setIsAutoScrolling(false);
     setCurrentIndex(index);
-  };
+  }, []);
 
   // Resume auto-scroll after manual interaction
-  const resumeAutoScroll = () => {
+  const resumeAutoScroll = useCallback(() => {
     setTimeout(() => setIsAutoScrolling(true), 5000);
-  };
+  }, []);
 
   // Get visible destinations (show 3 at a time)
   const getVisibleDestinations = () => {
@@ -75,10 +75,12 @@ const Destinations = () => {
             Discover the hidden gems and famous attractions across Jharkhand's beautiful districts
           </p>
           <div className="flex justify-end mt-8">
-            <Button variant="outline" className="gap-2" onClick={() => window.location.href = '/destinations'}>
-              View All {allDestinations.length} Destinations
-              <ArrowRight className="w-4 h-4" />
-            </Button>
+            <Link to="/destinations">
+              <Button variant="outline" className="gap-2">
+                View All {allDestinations.length} Destinations
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -87,8 +89,12 @@ const Destinations = () => {
           <Button
             variant="outline" 
             size="icon"
-            onClick={() => { goToPrevious(); resumeAutoScroll(); }}
+            onClick={() => {
+              goToPrevious();
+              resumeAutoScroll();
+            }}
             className="rounded-full"
+            aria-label="Previous destinations"
           >
             <ChevronLeft className="w-4 h-4" />
           </Button>
@@ -98,7 +104,11 @@ const Destinations = () => {
             {Array.from({ length: Math.min(allDestinations.length, 10) }, (_, i) => (
               <button
                 key={i}
-                onClick={() => { goToSlide(i * Math.floor(allDestinations.length / 10)); resumeAutoScroll(); }}
+                onClick={() => {
+                  const targetIndex = i * Math.floor(allDestinations.length / 10);
+                  goToSlide(targetIndex);
+                  resumeAutoScroll();
+                }}
                 className={`w-2 h-2 rounded-full transition-all ${
                   Math.floor(currentIndex / Math.ceil(allDestinations.length / 10)) === i
                     ? 'bg-primary w-8' 
@@ -113,8 +123,12 @@ const Destinations = () => {
           <Button
             variant="outline" 
             size="icon"
-            onClick={() => { goToNext(); resumeAutoScroll(); }}
+            onClick={() => {
+              goToNext();
+              resumeAutoScroll();
+            }}
             className="rounded-full"
+            aria-label="Next destinations"
           >
             <ChevronRight className="w-4 h-4" />
           </Button>

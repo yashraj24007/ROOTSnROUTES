@@ -5,34 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Star, Calendar, Clock, Phone, Camera, Navigation, Users, Car, Home } from "lucide-react";
 import { useParams, Link } from "react-router-dom";
-import { allDestinations } from "@/data/completeDestinations";
+import { allDestinations, type Destination } from "@/data/completeDestinations";
 import { useEffect, useState } from "react";
-
-interface Destination {
-  id: number;
-  name: string;
-  district: string;
-  category: string;
-  type: string;
-  description: string;
-  whyFamous: string;
-  bestTime: string;
-  entryFee: string;
-  rating: number;
-  reviews: number;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-  highlights: string[];
-  nearbyAttractions: string[];
-  facilities: string[];
-  activities: string[];
-  howToReach: string;
-  stayOptions: string[];
-  localCuisine: string[];
-  tips: string[];
-}
 
 const DestinationDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -110,7 +84,7 @@ const DestinationDetail = () => {
               <div className="flex items-center gap-1">
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
                 <span className="font-semibold">{destination.rating}</span>
-                <span className="text-white/80">({destination.reviews} reviews)</span>
+                <span className="text-white/80">({destination.reviews.length} reviews)</span>
               </div>
               <div className="flex items-center gap-1">
                 <MapPin className="w-5 h-5" />
@@ -144,79 +118,97 @@ const DestinationDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Highlights */}
+            {/* Key Features */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Star className="w-5 h-5" />
-                  Key Highlights
+                  Key Features
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-3">
-                  {destination.highlights.map((highlight, index) => (
+                  {destination.keyFeatures.map((feature, index) => (
                     <div key={index} className="flex items-center gap-2 p-2 bg-muted rounded">
                       <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span className="text-sm">{highlight}</span>
+                      <span className="text-sm">{feature}</span>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
 
-            {/* Activities */}
+            {/* Why Famous */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Camera className="w-5 h-5" />
-                  Things to Do
+                  Why Visit This Place
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {destination.activities.map((activity, index) => (
-                    <div key={index} className="flex items-center gap-2 p-3 border rounded-lg hover:bg-muted transition-colors">
-                      <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                        <span className="text-primary text-sm font-semibold">{index + 1}</span>
-                      </div>
-                      <span>{activity}</span>
-                    </div>
-                  ))}
+                <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                  <p className="text-orange-700 dark:text-orange-300 leading-relaxed">
+                    {destination.whyFamous}
+                  </p>
                 </div>
               </CardContent>
             </Card>
 
-            {/* How to Reach */}
+            {/* Visit Information */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Car className="w-5 h-5" />
-                  How to Reach
+                  Visit Information
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground leading-relaxed">{destination.howToReach}</p>
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-semibold mb-2">Best Time to Visit:</h5>
+                    <p className="text-muted-foreground">{destination.bestTime}</p>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold mb-2">Timings:</h5>
+                    <p className="text-muted-foreground">{destination.timing}</p>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold mb-2">Entry Fee:</h5>
+                    <p className="text-muted-foreground">{destination.entryFee}</p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
-            {/* Tips */}
+            {/* Reviews */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Users className="w-5 h-5" />
-                  Traveler Tips
+                  Visitor Reviews ({destination.reviews.length})
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  {destination.tips.map((tip, index) => (
-                    <div key={index} className="flex gap-3 p-3 bg-blue-50 rounded-lg">
-                      <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-semibold">
-                        {index + 1}
+                <div className="space-y-4">
+                  {destination.reviews.slice(0, 3).map((review, index) => (
+                    <div key={index} className="p-4 bg-muted rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <h5 className="font-semibold">{review.author}</h5>
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                          <span className="text-sm">{review.rating}</span>
+                        </div>
                       </div>
-                      <p className="text-blue-800 text-sm">{tip}</p>
+                      <p className="text-sm text-muted-foreground mb-2">{review.comment}</p>
+                      <p className="text-xs text-muted-foreground">{review.date}</p>
                     </div>
                   ))}
+                  {destination.reviews.length > 3 && (
+                    <p className="text-center text-muted-foreground">
+                      +{destination.reviews.length - 3} more reviews
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -249,56 +241,56 @@ const DestinationDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Nearby Attractions */}
+            {/* Location Details */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MapPin className="w-5 h-5" />
-                  Nearby Attractions
+                  Location Details
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  {destination.nearbyAttractions.map((attraction, index) => (
-                    <div key={index} className="p-2 text-sm text-muted-foreground">
-                      • {attraction}
-                    </div>
-                  ))}
+                <div className="space-y-3">
+                  <div>
+                    <span className="font-semibold">District:</span>
+                    <p className="text-muted-foreground">{destination.district}</p>
+                  </div>
+                  <div>
+                    <span className="font-semibold">Category:</span>
+                    <p className="text-muted-foreground">{destination.category}</p>
+                  </div>
+                  <div>
+                    <span className="font-semibold">Coordinates:</span>
+                    <p className="text-muted-foreground">
+                      {destination.coordinates.lat}, {destination.coordinates.lng}
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Stay Options */}
+            {/* Explore More */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Home className="w-5 h-5" />
-                  Where to Stay
+                  <Navigation className="w-5 h-5" />
+                  Explore More
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  {destination.stayOptions.map((option, index) => (
-                    <div key={index} className="p-2 text-sm text-muted-foreground">
-                      • {option}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Local Cuisine */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Local Cuisine</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {destination.localCuisine.map((dish, index) => (
-                    <div key={index} className="p-2 text-sm text-muted-foreground">
-                      • {dish}
-                    </div>
-                  ))}
+                <div className="space-y-3">
+                  <Link to={`/districts/${destination.district.toLowerCase()}`} className="block">
+                    <Button variant="outline" className="w-full justify-start">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      More places in {destination.district}
+                    </Button>
+                  </Link>
+                  <Link to="/community-chat" className="block">
+                    <Button variant="outline" className="w-full justify-start">
+                      <Users className="w-4 h-4 mr-2" />
+                      Join Community Chat
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>

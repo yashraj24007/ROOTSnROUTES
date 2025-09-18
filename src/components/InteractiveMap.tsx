@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, Navigation, Zap, Users, Mountain, Trees } from 'lucide-react';
+import { MapPin, Navigation, Zap, Users, Mountain, Trees, Phone } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import { allDestinations } from '@/data/completeDestinations';
 
 interface District {
   id: string;
@@ -12,6 +13,7 @@ interface District {
   speciality: string;
   description: string;
   icon: string;
+  destinations: typeof allDestinations;
 }
 
 const InteractiveMap = () => {
@@ -22,15 +24,23 @@ const InteractiveMap = () => {
   const [mapScale, setMapScale] = useState(1);
   const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
 
+  // Group destinations by district
+  const getDistrictDestinations = (districtName: string) => {
+    return allDestinations.filter(dest => 
+      dest.district.toLowerCase() === districtName.toLowerCase()
+    );
+  };
+
   const districts: District[] = [
     {
       id: 'ranchi',
       name: 'Ranchi',
-      coordinates: { x: 320, y: 280 },
+      coordinates: { x: 280, y: 300 },
       attractions: ['Rock Garden', 'Tagore Hill', 'Kanke Dam'],
       speciality: 'Capital City & Hills',
       description: 'The capital city known for its scenic hills and urban attractions.',
-      icon: '🏛️'
+      icon: '🏛️',
+      destinations: getDistrictDestinations('Ranchi')
     },
     {
       id: 'dhanbad',
@@ -39,16 +49,18 @@ const InteractiveMap = () => {
       attractions: ['Maithon Dam', 'Topchanchi Lake'],
       speciality: 'Coal Capital',
       description: 'Industrial hub famous for coal mining and beautiful lakes.',
-      icon: '⚡'
+      icon: '⚡',
+      destinations: getDistrictDestinations('Dhanbad')
     },
     {
       id: 'jamshedpur',
       name: 'Jamshedpur',
-      coordinates: { x: 480, y: 320 },
+      coordinates: { x: 450, y: 380 },
       attractions: ['Jubilee Park', 'Tata Steel Zoological Park'],
       speciality: 'Steel City',
       description: 'Planned industrial city with modern amenities and parks.',
-      icon: '🏭'
+      icon: '🏭',
+      destinations: getDistrictDestinations('Jamshedpur')
     },
     {
       id: 'bokaro',
@@ -57,7 +69,8 @@ const InteractiveMap = () => {
       attractions: ['Bokaro Steel Plant', 'Garga Dam'],
       speciality: 'Steel & Nature',
       description: 'Steel city surrounded by natural beauty and water bodies.',
-      icon: '🌊'
+      icon: '🌊',
+      destinations: getDistrictDestinations('Bokaro')
     },
     {
       id: 'deoghar',
@@ -66,7 +79,8 @@ const InteractiveMap = () => {
       attractions: ['Baidyanath Temple', 'Nandan Pahar'],
       speciality: 'Spiritual Center',
       description: 'Sacred city famous for the Baidyanath Jyotirlinga temple.',
-      icon: '🕉️'
+      icon: '🕉️',
+      destinations: getDistrictDestinations('Deoghar')
     },
     {
       id: 'hazaribag',
@@ -75,7 +89,8 @@ const InteractiveMap = () => {
       attractions: ['Hazaribag National Park', 'Canary Hill'],
       speciality: 'Wildlife & Hills',
       description: 'Hill station known for wildlife sanctuary and scenic beauty.',
-      icon: '🦌'
+      icon: '🦌',
+      destinations: getDistrictDestinations('Hazaribag')
     },
     {
       id: 'giridih',
@@ -84,7 +99,8 @@ const InteractiveMap = () => {
       attractions: ['Parasnath Hill', 'Usri Falls'],
       speciality: 'Jain Pilgrimage',
       description: 'Sacred destination with highest peak of Jharkhand.',
-      icon: '⛰️'
+      icon: '⛰️',
+      destinations: getDistrictDestinations('Giridih')
     },
     {
       id: 'palamu',
@@ -93,7 +109,28 @@ const InteractiveMap = () => {
       attractions: ['Betla National Park', 'Palamu Fort'],
       speciality: 'Tiger Reserve',
       description: 'Famous for Betla National Park and wildlife conservation.',
-      icon: '🐅'
+      icon: '🐅',
+      destinations: getDistrictDestinations('Palamu')
+    },
+    {
+      id: 'khunti',
+      name: 'Khunti',
+      coordinates: { x: 240, y: 320 },
+      attractions: ['Panchghagh Falls', 'Tribal Culture'],
+      speciality: 'Waterfalls & Heritage',
+      description: 'Rich in tribal culture and natural waterfalls.',
+      icon: '💧',
+      destinations: getDistrictDestinations('Khunti')
+    },
+    {
+      id: 'gumla',
+      name: 'Gumla',
+      coordinates: { x: 200, y: 320 },
+      attractions: ['Ghaghra Falls', 'Tribal Villages'],
+      speciality: 'Natural Beauty',
+      description: 'Known for beautiful waterfalls and tribal heritage.',
+      icon: '🏔️',
+      destinations: getDistrictDestinations('Gumla')
     }
   ];
 
