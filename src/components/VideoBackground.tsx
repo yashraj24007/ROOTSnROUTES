@@ -111,6 +111,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
           muted={muted}
           loop
           playsInline
+          preload="metadata"
           onLoadedData={handleVideoLoad}
           onError={handleVideoError}
           poster={fallbackImage}

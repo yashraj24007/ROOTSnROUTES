@@ -1,9 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, Navigation, Zap, Mountain, Phone, Filter, Map } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { 
+  MapPin, 
+  Navigation, 
+  Eye, 
+  Camera, 
+  Smartphone, 
+  Compass, 
+  Route, 
+  Clock, 
+  Star,
+  Play,
+  Pause,
+  RotateCcw,
+  Maximize,
+  Filter,
+  Mountain,
+  Phone,
+  Zap
+} from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
-import { allDestinations } from '@/data/completeDestinations';
+import { allDestinations, Destination } from '@/data/completeDestinations';
+import { useToast } from '@/hooks/use-toast';
 
 interface District {
   id: string;
@@ -13,20 +36,35 @@ interface District {
   speciality: string;
   description: string;
   icon: string;
-  destinations: Array<{
-    id: number;
-    name: string;
-    district: string;
-    category: string;
-    rating: number;
-  }>;
+  destinations: Destination[];
+}
+
+interface ARPreview {
+  id: string;
+  title: string;
+  description: string;
+  thumbnailUrl: string;
+  previewType: '360' | 'ar' | 'vr';
+  duration?: number;
+}
+
+interface RouteInfo {
+  distance: number;
+  duration: number;
+  steps: string[];
 }
 
 const EnhancedInteractiveMap = () => {
   const { t } = useLanguage();
+  const { toast } = useToast();
   const [selectedDistrict, setSelectedDistrict] = useState<District | null>(null);
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [arPreviews, setArPreviews] = useState<ARPreview[]>([]);
+  const [selectedPreview, setSelectedPreview] = useState<ARPreview | null>(null);
+  const [isARSupported, setIsARSupported] = useState(false);
+  const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
 
   // Group destinations by district
@@ -215,7 +253,7 @@ const EnhancedInteractiveMap = () => {
           <Card className="card-enhanced p-6 relative overflow-hidden">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-xl font-semibold flex items-center gap-2">
-                <Map className="text-primary" />
+                <MapPin className="text-primary" />
                 Jharkhand Tourist Map
               </h3>
               <Button

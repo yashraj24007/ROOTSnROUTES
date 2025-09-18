@@ -31,11 +31,17 @@ const Destinations = () => {
       { name: "Temples", value: "temples", count: categoryCount("temples") },
       { name: "Hills", value: "hills", count: categoryCount("hills") },
       { name: "Heritage", value: "heritage", count: categoryCount("heritage") },
-      { name: "Lakes", value: "lakes", count: categoryCount("lakes") }
+      { name: "Lakes", value: "lakes", count: categoryCount("lakes") },
+      { name: "Dams", value: "dams", count: categoryCount("dams") },
+      { name: "Parks", value: "parks", count: categoryCount("parks") }
     ];
   }, []);
 
-  const districts = ["all", "Khunti", "Kodarma", "Latehar", "Lohardaga"];
+  // Get all unique districts from destinations data
+  const districts = useMemo(() => {
+    const uniqueDistricts = [...new Set(allDestinations.map(dest => dest.district))].sort();
+    return ["all", ...uniqueDistricts];
+  }, []);
   const types = ["all", "famous", "hidden"];
 
   // Filter destinations based on active filters
@@ -112,26 +118,36 @@ const Destinations = () => {
             </div>
             
             <Select value={activeDistrict} onValueChange={setActiveDistrict}>
-              <SelectTrigger className="w-36">
-                <SelectValue placeholder="District" />
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Select District" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-60 overflow-y-auto">
                 {districts.map((district) => (
                   <SelectItem key={district} value={district}>
                     {district === "all" ? "All Districts" : district}
+                    {district !== "all" && (
+                      <span className="ml-2 text-xs text-muted-foreground">
+                        ({allDestinations.filter(dest => dest.district === district).length})
+                      </span>
+                    )}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
 
             <Select value={activeType} onValueChange={setActiveType}>
-              <SelectTrigger className="w-36">
-                <SelectValue placeholder="Type" />
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Select Type" />
               </SelectTrigger>
               <SelectContent>
                 {types.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type === "all" ? "All Places" : type === "famous" ? "Famous Places" : "Hidden Gems"}
+                    {type !== "all" && (
+                      <span className="ml-2 text-xs text-muted-foreground">
+                        ({allDestinations.filter(dest => dest.type === type).length})
+                      </span>
+                    )}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -189,6 +205,8 @@ const Destinations = () => {
                     src={destination.image}
                     alt={destination.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   

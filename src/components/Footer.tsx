@@ -122,7 +122,7 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-subtle border-t border-border">
       <div className="container mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
@@ -218,6 +218,29 @@ const Footer = () => {
               </Link>
               <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.termsOfService')}
+              </Link>
+            </div>
+          </div>
+
+          {/* Feedback & Analytics */}
+          <div>
+            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+              <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
+                Feedback
+              </span>
+            </h4>
+            <div className="space-y-3">
+              <Link to="/feedback-analysis" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
+                Share Feedback
+              </Link>
+              <Link to="/analytics-dashboard" className="block text-muted-foreground hover:text-primary transition-colors">
+                Tourism Insights
+              </Link>
+              <Link to="/ai-itinerary" className="block text-muted-foreground hover:text-primary transition-colors">
+                AI Trip Planner
+              </Link>
+              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
+                Report Issues
               </Link>
             </div>
           </div>

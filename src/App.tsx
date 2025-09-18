@@ -31,6 +31,10 @@ import ExploreDistricts from "./pages/ExploreDistricts";
 import DistrictDestinations from "./pages/DistrictDestinations";
 import DestinationsList from "./pages/DestinationsList";
 import CommunityChat from "./pages/CommunityChat";
+import AIItineraryPlannerPage from "./pages/AIItineraryPlanner";
+import LocalMarketplacePage from "./pages/LocalMarketplace";
+import FeedbackAnalysisPage from "./pages/FeedbackAnalysis";
+import AnalyticsDashboardPage from "./pages/AnalyticsDashboard";
 
 const queryClient = new QueryClient();
 
@@ -107,6 +111,10 @@ const App = () => (
                     <Route path="/district-destinations" element={<DistrictDestinations />} />
                     <Route path="/destinations-list" element={<DestinationsList />} />
                     <Route path="/community-chat" element={<CommunityChat />} />
+                    <Route path="/ai-itinerary" element={<AIItineraryPlannerPage />} />
+                    <Route path="/local-marketplace" element={<LocalMarketplacePage />} />
+                    <Route path="/feedback-analysis" element={<FeedbackAnalysisPage />} />
+                    <Route path="/analytics-dashboard" element={<AnalyticsDashboardPage />} />
                     <Route path="/glowing-line-demo" element={<GlowingLineDemo />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />

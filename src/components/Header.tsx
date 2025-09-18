@@ -115,13 +115,13 @@ const Header = () => {
           {/* Navigation */}
           <nav 
             id="navigation"
-            className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6"
+            className="hidden md:flex items-center gap-1 lg:gap-2 xl:gap-3 2xl:gap-4"
             role="navigation"
             aria-label="Primary navigation"
           >
             <Link 
               to="/" 
-              className={`nav-brand-item text-sm ${
+              className={`nav-brand-item text-xs xl:text-sm ${
                 isActive('/') ? 'active' : ''
               }`}
               aria-current={isActive('/') ? 'page' : undefined}
@@ -130,7 +130,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/destinations" 
-              className={`nav-brand-item text-sm ${
+              className={`nav-brand-item text-xs xl:text-sm ${
                 isActive('/destinations') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/destinations', 'Explore')}
@@ -141,7 +141,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/transport" 
-              className={`nav-brand-item text-sm ${
+              className={`nav-brand-item text-xs xl:text-sm ${
                 isActive('/transport') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/transport', 'Transport')}
@@ -152,7 +152,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/marketplace" 
-              className={`transition-colors text-sm ${
+              className={`transition-colors text-xs xl:text-sm ${
                 isActive('/marketplace') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/marketplace', 'Marketplace')}
@@ -163,34 +163,48 @@ const Header = () => {
             </Link>
             <Link 
               to="/weather" 
-              className={`transition-colors text-sm flex items-center space-x-1 ${
+              className={`transition-colors text-xs xl:text-sm flex items-center space-x-1 ${
                 isActive('/weather') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/weather', 'Weather')}
               aria-current={isActive('/weather') ? 'page' : undefined}
               aria-label="Current weather conditions in Jharkhand"
             >
-              <Cloud className="h-4 w-4" aria-hidden="true" />
-              <span>Weather</span>
+              <Cloud className="h-3 w-3 xl:h-4 xl:w-4" aria-hidden="true" />
+              <span className="hidden xl:inline">Weather</span>
+              <span className="xl:hidden">🌤</span>
+            </Link>
+            <Link 
+              to="/ai-itinerary" 
+              className={`transition-colors text-xs xl:text-sm ${
+                isActive('/ai-itinerary') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              }`}
+              onClick={() => handleNavClick('/ai-itinerary', 'AI Planner')}
+              aria-current={isActive('/ai-itinerary') ? 'page' : undefined}
+              aria-label="AI-powered travel itinerary planner"
+            >
+              <span className="hidden xl:inline">AI Planner</span>
+              <span className="xl:hidden">🤖</span>
             </Link>
             <Link 
               to="/about" 
-              className={`transition-colors text-sm ${
-                isActive('/about') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-xs xl:text-sm ${
+                isActive('/about') ? 'active' : ''
               }`}
+              onClick={() => handleNavClick('/about', 'About')}
               aria-current={isActive('/about') ? 'page' : undefined}
-              aria-label="About ROOTSnROUTES platform and mission"
+              aria-label="About ROOTSnROUTES platform"
             >
               {t('header.about')}
             </Link>
             <Link 
               to="/support" 
-              className={`transition-colors text-sm ${
-                isActive('/support') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-xs xl:text-sm ${
+                isActive('/support') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/support', 'Support')}
               aria-current={isActive('/support') ? 'page' : undefined}
-              aria-label="Customer support and help center"
+              aria-label="Get support and assistance"
             >
               {t('header.support')}
             </Link>
@@ -198,13 +212,13 @@ const Header = () => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
-            {/* Mobile Menu Button - Only on small screens */}
+            {/* Mobile Menu Button - Only on small and medium screens */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="md:hidden p-2 w-9 h-9 flex-shrink-0"
+                  className="lg:hidden p-2 w-9 h-9 flex-shrink-0"
                   aria-label="Open mobile menu"
                 >
                   <Menu className="w-4 h-4" />
@@ -289,6 +303,42 @@ const Header = () => {
                       }}
                     >
                       {t('header.transport')}
+                    </Link>
+                    <Link 
+                      to="/ai-itinerary" 
+                      className={`p-3 rounded-lg transition-colors ${
+                        isActive('/ai-itinerary') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                      }`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleNavClick('/ai-itinerary', 'AI Planner');
+                      }}
+                    >
+                      AI Planner
+                    </Link>
+                    <Link 
+                      to="/analytics-dashboard" 
+                      className={`p-3 rounded-lg transition-colors ${
+                        isActive('/analytics-dashboard') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                      }`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleNavClick('/analytics-dashboard', 'Analytics');
+                      }}
+                    >
+                      Analytics
+                    </Link>
+                    <Link 
+                      to="/feedback-analysis" 
+                      className={`p-3 rounded-lg transition-colors ${
+                        isActive('/feedback-analysis') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                      }`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleNavClick('/feedback-analysis', 'Feedback');
+                      }}
+                    >
+                      Feedback
                     </Link>
                     <Link 
                       to="/support" 
@@ -432,8 +482,8 @@ const Header = () => {
               </SheetContent>
             </Sheet>
 
-            {/* Theme Toggle - Hidden on mobile */}
-            <div className="hidden md:block flex-shrink-0">
+            {/* Theme Toggle - Hidden on mobile and tablet */}
+            <div className="hidden lg:block flex-shrink-0">
               <ThemeToggle />
             </div>
             

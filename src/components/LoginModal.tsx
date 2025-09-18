@@ -23,7 +23,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     password: "",
     confirmPassword: "",
     name: "",
-    phone: ""
+    phone: "",
+    userType: "traveller" // Default to traveller
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -52,7 +53,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       password: "",
       confirmPassword: "",
       name: "",
-      phone: ""
+      phone: "",
+      userType: "traveller"
     });
     setError("");
   };
@@ -120,7 +122,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       if (isLogin) {
         await signIn(formData.email, formData.password);
       } else {
-        await signUp(formData.email, formData.password);
+        const metadata = {
+          name: formData.name,
+          phone: formData.phone,
+          userType: formData.userType as 'traveller' | 'admin'
+        };
+        await signUp(formData.email, formData.password, metadata);
       }
       onClose();
       resetForm();
@@ -161,7 +168,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent 
           ref={modalRef}
-          className="sm:max-w-md bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl [&>button]:hidden"
+          className="sm:max-w-md bg-card/95 backdrop-blur-sm border shadow-2xl [&>button]:hidden"
           aria-labelledby="login-title"
           aria-describedby="login-description"
         >
@@ -169,7 +176,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-0 top-0 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800 z-10"
+              className="absolute right-0 top-0 h-8 w-8 p-0 hover:bg-muted z-10"
               onClick={handleClose}
               aria-label="Close dialog"
             >
@@ -189,7 +196,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 </CardTitle>
                 <CardDescription 
                   id="login-description"
-                  className="text-gray-600 dark:text-gray-400"
+                  className="text-muted-foreground"
                 >
                   {isLogin 
                     ? "Sign in to explore Jharkhand's hidden gems" 
@@ -219,7 +226,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
                     <div className="relative">
-                      <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                      <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     <Input
                       id="name"
                       ref={firstInputRef}
@@ -242,7 +249,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-sm font-medium">Phone Number</Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                    <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     <Input
                       id="phone"
                       type="tel"
@@ -259,11 +266,53 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 </div>
               )}
 
+              {/* User Type Selection */}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">Account Type</Label>
+                <div className="flex space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <input
+                      id="user-type-traveller"
+                      type="radio"
+                      name="userType"
+                      value="traveller"
+                      checked={formData.userType === 'traveller'}
+                      onChange={(e) => handleInputChange("userType", e.target.value)}
+                      className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      aria-describedby="user-type-help"
+                      aria-label="Select Traveller account type"
+                    />
+                    <Label htmlFor="user-type-traveller" className="text-sm cursor-pointer">
+                      Traveller
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      id="user-type-admin"
+                      type="radio"
+                      name="userType"
+                      value="admin"
+                      checked={formData.userType === 'admin'}
+                      onChange={(e) => handleInputChange("userType", e.target.value)}
+                      className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      aria-describedby="user-type-help"
+                      aria-label="Select Admin account type"
+                    />
+                    <Label htmlFor="user-type-admin" className="text-sm cursor-pointer">
+                      Admin
+                    </Label>
+                  </div>
+                </div>
+                <p id="user-type-help" className="text-xs text-muted-foreground">
+                  Select your account type to access appropriate features
+                </p>
+              </div>
+
               {/* Email Field */}
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-sm font-medium">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                   <Input
                     id="email"
                     ref={isLogin ? firstInputRef : undefined}
@@ -285,7 +334,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-sm font-medium">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -309,14 +358,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                     aria-pressed={showPassword}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-gray-400" aria-hidden="true" />
+                      <EyeOff className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     ) : (
-                      <Eye className="h-4 w-4 text-gray-400" aria-hidden="true" />
+                      <Eye className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     )}
                   </Button>
                 </div>
                 {!isLogin && (
-                  <p id="password-help" className="text-xs text-gray-500 dark:text-gray-400">
+                  <p id="password-help" className="text-xs text-muted-foreground">
                     Password must be at least 6 characters long
                   </p>
                 )}
@@ -327,7 +376,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword" className="text-sm font-medium">Confirm Password</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     <Input
                       id="confirmPassword"
                       type={showConfirmPassword ? "text" : "password"}
@@ -351,13 +400,13 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                       aria-pressed={showConfirmPassword}
                     >
                       {showConfirmPassword ? (
-                        <EyeOff className="h-4 w-4 text-gray-400" aria-hidden="true" />
+                        <EyeOff className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                       ) : (
-                        <Eye className="h-4 w-4 text-gray-400" aria-hidden="true" />
+                        <Eye className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                       )}
                     </Button>
                   </div>
-                  <p id="confirm-password-help" className="text-xs text-gray-500 dark:text-gray-400">
+                  <p id="confirm-password-help" className="text-xs text-muted-foreground">
                     Please enter the same password again
                   </p>
                 </div>
@@ -366,7 +415,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2.5 transition-all duration-200"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2.5 transition-all duration-200"
                 disabled={loading}
                 aria-describedby={error ? "error-message" : undefined}
               >
@@ -380,7 +429,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 <Separator />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white dark:bg-gray-900 px-2 text-gray-500">Or continue with</span>
+                <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
               </div>
             </div>
 
@@ -388,7 +437,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             <Button
               type="button"
               variant="outline"
-              className="w-full border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+              className="w-full hover:bg-muted"
               onClick={handleGoogleSignIn}
               disabled={loading}
               aria-label="Continue with Google account"
@@ -399,7 +448,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
             {/* Toggle Mode */}
             <div className="text-center text-sm">
-              <span className="text-gray-600 dark:text-gray-400">
+              <span className="text-muted-foreground">
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
               </span>
               <button

@@ -49,6 +49,8 @@ const DistrictDestinations = () => {
           src={destination.image} 
           alt={destination.name}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+          loading="lazy"
+          decoding="async"
           onError={(e) => {
             // Fallback to a placeholder image if the Google image fails to load
             (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop&crop=center`;

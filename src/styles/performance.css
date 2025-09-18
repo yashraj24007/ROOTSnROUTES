@@ -1,0 +1,108 @@
+/* Performance optimizations */
+
+/* Use CSS containment for better performance */
+.performance-container {
+  contain: layout style paint;
+}
+
+/* Optimize transforms for better performance */
+.performance-transform {
+  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: transform;
+}
+
+/* Reduce reflows with transform instead of layout properties */
+.performance-hover {
+  transition: transform 0.3s ease;
+}
+
+.performance-hover:hover {
+  transform: translateY(-4px) translateZ(0);
+}
+
+/* Optimize animations */
+.performance-animation {
+  animation-fill-mode: both;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Use CSS Grid and Flexbox efficiently */
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  contain: layout;
+}
+
+/* Optimize image rendering */
+.performance-image {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+}
+
+/* Optimize scrolling */
+.performance-scroll {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior: contain;
+}
+
+/* Use CSS variables for dynamic values to reduce style recalculation */
+.performance-dynamic {
+  --scale: 1;
+  transform: scale(var(--scale)) translateZ(0);
+}
+
+/* Optimize video elements */
+.performance-video {
+  object-fit: cover;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce paint complexity */
+.performance-card {
+  border-radius: 12px;
+  overflow: hidden;
+  contain: paint layout style;
+}
+
+/* Optimize gradients */
+.performance-gradient {
+  background: linear-gradient(135deg, var(--color-1), var(--color-2));
+  background-attachment: fixed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .performance-animation,
+  .performance-transform,
+  .performance-hover {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Memory-efficient animations */
+@keyframes performanceSlideIn {
+  from {
+    transform: translateX(-100%) translateZ(0);
+  }
+  to {
+    transform: translateX(0) translateZ(0);
+  }
+}
+
+/* Use transform instead of changing width/height */
+@keyframes performanceScale {
+  from {
+    transform: scale(0) translateZ(0);
+  }
+  to {
+    transform: scale(1) translateZ(0);
+  }
+}

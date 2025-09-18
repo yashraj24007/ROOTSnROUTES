@@ -37,8 +37,8 @@ const Hero = () => {
             <div className="mb-8 stagger-item">
               <span className="
                 inline-flex items-center px-8 py-4 rounded-full text-lg font-bold
-                bg-white/95 dark:bg-gray-800/95
-                text-black dark:text-white
+                bg-card/95
+                text-foreground
                 border-3 border-black/50 dark:border-white/50
                 backdrop-blur-md shadow-2xl
                 animate-gentle-float
@@ -68,6 +68,7 @@ const Hero = () => {
                 animate-scale-in
                 drop-shadow-2xl
                 [text-shadow:3px_3px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
+                [text-shadow:3px_3px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
               " style={{ animationDelay: '0.2s' }}>
                 {t('hero.subtitle')}
               </h2>
@@ -87,6 +88,11 @@ const Hero = () => {
               <p className="
                 text-lg sm:text-xl md:text-2xl 
                 max-w-4xl mx-auto leading-relaxed mb-12
+                text-white
+                font-semibold
+                animate-fade-in-up
+                drop-shadow-lg
+                [text-shadow:2px_2px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
                 text-white
                 font-semibold
                 bg-black/70

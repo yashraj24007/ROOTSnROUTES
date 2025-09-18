@@ -153,6 +153,8 @@ const Destinations = () => {
                   src={`https://picsum.photos/800/600?random=${destination.id}`}
                   alt={destination.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     // Fallback to a different image service if picsum fails
                     e.currentTarget.src = `https://source.unsplash.com/800x600/?nature,travel,${destination.category}&sig=${destination.id}`;

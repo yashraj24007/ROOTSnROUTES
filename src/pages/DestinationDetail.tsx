@@ -62,6 +62,8 @@ const DestinationDetail = () => {
           src={`https://picsum.photos/1200/400?random=${destination.id}`}
           alt={destination.name}
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
           onError={(e) => {
             e.currentTarget.src = `https://source.unsplash.com/1200x400/?nature,travel,${destination.category}&sig=${destination.id}`;
           }}
