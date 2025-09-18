@@ -92,12 +92,12 @@ const Header = () => {
       </div>
 
       <header 
-        className="fixed top-0 left-0 right-0 z-50 nav-brand border-b border-border/50 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-50 nav-brand border-b border-border/50 transition-all duration-300 min-h-[64px] md:min-h-[72px]"
         role="banner"
         aria-label="Main navigation"
       >
-      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
-        <div className="flex items-center justify-between gap-4">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 py-3 md:py-4">
+        <div className="flex items-center justify-between gap-2 md:gap-4 h-10 md:h-12 min-w-0">
           {/* Logo */}
           <Link 
             to="/" 
@@ -115,7 +115,7 @@ const Header = () => {
           {/* Navigation */}
           <nav 
             id="navigation"
-            className="hidden lg:flex items-center space-x-4 xl:space-x-6"
+            className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6"
             role="navigation"
             aria-label="Primary navigation"
           >
@@ -149,17 +149,6 @@ const Header = () => {
               aria-label="Transportation options and booking"
             >
               {t('header.transport')}
-            </Link>
-            <Link 
-              to="/services" 
-              className={`transition-colors text-sm ${
-                isActive('/services') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
-              }`}
-              onClick={() => handleNavClick('/services', 'Services')}
-              aria-current={isActive('/services') ? 'page' : undefined}
-              aria-label="Tourism services and packages"
-            >
-              {t('header.services')}
             </Link>
             <Link 
               to="/marketplace" 
@@ -208,14 +197,14 @@ const Header = () => {
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-1 md:space-x-2">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
             {/* Mobile Menu Button - Only on small screens */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="lg:hidden p-2 w-9 h-9"
+                  className="md:hidden p-2 w-9 h-9 flex-shrink-0"
                   aria-label="Open mobile menu"
                 >
                   <Menu className="w-4 h-4" />
@@ -263,18 +252,6 @@ const Header = () => {
                       }}
                     >
                       {t('header.explore')}
-                    </Link>
-                    <Link 
-                      to="/services" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/services') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/services', 'Services');
-                      }}
-                    >
-                      {t('header.services')}
                     </Link>
                     <Link 
                       to="/marketplace" 
@@ -456,34 +433,37 @@ const Header = () => {
             </Sheet>
 
             {/* Theme Toggle - Hidden on mobile */}
-            <div className="hidden md:block">
+            <div className="hidden md:block flex-shrink-0">
               <ThemeToggle />
             </div>
             
             {/* Language Dropdown - Compact on medium, full on large */}
-            <div className="hidden md:block">
+            <div className="hidden sm:block flex-shrink-0">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
                     size="sm"
                     className="
-                      flex items-center space-x-1 lg:space-x-2 
+                      flex items-center gap-1 lg:gap-2 
                       border-border
                       bg-forest-50 dark:bg-forest-900
                       hover:bg-autumn-100 dark:hover:bg-autumn-800
                       text-foreground
-                      min-w-[80px] lg:min-w-[120px] h-8 lg:h-9
+                      min-w-[50px] sm:min-w-[60px] md:min-w-[70px] lg:min-w-[120px] 
+                      h-8 lg:h-9
                       transition-all duration-300 ease-smooth
                       backdrop-blur-sm
                       shadow-organic
-                      px-2 lg:px-3
+                      px-1.5 sm:px-2 lg:px-3
+                      flex-shrink-0
+                      text-xs lg:text-sm
                     "
                   >
                     <Globe className="w-3 h-3 lg:w-4 lg:h-4" />
-                    <span className="text-xs lg:text-sm font-medium flex items-center space-x-1">
+                    <span className="text-xs lg:text-sm font-medium flex items-center gap-1">
                       <span>{getLanguageDisplay(language).flag}</span>
-                      <span className="hidden lg:inline">{getLanguageDisplay(language).icon}</span>
+                      <span className="hidden md:inline">{getLanguageDisplay(language).icon}</span>
                       <span className="hidden lg:inline">{getLanguageDisplay(language).name}</span>
                     </span>
                     <ChevronDown className="w-2 h-2 lg:w-3 lg:h-3" />
@@ -587,19 +567,19 @@ const Header = () => {
               </DropdownMenu>
             </div>
             
-            {/* Login/Profile Section - Rightmost - Hidden on mobile */}
+            {/* Login/Profile Section - Rightmost */}
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="hidden md:flex items-center space-x-2 hover:bg-accent p-2">
-                    <Avatar className="h-7 w-7 lg:h-8 lg:w-8">
+                  <Button variant="ghost" className="flex items-center gap-1 lg:gap-2 hover:bg-accent p-1 lg:p-2 flex-shrink-0 h-8 lg:h-9">
+                    <Avatar className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8">
                       <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
                       <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xs lg:text-sm">
                         {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="text-xs lg:text-sm font-medium hidden lg:inline">{user.user_metadata?.name || 'User'}</span>
-                    <ChevronDown className="h-4 w-4" />
+                    <span className="text-xs lg:text-sm font-medium hidden md:inline max-w-[80px] truncate">{user.user_metadata?.name || 'User'}</span>
+                    <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
@@ -630,29 +610,31 @@ const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <Button
-                onClick={() => setShowLoginModal(true)}
-                variant="default"
-                size="sm"
-                className="
-                  hidden md:flex items-center space-x-1 lg:space-x-2 
-                  bg-gradient-to-r from-blue-500 to-purple-600
-                  hover:from-blue-600 hover:to-purple-700
-                  text-white font-medium
-                  border-0
-                  shadow-lg hover:shadow-xl
-                  transition-all duration-300 ease-smooth
-                  hover:scale-105
-                  px-2 lg:px-3 py-2
-                  text-xs lg:text-sm
-                  min-w-[50px] lg:min-w-[80px]
-                "
-              >
-                <User className="w-3 h-3 lg:w-4 lg:h-4" />
-                <span className="hidden lg:inline">Login</span>
-              </Button>
-            )}
+              ) : (
+                <Button
+                  onClick={() => setShowLoginModal(true)}
+                  variant="default"
+                  size="sm"
+                  className="
+                    flex items-center gap-1 lg:gap-2 
+                    bg-gradient-to-r from-blue-500 to-purple-600
+                    hover:from-blue-600 hover:to-purple-700
+                    text-white font-medium
+                    border-0
+                    shadow-lg hover:shadow-xl
+                    transition-all duration-300 ease-smooth
+                    hover:scale-105
+                    px-2 lg:px-3 py-2
+                    text-xs lg:text-sm
+                    min-w-[45px] sm:min-w-[55px] lg:min-w-[75px]
+                    h-8 lg:h-9
+                    flex-shrink-0
+                  "
+                >
+                  <User className="w-3 h-3 lg:w-4 lg:h-4" />
+                  <span className="hidden lg:inline">Login</span>
+                </Button>
+              )}
           </div>
         </div>
       </div>

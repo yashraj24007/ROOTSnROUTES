@@ -37,12 +37,13 @@ const Hero = () => {
             <div className="mb-8 stagger-item">
               <span className="
                 inline-flex items-center px-8 py-4 rounded-full text-lg font-bold
-                bg-white/95 dark:bg-forest-900/95
-                text-forest-900 dark:text-forest-100
-                border-2 border-forest-300 dark:border-forest-600
-                backdrop-blur-md shadow-organic
+                bg-white/95 dark:bg-gray-800/95
+                text-black dark:text-white
+                border-3 border-black/50 dark:border-white/50
+                backdrop-blur-md shadow-2xl
                 animate-gentle-float
                 hover:scale-105 transition-all duration-300
+                hover:border-black/70 dark:hover:border-white/70
               ">
                 🌿 Discover Jharkhand's Hidden Gems
               </span>
@@ -53,40 +54,46 @@ const Hero = () => {
               <h1 className="
                 text-4xl sm:text-6xl md:text-7xl lg:text-8xl 
                 font-bold mb-6 leading-tight
-                bg-gradient-to-r from-forest-600 via-forest-500 to-autumn-600
-                dark:from-forest-400 dark:via-forest-300 dark:to-autumn-400
-                bg-clip-text text-transparent
+                text-white
                 animate-scale-in
-                drop-shadow-lg dark:drop-shadow-xl
+                drop-shadow-2xl
+                [text-shadow:3px_3px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
               ">
                 {t('hero.title')}
               </h1>
               <h2 className="
                 text-3xl sm:text-5xl md:text-6xl lg:text-7xl 
                 font-bold mb-6 leading-tight
-                bg-gradient-to-r from-autumn-600 via-autumn-500 to-golden-600
-                dark:from-autumn-400 dark:via-autumn-300 dark:to-golden-400
-                bg-clip-text text-transparent
+                text-white
                 animate-scale-in
-                drop-shadow-lg dark:drop-shadow-xl
+                drop-shadow-2xl
+                [text-shadow:3px_3px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
               " style={{ animationDelay: '0.2s' }}>
                 {t('hero.subtitle')}
               </h2>
               
               {/* Decorative Line */}
-              <div className="relative mx-auto mb-8 w-48 h-1">
+              <div className="relative mx-auto mb-8 w-48 h-2">
                 <div className="
                   absolute inset-0 rounded-full
-                  bg-gradient-to-r from-forest-500 via-autumn-500 to-golden-500
+                  bg-white
                   animate-shimmer
                   bg-size-200
+                  shadow-lg
+                  border-2 border-black
                 " style={{ backgroundSize: '200% 100%' }} />
               </div>
               
               <p className="
                 text-lg sm:text-xl md:text-2xl 
                 max-w-4xl mx-auto leading-relaxed mb-12
-                text-muted-foreground
+                text-white
+                font-semibold
+                bg-black/70
+                backdrop-blur-md
+                px-8 py-6 rounded-2xl
+                border-2 border-white/40
+                shadow-2xl
                 animate-fade-in-up
               " style={{ animationDelay: '0.4s' }}>
                 {t('hero.description')}

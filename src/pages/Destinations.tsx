@@ -4,98 +4,54 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { MapPin, Star, Clock, IndianRupee, Camera } from "lucide-react";
-import { useState } from "react";
-import { useLanguage } from "@/hooks/useLanguage";
-import hundruFalls from "@/assets/hundru-falls.jpg";
-import betlaPark from "@/assets/betla-national-park.jpg";
-import baidyanathTemple from "@/assets/baidyanath-temple.jpg";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MapPin, Star, Clock, IndianRupee, Camera, Eye, EyeOff, Filter, Search } from "lucide-react";
+import { useState, useMemo } from "react";
+import { allDestinations } from "@/data/completeDestinations";
 
 const Destinations = () => {
-  const { t } = useLanguage();
+  const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [activeDistrict, setActiveDistrict] = useState("all");
+  const [activeType, setActiveType] = useState("all");
+  const [showHidden, setShowHidden] = useState(false);
 
-  const categories = [
-    { nameKey: "destinationsPage.categories.all", name: "all", count: 50 },
-    { nameKey: "destinationsPage.categories.waterfalls", name: "waterfalls", count: 12 },
-    { nameKey: "destinationsPage.categories.wildlife", name: "wildlife", count: 8 },
-    { nameKey: "destinationsPage.categories.temples", name: "temples", count: 15 },
-    { nameKey: "destinationsPage.categories.hills", name: "hills", count: 10 },
-    { nameKey: "destinationsPage.categories.heritage", name: "heritage", count: 5 }
-  ];
+  // Calculate category counts dynamically
+  const categories = useMemo(() => {
+    const categoryCount = (category: string) => {
+      if (category === "all") return allDestinations.length;
+      return allDestinations.filter(dest => dest.category === category).length;
+    };
 
-  const destinations = [
-    {
-      nameKey: "destinationsPage.destinations.hundruFalls.name",
-      locationKey: "destinationsPage.destinations.hundruFalls.location",
-      category: "waterfalls",
-      rating: 4.8,
-      image: hundruFalls,
-      descriptionKey: "destinationsPage.destinations.hundruFalls.description",
-      entryFeeKey: "destinationsPage.destinations.hundruFalls.entryFee",
-      timingKey: "destinationsPage.destinations.hundruFalls.timing",
-      bestTimeKey: "destinationsPage.destinations.hundruFalls.bestTime"
-    },
-    {
-      nameKey: "destinationsPage.destinations.betlaPark.name",
-      locationKey: "destinationsPage.destinations.betlaPark.location",
-      category: "wildlife",
-      rating: 4.7,
-      image: betlaPark,
-      descriptionKey: "destinationsPage.destinations.betlaPark.description",
-      entryFeeKey: "destinationsPage.destinations.betlaPark.entryFee",
-      timingKey: "destinationsPage.destinations.betlaPark.timing",
-      bestTimeKey: "destinationsPage.destinations.betlaPark.bestTime"
-    },
-    {
-      nameKey: "destinationsPage.destinations.baidyanathDham.name",
-      locationKey: "destinationsPage.destinations.baidyanathDham.location",
-      category: "temples",
-      rating: 4.9,
-      image: baidyanathTemple,
-      descriptionKey: "destinationsPage.destinations.baidyanathDham.description",
-      entryFeeKey: "destinationsPage.destinations.baidyanathDham.entryFee",
-      timingKey: "destinationsPage.destinations.baidyanathDham.timing",
-      bestTimeKey: "destinationsPage.destinations.baidyanathDham.bestTime"
-    },
-    {
-      nameKey: "destinationsPage.destinations.netarhat.name",
-      locationKey: "destinationsPage.destinations.netarhat.location",
-      category: "hills",
-      rating: 4.6,
-      image: betlaPark, // Reusing for now
-      descriptionKey: "destinationsPage.destinations.netarhat.description",
-      entryFeeKey: "destinationsPage.destinations.netarhat.entryFee",
-      timingKey: "destinationsPage.destinations.netarhat.timing",
-      bestTimeKey: "destinationsPage.destinations.netarhat.bestTime"
-    },
-    {
-      nameKey: "destinationsPage.destinations.jonhaFalls.name",
-      locationKey: "destinationsPage.destinations.jonhaFalls.location",
-      category: "waterfalls", 
-      rating: 4.5,
-      image: hundruFalls, // Reusing for now
-      descriptionKey: "destinationsPage.destinations.jonhaFalls.description",
-      entryFeeKey: "destinationsPage.destinations.jonhaFalls.entryFee",
-      timingKey: "destinationsPage.destinations.jonhaFalls.timing",
-      bestTimeKey: "destinationsPage.destinations.jonhaFalls.bestTime"
-    },
-    {
-      nameKey: "destinationsPage.destinations.palamuFort.name",
-      locationKey: "destinationsPage.destinations.palamuFort.location",
-      category: "heritage",
-      rating: 4.3,
-      image: baidyanathTemple, // Reusing for now
-      descriptionKey: "destinationsPage.destinations.palamuFort.description",
-      entryFeeKey: "destinationsPage.destinations.palamuFort.entryFee",
-      timingKey: "destinationsPage.destinations.palamuFort.timing",
-      bestTimeKey: "destinationsPage.destinations.palamuFort.bestTime"
-    }
-  ];
+    return [
+      { name: "All Destinations", value: "all", count: categoryCount("all") },
+      { name: "Waterfalls", value: "waterfalls", count: categoryCount("waterfalls") },
+      { name: "Wildlife", value: "wildlife", count: categoryCount("wildlife") },
+      { name: "Temples", value: "temples", count: categoryCount("temples") },
+      { name: "Hills", value: "hills", count: categoryCount("hills") },
+      { name: "Heritage", value: "heritage", count: categoryCount("heritage") },
+      { name: "Lakes", value: "lakes", count: categoryCount("lakes") }
+    ];
+  }, []);
 
-  const filteredDestinations = activeCategory === "all" 
-    ? destinations 
-    : destinations.filter(dest => dest.category === activeCategory);
+  const districts = ["all", "Khunti", "Kodarma", "Latehar", "Lohardaga"];
+  const types = ["all", "famous", "hidden"];
+
+  // Filter destinations based on active filters
+  const filteredDestinations = useMemo(() => {
+    return allDestinations.filter(destination => {
+      const matchesSearch = destination.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           destination.district.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           destination.description.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesCategory = activeCategory === "all" || destination.category === activeCategory;
+      const matchesDistrict = activeDistrict === "all" || destination.district === activeDistrict;
+      const matchesType = activeType === "all" || destination.type === activeType;
+      const matchesVisibility = showHidden || destination.type === "famous";
+
+      return matchesSearch && matchesCategory && matchesDistrict && matchesType && matchesVisibility;
+    });
+  }, [searchTerm, activeCategory, activeDistrict, activeType, showHidden]);
 
   return (
     <main>
@@ -105,40 +61,118 @@ const Destinations = () => {
       <section className="pt-24 pb-16 bg-gradient-hero">
         <div className="container mx-auto px-6">
           <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">{t('destinationsPage.title')}</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Explore Jharkhand</h1>
             <p className="text-xl mb-8 max-w-4xl mx-auto">
-              {t('destinationsPage.subtitle')}
+              Discover hidden gems, majestic waterfalls, ancient temples, and cultural heritage across Jharkhand's four beautiful districts
             </p>
             
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto">
-              <Input 
-                type="text"
-                placeholder={t('destinationsPage.searchPlaceholder')}
-                className="h-12 text-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder:text-white/70"
-              />
+            <div className="max-w-2xl mx-auto flex gap-4">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70 w-5 h-5" />
+                <Input 
+                  type="text"
+                  placeholder="Search destinations, districts, or features..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="h-12 pl-12 text-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder:text-white/70"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Categories Filter */}
-      <section className="py-8 bg-background border-b border-border">
+      {/* Advanced Filters */}
+      <section className="py-6 bg-background border-b border-border">
         <div className="container mx-auto px-6">
-          <div className="flex flex-wrap gap-3 justify-center">
+          {/* Primary Filters Row */}
+          <div className="flex flex-wrap gap-4 justify-center mb-6">
             {categories.map((category, index) => (
               <Button
                 key={index}
-                variant={activeCategory === category.name ? "default" : "outline"}
-                onClick={() => setActiveCategory(category.name)}
+                variant={activeCategory === category.value ? "default" : "outline"}
+                onClick={() => setActiveCategory(category.value)}
                 className="gap-2"
               >
-                {t(category.nameKey)}
+                {category.name}
                 <Badge variant="secondary" className="text-xs">
                   {category.count}
                 </Badge>
               </Button>
             ))}
+          </div>
+
+          {/* Secondary Filters Row */}
+          <div className="flex flex-wrap gap-4 justify-center items-center">
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">Filters:</span>
+            </div>
+            
+            <Select value={activeDistrict} onValueChange={setActiveDistrict}>
+              <SelectTrigger className="w-36">
+                <SelectValue placeholder="District" />
+              </SelectTrigger>
+              <SelectContent>
+                {districts.map((district) => (
+                  <SelectItem key={district} value={district}>
+                    {district === "all" ? "All Districts" : district}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select value={activeType} onValueChange={setActiveType}>
+              <SelectTrigger className="w-36">
+                <SelectValue placeholder="Type" />
+              </SelectTrigger>
+              <SelectContent>
+                {types.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type === "all" ? "All Places" : type === "famous" ? "Famous Places" : "Hidden Gems"}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Button
+              variant={showHidden ? "default" : "outline"}
+              size="sm"
+              onClick={() => setShowHidden(!showHidden)}
+              className="gap-2"
+            >
+              {showHidden ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+              Include Hidden
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Results Header */}
+      <section className="py-6 bg-gradient-subtle">
+        <div className="container mx-auto px-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-foreground">
+                {filteredDestinations.length} Destinations Found
+              </h2>
+              <p className="text-muted-foreground mt-2">
+                Showing results for{" "}
+                {activeCategory !== "all" && `${categories.find(c => c.value === activeCategory)?.name}, `}
+                {activeDistrict !== "all" && `${activeDistrict} district, `}
+                {activeType !== "all" && `${activeType} places`}
+              </p>
+            </div>
+            
+            <div className="text-sm text-muted-foreground">
+              <Badge variant="outline" className="mr-2">
+                Famous: {filteredDestinations.filter(d => d.type === 'famous').length}
+              </Badge>
+              <Badge variant="secondary">
+                Hidden: {filteredDestinations.filter(d => d.type === 'hidden').length}
+              </Badge>
+            </div>
           </div>
         </div>
       </section>
@@ -146,29 +180,13 @@ const Destinations = () => {
       {/* Destinations Grid */}
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-foreground">
-                {t(`destinationsPage.categories.${activeCategory}`)} {t('destinationsPage.destinationsLabel')}
-              </h2>
-              <p className="text-muted-foreground mt-2">
-                {filteredDestinations.length} {t('destinationsPage.placesToExplore')}
-              </p>
-            </div>
-            
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm">{t('destinationsPage.sortByRating')}</Button>
-              <Button variant="outline" size="sm">{t('destinationsPage.filter')}</Button>
-            </div>
-          </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredDestinations.map((destination, index) => (
-              <Card key={index} className="overflow-hidden bg-card border-border hover:shadow-card transition-all duration-300 group">
+            {filteredDestinations.map((destination) => (
+              <Card key={destination.id} className="overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300 group">
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={destination.image}
-                    alt={t(destination.nameKey)}
+                    alt={destination.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -179,69 +197,131 @@ const Destinations = () => {
                     <span className="text-white text-sm font-medium">{destination.rating}</span>
                   </div>
 
-                  {/* Category Badge */}
+                  {/* Type Badge */}
                   <div className="absolute top-4 left-4">
-                    <Badge variant="secondary" className="bg-primary text-white">
-                      {t(`destinationsPage.categories.${destination.category}`)}
+                    <Badge 
+                      variant={destination.type === 'hidden' ? "destructive" : "secondary"} 
+                      className={destination.type === 'hidden' ? "bg-orange-500" : "bg-primary text-white"}
+                    >
+                      {destination.type === 'hidden' ? "Hidden Gem" : "Famous"}
                     </Badge>
                   </div>
 
-                  {/* Photo Count */}
+                  {/* Reviews Count */}
                   <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
                     <Camera className="w-4 h-4 text-white" />
-                    <span className="text-white text-sm">24+</span>
+                    <span className="text-white text-sm">{destination.reviews.length} reviews</span>
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-2">
-                    {t(destination.nameKey)}
-                  </h3>
-                  <div className="flex items-center gap-2 text-muted-foreground mb-4">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{t(destination.locationKey)}</span>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold text-foreground">
+                      {destination.name}
+                    </h3>
+                    <Badge variant="outline" className="text-xs">
+                      {destination.category}
+                    </Badge>
                   </div>
                   
-                  <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
-                    {t(destination.descriptionKey)}
+                  <div className="flex items-center gap-2 text-muted-foreground mb-4">
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-sm">{destination.district} District</span>
+                  </div>
+                  
+                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                    {destination.description.substring(0, 120)}...
                   </p>
+
+                  {/* Why Famous Section */}
+                  <div className="mb-4 p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                    <h4 className="text-sm font-semibold text-orange-800 mb-1">Why Visit:</h4>
+                    <p className="text-xs text-orange-700">
+                      {destination.whyFamous.substring(0, 100)}...
+                    </p>
+                  </div>
+
+                  {/* Key Features */}
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold mb-2">Key Features:</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {destination.keyFeatures.slice(0, 3).map((feature, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {feature}
+                        </Badge>
+                      ))}
+                      {destination.keyFeatures.length > 3 && (
+                        <Badge variant="secondary" className="text-xs">
+                          +{destination.keyFeatures.length - 3} more
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
 
                   {/* Details Grid */}
                   <div className="grid grid-cols-3 gap-4 mb-6 text-sm">
                     <div className="text-center">
                       <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
                         <IndianRupee className="w-3 h-3" />
-                        <span>{t('destinationsPage.entry')}</span>
+                        <span className="text-xs">Entry</span>
                       </div>
-                      <div className="font-medium text-foreground">{t(destination.entryFeeKey)}</div>
+                      <div className="font-medium text-foreground text-xs">{destination.entryFee}</div>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
                         <Clock className="w-3 h-3" />
-                        <span>{t('destinationsPage.timing')}</span>
+                        <span className="text-xs">Timing</span>
                       </div>
-                      <div className="font-medium text-foreground text-xs">{t(destination.timingKey)}</div>
+                      <div className="font-medium text-foreground text-xs">{destination.timing}</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-muted-foreground mb-1">{t('destinationsPage.bestTime')}</div>
-                      <div className="font-medium text-primary text-xs">{t(destination.bestTimeKey)}</div>
+                      <div className="text-muted-foreground mb-1 text-xs">Best Time</div>
+                      <div className="font-medium text-primary text-xs">{destination.bestTime}</div>
                     </div>
                   </div>
 
+                  {/* Reviews Preview */}
+                  {destination.reviews.length > 0 && (
+                    <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-sm font-semibold text-blue-800">Latest Review</h4>
+                        <div className="flex items-center gap-1">
+                          <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                          <span className="text-xs text-blue-700">{destination.reviews[0].rating}</span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-blue-700 italic">
+                        "{destination.reviews[0].comment.substring(0, 80)}..."
+                      </p>
+                      <p className="text-xs text-blue-600 mt-1">- {destination.reviews[0].author}</p>
+                    </div>
+                  )}
+
                   <Button variant="default" className="w-full">
-                    {t('destinationsPage.exploreDetails')}
+                    View Full Details
                   </Button>
                 </div>
               </Card>
             ))}
           </div>
 
-          {/* Load More Button */}
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
-              {t('destinationsPage.loadMore')}
-            </Button>
-          </div>
+          {filteredDestinations.length === 0 && (
+            <div className="text-center py-16">
+              <h3 className="text-xl font-semibold mb-2">No destinations found</h3>
+              <p className="text-muted-foreground mb-4">Try adjusting your filters or search terms</p>
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setSearchTerm("");
+                  setActiveCategory("all");
+                  setActiveDistrict("all");
+                  setActiveType("all");
+                }}
+              >
+                Clear All Filters
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 

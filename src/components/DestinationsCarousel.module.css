@@ -1,0 +1,89 @@
+/* Destinations Carousel Styles */
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.7s ease-in-out;
+}
+
+/* Dynamic transform based on current index */
+.carousel-track[data-carousel-offset="0"] { transform: translateX(0%); }
+.carousel-track[data-carousel-offset="1"] { transform: translateX(-33.333%); }
+.carousel-track[data-carousel-offset="2"] { transform: translateX(-66.666%); }
+.carousel-track[data-carousel-offset="3"] { transform: translateX(-100%); }
+.carousel-track[data-carousel-offset="4"] { transform: translateX(-133.333%); }
+.carousel-track[data-carousel-offset="5"] { transform: translateX(-166.666%); }
+.carousel-track[data-carousel-offset="6"] { transform: translateX(-200%); }
+.carousel-track[data-carousel-offset="7"] { transform: translateX(-233.333%); }
+.carousel-track[data-carousel-offset="8"] { transform: translateX(-266.666%); }
+.carousel-track[data-carousel-offset="9"] { transform: translateX(-300%); }
+.carousel-track[data-carousel-offset="10"] { transform: translateX(-333.333%); }
+.carousel-track[data-carousel-offset="11"] { transform: translateX(-366.666%); }
+.carousel-track[data-carousel-offset="12"] { transform: translateX(-400%); }
+.carousel-track[data-carousel-offset="13"] { transform: translateX(-433.333%); }
+.carousel-track[data-carousel-offset="14"] { transform: translateX(-466.666%); }
+.carousel-track[data-carousel-offset="15"] { transform: translateX(-500%); }
+.carousel-track[data-carousel-offset="16"] { transform: translateX(-533.333%); }
+.carousel-track[data-carousel-offset="17"] { transform: translateX(-566.666%); }
+.carousel-track[data-carousel-offset="18"] { transform: translateX(-600%); }
+.carousel-track[data-carousel-offset="19"] { transform: translateX(-633.333%); }
+.carousel-track[data-carousel-offset="20"] { transform: translateX(-666.666%); }
+.carousel-track[data-carousel-offset="21"] { transform: translateX(-700%); }
+.carousel-track[data-carousel-offset="22"] { transform: translateX(-733.333%); }
+.carousel-track[data-carousel-offset="23"] { transform: translateX(-766.666%); }
+.carousel-track[data-carousel-offset="24"] { transform: translateX(-800%); }
+.carousel-track[data-carousel-offset="25"] { transform: translateX(-833.333%); }
+.carousel-track[data-carousel-offset="26"] { transform: translateX(-866.666%); }
+.carousel-track[data-carousel-offset="27"] { transform: translateX(-900%); }
+.carousel-track[data-carousel-offset="28"] { transform: translateX(-933.333%); }
+.carousel-track[data-carousel-offset="29"] { transform: translateX(-966.666%); }
+.carousel-track[data-carousel-offset="30"] { transform: translateX(-1000%); }
+.carousel-track[data-carousel-offset="31"] { transform: translateX(-1033.333%); }
+.carousel-track[data-carousel-offset="32"] { transform: translateX(-1066.666%); }
+.carousel-track[data-carousel-offset="33"] { transform: translateX(-1100%); }
+.carousel-track[data-carousel-offset="34"] { transform: translateX(-1133.333%); }
+.carousel-track[data-carousel-offset="35"] { transform: translateX(-1166.666%); }
+.carousel-track[data-carousel-offset="36"] { transform: translateX(-1200%); }
+.carousel-track[data-carousel-offset="37"] { transform: translateX(-1233.333%); }
+.carousel-track[data-carousel-offset="38"] { transform: translateX(-1266.666%); }
+.carousel-track[data-carousel-offset="39"] { transform: translateX(-1300%); }
+.carousel-track[data-carousel-offset="40"] { transform: translateX(-1333.333%); }
+.carousel-track[data-carousel-offset="41"] { transform: translateX(-1366.666%); }
+.carousel-track[data-carousel-offset="42"] { transform: translateX(-1400%); }
+.carousel-track[data-carousel-offset="43"] { transform: translateX(-1433.333%); }
+.carousel-track[data-carousel-offset="44"] { transform: translateX(-1466.666%); }
+.carousel-track[data-carousel-offset="45"] { transform: translateX(-1500%); }
+.carousel-track[data-carousel-offset="46"] { transform: translateX(-1533.333%); }
+
+.carousel-slide {
+  flex: 0 0 33.333%;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    flex: 0 0 100%;
+  }
+  
+  /* Adjust transforms for mobile (100% per slide) */
+  .carousel-track[data-carousel-offset="1"] { transform: translateX(-100%); }
+  .carousel-track[data-carousel-offset="2"] { transform: translateX(-200%); }
+  .carousel-track[data-carousel-offset="3"] { transform: translateX(-300%); }
+  /* Continue pattern for mobile... */
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .carousel-slide {
+    flex: 0 0 50%;
+  }
+  
+  /* Adjust transforms for tablet (50% per slide) */
+  .carousel-track[data-carousel-offset="1"] { transform: translateX(-50%); }
+  .carousel-track[data-carousel-offset="2"] { transform: translateX(-100%); }
+  .carousel-track[data-carousel-offset="3"] { transform: translateX(-150%); }
+  /* Continue pattern for tablet... */
+}

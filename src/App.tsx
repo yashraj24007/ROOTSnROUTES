@@ -12,6 +12,7 @@ import FloatingChatbot from "@/components/FloatingChatbot";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Destinations from "./pages/Destinations";
+import DestinationDetail from "./pages/DestinationDetail";
 import Marketplace from "./pages/Marketplace";
 import Transport from "./pages/Transport";
 import Services from "./pages/Services";
@@ -27,6 +28,8 @@ import NaturalWonders from "./pages/NaturalWonders";
 import CulturalHeritage from "./pages/CulturalHeritage";
 import AuthenticStays from "./pages/AuthenticStays";
 import ExploreDistricts from "./pages/ExploreDistricts";
+import DistrictDestinations from "./pages/DistrictDestinations";
+import DestinationsList from "./pages/DestinationsList";
 
 const queryClient = new QueryClient();
 
@@ -54,7 +57,8 @@ const AccessibilityWrapper = ({ children }: { children: React.ReactNode }) => {
       '/natural-wonders': 'Natural Wonders',
       '/cultural-heritage': 'Cultural Heritage',
       '/authentic-stays': 'Authentic Stays',
-      '/explore-districts': 'Explore Districts'
+      '/explore-districts': 'Explore Districts',
+      '/district-destinations': 'District Destinations'
     };
     
     const currentRouteName = routeNames[location.pathname] || 'Page';
@@ -84,6 +88,7 @@ const App = () => (
                     <Route path="/" element={<Index />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/destinations" element={<Destinations />} />
+                    <Route path="/destination/:id" element={<DestinationDetail />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/support" element={<Support />} />
                     <Route path="/marketplace" element={<Marketplace />} />
@@ -97,6 +102,8 @@ const App = () => (
                     <Route path="/cultural-heritage" element={<CulturalHeritage />} />
                     <Route path="/authentic-stays" element={<AuthenticStays />} />
                     <Route path="/explore-districts" element={<ExploreDistricts />} />
+                    <Route path="/district-destinations" element={<DistrictDestinations />} />
+                    <Route path="/destinations-list" element={<DestinationsList />} />
                     <Route path="/glowing-line-demo" element={<GlowingLineDemo />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />

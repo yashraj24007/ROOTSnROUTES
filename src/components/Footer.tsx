@@ -118,16 +118,20 @@ const Footer = () => {
 
           {/* Services Links */}
           <div>
-            <h4 className="text-xl font-bold text-foreground mb-6">{t('footer.services')}</h4>
+            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+              <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+                {t('footer.services')}
+              </span>
+            </h4>
             <div className="space-y-3">
+              <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
+                {t('footer.tourPackages')}
+              </Link>
               <Link to="/authentic-stays" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.homestays')}
               </Link>
               <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.handicrafts')}
-              </Link>
-              <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors">
-                {t('footer.tourPackages')}
               </Link>
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.localGuides')}

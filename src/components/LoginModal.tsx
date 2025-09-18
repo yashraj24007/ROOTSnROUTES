@@ -161,15 +161,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent 
           ref={modalRef}
-          className="sm:max-w-md bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl"
+          className="sm:max-w-md bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl [&>button]:hidden"
           aria-labelledby="login-title"
           aria-describedby="login-description"
         >
-          <DialogHeader>
+          <DialogHeader className="relative">
             <Button
               variant="ghost"
               size="sm"
-              className="absolute right-4 top-4 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="absolute right-0 top-0 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-800 z-10"
               onClick={handleClose}
               aria-label="Close dialog"
             >
