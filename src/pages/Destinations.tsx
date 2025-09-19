@@ -9,6 +9,7 @@ import { MapPin, Star, Clock, IndianRupee, Camera, Eye, EyeOff, Filter, Search, 
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { allDestinations } from "@/data/completeDestinations";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const Destinations = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -231,6 +232,18 @@ const Destinations = () => {
                     <Camera className="w-4 h-4 text-white" />
                     <span className="text-white text-sm">{destination.reviews.length} reviews</span>
                   </div>
+                  
+                  {/* Favorite Button */}
+                  <FavoriteButton
+                    destinationId={destination.id}
+                    destinationName={destination.name}
+                    destinationType={destination.category}
+                    destinationDistrict={destination.district}
+                    destinationImageUrl={destination.image}
+                    variant="floating"
+                    size="sm"
+                    className="top-4 left-1/2 transform -translate-x-1/2"
+                  />
                 </div>
 
                 <div className="p-6">

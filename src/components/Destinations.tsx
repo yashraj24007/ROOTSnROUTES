@@ -5,6 +5,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { allDestinations } from "@/data/completeDestinations";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const Destinations = () => {
   const { t } = useLanguage();
@@ -183,6 +184,17 @@ const Destinations = () => {
                 <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">
                   <span className="text-white text-xs">{destination.district}</span>
                 </div>
+                
+                {/* Favorite Button */}
+                <FavoriteButton
+                  destinationId={destination.id}
+                  destinationName={destination.name}
+                  destinationType={destination.category}
+                  destinationDistrict={destination.district}
+                  destinationImageUrl={`https://picsum.photos/800/600?random=${destination.id}`}
+                  variant="floating"
+                  size="sm"
+                />
               </div>
               
               <div className="p-6">

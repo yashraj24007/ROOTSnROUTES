@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { UserPreferencesProvider } from './contexts/UserPreferencesContext';
 
 // Lazy load pages
 const Index = lazy(() => import('./pages/Index'));
@@ -27,6 +28,7 @@ const CommunityChat = lazy(() => import('./pages/CommunityChat'));
 const ExploreDistricts = lazy(() => import('./pages/ExploreDistricts'));
 const Support = lazy(() => import('./pages/Support'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
+const Favorites = lazy(() => import('./pages/Favorites'));
 const AIItineraryPlanner = lazy(() => import('./pages/AIItineraryPlanner'));
 const Marketplace = lazy(() => import('./pages/Marketplace'));
 const FeedbackAnalysis = lazy(() => import('./pages/FeedbackAnalysis'));
@@ -45,9 +47,10 @@ const App = () => {
       <ThemeProvider>
         <LanguageProvider>
           <AuthProvider>
-            <Router>
-              <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-                <Header />
+            <UserPreferencesProvider>
+              <Router>
+                <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+                  <Header />
                 <main className="flex-1">
                   <Suspense fallback={<Loading />}>
                     <Routes>
@@ -78,6 +81,7 @@ const App = () => {
                       <Route path="/community-chat" element={<CommunityChat />} />
                       <Route path="/support" element={<Support />} />
                       <Route path="/profile" element={<UserProfile />} />
+                      <Route path="/favorites" element={<Favorites />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Suspense>
@@ -85,10 +89,11 @@ const App = () => {
               </div>
             </Router>
             <Toaster />
-          </AuthProvider>
-        </LanguageProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+          </UserPreferencesProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
+  </QueryClientProvider>
   );
 };
 

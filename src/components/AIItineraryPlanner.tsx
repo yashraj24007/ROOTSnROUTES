@@ -219,7 +219,7 @@ const AIItineraryPlanner: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="space-y-8">
         {/* Preferences Form */}
         <Card>
           <CardHeader>
@@ -380,9 +380,9 @@ const AIItineraryPlanner: React.FC = () => {
           </CardContent>
         </Card>
 
-        {/* Generated Itinerary */}
-        <div className="space-y-6">
-          {itinerary.length > 0 && (
+        {/* Generated Itinerary Section */}
+        {itinerary.length > 0 && (
+          <div className="space-y-6">
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -408,7 +408,6 @@ const AIItineraryPlanner: React.FC = () => {
                 </div>
               </CardHeader>
             </Card>
-          )}
 
           {/* Itinerary Days */}
           {itinerary.map((day) => (
@@ -519,7 +518,7 @@ const AIItineraryPlanner: React.FC = () => {
                   <div className="space-y-2">
                     <p className="font-medium text-muted-foreground">Ready to Plan Your Adventure?</p>
                     <p className="text-sm text-muted-foreground max-w-sm">
-                      Fill in your preferences on the left and let our AI create an amazing 
+                      Fill in your preferences above and let our AI create an amazing 
                       itinerary tailored just for you!
                     </p>
                   </div>
@@ -527,7 +526,8 @@ const AIItineraryPlanner: React.FC = () => {
               </CardContent>
             </Card>
           )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

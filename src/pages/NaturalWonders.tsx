@@ -3,14 +3,17 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, ArrowRight, Camera, TreePine, Waves, Mountain } from "lucide-react";
+import { MapPin, Clock, ArrowRight, Camera, TreePine, Waves, Mountain, Bird, Trees, Compass, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useState } from "react";
 import hundruFalls from "@/assets/hundru-falls.jpg";
 import betlaPark from "@/assets/betla-national-park.jpg";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const NaturalWonders = () => {
   const { t } = useLanguage();
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const naturalWonders = [
     {
@@ -35,7 +38,7 @@ const NaturalWonders = () => {
       duration: "Full Day",
       bestTime: "November to April",
       activities: ["Wildlife Safari", "Bird Watching", "Photography", "Nature Walks"],
-      category: "Wildlife Park"
+      category: "Wildlife"
     },
     {
       id: 3,
@@ -59,15 +62,123 @@ const NaturalWonders = () => {
       duration: "Full Day",
       bestTime: "November to March",
       activities: ["Tiger Safari", "Conservation Tour", "Bird Watching", "Photography"],
-      category: "Tiger Reserve"
+      category: "Wildlife"
+    },
+    {
+      id: 5,
+      name: "Netarhat Hills",
+      location: "Latehar",
+      description: "Known as the 'Queen of Chotanagpur', offering breathtaking sunrise and sunset views from its scenic hilltops.",
+      image: hundruFalls,
+      difficulty: "Moderate",
+      duration: "4-5 hours",
+      bestTime: "October to March",
+      activities: ["Trekking", "Photography", "Sunrise Viewing", "Nature Walks"],
+      category: "Hills"
+    },
+    {
+      id: 6,
+      name: "Dimna Lake",
+      location: "Jamshedpur",
+      description: "A pristine artificial lake surrounded by hills and forests, perfect for boating and water sports activities.",
+      image: betlaPark,
+      difficulty: "Easy",
+      duration: "3-4 hours",
+      bestTime: "October to April",
+      activities: ["Boating", "Water Sports", "Photography", "Picnicking"],
+      category: "Lakes"
+    },
+    {
+      id: 7,
+      name: "Getalsud Dam",
+      location: "Ranchi",
+      description: "A beautiful dam reservoir offering panoramic views and peaceful environment for relaxation and photography.",
+      image: hundruFalls,
+      difficulty: "Easy",
+      duration: "2-3 hours",
+      bestTime: "November to March",
+      activities: ["Photography", "Boating", "Picnicking", "Bird Watching"],
+      category: "Dams"
+    },
+    {
+      id: 8,
+      name: "Hazaribagh National Park",
+      location: "Hazaribagh",
+      description: "A wildlife sanctuary known for its diverse flora and fauna, including tigers, leopards, and various bird species.",
+      image: betlaPark,
+      difficulty: "Moderate",
+      duration: "Full Day",
+      bestTime: "November to April",
+      activities: ["Wildlife Safari", "Bird Watching", "Photography", "Nature Study"],
+      category: "Parks"
+    },
+    {
+      id: 9,
+      name: "Jonha Falls",
+      location: "Ranchi",
+      description: "Also known as Gautamdhara, this waterfall is associated with Lord Buddha and offers spiritual significance along with natural beauty.",
+      image: hundruFalls,
+      difficulty: "Easy",
+      duration: "2-3 hours",
+      bestTime: "September to March",
+      activities: ["Photography", "Meditation", "Trekking", "Spiritual Tourism"],
+      category: "Waterfall"
+    },
+    {
+      id: 10,
+      name: "Parasnath Hills",
+      location: "Giridih",
+      description: "The highest peak in Jharkhand, sacred to Jains, offering challenging treks and panoramic views of the surrounding landscape.",
+      image: betlaPark,
+      difficulty: "Difficult",
+      duration: "Full Day",
+      bestTime: "October to March",
+      activities: ["Trekking", "Pilgrimage", "Photography", "Adventure Sports"],
+      category: "Hills"
+    },
+    {
+      id: 11,
+      name: "Kanke Dam",
+      location: "Ranchi",
+      description: "A scenic reservoir surrounded by hills, popular for its gardens and peaceful environment perfect for family outings.",
+      image: hundruFalls,
+      difficulty: "Easy",
+      duration: "2-4 hours",
+      bestTime: "October to April",
+      activities: ["Boating", "Garden Visit", "Photography", "Picnicking"],
+      category: "Dams"
+    },
+    {
+      id: 12,
+      name: "Dalma Wildlife Sanctuary",
+      location: "Jamshedpur",
+      description: "Home to elephants and diverse wildlife, offering excellent opportunities for wildlife photography and nature walks.",
+      image: betlaPark,
+      difficulty: "Moderate",
+      duration: "Half Day",
+      bestTime: "November to March",
+      activities: ["Wildlife Safari", "Elephant Spotting", "Photography", "Nature Walks"],
+      category: "Wildlife"
     }
   ];
 
   const categories = [
     { name: "All", icon: TreePine, count: naturalWonders.length },
     { name: "Waterfalls", icon: Waves, count: naturalWonders.filter(w => w.category === "Waterfall").length },
-    { name: "Wildlife Parks", icon: Mountain, count: naturalWonders.filter(w => w.category.includes("Park") || w.category.includes("Reserve")).length }
+    { name: "Wildlife", icon: Bird, count: naturalWonders.filter(w => w.category === "Wildlife").length },
+    { name: "Hills", icon: Mountain, count: naturalWonders.filter(w => w.category === "Hills").length },
+    { name: "Lakes", icon: Compass, count: naturalWonders.filter(w => w.category === "Lakes").length },
+    { name: "Dams", icon: Zap, count: naturalWonders.filter(w => w.category === "Dams").length },
+    { name: "Parks", icon: Trees, count: naturalWonders.filter(w => w.category === "Parks").length }
   ];
+
+  // Filter destinations based on selected category
+  const filteredWonders = selectedCategory === "All" 
+    ? naturalWonders 
+    : naturalWonders.filter(wonder => {
+        if (selectedCategory === "Waterfalls") return wonder.category === "Waterfall";
+        return wonder.category === selectedCategory;
+      });
 
   return (
     <main className="min-h-screen bg-background">
@@ -104,15 +215,28 @@ const NaturalWonders = () => {
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {categories.map((category, index) => {
               const IconComponent = category.icon;
+              const isSelected = selectedCategory === category.name;
               return (
                 <Button
                   key={index}
-                  variant="outline"
-                  className="flex items-center gap-2 px-6 py-3"
+                  variant={isSelected ? "default" : "outline"}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 ${
+                    isSelected 
+                      ? "bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-600" 
+                      : "bg-black/80 hover:bg-black text-white border-gray-700 hover:border-emerald-500"
+                  }`}
+                  onClick={() => setSelectedCategory(category.name)}
                 >
                   <IconComponent className="w-4 h-4" />
                   {category.name}
-                  <Badge variant="secondary" className="ml-2">
+                  <Badge 
+                    variant="secondary" 
+                    className={`ml-2 ${
+                      isSelected 
+                        ? "bg-white/20 text-white" 
+                        : "bg-gray-600 text-white"
+                    }`}
+                  >
                     {category.count}
                   </Badge>
                 </Button>
@@ -126,7 +250,7 @@ const NaturalWonders = () => {
       <section className="py-20 bg-gradient-subtle">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {naturalWonders.map((wonder) => (
+            {filteredWonders.map((wonder) => (
               <Card key={wonder.id} className="group overflow-hidden hover:shadow-organic-lg transition-all duration-300">
                 <div className="relative h-64 overflow-hidden">
                   <img
@@ -145,6 +269,18 @@ const NaturalWonders = () => {
                       {wonder.difficulty}
                     </Badge>
                   </div>
+                  
+                  {/* Favorite Button */}
+                  <FavoriteButton
+                    destinationId={wonder.id.toString()}
+                    destinationName={wonder.name}
+                    destinationType={wonder.category.toLowerCase()}
+                    destinationDistrict={wonder.location}
+                    destinationImageUrl={wonder.image}
+                    variant="floating"
+                    size="sm"
+                    className="top-4 left-1/2 transform -translate-x-1/2"
+                  />
                 </div>
                 
                 <CardContent className="p-6">

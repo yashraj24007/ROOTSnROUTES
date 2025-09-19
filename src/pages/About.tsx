@@ -107,38 +107,38 @@ const About = () => {
   const team = [
     {
       name: "Tanish Oberoi",
-      role: "Team Lead",
-      description: "Visionary leader with a passion for sustainable tourism and technology integration. Orchestrates project vision and ensures alignment with Smart India Hackathon objectives.",
+      role: "Project Lead & System Architect",
+      description: "Visionary leader orchestrating project architecture and stakeholder coordination. Led technical strategy, system integration planning, and ensured alignment with Smart India Hackathon objectives while managing development workflows.",
       image: ""
     },
     {
       name: "Yash Raj",
-      role: "Tech Lead",
-      description: "Full-stack developer specializing in AI integration and blockchain technology. Architected the platform's core infrastructure and AI-powered itinerary planning system.",
+      role: "Full-Stack Lead & AI Specialist",
+      description: "Full-stack development leader specializing in AI integration and modern web technologies. Architected the platform's core infrastructure, AI-powered itinerary system, and coordinated frontend-backend integration.",
       image: ""
     },
     {
       name: "Shreesh Kambampally", 
-      role: "Backend Developer",
-      description: "Expert in scalable backend systems and database architecture. Developed secure payment processing, user authentication, and real-time data synchronization features.",
+      role: "Backend Lead & Database Architect",
+      description: "Backend systems expert and database architecture specialist. Developed secure payment processing, user authentication, real-time data synchronization, API design, and scalable cloud infrastructure.",
       image: ""
     },
     {
-      name: "Nihal Reddy",
-      role: "Frontend Developer", 
-      description: "Specialist in modern React development and responsive design. Created interactive maps, weather integration, and multilingual support for seamless user experience.",
+      name: "Pakkireddy Nihal Reddy",
+      role: "Frontend Lead & UI Developer", 
+      description: "Frontend development specialist and responsive design expert. Created interactive maps, weather integration, multilingual support, component libraries, and optimized user interface performance.",
       image: ""
     },
     {
-      name: "Sriya Gaytri",
-      role: "Design Lead",
-      description: "Creative mind behind our user-centric designs and seamless experiences. Designed the visual identity, UX flows, and accessibility features for inclusive tourism.",
+      name: "Sriya Gayatri",
+      role: "Design Lead & UX Strategist",
+      description: "Creative design leader and user experience strategist. Designed the complete visual identity, UX/UI flows, accessibility features, brand guidelines, and conducted user research for inclusive tourism experiences.",
       image: ""
     },
     {
       name: "Kulkarni Sahithi",
-      role: "Research & Content Strategist",
-      description: "Tourism research specialist and content curator. Compiled comprehensive destination database and developed cultural sensitivity guidelines for authentic experiences.",
+      role: "Research Lead & Content Architect",
+      description: "Tourism research specialist and comprehensive content strategist. Compiled destination databases, developed cultural sensitivity guidelines, content management systems, and coordinated stakeholder research for authentic experiences.",
       image: ""
     }
   ];
@@ -539,7 +539,7 @@ const About = () => {
             <div className="bg-card/30 rounded-lg p-4 max-w-2xl mx-auto">
               <p className="text-sm text-muted-foreground">
                 <strong className="text-foreground">Smart India Hackathon 2025</strong> - Team ROOTSnROUTES<br/>
-                Problem Statement: Sustainable Tourism Development for Jharkhand
+                Problem Statement: Development of a Smart Digital Platform to Promote Eco & Cultural Tourism in Jharkhand
               </p>
             </div>
           </div>
