@@ -14,12 +14,12 @@ const Hero = () => {
   }, []);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden">
       {/* Fullscreen Animated Background with Waterfall/Forest */}
       <VideoBackground
         videoSrc="https://videos.pexels.com/video-files/6985066/6985066-uhd_2732_1440_25fps.mp4"
         fallbackImage={jharkhandHero}
-        className="absolute inset-0"
+        className="absolute inset-0 w-full h-full"
         autoPlay={true}
         muted={true}
         overlay={true}

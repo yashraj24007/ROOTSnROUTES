@@ -2,15 +2,43 @@
 .videoContainer {
   position: relative;
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
 }
 
 .video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: none;
+  max-height: none;
+  transform: translate(-50%, -50%);
   object-fit: cover;
+  object-position: center;
   transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
+
+/* Ensure video covers edge cases with different aspect ratios */
+@media (min-aspect-ratio: 16/9) {
+  .video {
+    width: 100vw;
+    height: 56.25vw; /* 16:9 aspect ratio */
+    min-height: 100vh;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .video {
+    width: 177.78vh; /* 16:9 aspect ratio */
+    height: 100vh;
+    min-width: 100vw;
+  }
 }
 
 .videoLoaded {
@@ -23,13 +51,37 @@
 
 .fallbackImage {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: none;
+  max-height: none;
+  transform: translate(-50%, -50%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   transition: opacity 1s ease-in-out;
+  z-index: 0;
+}
+
+/* Ensure fallback image covers edge cases with different aspect ratios */
+@media (min-aspect-ratio: 16/9) {
+  .fallbackImage {
+    width: 100vw;
+    height: 56.25vw;
+    min-height: 100vh;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fallbackImage {
+    width: 177.78vh;
+    height: 100vh;
+    min-width: 100vw;
+  }
 }
 
 .fallbackVisible {
@@ -108,7 +160,9 @@
 .content {
   position: relative;
   z-index: 15;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
 }
 
 /* Theme-specific particle colors */

@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WeatherSafetyWidget from "@/components/WeatherSafetyWidget";
 import { useLanguage } from "@/hooks/useLanguage";
+import { motion, useReducedMotion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,8 +46,54 @@ const jharkhandDistricts = [
   { name: 'Khunti', city: 'Khunti', region: 'Central' }
 ];
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      staggerChildren: 0.1,
+      ease: "easeOut"
+    }
+  }
+} as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+} as const;
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  },
+  hover: {
+    scale: 1.02,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut"
+    }
+  }
+} as const;
+
 const Weather = () => {
   const { t } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRegion, setSelectedRegion] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -65,76 +112,97 @@ const Weather = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <Header />
-      <main className="container mx-auto px-6 py-24">
+      <motion.main 
+        className="container mx-auto px-6 py-24"
+        initial="hidden"
+        animate="visible"
+        variants={shouldReduceMotion ? {} : containerVariants}
+      >
         <div className="max-w-7xl mx-auto">
           {/* Hero Section */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <motion.div 
+            className="text-center mb-8"
+            variants={shouldReduceMotion ? {} : itemVariants}
+          >
+            <motion.h1 
+              className="text-4xl md:text-5xl font-bold text-foreground mb-4"
+              variants={shouldReduceMotion ? {} : itemVariants}
+            >
               🌤️ Jharkhand Weather Dashboard
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            </motion.h1>
+            <motion.p 
+              className="text-lg text-muted-foreground max-w-3xl mx-auto"
+              variants={shouldReduceMotion ? {} : itemVariants}
+            >
               Live weather conditions and travel safety information for all 24 districts of Jharkhand. 
               Plan your journey with real-time weather intelligence.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* Controls */}
-          <Card className="mb-6">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                {/* Search */}
-                <div className="relative flex-1 max-w-md">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                  <Input
-                    placeholder="Search districts..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
+          <motion.div
+            variants={shouldReduceMotion ? {} : itemVariants}
+          >
+            <Card className="mb-6">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+                  {/* Search */}
+                  <div className="relative flex-1 max-w-md">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                    <Input
+                      placeholder="Search districts..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
 
-                {/* Region Filter */}
-                <div className="flex items-center space-x-2">
-                  <Filter className="h-4 w-4 text-muted-foreground" />
-                  <div className="flex flex-wrap gap-2">
-                    {regions.map((region) => (
-                      <Button
-                        key={region}
-                        variant={selectedRegion === region ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setSelectedRegion(region)}
-                      >
-                        {region}
-                      </Button>
-                    ))}
+                  {/* Region Filter */}
+                  <div className="flex items-center space-x-2">
+                    <Filter className="h-4 w-4 text-muted-foreground" />
+                    <div className="flex flex-wrap gap-2">
+                      {regions.map((region) => (
+                        <Button
+                          key={region}
+                          variant={selectedRegion === region ? "default" : "outline"}
+                          size="sm"
+                          onClick={() => setSelectedRegion(region)}
+                        >
+                          {region}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* View Mode Toggle */}
+                  <div className="flex items-center space-x-1 border rounded-lg p-1">
+                    <Button
+                      variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('grid')}
+                      className="h-8 w-8 p-0"
+                    >
+                      <Grid className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'list' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('list')}
+                      className="h-8 w-8 p-0"
+                    >
+                      <List className="h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
-
-                {/* View Mode Toggle */}
-                <div className="flex items-center space-x-1 border rounded-lg p-1">
-                  <Button
-                    variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                    className="h-8 w-8 p-0"
-                  >
-                    <Grid className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === 'list' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setViewMode('list')}
-                    className="h-8 w-8 p-0"
-                  >
-                    <List className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
 
           {/* Results Summary */}
-          <div className="mb-6 flex items-center justify-between">
+          <motion.div 
+            className="mb-6 flex items-center justify-between"
+            variants={shouldReduceMotion ? {} : itemVariants}
+          >
             <div className="flex items-center space-x-4">
               <p className="text-sm text-muted-foreground">
                 Showing {filteredDistricts.length} of {jharkhandDistricts.length} districts
@@ -147,43 +215,56 @@ const Weather = () => {
               <RefreshCw className="h-3 w-3 mr-2" />
               Refresh All
             </Button>
-          </div>
+          </motion.div>
 
           {/* Weather Grid */}
           {filteredDistricts.length > 0 && (
-            <div className={`grid gap-6 mb-12 ${
-              viewMode === 'grid' 
-                ? 'md:grid-cols-2 xl:grid-cols-3' 
-                : 'grid-cols-1'
-            }`}>
-              {filteredDistricts.map((district) => (
-                <Card key={district.name} className="overflow-hidden">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="h-4 w-4 text-primary" />
-                        <div>
-                          <CardTitle className="text-lg">{district.name}</CardTitle>
-                          <p className="text-sm text-muted-foreground">
-                            {district.city}, Jharkhand
-                          </p>
+            <motion.div 
+              className={`grid gap-6 mb-12 ${
+                viewMode === 'grid' 
+                  ? 'md:grid-cols-2 xl:grid-cols-3' 
+                  : 'grid-cols-1'
+              }`}
+              variants={shouldReduceMotion ? {} : containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              {filteredDistricts.map((district, index) => (
+                <motion.div
+                  key={district.name}
+                  variants={shouldReduceMotion ? {} : cardVariants}
+                  whileHover={shouldReduceMotion ? {} : "hover"}
+                  custom={index}
+                >
+                  <Card className="overflow-hidden h-full">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <MapPin className="h-4 w-4 text-primary" />
+                          <div>
+                            <CardTitle className="text-lg">{district.name}</CardTitle>
+                            <p className="text-sm text-muted-foreground">
+                              {district.city}, Jharkhand
+                            </p>
+                          </div>
                         </div>
+                        <Badge variant="secondary" className="text-xs">
+                          {district.region}
+                        </Badge>
                       </div>
-                      <Badge variant="secondary" className="text-xs">
-                        {district.region}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <WeatherSafetyWidget 
-                      location={`${district.city}, Jharkhand`}
-                      showDetails={viewMode === 'list'}
-                      className="w-full"
-                    />
-                  </CardContent>
-                </Card>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <WeatherSafetyWidget 
+                        location={`${district.city}, Jharkhand`}
+                        showDetails={viewMode === 'list'}
+                        className="w-full"
+                      />
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
 
           {/* No Results */}
@@ -281,7 +362,7 @@ const Weather = () => {
             </CardContent>
           </Card>
         </div>
-      </main>
+      </motion.main>
       <Footer />
     </div>
   );

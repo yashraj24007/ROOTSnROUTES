@@ -8,6 +8,7 @@ export const translations = {
       transport: 'Transport',
       support: 'Support',
       about: 'About',
+      aiPlanner: 'AI Planner',
       language: 'Language'
     },
     hero: {
@@ -438,6 +439,7 @@ export const translations = {
       transport: 'परिवहन',
       support: 'सहायता',
       about: 'बारे में',
+      aiPlanner: 'AI प्लानर',
       language: 'भाषा'
     },
     hero: {
@@ -868,6 +870,7 @@ export const translations = {
       transport: 'बाहान',
       support: 'साहायता',
       about: 'बाबोत्',
+      aiPlanner: 'AI योजना',
       language: 'पार्सी'
     },
     hero: {

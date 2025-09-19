@@ -4,13 +4,60 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TeamMember from "@/components/TeamMember";
 import FAQ from "@/components/FAQ";
+import { motion, useReducedMotion } from "framer-motion";
 import { Zap, Shield, Leaf, Users, Heart, Award, Globe, TreePine } from "lucide-react";
 import { Link } from "react-router-dom";
 import jharkhandHero from "@/assets/jharkhand-hero.jpg";
 import { useLanguage } from "@/hooks/useLanguage";
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      staggerChildren: 0.1,
+      ease: "easeOut"
+    }
+  }
+} as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+} as const;
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  },
+  hover: {
+    scale: 1.02,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut"
+    }
+  }
+} as const;
+
 const About = () => {
   const { t } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
   const values = [
     {
       icon: Heart,
@@ -108,7 +155,12 @@ const About = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <motion.section 
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+        initial="hidden"
+        animate="visible"
+        variants={shouldReduceMotion ? {} : containerVariants}
+      >
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${jharkhandHero})` }}
@@ -117,15 +169,25 @@ const About = () => {
         <div className="absolute inset-0 bg-background/40" />
 
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8">{t('about.title')}</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8 leading-relaxed">
+          <motion.h1 
+            className="text-5xl md:text-7xl font-bold text-white mb-8"
+            variants={shouldReduceMotion ? {} : itemVariants}
+          >
+            {t('about.title')}
+          </motion.h1>
+          <motion.p 
+            className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8 leading-relaxed"
+            variants={shouldReduceMotion ? {} : itemVariants}
+          >
             Connecting travelers with the authentic soul of Jharkhand through technology, sustainability, and community empowerment
-          </p>
-          <Link to="/destinations">
-            <Button variant="hero" size="lg">Start Your Journey</Button>
-          </Link>
+          </motion.p>
+          <motion.div variants={shouldReduceMotion ? {} : itemVariants}>
+            <Link to="/destinations">
+              <Button variant="hero" size="lg">Start Your Journey</Button>
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Mission Section */}
       <section className="py-20 bg-background">
@@ -253,32 +315,58 @@ const About = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-subtle">
+      <motion.section 
+        className="py-20 bg-gradient-subtle"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={shouldReduceMotion ? {} : containerVariants}
+      >
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Powered by Innovation</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            variants={shouldReduceMotion ? {} : itemVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
+              variants={shouldReduceMotion ? {} : itemVariants}
+            >
+              Powered by Innovation
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-muted-foreground max-w-3xl mx-auto"
+              variants={shouldReduceMotion ? {} : itemVariants}
+            >
               Cutting-edge technology meets traditional wisdom to create unparalleled travel experiences
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <motion.div 
+            className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+            variants={shouldReduceMotion ? {} : containerVariants}
+          >
             {features.map((feature, index) => (
-              <Card key={index} className="p-8 bg-card/50 border-border hover:bg-card/80 transition-all duration-300">
-                <div className="flex items-start gap-6">
-                  <div className="w-16 h-16 bg-gradient-card rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <feature.icon className="w-8 h-8 text-white" />
+              <motion.div
+                key={index}
+                variants={shouldReduceMotion ? {} : cardVariants}
+                whileHover={shouldReduceMotion ? {} : "hover"}
+              >
+                <Card className="p-8 bg-card/50 border-border hover:bg-card/80 transition-all duration-300 h-full">
+                  <div className="flex items-start gap-6">
+                    <div className="w-16 h-16 bg-gradient-card rounded-2xl flex items-center justify-center flex-shrink-0">
+                      <feature.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-foreground mb-4">{feature.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">{feature.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Impact Stats */}
       <section className="py-20 bg-background">
@@ -303,28 +391,54 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gradient-subtle">
+      <motion.section 
+        className="py-20 bg-gradient-subtle"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={shouldReduceMotion ? {} : containerVariants}
+      >
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Our Values</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            variants={shouldReduceMotion ? {} : itemVariants}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
+              variants={shouldReduceMotion ? {} : itemVariants}
+            >
+              Our Values
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-muted-foreground max-w-3xl mx-auto"
+              variants={shouldReduceMotion ? {} : itemVariants}
+            >
               The principles that guide every decision and shape every experience we create
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <motion.div 
+            className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+            variants={shouldReduceMotion ? {} : containerVariants}
+          >
             {values.map((value, index) => (
-              <Card key={index} className="p-8 bg-card/50 border-border hover:bg-card/80 transition-all duration-300 text-center">
-                <div className="w-16 h-16 bg-gradient-nature rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <value.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">{value.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-              </Card>
+              <motion.div
+                key={index}
+                variants={shouldReduceMotion ? {} : cardVariants}
+                whileHover={shouldReduceMotion ? {} : "hover"}
+              >
+                <Card className="p-8 bg-card/50 border-border hover:bg-card/80 transition-all duration-300 text-center h-full">
+                  <div className="w-16 h-16 bg-gradient-nature rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <value.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">{value.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Project Overview Section */}
       <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5">

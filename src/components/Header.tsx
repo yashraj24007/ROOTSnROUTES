@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Cloud, Settings, Heart } from "lucide-react";
+import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Cloud, Settings, Heart, Brain } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
@@ -184,6 +184,23 @@ const Header = () => {
             >
               {t('header.about')}
             </Link>
+            
+            {/* AI Trip Planner Button */}
+            <Link 
+              to="/ai-itinerary" 
+              className={`transition-all duration-300 text-sm flex items-center space-x-1 lg:space-x-2 px-2 lg:px-3 py-2 rounded-full font-medium ${
+                isActive('/ai-itinerary') 
+                  ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg' 
+                  : 'bg-gradient-to-r from-purple-100 to-blue-100 hover:from-purple-200 hover:to-blue-200 text-purple-700 hover:text-purple-900 dark:from-purple-900/30 dark:to-blue-900/30 dark:text-purple-300 dark:hover:text-purple-200 border border-purple-200 dark:border-purple-700'
+              } hover:scale-105 active:scale-95 shadow-md hover:shadow-lg`}
+              onClick={() => handleNavClick('/ai-itinerary', 'AI Trip Planner')}
+              aria-current={isActive('/ai-itinerary') ? 'page' : undefined}
+              aria-label="AI-powered trip planning for personalized Jharkhand experiences"
+            >
+              <Brain className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden sm:inline">{t('header.aiPlanner')}</span>
+              <span className="sm:hidden">AI</span>
+            </Link>
           </nav>
 
           {/* Right side actions */}
@@ -289,6 +306,23 @@ const Header = () => {
                     >
                       {t('header.about')}
                     </Link>
+                    
+                    {/* AI Trip Planner Mobile */}
+                    <Link 
+                      to="/ai-itinerary" 
+                      className={`p-3 rounded-lg transition-all duration-300 flex items-center space-x-3 ${
+                        isActive('/ai-itinerary') 
+                          ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium shadow-lg' 
+                          : 'bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 text-purple-700 hover:text-purple-900 dark:from-purple-900/20 dark:to-blue-900/20 dark:text-purple-300 border border-purple-200 dark:border-purple-700'
+                      }`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleNavClick('/ai-itinerary', 'AI Trip Planner');
+                      }}
+                    >
+                      <Brain className="h-5 w-5" />
+                      <span className="font-medium">{t('header.aiPlanner')}</span>
+                    </Link>
                   </nav>
                   
                   {/* Mobile Actions */}
@@ -333,11 +367,11 @@ const Header = () => {
                           setShowLoginModal(true);
                           setMobileMenuOpen(false);
                         }}
-                        className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3"
                         size="lg"
                       >
-                        <User className="w-5 h-5 mr-2" />
-                        Login to Account
+                        <User className="w-5 h-5" />
+                        <span>Login</span>
                       </Button>
                     )}
                     
@@ -584,24 +618,21 @@ const Header = () => {
                   variant="default"
                   size="default"
                   className="
-                    flex items-center gap-2
+                    flex items-center justify-center
                     bg-gradient-to-r from-blue-600 to-blue-500 
                     hover:from-blue-500 hover:to-blue-400
                     text-white font-semibold
                     shadow-lg hover:shadow-xl
                     transition-all duration-300
                     hover:scale-105
-                    px-4 py-2.5
-                    text-sm
-                    min-w-[90px]
-                    h-10
+                    w-10 h-10
+                    p-0
                     flex-shrink-0
-                    rounded-lg
+                    rounded-full
                   "
                   aria-label="Login to your account"
                 >
-                  <User className="w-4 h-4" />
-                  <span className="font-semibold">LOGIN</span>
+                  <User className="w-5 h-5" />
                 </Button>
               )}
           </div>
