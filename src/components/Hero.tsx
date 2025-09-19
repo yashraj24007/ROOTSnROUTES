@@ -103,7 +103,7 @@ const Hero = () => {
               </Link>
               
               {/* Authentic Stays Card */}
-              <Link to="/authentic-stays" className="group block">
+              <Link to="/stays" className="group block">
                 <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-blue-100/20 to-purple-100/20 border border-blue-200/30 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 hover:border-blue-300/50 hover:bg-gradient-to-br hover:from-blue-200/30 hover:to-purple-200/30">
                   <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🏡</div>
                   <h3 className="font-bold text-white text-xl mb-3 group-hover:text-blue-200 transition-colors duration-300">

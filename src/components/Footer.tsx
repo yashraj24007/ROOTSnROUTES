@@ -181,7 +181,7 @@ const Footer = () => {
               <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.tourPackages')}
               </Link>
-              <Link to="/authentic-stays" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/stays" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.homestays')}
               </Link>
               <Link to="/handicrafts" className="block text-muted-foreground hover:text-primary transition-colors">

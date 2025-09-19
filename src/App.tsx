@@ -1,152 +1,91 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import { ThemeProvider } from "@/contexts/ThemeContext";
-import { AuthProvider } from "@/contexts/AuthContext";
-import { useAccessibilityValidator, useAccessibilityAnnouncements } from "@/hooks/useAccessibilityValidator";
-import { useEffect } from "react";
-import FloatingChatbot from "@/components/FloatingChatbot";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Destinations from "./pages/Destinations";
-import DestinationDetail from "./pages/DestinationDetail";
-import Marketplace from "./pages/Marketplace";
-import Transport from "./pages/Transport";
-import Services from "./pages/Services";
-import Support from "./pages/Support";
-import Chatbot from "./pages/Chatbot";
-import Weather from "./pages/Weather";
-import WeatherDashboard from "./pages/WeatherDashboard";
-import AuthDiagnostic from "./pages/AuthDiagnostic";
-import UserProfile from "./pages/UserProfile";
-import Settings from "./pages/Settings";
-import NotFound from "./pages/NotFound";
-import GlowingLineDemo from "./pages/GlowingLineDemo";
-import NaturalWonders from "./pages/NaturalWonders";
-import CulturalHeritage from "./pages/CulturalHeritage";
-import AuthenticStays from "./pages/AuthenticStays";
-import ExploreDistricts from "./pages/ExploreDistricts";
-import DistrictDestinations from "./pages/DistrictDestinations";
-import DestinationsList from "./pages/DestinationsList";
-import CommunityChat from "./pages/CommunityChat";
-import AIItineraryPlannerPage from "./pages/AIItineraryPlanner";
-import LocalMarketplacePage from "./pages/LocalMarketplace";
-import FeedbackAnalysisPage from "./pages/FeedbackAnalysis";
-import AnalyticsDashboardPage from "./pages/AnalyticsDashboard";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
-import LocalGuides from "./pages/LocalGuides";
-import Handicrafts from "./pages/Handicrafts";
+﻿import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from './components/ui/toaster';
+import Loading from './components/Loading';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { LanguageProvider } from './contexts/LanguageContext';
+
+// Lazy load pages
+const Index = lazy(() => import('./pages/Index'));
+const About = lazy(() => import('./pages/About'));
+const Destinations = lazy(() => import('./pages/Destinations'));
+const Services = lazy(() => import('./pages/Services'));
+const DestinationDetail = lazy(() => import('./pages/DestinationDetail'));
+const AuthenticStays = lazy(() => import('./pages/AuthenticStays'));
+const CulturalHeritage = lazy(() => import('./pages/CulturalHeritage'));
+const NaturalWonders = lazy(() => import('./pages/NaturalWonders'));
+const Transport = lazy(() => import('./pages/Transport'));
+const Weather = lazy(() => import('./pages/Weather'));
+const Chatbot = lazy(() => import('./pages/Chatbot'));
+const DistrictDestinations = lazy(() => import('./pages/DistrictDestinations'));
+const DestinationsList = lazy(() => import('./pages/DestinationsList'));
+const CommunityChat = lazy(() => import('./pages/CommunityChat'));
+const ExploreDistricts = lazy(() => import('./pages/ExploreDistricts'));
+const Support = lazy(() => import('./pages/Support'));
+const UserProfile = lazy(() => import('./pages/UserProfile'));
+const AIItineraryPlanner = lazy(() => import('./pages/AIItineraryPlanner'));
+const Marketplace = lazy(() => import('./pages/Marketplace'));
+const FeedbackAnalysis = lazy(() => import('./pages/FeedbackAnalysis'));
+const AnalyticsDashboard = lazy(() => import('./pages/AnalyticsDashboard'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
 
-// Accessibility wrapper component
-const AccessibilityWrapper = ({ children }: { children: React.ReactNode }) => {
-  const { enhanceAccessibility, runFullValidation } = useAccessibilityValidator();
-  const { announceRouteChange } = useAccessibilityAnnouncements();
-  const location = useLocation();
-
-  useEffect(() => {
-    // Enhance accessibility on route changes
-    enhanceAccessibility();
-    
-    // Announce route changes to screen readers
-    const routeNames: { [key: string]: string } = {
-      '/': 'Home',
-      '/about': 'About',
-      '/destinations': 'Destinations',
-      '/marketplace': 'Marketplace',
-      '/transport': 'Transport',
-      '/services': 'Services',
-      '/support': 'Support',
-      '/chatbot': 'Chatbot',
-      '/weather': 'Weather',
-      '/natural-wonders': 'Natural Wonders',
-      '/cultural-heritage': 'Cultural Heritage',
-      '/authentic-stays': 'Authentic Stays',
-      '/explore-districts': 'Explore Districts',
-      '/district-destinations': 'District Destinations',
-      '/community-chat': 'Community Chat',
-      '/ai-itinerary': 'AI Trip Planner',
-      '/feedback-analysis': 'Feedback Analysis',
-      '/analytics-dashboard': 'Analytics Dashboard',
-      '/privacy-policy': 'Privacy Policy',
-      '/terms-of-service': 'Terms of Service',
-      '/local-guides': 'Local Guides',
-      '/handicrafts': 'Handicrafts'
-    };
-    
-    const currentRouteName = routeNames[location.pathname] || 'Page';
-    announceRouteChange(currentRouteName);
-    
-    // Run accessibility validation in development
-    if (process.env.NODE_ENV === 'development') {
-      setTimeout(() => runFullValidation(), 1000);
-    }
-  }, [location, enhanceAccessibility, announceRouteChange, runFullValidation]);
-
-  return <>{children}</>;
-};
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <LanguageProvider>
-        <AuthProvider>
-          <TooltipProvider>
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <Router>
+              <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+                <Header />
+                <main className="flex-1">
+                  <Suspense fallback={<Loading />}>
+                    <Routes>
+                      <Route path="/" element={<Index />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/destinations" element={<Destinations />} />
+                      <Route path="/destinations/:id" element={<DestinationDetail />} />
+                      <Route path="/districts" element={<ExploreDistricts />} />
+                      <Route path="/districts/:districtName" element={<DistrictDestinations />} />
+                      <Route path="/destinations-list" element={<DestinationsList />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/stays" element={<AuthenticStays />} />
+                      <Route path="/cultural-heritage" element={<CulturalHeritage />} />
+                      <Route path="/natural-wonders" element={<NaturalWonders />} />
+                      <Route path="/transport" element={<Transport />} />
+                      <Route path="/weather" element={<Weather />} />
+                      <Route path="/chatbot" element={<Chatbot />} />
+                      <Route path="/ai-itinerary" element={<AIItineraryPlanner />} />
+                      <Route path="/ai-planner" element={<AIItineraryPlanner />} />
+                      <Route path="/marketplace" element={<Marketplace />} />
+                      <Route path="/feedback-analysis" element={<FeedbackAnalysis />} />
+                      <Route path="/analytics-dashboard" element={<AnalyticsDashboard />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route path="/terms-of-service" element={<TermsOfService />} />
+                      <Route path="/community" element={<CommunityChat />} />
+                      <Route path="/community-chat" element={<CommunityChat />} />
+                      <Route path="/support" element={<Support />} />
+                      <Route path="/profile" element={<UserProfile />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </Suspense>
+                </main>
+              </div>
+            </Router>
             <Toaster />
-            <Sonner />
-            <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-              <BrowserRouter>
-                <AccessibilityWrapper>
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/destinations" element={<Destinations />} />
-                    <Route path="/destination/:id" element={<DestinationDetail />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/support" element={<Support />} />
-                    <Route path="/marketplace" element={<Marketplace />} />
-                    <Route path="/transport" element={<Transport />} />
-                    <Route path="/weather" element={<Weather />} />
-                    <Route path="/weather-dashboard" element={<WeatherDashboard />} />
-                    <Route path="/auth-diagnostic" element={<AuthDiagnostic />} />
-                    <Route path="/profile" element={<UserProfile />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/chatbot" element={<Chatbot />} />
-                    <Route path="/natural-wonders" element={<NaturalWonders />} />
-                    <Route path="/cultural-heritage" element={<CulturalHeritage />} />
-                    <Route path="/authentic-stays" element={<AuthenticStays />} />
-                    <Route path="/explore-districts" element={<ExploreDistricts />} />
-                    <Route path="/district-destinations" element={<DistrictDestinations />} />
-                    <Route path="/destinations-list" element={<DestinationsList />} />
-                    <Route path="/community-chat" element={<CommunityChat />} />
-                    <Route path="/ai-itinerary" element={<AIItineraryPlannerPage />} />
-                    <Route path="/local-marketplace" element={<LocalMarketplacePage />} />
-                    <Route path="/feedback-analysis" element={<FeedbackAnalysisPage />} />
-                    <Route path="/analytics-dashboard" element={<AnalyticsDashboardPage />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/terms-of-service" element={<TermsOfService />} />
-                    <Route path="/local-guides" element={<LocalGuides />} />
-                    <Route path="/handicrafts" element={<Handicrafts />} />
-                    <Route path="/glowing-line-demo" element={<GlowingLineDemo />} />
-                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </AccessibilityWrapper>
-                
-                {/* Floating Chatbot - Available on all pages */}
-                <FloatingChatbot />
-            </BrowserRouter>
-            </div>
-        </TooltipProvider>
-      </AuthProvider>
-    </LanguageProvider>
-  </ThemeProvider>
-</QueryClientProvider>
-);
+          </AuthProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

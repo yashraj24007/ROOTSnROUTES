@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { User, Mail, Calendar, MapPin, LogOut, Settings, Heart, Camera } from 'lucide-react';
+import Footer from '@/components/Footer';
 
 interface UserProfileProps {
   onClose?: () => void;
@@ -175,6 +176,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
           </Button>
         </CardContent>
       </Card>
+      <Footer />
     </div>
   );
 };
