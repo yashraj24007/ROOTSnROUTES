@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
 import Destinations from "@/components/Destinations";
 import Features from "@/components/Features";
 import Marketplace from "@/components/Marketplace";
@@ -13,9 +12,7 @@ const Index = () => {
     <main>
       <Header />
       <Hero />
-      <SectionDivider responsive={true} delay={1000} />
-      <Stats />
-      <SectionDivider responsive={true} delay={500} />
+      <SectionDivider responsive={true} delay={800} />
       <Destinations />
       <SectionDivider responsive={true} delay={800} />
       <Features />

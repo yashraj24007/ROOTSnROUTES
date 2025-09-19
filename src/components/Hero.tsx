@@ -1,13 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, MapPin, Calendar, Users } from "lucide-react";
+﻿import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "@/hooks/useLanguage";
 import VideoBackground from "@/components/VideoBackground";
 import jharkhandHero from "@/assets/jharkhand-hero.jpg";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
-  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
@@ -17,217 +15,104 @@ const Hero = () => {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+      {/* Fullscreen Animated Background with Waterfall/Forest */}
       <VideoBackground
-        videoSrc="https://videos.pexels.com/video-files/6985066/6985066-uhd_2732_1440_25fps.mp4" // Waterfall video
+        videoSrc="https://videos.pexels.com/video-files/6985066/6985066-uhd_2732_1440_25fps.mp4"
         fallbackImage={jharkhandHero}
         className="absolute inset-0"
-        showControls={true}
         autoPlay={true}
         muted={true}
         overlay={true}
-        overlayOpacity={0.3}
+        overlayOpacity={0.4}
       >
         {/* Hero Content */}
-        <div className="relative z-20 min-h-screen flex items-center justify-center px-6">
-          <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        <div className="relative z-20 min-h-screen flex items-center justify-center px-4 py-12">
+          <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            {/* Animated Badge */}
-            <div className="mb-8 stagger-item">
-              <span className="
-                inline-flex items-center px-8 py-4 rounded-full text-lg font-bold
-                bg-card/95
-                text-foreground
-                border-3 border-black/50 dark:border-white/50
-                backdrop-blur-md shadow-2xl
-                animate-gentle-float
-                hover:scale-105 transition-all duration-300
-                hover:border-black/70 dark:hover:border-white/70
-              ">
-                🌿 Discover Jharkhand's Hidden Gems
-              </span>
-            </div>
-
-            {/* Main Title */}
+            
+            {/* Hero Headline */}
             <div className="mb-8">
-              <h1 className="
-                text-4xl sm:text-6xl md:text-7xl lg:text-8xl 
-                font-bold mb-6 leading-tight
-                text-white
-                animate-scale-in
-                drop-shadow-2xl
-                [text-shadow:3px_3px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
-              ">
-                {t('hero.title')}
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-2xl animate-fade-in-up">
+                Discover Hidden Gems of Jharkhand
               </h1>
-              <h2 className="
-                text-3xl sm:text-5xl md:text-6xl lg:text-7xl 
-                font-bold mb-6 leading-tight
-                text-white
-                animate-scale-in
-                drop-shadow-2xl
-                [text-shadow:3px_3px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
-                [text-shadow:3px_3px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
-              " style={{ animationDelay: '0.2s' }}>
-                {t('hero.subtitle')}
-              </h2>
               
-              {/* Decorative Line */}
-              <div className="relative mx-auto mb-8 w-48 h-2">
-                <div className="
-                  absolute inset-0 rounded-full
-                  bg-white
-                  animate-shimmer
-                  bg-size-200
-                  shadow-lg
-                  border-2 border-black
-                " style={{ backgroundSize: '200% 100%' }} />
-              </div>
-              
-              <p className="
-                text-lg sm:text-xl md:text-2xl 
-                max-w-4xl mx-auto leading-relaxed mb-12
-                text-white
-                font-semibold
-                animate-fade-in-up
-                drop-shadow-lg
-                [text-shadow:2px_2px_0px_black,_-1px_-1px_0px_black,_1px_-1px_0px_black,_-1px_1px_0px_black]
-                text-white
-                font-semibold
-                bg-black/70
-                backdrop-blur-md
-                px-8 py-6 rounded-2xl
-                border-2 border-white/40
-                shadow-2xl
-                animate-fade-in-up
-              " style={{ animationDelay: '0.4s' }}>
-                {t('hero.description')}
+              {/* Subtext */}
+              <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed text-white/95 font-medium drop-shadow-lg bg-black/30 backdrop-blur-sm px-8 py-4 rounded-2xl border border-white/20 shadow-xl" style={{ animationDelay: '0.3s' }}>
+                Experience authentic village life, eco-tourism, and rich cultural heritage
               </p>
             </div>
 
-            {/* Call-to-Action Buttons */}
-            <div className="
-              flex flex-col sm:flex-row gap-6 justify-center items-center
-              animate-fade-in-up
-            " style={{ animationDelay: '0.6s' }}>
+            {/* Styled Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12" style={{ animationDelay: '0.6s' }}>
+              {/* Explore Destinations - Gradient Button */}
               <Link to="/destinations">
                 <Button 
                   size="lg" 
-                  className="
-                    group relative overflow-hidden
-                    bg-gradient-to-r from-forest-500 to-autumn-500
-                    hover:from-autumn-500 hover:to-golden-500
-                    text-white font-semibold
-                    px-8 py-4 rounded-full
-                    shadow-organic hover:shadow-organic-lg
-                    transition-all duration-500 ease-smooth
-                    hover:scale-105 active:scale-95
-                    border-0
-                  "
+                  className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 text-white font-semibold px-10 py-4 rounded-full shadow-2xl transition-all duration-500 ease-out hover:scale-110 hover:shadow-emerald-500/50 active:scale-95 border-0 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
-                    {t('hero.exploreButton')}
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    Explore Destinations
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
-                  <div className="
-                    absolute inset-0 opacity-0 group-hover:opacity-100
-                    bg-gradient-to-r from-white/20 to-transparent
-                    transition-opacity duration-300
-                  " />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/20 to-transparent transition-opacity duration-500" />
                 </Button>
               </Link>
               
-              <Link to="/chatbot">
+              {/* AI Planning - Outlined Button */}
+              <Link to="/ai-itinerary">
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="
-                    group relative overflow-hidden
-                    bg-card/90 border-2 border-autumn-300 dark:border-autumn-600
-                    hover:bg-autumn-50 dark:hover:bg-autumn-900/20
-                    text-foreground font-semibold px-8 py-4 rounded-full
-                    backdrop-blur-sm shadow-autumn hover:shadow-organic
-                    transition-all duration-500 ease-smooth
-                    hover:scale-105 active:scale-95
-                  "
+                  className="group relative overflow-hidden bg-transparent border-2 border-white/70 hover:border-white text-white hover:text-black font-semibold px-10 py-4 rounded-full backdrop-blur-sm shadow-lg hover:shadow-white/30 hover:shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-white active:scale-95 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     🤖 AI Planning
                   </span>
-                  <div className="
-                    absolute inset-0 opacity-0 group-hover:opacity-100
-                    bg-gradient-to-r from-forest-500 to-autumn-500
-                    transition-opacity duration-300
-                  " />
+                  <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 </Button>
               </Link>
             </div>
 
-            {/* Feature Highlights */}
-            <div className="
-              relative z-30 
-              mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto
-              animate-fade-in-up
-            "  >
-              <Link to="/natural-wonders" className="
-                text-center p-6 rounded-2xl
-                bg-forest-100/40 dark:bg-forest-900/40
-                border border-forest-200 dark:border-forest-800
-                backdrop-blur-sm hover:backdrop-blur-md
-                transition-all duration-300 ease-smooth
-                hover:bg-forest-200/40 dark:hover:bg-forest-800/40
-                hover:border-forest-300 dark:hover:border-forest-700
-                hover:-translate-y-2 hover:shadow-forest
-                block no-underline
-              ">
-                <div className="text-3xl mb-3">🏞️</div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  Natural Wonders
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Waterfalls, forests & wildlife
-                </p>
+            {/* Interactive Feature Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto" style={{ animationDelay: '0.9s' }}>
+              {/* Natural Wonders Card */}
+              <Link to="/natural-wonders" className="group block">
+                <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-emerald-100/20 to-teal-100/20 border border-emerald-200/30 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 hover:border-emerald-300/50 hover:bg-gradient-to-br hover:from-emerald-200/30 hover:to-teal-200/30">
+                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🏞️</div>
+                  <h3 className="font-bold text-white text-xl mb-3 group-hover:text-emerald-200 transition-colors duration-300">
+                    Natural Wonders
+                  </h3>
+                  <p className="text-white/80 group-hover:text-white transition-colors duration-300 text-base">
+                    Waterfalls & Forests
+                  </p>
+                </div>
               </Link>
               
-              <Link to="/cultural-heritage" className="
-                text-center p-6 rounded-2xl
-                bg-autumn-100/40 dark:bg-autumn-900/40
-                border border-autumn-200 dark:border-autumn-800
-                backdrop-blur-sm hover:backdrop-blur-md
-                transition-all duration-300 ease-smooth
-                hover:bg-autumn-200/40 dark:hover:bg-autumn-800/40
-                hover:border-autumn-300 dark:hover:border-autumn-700
-                hover:-translate-y-2 hover:shadow-autumn
-                block no-underline
-              ">
-                <div className="text-3xl mb-3">🎨</div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  Cultural Heritage
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Art, crafts & traditions
-                </p>
+              {/* Cultural Heritage Card */}
+              <Link to="/cultural-heritage" className="group block">
+                <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-orange-100/20 to-amber-100/20 border border-orange-200/30 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20 hover:border-orange-300/50 hover:bg-gradient-to-br hover:from-orange-200/30 hover:to-amber-200/30">
+                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🎨</div>
+                  <h3 className="font-bold text-white text-xl mb-3 group-hover:text-orange-200 transition-colors duration-300">
+                    Cultural Heritage
+                  </h3>
+                  <p className="text-white/80 group-hover:text-white transition-colors duration-300 text-base">
+                    Art & Traditions
+                  </p>
+                </div>
               </Link>
               
-              <Link to="/authentic-stays" className="
-                text-center p-6 rounded-2xl
-                bg-golden-100/40 dark:bg-golden-900/40
-                border border-golden-200 dark:border-golden-800
-                backdrop-blur-sm hover:backdrop-blur-md
-                transition-all duration-300 ease-smooth
-                hover:bg-golden-200/40 dark:hover:bg-golden-800/40
-                hover:border-golden-300 dark:hover:border-golden-700
-                hover:-translate-y-2 hover:shadow-golden
-                block no-underline
-              ">
-                <div className="text-3xl mb-3">🏡</div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  Authentic Stays
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Eco-lodges & homestays
-                </p>
+              {/* Authentic Stays Card */}
+              <Link to="/authentic-stays" className="group block">
+                <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-blue-100/20 to-purple-100/20 border border-blue-200/30 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 hover:border-blue-300/50 hover:bg-gradient-to-br hover:from-blue-200/30 hover:to-purple-200/30">
+                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">🏡</div>
+                  <h3 className="font-bold text-white text-xl mb-3 group-hover:text-blue-200 transition-colors duration-300">
+                    Authentic Stays
+                  </h3>
+                  <p className="text-white/80 group-hover:text-white transition-colors duration-300 text-base">
+                    Eco-lodges
+                  </p>
+                </div>
               </Link>
             </div>
           </div>

@@ -8,26 +8,38 @@ export const useLanguage = () => {
   // Translation function
   const t = (key: string): string => {
     const keys = key.split('.');
+    
+    // First try the selected language
     let current: Record<string, unknown> = translations[context.language];
+    let found = true;
     
     for (const k of keys) {
       if (current && typeof current === 'object' && k in current) {
         current = current[k] as Record<string, unknown>;
       } else {
-        // Fallback to English if key not found
-        current = translations.en;
-        for (const fallbackKey of keys) {
-          if (current && typeof current === 'object' && fallbackKey in current) {
-            current = current[fallbackKey] as Record<string, unknown>;
-          } else {
-            return key; // Return key if not found in any language
-          }
-        }
+        found = false;
         break;
       }
     }
     
-    return typeof current === 'string' ? current : key;
+    if (found && typeof current === 'string') {
+      return current;
+    }
+    
+    // Fallback to English if key not found in selected language
+    if (context.language !== 'en') {
+      current = translations.en;
+      for (const k of keys) {
+        if (current && typeof current === 'object' && k in current) {
+          current = current[k] as Record<string, unknown>;
+        } else {
+          return key; // Return key if not found even in English
+        }
+      }
+      return typeof current === 'string' ? current : key;
+    }
+    
+    return key; // Return key if not found anywhere
   };
 
   return {

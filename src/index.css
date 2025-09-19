@@ -177,4 +177,56 @@ All colors MUST be HSL for perfect theme transitions.
     background: hsl(var(--primary) / 0.2);
     color: hsl(var(--foreground));
   }
+
+  /* Hero Landing Page Animations */
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scale-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.6s ease-out forwards;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Smooth hover transitions for all interactive elements */
+  * {
+    transition-property: transform, shadow, background-color, border-color, color, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }

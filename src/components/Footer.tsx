@@ -122,16 +122,17 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-subtle border-t border-border">
       <div className="container mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        {/* Single Row Layout */}
+        <div className="flex flex-wrap items-start justify-between gap-8 mb-12">
           {/* Brand Section */}
-          <div className="lg:col-span-1">
+          <div className="flex-shrink-0">
             <div className="flex items-center space-x-3 mb-6">
               <div className="w-12 h-12 bg-gradient-card rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-pink">
                 R&R
               </div>
               <span className="text-xl font-bold text-foreground">ROOTSnROUTES</span>
             </div>
-            <p className="text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-muted-foreground mb-6 leading-relaxed max-w-xs">
               {t('footer.tagline')}
             </p>
             <div className="space-y-2">
@@ -143,22 +144,18 @@ const Footer = () => {
                 <Phone className="w-5 h-5 text-primary" />
                 <span className="text-muted-foreground">+91 9876543210</span>
               </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span className="text-muted-foreground">Ranchi, Jharkhand, India</span>
-              </div>
             </div>
           </div>
 
           {/* Explore Links */}
-          <div>
+          <div className="flex-shrink-0">
             <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
               <span className="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent">
                 {t('footer.explore')}
               </span>
             </h4>
             <div className="space-y-3">
-              <Link to="/destinations" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
+              <Link to="/destinations" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.destinations')}
               </Link>
               <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -174,37 +171,37 @@ const Footer = () => {
           </div>
 
           {/* Services Links */}
-          <div>
+          <div className="flex-shrink-0">
             <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
               <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                 {t('footer.services')}
               </span>
             </h4>
             <div className="space-y-3">
-              <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
+              <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.tourPackages')}
               </Link>
               <Link to="/authentic-stays" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.homestays')}
               </Link>
-              <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/handicrafts" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.handicrafts')}
               </Link>
-              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/local-guides" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.localGuides')}
               </Link>
             </div>
           </div>
 
           {/* Support Links */}
-          <div>
+          <div className="flex-shrink-0">
             <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
               <span className="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
                 {t('footer.support')}
               </span>
             </h4>
             <div className="space-y-3">
-              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
+              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.helpCenter')}
               </Link>
               <Link to="/community-chat" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -213,24 +210,24 @@ const Footer = () => {
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.contactUs')}
               </Link>
-              <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/privacy-policy" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.privacyPolicy')}
               </Link>
-              <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/terms-of-service" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.termsOfService')}
               </Link>
             </div>
           </div>
 
           {/* Feedback & Analytics */}
-          <div>
+          <div className="flex-shrink-0">
             <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
               <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
                 Feedback
               </span>
             </h4>
             <div className="space-y-3">
-              <Link to="/feedback-analysis" className="block text-muted-foreground hover:text-primary transition-colors font-medium border-l-2 border-transparent hover:border-primary pl-3">
+              <Link to="/feedback-analysis" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 Share Feedback
               </Link>
               <Link to="/analytics-dashboard" className="block text-muted-foreground hover:text-primary transition-colors">

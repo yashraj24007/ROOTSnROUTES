@@ -18,6 +18,7 @@ import Transport from "./pages/Transport";
 import Services from "./pages/Services";
 import Support from "./pages/Support";
 import Chatbot from "./pages/Chatbot";
+import Weather from "./pages/Weather";
 import WeatherDashboard from "./pages/WeatherDashboard";
 import AuthDiagnostic from "./pages/AuthDiagnostic";
 import UserProfile from "./pages/UserProfile";
@@ -35,6 +36,10 @@ import AIItineraryPlannerPage from "./pages/AIItineraryPlanner";
 import LocalMarketplacePage from "./pages/LocalMarketplace";
 import FeedbackAnalysisPage from "./pages/FeedbackAnalysis";
 import AnalyticsDashboardPage from "./pages/AnalyticsDashboard";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import LocalGuides from "./pages/LocalGuides";
+import Handicrafts from "./pages/Handicrafts";
 
 const queryClient = new QueryClient();
 
@@ -64,7 +69,14 @@ const AccessibilityWrapper = ({ children }: { children: React.ReactNode }) => {
       '/authentic-stays': 'Authentic Stays',
       '/explore-districts': 'Explore Districts',
       '/district-destinations': 'District Destinations',
-      '/community-chat': 'Community Chat'
+      '/community-chat': 'Community Chat',
+      '/ai-itinerary': 'AI Trip Planner',
+      '/feedback-analysis': 'Feedback Analysis',
+      '/analytics-dashboard': 'Analytics Dashboard',
+      '/privacy-policy': 'Privacy Policy',
+      '/terms-of-service': 'Terms of Service',
+      '/local-guides': 'Local Guides',
+      '/handicrafts': 'Handicrafts'
     };
     
     const currentRouteName = routeNames[location.pathname] || 'Page';
@@ -99,7 +111,8 @@ const App = () => (
                     <Route path="/support" element={<Support />} />
                     <Route path="/marketplace" element={<Marketplace />} />
                     <Route path="/transport" element={<Transport />} />
-                    <Route path="/weather" element={<WeatherDashboard />} />
+                    <Route path="/weather" element={<Weather />} />
+                    <Route path="/weather-dashboard" element={<WeatherDashboard />} />
                     <Route path="/auth-diagnostic" element={<AuthDiagnostic />} />
                     <Route path="/profile" element={<UserProfile />} />
                     <Route path="/settings" element={<Settings />} />
@@ -115,6 +128,10 @@ const App = () => (
                     <Route path="/local-marketplace" element={<LocalMarketplacePage />} />
                     <Route path="/feedback-analysis" element={<FeedbackAnalysisPage />} />
                     <Route path="/analytics-dashboard" element={<AnalyticsDashboardPage />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/terms-of-service" element={<TermsOfService />} />
+                    <Route path="/local-guides" element={<LocalGuides />} />
+                    <Route path="/handicrafts" element={<Handicrafts />} />
                     <Route path="/glowing-line-demo" element={<GlowingLineDemo />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />

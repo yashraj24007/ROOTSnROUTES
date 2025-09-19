@@ -60,38 +60,38 @@ const About = () => {
   const team = [
     {
       name: "Tanish Oberoi",
-      role:"Team Lead",
-      description: "Visionary leader with a passion for sustainable tourism and technology integration",
+      role: "Team Lead",
+      description: "Visionary leader with a passion for sustainable tourism and technology integration. Orchestrates project vision and ensures alignment with Smart India Hackathon objectives.",
       image: ""
     },
     {
       name: "Yash Raj",
       role: "Tech Lead",
-      description: "",
+      description: "Full-stack developer specializing in AI integration and blockchain technology. Architected the platform's core infrastructure and AI-powered itinerary planning system.",
       image: ""
     },
     {
       name: "Shreesh Kambampally", 
-      role: "",
-      description: "",
+      role: "Backend Developer",
+      description: "Expert in scalable backend systems and database architecture. Developed secure payment processing, user authentication, and real-time data synchronization features.",
       image: ""
     },
     {
       name: "Nihal Reddy",
-      role: "", 
-      description: "",
+      role: "Frontend Developer", 
+      description: "Specialist in modern React development and responsive design. Created interactive maps, weather integration, and multilingual support for seamless user experience.",
       image: ""
     },
     {
       name: "Sriya Gaytri",
       role: "Design Lead",
-      description: "Creative mind behind our user-centric designs and seamless experiences", 
+      description: "Creative mind behind our user-centric designs and seamless experiences. Designed the visual identity, UX flows, and accessibility features for inclusive tourism.",
       image: ""
     },
     {
       name: "Kulkarni Sahithi",
-      role: "",
-      description: "", 
+      role: "Research & Content Strategist",
+      description: "Tourism research specialist and content curator. Compiled comprehensive destination database and developed cultural sensitivity guidelines for authentic experiences.",
       image: ""
     }
   ];
@@ -326,14 +326,108 @@ const About = () => {
         </div>
       </section>
 
+      {/* Project Overview Section */}
+      <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">About ROOTSnROUTES</h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                A Smart India Hackathon 2024 project revolutionizing Jharkhand's tourism ecosystem through innovative technology
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h3 className="text-3xl font-bold text-foreground mb-6">Our Vision</h3>
+                <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
+                  <p>
+                    ROOTSnROUTES represents a paradigm shift in how travelers discover and experience Jharkhand's hidden treasures. 
+                    Developed as part of Smart India Hackathon 2024, our platform addresses the critical challenge of promoting 
+                    sustainable tourism while empowering local communities.
+                  </p>
+                  <p>
+                    By leveraging cutting-edge AI technology, blockchain security, and comprehensive multilingual support, 
+                    we're creating an inclusive digital ecosystem that connects travelers with authentic local experiences 
+                    across all 24 districts of Jharkhand.
+                  </p>
+                  <p>
+                    Our platform goes beyond traditional tourism by integrating real-time weather monitoring, emergency services, 
+                    local marketplace access, and AI-powered itinerary planning to ensure safe, meaningful, and culturally 
+                    respectful travel experiences.
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-6">
+                <Card className="p-6 bg-card/80 border-border text-center">
+                  <Zap className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <h4 className="text-xl font-bold text-foreground mb-2">AI-Powered</h4>
+                  <p className="text-sm text-muted-foreground">Smart itinerary planning and personalized recommendations</p>
+                </Card>
+                <Card className="p-6 bg-card/80 border-border text-center">
+                  <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <h4 className="text-xl font-bold text-foreground mb-2">Secure</h4>
+                  <p className="text-sm text-muted-foreground">Blockchain-secured payments and transparent transactions</p>
+                </Card>
+                <Card className="p-6 bg-card/80 border-border text-center">
+                  <Users className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <h4 className="text-xl font-bold text-foreground mb-2">Community-First</h4>
+                  <p className="text-sm text-muted-foreground">Direct support to local artisans and service providers</p>
+                </Card>
+                <Card className="p-6 bg-card/80 border-border text-center">
+                  <Globe className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <h4 className="text-xl font-bold text-foreground mb-2">Accessible</h4>
+                  <p className="text-sm text-muted-foreground">Multilingual support in 7+ local languages</p>
+                </Card>
+              </div>
+            </div>
+
+            <div className="bg-card/30 rounded-2xl p-8 border border-border">
+              <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Key Innovations</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🤖</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">AI Itinerary Planner</h4>
+                  <p className="text-sm text-muted-foreground">Personalized travel plans based on preferences, weather, and local events</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🌦️</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">Weather Intelligence</h4>
+                  <p className="text-sm text-muted-foreground">Real-time weather monitoring across all 24 districts with safety recommendations</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">💝</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-foreground mb-2">Local Marketplace</h4>
+                  <p className="text-sm text-muted-foreground">Direct access to authentic local products and artisan communities</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Meet Our Team</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Passionate individuals dedicated to transforming Jharkhand's tourism landscape
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-8">
+              A passionate team of innovators, developers, and designers who came together for Smart India Hackathon 2024 
+              to revolutionize Jharkhand's tourism ecosystem. Each member brings unique expertise to create a comprehensive 
+              platform that bridges technology with authentic cultural experiences.
             </p>
+            <div className="bg-card/30 rounded-lg p-4 max-w-2xl mx-auto">
+              <p className="text-sm text-muted-foreground">
+                <strong className="text-foreground">Smart India Hackathon 2024</strong> - Team ROOTSnROUTES<br/>
+                Problem Statement: Sustainable Tourism Development for Jharkhand
+              </p>
+            </div>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
