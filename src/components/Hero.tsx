@@ -67,7 +67,7 @@ const Hero = () => {
                   className="group relative overflow-hidden bg-transparent border-2 border-white/70 hover:border-white text-white hover:text-black font-semibold px-10 py-4 rounded-full backdrop-blur-sm shadow-lg hover:shadow-white/30 hover:shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-white active:scale-95 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
-                    🤖 AI Planning
+                    AI Planning
                   </span>
                   <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 </Button>

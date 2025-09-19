@@ -257,7 +257,7 @@ const Destinations = () => {
               <div className="text-sm text-muted-foreground">Hidden Gems</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary">4</div>
+              <div className="text-3xl font-bold text-primary">24</div>
               <div className="text-sm text-muted-foreground">Districts Covered</div>
             </div>
           </div>

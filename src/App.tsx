@@ -33,6 +33,8 @@ const FeedbackAnalysis = lazy(() => import('./pages/FeedbackAnalysis'));
 const AnalyticsDashboard = lazy(() => import('./pages/AnalyticsDashboard'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const Handicrafts = lazy(() => import('./pages/Handicrafts'));
+const LocalGuides = lazy(() => import('./pages/LocalGuides'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
@@ -70,6 +72,8 @@ const App = () => {
                       <Route path="/analytics-dashboard" element={<AnalyticsDashboard />} />
                       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                       <Route path="/terms-of-service" element={<TermsOfService />} />
+                      <Route path="/handicrafts" element={<Handicrafts />} />
+                      <Route path="/local-guides" element={<LocalGuides />} />
                       <Route path="/community" element={<CommunityChat />} />
                       <Route path="/community-chat" element={<CommunityChat />} />
                       <Route path="/support" element={<Support />} />

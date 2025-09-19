@@ -390,12 +390,12 @@ export const translations = {
     },
     stats: {
       destinations: {
-        number: '50+',
+        number: '100+',
         label: 'Destinations'
       },
-      homestays: {
-        number: '200+',
-        label: 'Homestays'
+      districts: {
+        number: '24',
+        label: 'Districts Covered'
       },
       artisans: {
         number: '500+',
@@ -821,12 +821,12 @@ export const translations = {
     },
     stats: {
       destinations: {
-        number: '50+',
+        number: '100+',
         label: 'गंतव्य'
       },
-      homestays: {
-        number: '200+',
-        label: 'होमस्टे'
+      districts: {
+        number: '24',
+        label: 'जिले कवर किए गए'
       },
       artisans: {
         number: '500+',
@@ -1231,12 +1231,12 @@ export const translations = {
     },
     stats: {
       destinations: {
-        number: '50+',
+        number: '100+',
         label: 'जागा'
       },
-      homestays: {
-        number: '200+',
-        label: 'घर बासा'
+      districts: {
+        number: '24',
+        label: 'जिला कवर'
       },
       artisans: {
         number: '500+',

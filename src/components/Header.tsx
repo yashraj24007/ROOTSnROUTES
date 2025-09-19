@@ -7,11 +7,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Cloud, Settings, Heart, Brain } from "lucide-react";
+import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Settings, Heart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
-import ThemeToggle from "@/components/ThemeToggle";
 import LoginModal from "@/components/LoginModal";
 import { useState, useRef, useCallback } from "react";
 import logoFullSvg from "@/assets/logo.svg";
@@ -97,8 +96,8 @@ const Header = () => {
         role="banner"
         aria-label="Main navigation"
       >
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 py-3 md:py-4">
-        <div className="flex items-center justify-between gap-2 md:gap-4 h-10 md:h-12 min-w-0">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-3 md:py-4">
+        <div className="flex items-center justify-between gap-2 md:gap-4 h-10 md:h-12">
           {/* Logo */}
           <Link 
             to="/" 
@@ -141,17 +140,6 @@ const Header = () => {
               {t('header.explore')}
             </Link>
             <Link 
-              to="/transport" 
-              className={`nav-brand-item text-sm ${
-                isActive('/transport') ? 'active' : ''
-              }`}
-              onClick={() => handleNavClick('/transport', 'Transport')}
-              aria-current={isActive('/transport') ? 'page' : undefined}
-              aria-label="Transportation options and booking"
-            >
-              {t('header.transport')}
-            </Link>
-            <Link 
               to="/marketplace" 
               className={`nav-brand-item text-sm ${
                 isActive('/marketplace') ? 'active' : ''
@@ -163,48 +151,52 @@ const Header = () => {
               {t('header.marketplace')}
             </Link>
             <Link 
+              to="/transport" 
+              className={`nav-brand-item text-sm ${
+                isActive('/transport') ? 'active' : ''
+              }`}
+              onClick={() => handleNavClick('/transport', 'Transport')}
+              aria-current={isActive('/transport') ? 'page' : undefined}
+              aria-label="Transportation options and booking"
+            >
+              {t('header.transport')}
+            </Link>
+            <Link 
+              to="/ai-itinerary" 
+              className={`nav-brand-item text-sm ${
+                isActive('/ai-itinerary') ? 'active' : ''
+              }`}
+              onClick={() => handleNavClick('/ai-itinerary', 'AI Trip Planner')}
+              aria-current={isActive('/ai-itinerary') ? 'page' : undefined}
+              aria-label="AI-powered trip planning for personalized Jharkhand experiences"
+            >
+              {t('header.aiPlanner')}
+            </Link>
+            <Link 
               to="/weather" 
-              className={`nav-brand-item text-sm flex items-center space-x-1 ${
+              className={`nav-brand-item text-sm ${
                 isActive('/weather') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/weather', 'Weather')}
               aria-current={isActive('/weather') ? 'page' : undefined}
               aria-label="Current weather conditions in Jharkhand"
             >
-              <Cloud className="h-4 w-4" aria-hidden="true" />
-              <span>Weather</span>
+              Weather
             </Link>
             <Link 
               to="/about" 
-              className={`transition-colors text-sm ${
-                isActive('/about') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-sm ${
+                isActive('/about') ? 'active' : ''
               }`}
               aria-current={isActive('/about') ? 'page' : undefined}
               aria-label="About ROOTSnROUTES platform and mission"
             >
               {t('header.about')}
             </Link>
-            
-            {/* AI Trip Planner Button */}
-            <Link 
-              to="/ai-itinerary" 
-              className={`transition-all duration-300 text-sm flex items-center space-x-1 lg:space-x-2 px-2 lg:px-3 py-2 rounded-full font-medium ${
-                isActive('/ai-itinerary') 
-                  ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg' 
-                  : 'bg-gradient-to-r from-purple-100 to-blue-100 hover:from-purple-200 hover:to-blue-200 text-purple-700 hover:text-purple-900 dark:from-purple-900/30 dark:to-blue-900/30 dark:text-purple-300 dark:hover:text-purple-200 border border-purple-200 dark:border-purple-700'
-              } hover:scale-105 active:scale-95 shadow-md hover:shadow-lg`}
-              onClick={() => handleNavClick('/ai-itinerary', 'AI Trip Planner')}
-              aria-current={isActive('/ai-itinerary') ? 'page' : undefined}
-              aria-label="AI-powered trip planning for personalized Jharkhand experiences"
-            >
-              <Brain className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden sm:inline">{t('header.aiPlanner')}</span>
-              <span className="sm:hidden">AI</span>
-            </Link>
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-3 sm:gap-4 md:gap-5 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0 min-w-0">
             {/* Mobile Menu Button - Only on small screens */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -282,7 +274,6 @@ const Header = () => {
                         handleNavClick('/weather', 'Weather');
                       }}
                     >
-                      <Cloud className="h-4 w-4" />
                       <span>Weather</span>
                     </Link>
                     <Link 
@@ -310,17 +301,14 @@ const Header = () => {
                     {/* AI Trip Planner Mobile */}
                     <Link 
                       to="/ai-itinerary" 
-                      className={`p-3 rounded-lg transition-all duration-300 flex items-center space-x-3 ${
-                        isActive('/ai-itinerary') 
-                          ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium shadow-lg' 
-                          : 'bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 text-purple-700 hover:text-purple-900 dark:from-purple-900/20 dark:to-blue-900/20 dark:text-purple-300 border border-purple-200 dark:border-purple-700'
+                      className={`p-3 rounded-lg transition-colors ${
+                        isActive('/ai-itinerary') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
                       }`}
                       onClick={() => {
                         setMobileMenuOpen(false);
                         handleNavClick('/ai-itinerary', 'AI Trip Planner');
                       }}
                     >
-                      <Brain className="h-5 w-5" />
                       <span className="font-medium">{t('header.aiPlanner')}</span>
                     </Link>
                   </nav>
@@ -338,7 +326,7 @@ const Header = () => {
                         >
                           <Avatar className="h-8 w-8">
                             <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
-                            <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xs">
+                            <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white text-xs">
                               {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
                             </AvatarFallback>
                           </Avatar>
@@ -412,11 +400,6 @@ const Header = () => {
                 </div>
               </SheetContent>
             </Sheet>
-
-            {/* Theme Toggle - Hidden on mobile */}
-            <div className="hidden md:block flex-shrink-0">
-              <ThemeToggle />
-            </div>
             
             {/* Language Dropdown - Compact on medium, full on large */}
             <div className="hidden sm:block flex-shrink-0">
@@ -539,7 +522,7 @@ const Header = () => {
                   <Button variant="ghost" className="flex items-center gap-1 lg:gap-2 hover:bg-accent p-1 lg:p-2 flex-shrink-0 h-8 lg:h-9">
                     <Avatar className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8">
                       <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
-                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xs lg:text-sm">
+                      <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white text-xs lg:text-sm">
                         {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
@@ -576,30 +559,31 @@ const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
               ) : (
-                <Button
-                  onClick={() => {
-                    console.log("Header Login clicked!");
-                    setShowLoginModal(true);
-                  }}
-                  variant="default"
-                  size="default"
-                  className="
-                    flex items-center justify-center
-                    bg-gradient-to-r from-blue-600 to-blue-500 
-                    hover:from-blue-500 hover:to-blue-400
-                    text-white font-semibold
-                    shadow-lg hover:shadow-xl
-                    transition-all duration-300
-                    hover:scale-105
-                    w-10 h-10
-                    p-0
-                    flex-shrink-0
-                    rounded-full
-                  "
-                  aria-label="Login to your account"
-                >
-                  <User className="w-5 h-5" />
-                </Button>
+                <div className="flex-shrink-0 pr-1">
+                  <Button
+                    onClick={() => {
+                      console.log("Header Login clicked!");
+                      setShowLoginModal(true);
+                    }}
+                    variant="default"
+                    size="default"
+                    className="
+                      flex items-center justify-center
+                      bg-gradient-to-r from-purple-600 to-blue-500 
+                      hover:from-purple-500 hover:to-blue-400
+                      text-white font-semibold
+                      shadow-lg hover:shadow-xl
+                      transition-all duration-300
+                      hover:scale-105
+                      w-10 h-10 sm:w-11 sm:h-11
+                      p-0
+                      rounded-full
+                    "
+                    aria-label="Login to your account"
+                  >
+                    <User className="w-5 h-5" />
+                  </Button>
+                </div>
               )}
           </div>
         </div>

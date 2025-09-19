@@ -200,10 +200,13 @@ const FloatingChatbot: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999]">
-      <Card className={`w-[420px] shadow-2xl border-2 border-emerald-200 transition-all duration-300 ${
-        isMinimized ? 'h-14' : 'h-[500px]'
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end">
+      <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-2xl border-2 border-emerald-200 transition-all duration-300 ${
+        isMinimized ? 'h-14' : 'h-[500px] max-h-[calc(100vh-8rem)]'
       }`}>
+        <Card className={`w-full shadow-2xl border-2 border-emerald-200 transition-all duration-300 ${
+          isMinimized ? 'h-14' : 'h-[500px]'
+        }`}>
         <CardHeader className="p-3 border-b bg-emerald-600 text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-sm font-medium">
@@ -234,7 +237,7 @@ const FloatingChatbot: React.FC = () => {
         </CardHeader>
         
         {!isMinimized && (
-          <CardContent className="flex flex-col h-[440px] p-0">
+          <CardContent className="flex flex-col h-[440px] max-h-[calc(100vh-12rem)] p-0">
             <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
               <div className="space-y-4">
                 {messages.map((message) => (

@@ -5,7 +5,7 @@ const Stats = () => {
   
   const stats = [
     { numberKey: "stats.destinations.number", labelKey: "stats.destinations.label" },
-    { numberKey: "stats.homestays.number", labelKey: "stats.homestays.label" },
+    { numberKey: "stats.districts.number", labelKey: "stats.districts.label" },
     { numberKey: "stats.artisans.number", labelKey: "stats.artisans.label" },
     { numberKey: "stats.travelers.number", labelKey: "stats.travelers.label" },
   ];
