@@ -40,21 +40,21 @@ const Header = () => {
   const getLanguageDisplay = (lang: string) => {
     switch (lang) {
       case 'en':
-        return { name: 'English', flag: '🇺🇸', icon: '🌍' };
+        return { name: 'English' };
       case 'hi':
-        return { name: 'हिंदी', flag: '🇮🇳', icon: '🕉️' };
+        return { name: 'हिंदी' };
       case 'snt':
-        return { name: 'ᱥᱟᱱᱛᱟᱲᱤ', flag: '🏞️', icon: '🌿' };
+        return { name: 'ᱥᱟᱱᱛᱟᱲᱤ' };
       case 'ho':
-        return { name: 'हो', flag: '🏔️', icon: '🪶' };
+        return { name: 'हो' };
       case 'mun':
-        return { name: 'मुंडारी', flag: '🌾', icon: '🎋' };
+        return { name: 'मुंडारी' };
       case 'kur':
-        return { name: 'कुरुख', flag: '⛰️', icon: '🌸' };
+        return { name: 'कुरुख' };
       case 'kha':
-        return { name: 'खड़िया', flag: '🌳', icon: '🍃' };
+        return { name: 'खड़िया' };
       default:
-        return { name: 'English', flag: '🇺🇸', icon: '🌍' };
+        return { name: 'English' };
     }
   };
 
@@ -153,8 +153,8 @@ const Header = () => {
             </Link>
             <Link 
               to="/marketplace" 
-              className={`transition-colors text-sm ${
-                isActive('/marketplace') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-sm ${
+                isActive('/marketplace') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/marketplace', 'Marketplace')}
               aria-current={isActive('/marketplace') ? 'page' : undefined}
@@ -164,8 +164,8 @@ const Header = () => {
             </Link>
             <Link 
               to="/weather" 
-              className={`transition-colors text-sm flex items-center space-x-1 ${
-                isActive('/weather') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
+              className={`nav-brand-item text-sm flex items-center space-x-1 ${
+                isActive('/weather') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/weather', 'Weather')}
               aria-current={isActive('/weather') ? 'page' : undefined}
@@ -380,56 +380,31 @@ const Header = () => {
                       <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="w-full">
                           <Globe className="w-4 h-4 mr-2" />
-                          <span className="flex items-center space-x-2">
-                            <span>{getLanguageDisplay(language).flag}</span>
-                            <span>{getLanguageDisplay(language).icon}</span>
-                            <span>{getLanguageDisplay(language).name}</span>
-                          </span>
+                          <span>{getLanguageDisplay(language).name}</span>
                           <ChevronDown className="w-3 h-3 ml-auto" />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-full">
                         <DropdownMenuItem onClick={() => handleLanguageChange('en')}>
-                          <div className="flex items-center space-x-2 w-full">
-                            <span>🇺🇸</span>
-                            <span>English</span>
-                          </div>
+                          <span>English</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('hi')}>
-                          <div className="flex items-center space-x-2 w-full">
-                            <span>🇮🇳</span>
-                            <span>हिंदी</span>
-                          </div>
+                          <span>हिंदी</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('snt')}>
-                          <div className="flex items-center space-x-2 w-full">
-                            <span>🏞️</span>
-                            <span>ᱥᱟᱱᱛᱟᱲᱤ</span>
-                          </div>
+                          <span>ᱥᱟᱱᱛᱟᱲᱤ</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('ho')}>
-                          <div className="flex items-center space-x-2 w-full">
-                            <span>🏔️</span>
-                            <span>हो</span>
-                          </div>
+                          <span>हो</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('mun')}>
-                          <div className="flex items-center space-x-2 w-full">
-                            <span>🌾</span>
-                            <span>मुंडारी</span>
-                          </div>
+                          <span>मुंडारी</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('kur')}>
-                          <div className="flex items-center space-x-2 w-full">
-                            <span>⛰️</span>
-                            <span>कुरुख</span>
-                          </div>
+                          <span>कुरुख</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('kha')}>
-                          <div className="flex items-center space-x-2 w-full">
-                            <span>🌳</span>
-                            <span>खड़िया</span>
-                          </div>
+                          <span>खड़िया</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -467,10 +442,8 @@ const Header = () => {
                     "
                   >
                     <Globe className="w-3 h-3 lg:w-4 lg:h-4" />
-                    <span className="text-xs lg:text-sm font-medium flex items-center gap-1">
-                      <span>{getLanguageDisplay(language).flag}</span>
-                      <span className="hidden md:inline">{getLanguageDisplay(language).icon}</span>
-                      <span className="hidden lg:inline">{getLanguageDisplay(language).name}</span>
+                    <span className="text-xs lg:text-sm font-medium">
+                      <span>{getLanguageDisplay(language).name}</span>
                     </span>
                     <ChevronDown className="w-2 h-2 lg:w-3 lg:h-3" />
                   </Button>
@@ -488,78 +461,71 @@ const Header = () => {
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('en')}
                     className={`
-                      flex items-center space-x-2 cursor-pointer 
+                      flex items-center cursor-pointer 
                       hover:bg-forest-800
                       ${language === 'en' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>🇺🇸</span>
                     <span>English</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('hi')}
                     className={`
-                      flex items-center space-x-2 cursor-pointer 
+                      flex items-center cursor-pointer 
                       hover:bg-forest-800
                       ${language === 'hi' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>🇮🇳</span>
                     <span>हिंदी</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('snt')}
                     className={`
-                      flex items-center space-x-2 cursor-pointer 
+                      flex items-center cursor-pointer 
                       hover:bg-forest-800
                       ${language === 'snt' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>🏞️</span>
                     <span>ᱥᱟᱱᱛᱟᱲᱤ</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('ho')}
                     className={`
-                      flex items-center space-x-2 cursor-pointer 
+                      flex items-center cursor-pointer 
                       hover:bg-forest-800
                       ${language === 'ho' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>🏔️</span>
                     <span>हो</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('mun')}
                     className={`
-                      flex items-center space-x-2 cursor-pointer 
+                      flex items-center cursor-pointer 
                       hover:bg-forest-800
                       ${language === 'mun' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>🌾</span>
                     <span>मुंडारी</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('kur')}
                     className={`
-                      flex items-center space-x-2 cursor-pointer 
+                      flex items-center cursor-pointer 
                       hover:bg-forest-800
                       ${language === 'kur' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>⛰️</span>
                     <span>कुरुख</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('kha')}
                     className={`
-                      flex items-center space-x-2 cursor-pointer 
+                      flex items-center cursor-pointer 
                       hover:bg-forest-800
                       ${language === 'kha' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>🌳</span>
                     <span>खड़िया</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

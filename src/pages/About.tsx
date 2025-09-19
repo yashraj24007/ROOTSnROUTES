@@ -447,7 +447,7 @@ const About = () => {
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">About ROOTSnROUTES</h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                A Smart India Hackathon 2024 project revolutionizing Jharkhand's tourism ecosystem through innovative technology
+                A Smart India Hackathon 2025 project revolutionizing Jharkhand's tourism ecosystem through innovative technology
               </p>
             </div>
 
@@ -457,7 +457,7 @@ const About = () => {
                 <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                   <p>
                     ROOTSnROUTES represents a paradigm shift in how travelers discover and experience Jharkhand's hidden treasures. 
-                    Developed as part of Smart India Hackathon 2024, our platform addresses the critical challenge of promoting 
+                    Developed as part of Smart India Hackathon 2025, our platform addresses the critical challenge of promoting 
                     sustainable tourism while empowering local communities.
                   </p>
                   <p>
@@ -532,13 +532,13 @@ const About = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Meet Our Team</h2>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-8">
-              A passionate team of innovators, developers, and designers who came together for Smart India Hackathon 2024 
+              A passionate team of innovators, developers, and designers who came together for Smart India Hackathon 2025 
               to revolutionize Jharkhand's tourism ecosystem. Each member brings unique expertise to create a comprehensive 
               platform that bridges technology with authentic cultural experiences.
             </p>
             <div className="bg-card/30 rounded-lg p-4 max-w-2xl mx-auto">
               <p className="text-sm text-muted-foreground">
-                <strong className="text-foreground">Smart India Hackathon 2024</strong> - Team ROOTSnROUTES<br/>
+                <strong className="text-foreground">Smart India Hackathon 2025</strong> - Team ROOTSnROUTES<br/>
                 Problem Statement: Sustainable Tourism Development for Jharkhand
               </p>
             </div>
