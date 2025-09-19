@@ -426,7 +426,7 @@ export const translations = {
       newsletterDesc: 'Get the latest updates on new destinations and exclusive offers.',
       emailPlaceholder: 'Enter your email',
       subscribe: 'Subscribe',
-      copyright: '© 2024 ROOTSnROUTES. All rights reserved. Built with ❤️ for sustainable tourism in Jharkhand.'
+      copyright: '© 2025 ROOTSnROUTES. All rights reserved. Built with ❤️ for sustainable tourism in Jharkhand.'
     }
   },
   hi: {
@@ -856,7 +856,7 @@ export const translations = {
       newsletterDesc: 'नए गंतव्यों और विशेष ऑफर्स की नवीनतम अपडेट प्राप्त करें।',
       emailPlaceholder: 'अपना ईमेल दर्ज करें',
       subscribe: 'सब्स्क्राइब करें',
-      copyright: '© 2024 ROOTSnROUTES। सभी अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ के साथ बनाया गया।'
+      copyright: '© 2025 ROOTSnROUTES। सभी अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ के साथ बनाया गया।'
     }
   },
   snt: {
@@ -1265,7 +1265,7 @@ export const translations = {
       newsletterDesc: 'नावा जागा आर विशेष ऑफर अपडेट निमे।',
       emailPlaceholder: 'आमाक् ईमेल ओल्मे',
       subscribe: 'सब्स्क्राइब',
-      copyright: '© 2024 ROOTSnROUTES। सारा अधिकार सुरक्षित। झारखंड़् टिकाऊ पर्यटन निमित् ❤️ संग् तेयार।'
+      copyright: '© 2025 ROOTSnROUTES। सारा अधिकार सुरक्षित। झारखंड़् टिकाऊ पर्यटन निमित् ❤️ संग् तेयार।'
     }
   },
   ho: {
@@ -1320,7 +1320,7 @@ export const translations = {
       newsletterDesc: 'नए स्थान और विशेष ऑफर की जानकारी पाम्।',
       emailPlaceholder: 'अम्क् ईमेल दालुम्',
       subscribe: 'सब्स्क्राइब',
-      copyright: '© 2024 ROOTSnROUTES। सारा अधिकार सुरक्षित। झारखंड़ में टिकाऊ पर्यटन के लिए ❤️ संग् बनाना।'
+      copyright: '© 2025 ROOTSnROUTES। सारा अधिकार सुरक्षित। झारखंड़ में टिकाऊ पर्यटन के लिए ❤️ संग् बनाना।'
     },
     about: {
       title: 'ROOTSnROUTES बाबोत्',
@@ -1401,7 +1401,7 @@ export const translations = {
       newsletterDesc: 'नावा जागा आर खास ऑफर खबर नाम्मे।',
       emailPlaceholder: 'आमाक् ईमेल एमेम्',
       subscribe: 'सब्स्क्राइब',
-      copyright: '© 2024 ROOTSnROUTES। सारिन् अधिकार सुरक्षित। झारखंड़् टिकाऊ पर्यटन निमित् ❤️ संग् तेयार।'
+      copyright: '© 2025 ROOTSnROUTES। सारिन् अधिकार सुरक्षित। झारखंड़् टिकाऊ पर्यटन निमित् ❤️ संग् तेयार।'
     },
     about: {
       title: 'ROOTSnROUTES चेतेन्',
@@ -1482,7 +1482,7 @@ export const translations = {
       newsletterDesc: 'नई जगह अउर खास ऑफर की खबर पाना।',
       emailPlaceholder: 'अपन ईमेल डालना',
       subscribe: 'सब्स्क्राइब',
-      copyright: '© 2024 ROOTSnROUTES। सब अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ से बनाया।'
+      copyright: '© 2025 ROOTSnROUTES। सब अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ से बनाया।'
     },
     about: {
       title: 'ROOTSnROUTES बारे',
@@ -1563,7 +1563,7 @@ export const translations = {
       newsletterDesc: 'नई जगह अउर विशेष ऑफर की जानकारी पाना।',
       emailPlaceholder: 'अपन ईमेल लिखना',
       subscribe: 'सब्स्क्राइब',
-      copyright: '© 2024 ROOTSnROUTES। सब अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ से बनाया।'
+      copyright: '© 2025 ROOTSnROUTES। सब अधिकार सुरक्षित। झारखंड में टिकाऊ पर्यटन के लिए ❤️ से बनाया।'
     },
     about: {
       title: 'ROOTSnROUTES बारे',

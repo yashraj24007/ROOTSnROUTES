@@ -12,24 +12,24 @@ All colors MUST be HSL for perfect theme transitions.
 
 @layer base {
   :root {
-    /* Light Mode - Forest & Autumn Harmony */
+    /* Light Mode - Forest & Autumn Harmony with Black Text */
     --background: 45 25% 98%;            /* Brighter cream white for better contrast */
-    --foreground: 120 40% 12%;           /* Darker forest green for better readability */
+    --foreground: 0 0% 0%;               /* Pure black text for maximum readability */
 
     --card: 40 35% 96%;                  /* Lighter warm card for better contrast */
-    --card-foreground: 120 35% 15%;      /* Darker forest green text */
+    --card-foreground: 0 0% 5%;          /* Near black text on cards */
 
     --popover: 42 30% 95%;               /* Lighter popover background */
-    --popover-foreground: 120 40% 12%;   /* Darker green text */
+    --popover-foreground: 0 0% 0%;       /* Pure black text in popovers */
 
     --primary: 140 45% 40%;              /* Slightly darker forest green for better contrast */
     --primary-foreground: 45 60% 98%;    /* Near-white text for accessibility */
 
     --secondary: 35 40% 85%;             /* Lighter autumn beige for better contrast */
-    --secondary-foreground: 120 35% 15%; /* Much darker forest text */
+    --secondary-foreground: 0 0% 10%;    /* Very dark text on secondary elements */
 
     --muted: 38 30% 92%;                 /* Lighter autumn mist for better contrast */
-    --muted-foreground: 120 25% 30%;     /* Darker muted forest green for readability */
+    --muted-foreground: 0 0% 20%;        /* Dark gray text for muted elements */
 
     --accent: 25 70% 60%;                /* Slightly darker autumn orange for contrast */
     --accent-foreground: 45 50% 98%;     /* Near-white text on accent */
@@ -68,13 +68,13 @@ All colors MUST be HSL for perfect theme transitions.
     --overlay-gradient-light: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.3) 100%);
     --overlay-gradient-dark: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.5) 100%);
 
-    /* Sidebar - Light Mode */
+    /* Sidebar - Light Mode with Dark Text */
     --sidebar-background: 42 30% 94%;
-    --sidebar-foreground: 120 35% 25%;
+    --sidebar-foreground: 0 0% 10%;      /* Very dark text for sidebar */
     --sidebar-primary: 140 45% 45%;
     --sidebar-primary-foreground: 45 60% 95%;
     --sidebar-accent: 35 30% 88%;
-    --sidebar-accent-foreground: 120 35% 20%;
+    --sidebar-accent-foreground: 0 0% 15%; /* Very dark text on sidebar accents */
     --sidebar-border: 35 25% 82%;
     --sidebar-ring: 140 45% 45%;
   }
@@ -177,7 +177,9 @@ All colors MUST be HSL for perfect theme transitions.
     background: hsl(var(--primary) / 0.2);
     color: hsl(var(--foreground));
   }
+}
 
+@layer utilities {
   /* Hero Landing Page Animations */
   @keyframes fade-in-up {
     0% {
@@ -228,5 +230,36 @@ All colors MUST be HSL for perfect theme transitions.
   * {
     transition-property: transform, shadow, background-color, border-color, color, opacity;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Force dark mode appearance for images and overlays */
+  .preserve-dark-mode {
+    color: hsl(45 35% 85%) !important;
+  }
+
+  .preserve-dark-mode h1,
+  .preserve-dark-mode h2,
+  .preserve-dark-mode h3,
+  .preserve-dark-mode h4,
+  .preserve-dark-mode h5,
+  .preserve-dark-mode h6 {
+    color: hsl(45 35% 90%) !important;
+  }
+
+  .preserve-dark-mode p,
+  .preserve-dark-mode span,
+  .preserve-dark-mode div {
+    color: hsl(45 35% 85%) !important;
+  }
+
+  /* Enhanced text shadows for better readability over images */
+  .text-over-image {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-over-image h1,
+  .text-over-image h2,
+  .text-over-image h3 {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(0, 0, 0, 0.6);
   }
 }

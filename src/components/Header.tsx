@@ -11,11 +11,11 @@ import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Cloud, Settings, 
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
-import { Language } from "@/contexts/LanguageContext";
 import ThemeToggle from "@/components/ThemeToggle";
 import LoginModal from "@/components/LoginModal";
 import { useState, useRef, useCallback } from "react";
-import logoSvg from "@/assets/logo.svg";
+import logoFullSvg from "@/assets/logo.svg";
+import logoIconSvg from "@/assets/logo.svg";
 
 const Header = () => {
   const location = useLocation();
@@ -34,27 +34,27 @@ const Header = () => {
   };
 
   const handleLanguageChange = (newLanguage: string) => {
-    setLanguage(newLanguage as Language);
+    setLanguage(newLanguage as 'en' | 'hi' | 'snt');
   };
 
   const getLanguageDisplay = (lang: string) => {
     switch (lang) {
       case 'en':
-        return { name: 'English', flag: '🇺🇸' };
+        return { name: 'English', flag: '🇺🇸', icon: '🌍' };
       case 'hi':
-        return { name: 'हिंदी', flag: '🇮🇳' };
+        return { name: 'हिंदी', flag: '🇮🇳', icon: '🕉️' };
       case 'snt':
-        return { name: 'ᱥᱟᱱᱛᱟᱲᱤ', flag: '🏞️' };
+        return { name: 'ᱥᱟᱱᱛᱟᱲᱤ', flag: '🏞️', icon: '🌿' };
       case 'ho':
-        return { name: 'हो', flag: '🏔️' };
+        return { name: 'हो', flag: '🏔️', icon: '🪶' };
       case 'mun':
-        return { name: 'मुंडारी', flag: '🌾' };
+        return { name: 'मुंडारी', flag: '🌾', icon: '🎋' };
       case 'kur':
-        return { name: 'कुरुख', flag: '⛰️' };
+        return { name: 'कुरुख', flag: '⛰️', icon: '🌸' };
       case 'kha':
-        return { name: 'खड़िया', flag: '🌳' };
+        return { name: 'खड़िया', flag: '🌳', icon: '🍃' };
       default:
-        return { name: 'English', flag: '🇺🇸' };
+        return { name: 'English', flag: '🇺🇸', icon: '🌍' };
     }
   };
 
@@ -106,9 +106,9 @@ const Header = () => {
             aria-label="ROOTSnROUTES - Go to homepage"
           >
             <img 
-              src={logoSvg} 
+              src={logoIconSvg} 
               alt="ROOTSnROUTES Tourism Platform Logo" 
-              className="logo-icon w-10 h-10 md:w-12 md:h-12 rounded-lg shadow-md"
+              className="logo-icon w-10 h-10 md:w-12 md:h-12 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
             />
             <span className="logo-text text-lg md:text-2xl">ROOTSnROUTES</span>
           </Link>
@@ -116,13 +116,13 @@ const Header = () => {
           {/* Navigation */}
           <nav 
             id="navigation"
-            className="hidden md:flex items-center gap-2 lg:gap-3 xl:gap-4 2xl:gap-5"
+            className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6"
             role="navigation"
             aria-label="Primary navigation"
           >
             <Link 
               to="/" 
-              className={`nav-brand-item text-xs xl:text-sm ${
+              className={`nav-brand-item text-sm ${
                 isActive('/') ? 'active' : ''
               }`}
               aria-current={isActive('/') ? 'page' : undefined}
@@ -131,7 +131,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/destinations" 
-              className={`nav-brand-item text-xs xl:text-sm ${
+              className={`nav-brand-item text-sm ${
                 isActive('/destinations') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/destinations', 'Explore')}
@@ -142,7 +142,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/transport" 
-              className={`nav-brand-item text-xs xl:text-sm ${
+              className={`nav-brand-item text-sm ${
                 isActive('/transport') ? 'active' : ''
               }`}
               onClick={() => handleNavClick('/transport', 'Transport')}
@@ -153,8 +153,8 @@ const Header = () => {
             </Link>
             <Link 
               to="/marketplace" 
-              className={`nav-brand-item text-xs xl:text-sm ${
-                isActive('/marketplace') ? 'active' : ''
+              className={`transition-colors text-sm ${
+                isActive('/marketplace') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/marketplace', 'Marketplace')}
               aria-current={isActive('/marketplace') ? 'page' : undefined}
@@ -164,48 +164,37 @@ const Header = () => {
             </Link>
             <Link 
               to="/weather" 
-              className={`nav-brand-item text-xs xl:text-sm ${
-                isActive('/weather') ? 'active' : ''
+              className={`transition-colors text-sm flex items-center space-x-1 ${
+                isActive('/weather') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
               onClick={() => handleNavClick('/weather', 'Weather')}
               aria-current={isActive('/weather') ? 'page' : undefined}
               aria-label="Current weather conditions in Jharkhand"
             >
-              Weather
-            </Link>
-            <Link 
-              to="/ai-itinerary" 
-              className={`nav-brand-item text-xs xl:text-sm ${
-                isActive('/ai-itinerary') ? 'active' : ''
-              }`}
-              onClick={() => handleNavClick('/ai-itinerary', 'AI Planner')}
-              aria-current={isActive('/ai-itinerary') ? 'page' : undefined}
-              aria-label="AI-powered travel itinerary planner"
-            >
-              AI Planner
+              <Cloud className="h-4 w-4" aria-hidden="true" />
+              <span>Weather</span>
             </Link>
             <Link 
               to="/about" 
-              className={`nav-brand-item text-xs xl:text-sm ${
-                isActive('/about') ? 'active' : ''
+              className={`transition-colors text-sm ${
+                isActive('/about') ? 'text-primary font-medium' : 'text-foreground hover:text-primary'
               }`}
-              onClick={() => handleNavClick('/about', 'About')}
               aria-current={isActive('/about') ? 'page' : undefined}
-              aria-label="About ROOTSnROUTES platform"
+              aria-label="About ROOTSnROUTES platform and mission"
             >
               {t('header.about')}
             </Link>
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-1 sm:gap-2 md:gap-3 flex-shrink-0">
-            {/* Mobile Menu Button - Only on small and medium screens */}
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-5 flex-shrink-0">
+            {/* Mobile Menu Button - Only on small screens */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="lg:hidden p-2 w-9 h-9 flex-shrink-0"
+                  className="md:hidden p-2 w-9 h-9 flex-shrink-0"
                   aria-label="Open mobile menu"
                 >
                   <Menu className="w-4 h-4" />
@@ -217,9 +206,9 @@ const Header = () => {
                   <div className="flex items-center justify-between p-4 border-b">
                     <div className="flex items-center space-x-2">
                       <img 
-                        src={logoSvg} 
+                        src={logoIconSvg} 
                         alt="ROOTSnROUTES" 
-                        className="w-8 h-8 rounded-md"
+                        className="w-8 h-8 rounded-md transition-transform duration-300 hover:scale-110"
                       />
                       <span className="font-bold text-lg">ROOTSnROUTES</span>
                     </div>
@@ -292,42 +281,6 @@ const Header = () => {
                       {t('header.transport')}
                     </Link>
                     <Link 
-                      to="/ai-itinerary" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/ai-itinerary') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/ai-itinerary', 'AI Planner');
-                      }}
-                    >
-                      AI Planner
-                    </Link>
-                    <Link 
-                      to="/analytics-dashboard" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/analytics-dashboard') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/analytics-dashboard', 'Analytics');
-                      }}
-                    >
-                      Analytics
-                    </Link>
-                    <Link 
-                      to="/feedback-analysis" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/feedback-analysis') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/feedback-analysis', 'Feedback');
-                      }}
-                    >
-                      Feedback
-                    </Link>
-                    <Link 
                       to="/about" 
                       className={`p-3 rounded-lg transition-colors ${
                         isActive('/about') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
@@ -380,10 +333,11 @@ const Header = () => {
                           setShowLoginModal(true);
                           setMobileMenuOpen(false);
                         }}
-                        className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                        className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        size="lg"
                       >
-                        <User className="w-4 h-4 mr-2" />
-                        Login
+                        <User className="w-5 h-5 mr-2" />
+                        Login to Account
                       </Button>
                     )}
                     
@@ -394,6 +348,7 @@ const Header = () => {
                           <Globe className="w-4 h-4 mr-2" />
                           <span className="flex items-center space-x-2">
                             <span>{getLanguageDisplay(language).flag}</span>
+                            <span>{getLanguageDisplay(language).icon}</span>
                             <span>{getLanguageDisplay(language).name}</span>
                           </span>
                           <ChevronDown className="w-3 h-3 ml-auto" />
@@ -449,8 +404,8 @@ const Header = () => {
               </SheetContent>
             </Sheet>
 
-            {/* Theme Toggle - Hidden on mobile and tablet */}
-            <div className="hidden lg:block flex-shrink-0">
+            {/* Theme Toggle - Hidden on mobile */}
+            <div className="hidden md:block flex-shrink-0">
               <ThemeToggle />
             </div>
             
@@ -464,8 +419,8 @@ const Header = () => {
                     className="
                       flex items-center gap-1 lg:gap-2 
                       border-border
-                      bg-forest-50 dark:bg-forest-900
-                      hover:bg-autumn-100 dark:hover:bg-autumn-800
+                      bg-forest-900
+                      hover:bg-autumn-800
                       text-foreground
                       min-w-[50px] sm:min-w-[60px] md:min-w-[70px] lg:min-w-[120px] 
                       h-8 lg:h-9
@@ -480,6 +435,7 @@ const Header = () => {
                     <Globe className="w-3 h-3 lg:w-4 lg:h-4" />
                     <span className="text-xs lg:text-sm font-medium flex items-center gap-1">
                       <span>{getLanguageDisplay(language).flag}</span>
+                      <span className="hidden md:inline">{getLanguageDisplay(language).icon}</span>
                       <span className="hidden lg:inline">{getLanguageDisplay(language).name}</span>
                     </span>
                     <ChevronDown className="w-2 h-2 lg:w-3 lg:h-3" />
@@ -499,8 +455,8 @@ const Header = () => {
                     onClick={() => handleLanguageChange('en')}
                     className={`
                       flex items-center space-x-2 cursor-pointer 
-                      hover:bg-forest-100 dark:hover:bg-forest-800
-                      ${language === 'en' ? 'bg-autumn-100 dark:bg-autumn-800' : ''}
+                      hover:bg-forest-800
+                      ${language === 'en' ? 'bg-autumn-800' : ''}
                     `}
                   >
                     <span>🇺🇸</span>
@@ -510,8 +466,8 @@ const Header = () => {
                     onClick={() => handleLanguageChange('hi')}
                     className={`
                       flex items-center space-x-2 cursor-pointer 
-                      hover:bg-forest-100 dark:hover:bg-forest-800
-                      ${language === 'hi' ? 'bg-autumn-100 dark:bg-autumn-800' : ''}
+                      hover:bg-forest-800
+                      ${language === 'hi' ? 'bg-autumn-800' : ''}
                     `}
                   >
                     <span>🇮🇳</span>
@@ -521,8 +477,8 @@ const Header = () => {
                     onClick={() => handleLanguageChange('snt')}
                     className={`
                       flex items-center space-x-2 cursor-pointer 
-                      hover:bg-forest-100 dark:hover:bg-forest-800
-                      ${language === 'snt' ? 'bg-autumn-100 dark:bg-autumn-800' : ''}
+                      hover:bg-forest-800
+                      ${language === 'snt' ? 'bg-autumn-800' : ''}
                     `}
                   >
                     <span>🏞️</span>
@@ -532,8 +488,8 @@ const Header = () => {
                     onClick={() => handleLanguageChange('ho')}
                     className={`
                       flex items-center space-x-2 cursor-pointer 
-                      hover:bg-forest-100 dark:hover:bg-forest-800
-                      ${language === 'ho' ? 'bg-autumn-100 dark:bg-autumn-800' : ''}
+                      hover:bg-forest-800
+                      ${language === 'ho' ? 'bg-autumn-800' : ''}
                     `}
                   >
                     <span>🏔️</span>
@@ -543,8 +499,8 @@ const Header = () => {
                     onClick={() => handleLanguageChange('mun')}
                     className={`
                       flex items-center space-x-2 cursor-pointer 
-                      hover:bg-forest-100 dark:hover:bg-forest-800
-                      ${language === 'mun' ? 'bg-autumn-100 dark:bg-autumn-800' : ''}
+                      hover:bg-forest-800
+                      ${language === 'mun' ? 'bg-autumn-800' : ''}
                     `}
                   >
                     <span>🌾</span>
@@ -554,8 +510,8 @@ const Header = () => {
                     onClick={() => handleLanguageChange('kur')}
                     className={`
                       flex items-center space-x-2 cursor-pointer 
-                      hover:bg-forest-100 dark:hover:bg-forest-800
-                      ${language === 'kur' ? 'bg-autumn-100 dark:bg-autumn-800' : ''}
+                      hover:bg-forest-800
+                      ${language === 'kur' ? 'bg-autumn-800' : ''}
                     `}
                   >
                     <span>⛰️</span>
@@ -565,8 +521,8 @@ const Header = () => {
                     onClick={() => handleLanguageChange('kha')}
                     className={`
                       flex items-center space-x-2 cursor-pointer 
-                      hover:bg-forest-100 dark:hover:bg-forest-800
-                      ${language === 'kha' ? 'bg-autumn-100 dark:bg-autumn-800' : ''}
+                      hover:bg-forest-800
+                      ${language === 'kha' ? 'bg-autumn-800' : ''}
                     `}
                   >
                     <span>🌳</span>
@@ -621,27 +577,31 @@ const Header = () => {
               </DropdownMenu>
               ) : (
                 <Button
-                  onClick={() => setShowLoginModal(true)}
+                  onClick={() => {
+                    console.log("Header Login clicked!");
+                    setShowLoginModal(true);
+                  }}
                   variant="default"
-                  size="sm"
+                  size="default"
                   className="
-                    flex items-center gap-1 lg:gap-2 
-                    bg-gradient-to-r from-blue-500 to-purple-600
-                    hover:from-blue-600 hover:to-purple-700
-                    text-white font-medium
-                    border-0
+                    flex items-center gap-2
+                    bg-gradient-to-r from-blue-600 to-blue-500 
+                    hover:from-blue-500 hover:to-blue-400
+                    text-white font-semibold
                     shadow-lg hover:shadow-xl
-                    transition-all duration-300 ease-smooth
+                    transition-all duration-300
                     hover:scale-105
-                    px-2 lg:px-3 py-2
-                    text-xs lg:text-sm
-                    min-w-[45px] sm:min-w-[55px] lg:min-w-[75px]
-                    h-8 lg:h-9
+                    px-4 py-2.5
+                    text-sm
+                    min-w-[90px]
+                    h-10
                     flex-shrink-0
+                    rounded-lg
                   "
+                  aria-label="Login to your account"
                 >
-                  <User className="w-3 h-3 lg:w-4 lg:h-4" />
-                  <span className="hidden lg:inline">Login</span>
+                  <User className="w-4 h-4" />
+                  <span className="font-semibold">LOGIN</span>
                 </Button>
               )}
           </div>

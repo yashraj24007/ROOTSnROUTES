@@ -81,7 +81,7 @@ const WeatherSafetyWidget: React.FC<WeatherSafetyWidgetProps> = ({
       case 'moderate': return 'bg-yellow-500';
       case 'poor': return 'bg-orange-500';
       case 'dangerous': return 'bg-red-500';
-      default: return 'bg-muted';
+      default: return 'bg-gray-500';
     }
   };
 
@@ -96,7 +96,7 @@ const WeatherSafetyWidget: React.FC<WeatherSafetyWidgetProps> = ({
       case 'dangerous':
         return <XCircle className="h-5 w-5 text-red-600" />;
       default:
-        return <AlertTriangle className="h-5 w-5 text-muted-foreground" />;
+        return <AlertTriangle className="h-5 w-5 text-gray-600" />;
     }
   };
 
@@ -178,13 +178,13 @@ const WeatherSafetyWidget: React.FC<WeatherSafetyWidgetProps> = ({
             <span className="font-medium">Travel Safety</span>
             <div className="flex items-center space-x-2">
               {getSafetyIcon(safety.safetyLevel)}
-              <Badge className={`${getSafetyColor(safety.safetyLevel)} text-primary-foreground`}>
+              <Badge className={`${getSafetyColor(safety.safetyLevel)} text-white`}>
                 {safety.safetyLevel.toUpperCase()}
               </Badge>
             </div>
           </div>
           
-          <div className="w-full bg-muted rounded-full h-2">
+          <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
               className={`h-2 rounded-full ${getSafetyColor(safety.safetyLevel)} ${styles.progressBar}`}
               style={{ '--progress-width': `${safety.safetyScore}%` } as React.CSSProperties}
