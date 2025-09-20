@@ -78,6 +78,42 @@ npm run dev
 - **Use different keys** for development and production
 - **Monitor API usage** regularly for unauthorized access
 
+## Database Setup
+
+### 1. Supabase Configuration
+
+1. Create a new project on [Supabase](https://supabase.com)
+2. Get your project URL and anon key
+3. Add them to your `.env` file:
+
+```env
+VITE_SUPABASE_URL=your_project_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
+```
+
+### 2. Create Database Tables
+
+1. Open your Supabase project dashboard
+2. Navigate to "SQL Editor"
+3. Copy the entire contents of `database_setup.sql`
+4. Paste and run the script to create all required tables
+
+**Required Tables:**
+
+- `user_favorites` - For bookmarked destinations
+- `user_messages` - For feedback and support
+- `chat_messages` - For community discussions
+- `newsletter_subscriptions` - For email subscriptions
+
+### 3. Verify Setup
+
+- Go to "Table Editor" to confirm all tables are created
+- Test the favorites functionality by signing in and bookmarking a destination
+
+> **Having issues with favorites?** See `FAVORITES_TROUBLESHOOTING.md` for detailed solutions.
+
+---
+
 ## Environment Files Structure
 
 - `.env` - Your local environment variables (DO NOT COMMIT)
@@ -87,7 +123,15 @@ npm run dev
 ## Troubleshooting
 
 If you see "Please set your VITE_GROQ_API_KEY" error:
+
 1. Check if `.env` file exists in project root
 2. Verify the API key is correctly set in `.env`
 3. Restart the development server
 4. Ensure the API key is valid and not revoked
+
+If you see "Could not find table 'public.user_favorites'" error:
+
+1. Run the `database_setup.sql` script in your Supabase SQL Editor
+2. Verify all tables are created in the Table Editor
+3. Check your Supabase URL and keys in `.env`
+4. See `FAVORITES_TROUBLESHOOTING.md` for detailed solutions
