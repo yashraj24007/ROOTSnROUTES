@@ -36,9 +36,32 @@ It bridges the gap between tourists, local communities, and service providers th
 
 ---
 
-❌ The Problem  
+## 🌟 Our Values
+
+The principles that guide every decision and shape every experience we create
+
+### 💚 Authenticity
+
+We preserve and promote genuine tribal culture, traditional crafts, and local stories, ensuring every tourist experience reflects the true spirit of Jharkhand.
+
+### 🌿 Environmental Responsibility
+
+Committed to sustainable eco-tourism practices that protect Jharkhand's natural beauty while supporting conservation efforts and green initiatives.
+
+### 🏆 Quality Excellence
+
+Delivering exceptional service standards through verified guides, quality accommodations, and seamless digital experiences that exceed expectations.
+
+### 🎭 Cultural Preservation
+
+Celebrating and safeguarding Jharkhand's rich heritage, tribal traditions, and artistic legacy for future generations while creating meaningful cultural exchanges.
+
+---
+
+❌ The Problem
 
 Despite its natural beauty and cultural richness, **Jharkhand tourism faces:**
+
 - Lack of reliable digital information for tourists.  
 - Unorganized travel & hospitality services.  
 - Low awareness about tribal culture, eco-tourism, and local artisans.  
@@ -102,6 +125,20 @@ We provide a **centralized smart tourism platform** that:
 - 🌍 Growth in eco-tourism and sustainable travel.  
 - 💵 Boost in state revenue through organized digital services.  
 - 📊 Data-driven policymaking for tourism officials.  
+
+---
+
+## 🚀 Deployment & Refresh Handling
+
+This application includes comprehensive configuration for proper client-side routing and page refresh handling across all major hosting platforms.
+
+### Quick Deploy
+
+- **Netlify/Vercel**: Auto-configured with included config files
+- **Production Build**: `npm run build` generates optimized dist folder
+- **Refresh Support**: All routes work correctly after browser refresh
+
+For detailed deployment instructions and server configurations, see [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md).
 
 ---
 

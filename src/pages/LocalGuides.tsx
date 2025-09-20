@@ -8,9 +8,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Star, MapPin, Phone, Mail, MessageCircle, Award, Camera, 
-  Clock, Users, Globe, Search, Filter, WhatsApp, Calendar,
+import {
+  Star, MapPin, Phone, Mail, MessageCircle, Award, Camera,
+  Clock, Users, Globe, Search, Filter, MessageSquare, Calendar,
   Shield, TrendingUp, Heart, Mountain, TreePine, Building, Car
 } from "lucide-react";
 import { useState, useMemo } from "react";
@@ -554,7 +554,7 @@ const LocalGuides = () => {
                       className="bg-green-600 hover:bg-green-700 text-white"
                       size="sm"
                     >
-                      <WhatsApp className="w-4 h-4 mr-2" />
+                      <MessageSquare className="w-4 h-4 mr-2" />
                       WhatsApp
                     </Button>
                     <Button 

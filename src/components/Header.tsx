@@ -129,37 +129,15 @@ const Header = () => {
               {t('header.home')}
             </Link>
             <Link 
-              to="/destinations" 
+              to="/explore" 
               className={`nav-brand-item text-sm ${
-                isActive('/destinations') ? 'active' : ''
+                isActive('/explore') ? 'active' : ''
               }`}
-              onClick={() => handleNavClick('/destinations', 'Explore')}
-              aria-current={isActive('/destinations') ? 'page' : undefined}
-              aria-label="Explore destinations in Jharkhand"
+              onClick={() => handleNavClick('/explore', 'Explore')}
+              aria-current={isActive('/explore') ? 'page' : undefined}
+              aria-label="Explore destinations, hotels, restaurants and more in Jharkhand"
             >
               {t('header.explore')}
-            </Link>
-            <Link 
-              to="/marketplace" 
-              className={`nav-brand-item text-sm ${
-                isActive('/marketplace') ? 'active' : ''
-              }`}
-              onClick={() => handleNavClick('/marketplace', 'Marketplace')}
-              aria-current={isActive('/marketplace') ? 'page' : undefined}
-              aria-label="Local marketplace for authentic Jharkhand products"
-            >
-              {t('header.marketplace')}
-            </Link>
-            <Link 
-              to="/transport" 
-              className={`nav-brand-item text-sm ${
-                isActive('/transport') ? 'active' : ''
-              }`}
-              onClick={() => handleNavClick('/transport', 'Transport')}
-              aria-current={isActive('/transport') ? 'page' : undefined}
-              aria-label="Transportation options and booking"
-            >
-              {t('header.transport')}
             </Link>
             <Link 
               to="/ai-itinerary" 
@@ -241,28 +219,16 @@ const Header = () => {
                       {t('header.home')}
                     </Link>
                     <Link 
-                      to="/destinations" 
+                      to="/explore" 
                       className={`p-3 rounded-lg transition-colors ${
-                        isActive('/destinations') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                        isActive('/explore') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
                       }`}
                       onClick={() => {
                         setMobileMenuOpen(false);
-                        handleNavClick('/destinations', 'Explore');
+                        handleNavClick('/explore', 'Explore');
                       }}
                     >
                       {t('header.explore')}
-                    </Link>
-                    <Link 
-                      to="/marketplace" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/marketplace') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/marketplace', 'Marketplace');
-                      }}
-                    >
-                      {t('header.marketplace')}
                     </Link>
                     <Link 
                       to="/weather" 
@@ -275,18 +241,6 @@ const Header = () => {
                       }}
                     >
                       <span>Weather</span>
-                    </Link>
-                    <Link 
-                      to="/transport" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/transport') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/transport', 'Transport');
-                      }}
-                    >
-                      {t('header.transport')}
                     </Link>
                     <Link 
                       to="/about" 

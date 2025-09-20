@@ -7,6 +7,7 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 import NewsletterService from "@/services/newsletterService";
+import CommunityChatLink from "./CommunityChatLink";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -204,9 +205,9 @@ const Footer = () => {
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.helpCenter')}
               </Link>
-              <Link to="/community-chat" className="block text-muted-foreground hover:text-primary transition-colors">
-                Community Chat
-              </Link>
+              <CommunityChatLink className="block text-muted-foreground hover:text-primary transition-colors">
+                {t('support.communityChat')}
+              </CommunityChatLink>
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.contactUs')}
               </Link>
@@ -223,21 +224,21 @@ const Footer = () => {
           <div className="flex-shrink-0">
             <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
               <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
-                Feedback
+                {t('feedback.title')}
               </span>
             </h4>
             <div className="space-y-3">
               <Link to="/feedback-analysis" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
-                Share Feedback
+                {t('feedback.shareFeedback')}
               </Link>
               <Link to="/analytics-dashboard" className="block text-muted-foreground hover:text-primary transition-colors">
-                Tourism Insights
+                {t('feedback.tourismInsights')}
               </Link>
               <Link to="/ai-itinerary" className="block text-muted-foreground hover:text-primary transition-colors">
-                AI Trip Planner
+                {t('feedback.aiTripPlanner')}
               </Link>
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
-                Report Issues
+                {t('feedback.reportIssues')}
               </Link>
             </div>
           </div>

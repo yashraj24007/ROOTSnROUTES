@@ -227,7 +227,7 @@ export const translations = {
     // SUPPORT SECTION (Help & Customer Service)
     support: {
       title: 'Need Help?',
-      subtitle: 'We\'re here to assist you 24/7',
+      subtitle: 'We\'re here to assist you 24/7 with authentic Jharkhand travel experiences',
       helpCenter: 'Help Center',
       communityChat: 'Community Chat',
       contactUs: 'Contact Us',
@@ -237,16 +237,71 @@ export const translations = {
         getInTouch: 'Get in Touch',
         call: {
           title: 'Call Us',
-          description: 'Speak directly with our travel experts',
+          description: 'Speak directly with our Jharkhand travel specialists',
           contact: '+91 98765 43210',
           availability: '24/7 Emergency Support'
         },
         email: {
           title: 'Email Support',
-          description: 'Send us your queries and get detailed responses',
+          description: 'Send us your queries about Jharkhand destinations',
           contact: 'support@rootsnroutes.com',
           availability: 'Response within 2 hours'
+        },
+        chat: {
+          title: 'Live Chat',
+          description: 'Instant help for your Jharkhand travel planning',
+          contact: 'Available on all pages',
+          availability: '24/7 Instant Response'
+        },
+        office: {
+          title: 'Visit Our Office',
+          description: 'Meet us in Ranchi for detailed travel planning',
+          contact: 'Ranchi, Jharkhand',
+          availability: 'Mon-Sat: 9 AM - 6 PM'
         }
+      },
+      sendMessage: 'Send us a Message',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      email: 'Email',
+      phone: 'Phone',
+      subject: 'Subject',
+      message: 'Message',
+      firstNamePlaceholder: 'Your first name',
+      lastNamePlaceholder: 'Your last name',
+      emailPlaceholder: 'your.email@example.com',
+      phonePlaceholder: '+91 98765 43210',
+      subjectPlaceholder: 'How can we help with your Jharkhand visit?',
+      messagePlaceholder: 'Tell us about your travel plans, cultural interests, or any questions about Jharkhand...',
+      faq: {
+        title: 'Frequently Asked Questions',
+        items: {
+          booking: {
+            question: 'How do I book authentic tribal experiences in Jharkhand?',
+            answer: 'You can book directly through our platform by selecting local guides from tribal communities. We ensure all experiences are authentic and support local livelihoods.'
+          },
+          includes: {
+            question: 'What\'s included in Jharkhand tour packages?',
+            answer: 'Our packages include accommodation in eco-friendly homestays, meals featuring traditional cuisine, certified tribal guides, cultural performances, and visits to sacred groves and waterfalls.'
+          },
+          customize: {
+            question: 'Can I customize my Jharkhand itinerary?',
+            answer: 'Absolutely! Our local experts can create personalized itineraries focusing on specific interests like tribal culture, wildlife, handicrafts, or spiritual sites across all 24 districts.'
+          },
+          safety: {
+            question: 'Is it safe to travel to remote areas of Jharkhand?',
+            answer: 'Yes, we prioritize safety with experienced local guides, established community networks, and 24/7 support. Our guides are well-versed in local conditions and safety protocols.'
+          },
+          insurance: {
+            question: 'Do you provide travel insurance for Jharkhand trips?',
+            answer: 'We recommend comprehensive travel insurance and can help you choose suitable coverage for your Jharkhand adventure, including coverage for outdoor activities and remote area travel.'
+          }
+        }
+      },
+      emergency: {
+        title: 'Emergency Assistance',
+        subtitle: 'For immediate help during your Jharkhand travel',
+        call: 'Emergency Call'
       }
     },
 
@@ -267,6 +322,24 @@ export const translations = {
       mission: {
         title: 'Our Mission',
         description: 'To make Jharkhand\'s hidden treasures accessible to every traveler while preserving its natural beauty'
+      },
+      values: {
+        authenticity: {
+          title: 'Authenticity',
+          description: 'We preserve and promote genuine tribal culture, traditional crafts, and local stories, ensuring every tourist experience reflects the true spirit of Jharkhand.'
+        },
+        environmental: {
+          title: 'Environmental Responsibility',
+          description: 'Committed to sustainable eco-tourism practices that protect Jharkhand\'s natural beauty while supporting conservation efforts and green initiatives.'
+        },
+        quality: {
+          title: 'Quality Excellence',
+          description: 'Delivering exceptional service standards through verified guides, quality accommodations, and seamless digital experiences that exceed expectations.'
+        },
+        cultural: {
+          title: 'Cultural Preservation',
+          description: 'Celebrating and safeguarding Jharkhand\'s rich heritage, tribal traditions, and artistic legacy for future generations while creating meaningful cultural exchanges.'
+        }
       },
       jharkhand: {
         title: 'Discover Jharkhand',
@@ -391,6 +464,44 @@ export const translations = {
       travelers: {
         number: '10K+',
         label: 'खुश यात्री'
+      }
+    },
+
+    // ABOUT SECTION (Company & Regional Information)
+    about: {
+      title: 'ROOTSnROUTES के बारे में',
+      aboutJharkhand: 'झारखंड के बारे में',
+      mission: {
+        title: 'हमारा मिशन',
+        description: 'झारखंड के छुपे हुए खजानों को हर यात्री के लिए सुलभ बनाना और इसकी प्राकृतिक सुंदरता का संरक्षण करना'
+      },
+      values: {
+        authenticity: {
+          title: 'प्रामाणिकता',
+          description: 'हम वास्तविक आदिवासी संस्कृति, पारंपरिक शिल्प और स्थानीय कहानियों को संरक्षित और बढ़ावा देते हैं, यह सुनिश्चित करते हुए कि हर पर्यटन अनुभव झारखंड की सच्ची भावना को दर्शाता है।'
+        },
+        environmental: {
+          title: 'पर्यावरणीय जिम्मेदारी',
+          description: 'टिकाऊ पर्यावरण-पर्यटन प्रथाओं के लिए प्रतिबद्ध जो झारखंड की प्राकृतिक सुंदरता की रक्षा करते हुए संरक्षण प्रयासों और हरित पहलों का समर्थन करती हैं।'
+        },
+        quality: {
+          title: 'गुणवत्ता उत्कृष्टता',
+          description: 'सत्यापित गाइडों, गुणवत्तापूर्ण आवास और निर्बाध डिजिटल अनुभवों के माध्यम से असाधारण सेवा मानकों को पूरा करना जो अपेक्षाओं से अधिक हो।'
+        },
+        cultural: {
+          title: 'सांस्कृतिक संरक्षण',
+          description: 'झारखंड की समृद्ध विरासत, आदिवासी परंपराओं और कलात्मक विरासत का जश्न मनाना और उसकी सुरक्षा करना भविष्य की पीढ़ियों के लिए सार्थक सांस्कृतिक आदान-प्रदान बनाते हुए।'
+        }
+      },
+      jharkhand: {
+        title: 'झारखंड की खोज करें',
+        subtitle: 'जंगलों की भूमि - जहाँ प्राचीन आदिवासी संस्कृति मिलती है प्राकृतिक जंगल से',
+        heritage: {
+          title: 'विरासत से भरपूर भूमि',
+          description1: 'झारखंड, जिसका अर्थ है "जंगलों की भूमि," प्राकृतिक सुंदरता और आदिवासी संस्कृति का खजाना है।',
+          description2: 'पवित्र वनों से लेकर गर्जना करने वाले झरनों तक, झारखंड ऐसे अनुभव प्रदान करता है जो आत्मा को छूते हैं।',
+          description3: 'राज्य 32% से अधिक वन आवरण से धन्य है, जो इसे भारत के सबसे हरे राज्यों में से एक बनाता है।'
+        }
       }
     },
 

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROOTSnROUTES - AI-Powered Eco-Tourism Platform for Jharkhand</title>
+    <script>
+      // Store the current path to redirect to after the app loads
+      const currentPath = window.location.pathname + window.location.search + window.location.hash;
+      if (currentPath !== '/') {
+        sessionStorage.setItem('redirectPath', currentPath);
+      }
+      // Redirect to home page
+      window.location.replace('/');
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
