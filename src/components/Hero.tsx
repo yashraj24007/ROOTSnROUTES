@@ -27,7 +27,7 @@ const Hero = () => {
       >
         {/* Hero Content */}
         <div className="relative z-20 min-h-screen flex items-center justify-center px-4 py-12">
-          <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ease-out ${
+          <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ease-out mt-16 md:mt-20 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             
