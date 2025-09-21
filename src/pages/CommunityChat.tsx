@@ -29,10 +29,10 @@ const CommunityChat = () => {
       <div className="min-h-screen bg-forest-100 pt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+            <h1 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
               Community Chat
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-lg text-gray-100 max-w-2xl mx-auto mb-8 drop-shadow-md">
               Connect with fellow travelers and locals in Jharkhand
             </p>
           </div>
@@ -73,10 +73,10 @@ const CommunityChat = () => {
     <div className="min-h-screen bg-gradient-subtle pt-16">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          <h1 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
             Community Chat
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-100 max-w-2xl mx-auto drop-shadow-md">
             Connect with fellow travelers and locals in Jharkhand
           </p>
         </div>

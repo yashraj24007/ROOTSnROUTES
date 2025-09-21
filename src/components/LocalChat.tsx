@@ -154,7 +154,7 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
     }, [] as Array<{ id: string; name: string; type: string }>);
 
     return [
-      { id: '', name: 'General Chat', type: 'general' },
+      { id: 'general', name: 'General Chat', type: 'general' },
       ...uniqueDestinations.slice(0, 10),
       ...allDestinations.slice(0, 5).map(dest => ({
         id: dest.id.toString(),
@@ -165,7 +165,7 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
   };
 
   const getCurrentRoomName = () => {
-    if (!selectedDestination) return 'General Travel Chat';
+    if (!selectedDestination || selectedDestination === 'general') return 'General Travel Chat';
     
     const destination = allDestinations.find(d => d.id.toString() === selectedDestination);
     if (destination) return `${destination.name} Chat`;
@@ -193,7 +193,7 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
           <div className="flex items-center gap-4">
             <div className="flex-1">
               <Select 
-                value={selectedDestination || ''} 
+                value={selectedDestination || 'general'} 
                 onValueChange={setSelectedDestination}
               >
                 <SelectTrigger className="w-full">
