@@ -194,6 +194,29 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* AI Services Links */}
+          <div className="flex-shrink-0">
+            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+              <span className="bg-gradient-to-r from-violet-500 to-purple-600 bg-clip-text text-transparent">
+                AI Services
+              </span>
+            </h4>
+            <div className="space-y-3">
+              <Link to="/ai-trip-planner" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
+                AI Trip Planner
+              </Link>
+              <Link to="/smart-weather" className="block text-muted-foreground hover:text-primary transition-colors">
+                Smart Weather Guide
+              </Link>
+              <Link to="/predictive-booking" className="block text-muted-foreground hover:text-primary transition-colors">
+                Smart Booking
+              </Link>
+              <Link to="/analytics-dashboard" className="block text-muted-foreground hover:text-primary transition-colors">
+                Tourism Insights
+              </Link>
+            </div>
+          </div>
+
           {/* Support Links */}
           <div className="flex-shrink-0">
             <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
@@ -211,34 +234,14 @@ const Footer = () => {
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.contactUs')}
               </Link>
+              <Link to="/feedback-analysis" className="block text-muted-foreground hover:text-primary transition-colors">
+                Share Feedback
+              </Link>
               <Link to="/privacy-policy" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.privacyPolicy')}
               </Link>
               <Link to="/terms-of-service" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.termsOfService')}
-              </Link>
-            </div>
-          </div>
-
-          {/* Share Your Experience */}
-          <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
-              <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
-                {t('feedback.title')}
-              </span>
-            </h4>
-            <div className="space-y-3">
-              <Link to="/feedback-analysis" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
-                {t('feedback.shareFeedback')}
-              </Link>
-              <Link to="/analytics-dashboard" className="block text-muted-foreground hover:text-primary transition-colors">
-                {t('feedback.tourismInsights')}
-              </Link>
-              <Link to="/ai-itinerary" className="block text-muted-foreground hover:text-primary transition-colors">
-                {t('feedback.aiTripPlanner')}
-              </Link>
-              <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors">
-                {t('feedback.reportIssues')}
               </Link>
             </div>
           </div>

@@ -139,28 +139,78 @@ const Header = () => {
             >
               {t('header.explore')}
             </Link>
-            <Link 
-              to="/ai-trip-planner" 
-              className={`nav-brand-item text-sm ${
-                isActive('/ai-trip-planner') ? 'active' : ''
-              }`}
-              onClick={() => handleNavClick('/ai-trip-planner', 'AI Trip Planner')}
-              aria-current={isActive('/ai-trip-planner') ? 'page' : undefined}
-              aria-label="AI-powered trip planning for personalized Jharkhand experiences"
-            >
-              {t('header.aiPlanner')}
-            </Link>
-            <Link 
-              to="/smart-weather" 
-              className={`nav-brand-item text-sm ${
-                isActive('/smart-weather') ? 'active' : ''
-              }`}
-              onClick={() => handleNavClick('/smart-weather', 'Smart Weather')}
-              aria-current={isActive('/smart-weather') ? 'page' : undefined}
-              aria-label="Weather-based activity recommendations for Jharkhand"
-            >
-              Smart Weather
-            </Link>
+
+            {/* AI Services Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className={`nav-brand-item text-sm flex items-center gap-1 ${
+                    (isActive('/ai-trip-planner') || isActive('/smart-weather') || isActive('/predictive-booking')) ? 'active' : ''
+                  }`}
+                  aria-label="AI Services menu"
+                >
+                  AI Services
+                  <ChevronDown className="w-3 h-3 opacity-60" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link 
+                    to="/ai-trip-planner" 
+                    className="flex items-center w-full"
+                    onClick={() => handleNavClick('/ai-trip-planner', 'AI Trip Planner')}
+                  >
+                    <span className="mr-3">🧭</span>
+                    <div>
+                      <div className="font-medium">AI Trip Planner</div>
+                      <div className="text-xs text-muted-foreground">Personalized itineraries</div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link 
+                    to="/smart-weather" 
+                    className="flex items-center w-full"
+                    onClick={() => handleNavClick('/smart-weather', 'Smart Weather')}
+                  >
+                    <span className="mr-3">🌤️</span>
+                    <div>
+                      <div className="font-medium">Smart Weather</div>
+                      <div className="text-xs text-muted-foreground">Weather-based recommendations</div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link 
+                    to="/predictive-booking" 
+                    className="flex items-center w-full"
+                    onClick={() => handleNavClick('/predictive-booking', 'Smart Booking')}
+                  >
+                    <span className="mr-3">🎯</span>
+                    <div>
+                      <div className="font-medium">Smart Booking</div>
+                      <div className="text-xs text-muted-foreground">Predictive recommendations</div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link 
+                    to="/analytics-dashboard" 
+                    className="flex items-center w-full"
+                    onClick={() => handleNavClick('/analytics-dashboard', 'Tourism Insights')}
+                  >
+                    <span className="mr-3">📊</span>
+                    <div>
+                      <div className="font-medium">Tourism Insights</div>
+                      <div className="text-xs text-muted-foreground">Data analytics</div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <Link 
               to="/about" 
               className={`nav-brand-item text-sm ${
@@ -230,18 +280,80 @@ const Header = () => {
                     >
                       {t('header.explore')}
                     </Link>
-                    <Link 
-                      to="/smart-weather" 
-                      className={`p-3 rounded-lg transition-colors flex items-center space-x-2 ${
-                        isActive('/smart-weather') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/smart-weather', 'Smart Weather');
-                      }}
-                    >
-                      <span>Smart Weather</span>
-                    </Link>
+                    
+                    {/* AI Services Section */}
+                    <div className="border-t pt-2 mt-2">
+                      <div className="text-xs font-medium text-muted-foreground px-3 py-2">AI SERVICES</div>
+                      
+                      <Link 
+                        to="/ai-trip-planner" 
+                        className={`p-3 rounded-lg transition-colors flex items-center space-x-3 ${
+                          isActive('/ai-trip-planner') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                        }`}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          handleNavClick('/ai-trip-planner', 'AI Trip Planner');
+                        }}
+                      >
+                        <span>🧭</span>
+                        <div>
+                          <div className="font-medium">AI Trip Planner</div>
+                          <div className="text-xs text-muted-foreground">Personalized itineraries</div>
+                        </div>
+                      </Link>
+                      
+                      <Link 
+                        to="/smart-weather" 
+                        className={`p-3 rounded-lg transition-colors flex items-center space-x-3 ${
+                          isActive('/smart-weather') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                        }`}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          handleNavClick('/smart-weather', 'Smart Weather');
+                        }}
+                      >
+                        <span>🌤️</span>
+                        <div>
+                          <div className="font-medium">Smart Weather</div>
+                          <div className="text-xs text-muted-foreground">Weather recommendations</div>
+                        </div>
+                      </Link>
+                      
+                      <Link 
+                        to="/predictive-booking" 
+                        className={`p-3 rounded-lg transition-colors flex items-center space-x-3 ${
+                          isActive('/predictive-booking') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                        }`}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          handleNavClick('/predictive-booking', 'Smart Booking');
+                        }}
+                      >
+                        <span>🎯</span>
+                        <div>
+                          <div className="font-medium">Smart Booking</div>
+                          <div className="text-xs text-muted-foreground">AI recommendations</div>
+                        </div>
+                      </Link>
+                      
+                      <Link 
+                        to="/analytics-dashboard" 
+                        className={`p-3 rounded-lg transition-colors flex items-center space-x-3 ${
+                          isActive('/analytics-dashboard') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                        }`}
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          handleNavClick('/analytics-dashboard', 'Tourism Insights');
+                        }}
+                      >
+                        <span>📊</span>
+                        <div>
+                          <div className="font-medium">Tourism Insights</div>
+                          <div className="text-xs text-muted-foreground">Data analytics</div>
+                        </div>
+                      </Link>
+                    </div>
+                    
                     <Link 
                       to="/about" 
                       className={`p-3 rounded-lg transition-colors ${
@@ -250,34 +362,6 @@ const Header = () => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {t('header.about')}
-                    </Link>
-                    
-                    {/* AI Trip Planner Mobile */}
-                    <Link 
-                      to="/ai-trip-planner" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/ai-trip-planner') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/ai-trip-planner', 'AI Trip Planner');
-                      }}
-                    >
-                      <span className="font-medium">{t('header.aiPlanner')}</span>
-                    </Link>
-                    
-                    {/* Predictive Booking Mobile */}
-                    <Link 
-                      to="/predictive-booking" 
-                      className={`p-3 rounded-lg transition-colors ${
-                        isActive('/predictive-booking') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        handleNavClick('/predictive-booking', 'AI Recommendations');
-                      }}
-                    >
-                      <span className="font-medium">AI Recommendations</span>
                     </Link>
                   </nav>
                   
