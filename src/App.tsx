@@ -5,6 +5,7 @@ import { Toaster } from './components/ui/toaster';
 import Loading from './components/Loading';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import AIChatbot from './components/AIChatbot';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -39,6 +40,9 @@ const Handicrafts = lazy(() => import('./pages/Handicrafts'));
 const LocalGuides = lazy(() => import('./pages/LocalGuides'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Restaurants = lazy(() => import('./pages/Restaurants'));
+const AITripPlannerPage = lazy(() => import('./pages/AITripPlannerPage'));
+const SmartWeatherPage = lazy(() => import('./pages/SmartWeatherPage'));
+const PredictiveBookingPage = lazy(() => import('./pages/PredictiveBookingPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
@@ -96,7 +100,9 @@ const App = () => {
                       <Route path="/chatbot" element={<Chatbot />} />
                       <Route path="/ai-itinerary" element={<AIItineraryPlanner />} />
                       <Route path="/ai-planner" element={<AIItineraryPlanner />} />
-                      <Route path="/ai-trip-planner" element={<AIItineraryPlanner />} />
+                      <Route path="/ai-trip-planner" element={<AITripPlannerPage />} />
+                      <Route path="/smart-weather" element={<SmartWeatherPage />} />
+                      <Route path="/predictive-booking" element={<PredictiveBookingPage />} />
                       <Route path="/marketplace" element={<Marketplace />} />
                       <Route path="/feedback-analysis" element={<FeedbackAnalysis />} />
                       <Route path="/share-feedback" element={<FeedbackAnalysis />} />
@@ -119,6 +125,7 @@ const App = () => {
                   </Suspense>
                 </div>
             </Router>
+            <AIChatbot />
             <Toaster />
           </UserPreferencesProvider>
         </AuthProvider>

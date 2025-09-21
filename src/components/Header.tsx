@@ -140,26 +140,26 @@ const Header = () => {
               {t('header.explore')}
             </Link>
             <Link 
-              to="/ai-itinerary" 
+              to="/ai-trip-planner" 
               className={`nav-brand-item text-sm ${
-                isActive('/ai-itinerary') ? 'active' : ''
+                isActive('/ai-trip-planner') ? 'active' : ''
               }`}
-              onClick={() => handleNavClick('/ai-itinerary', 'AI Trip Planner')}
-              aria-current={isActive('/ai-itinerary') ? 'page' : undefined}
+              onClick={() => handleNavClick('/ai-trip-planner', 'AI Trip Planner')}
+              aria-current={isActive('/ai-trip-planner') ? 'page' : undefined}
               aria-label="AI-powered trip planning for personalized Jharkhand experiences"
             >
               {t('header.aiPlanner')}
             </Link>
             <Link 
-              to="/weather" 
+              to="/smart-weather" 
               className={`nav-brand-item text-sm ${
-                isActive('/weather') ? 'active' : ''
+                isActive('/smart-weather') ? 'active' : ''
               }`}
-              onClick={() => handleNavClick('/weather', 'Weather')}
-              aria-current={isActive('/weather') ? 'page' : undefined}
-              aria-label="Current weather conditions in Jharkhand"
+              onClick={() => handleNavClick('/smart-weather', 'Smart Weather')}
+              aria-current={isActive('/smart-weather') ? 'page' : undefined}
+              aria-label="Weather-based activity recommendations for Jharkhand"
             >
-              Weather
+              Smart Weather
             </Link>
             <Link 
               to="/about" 
@@ -231,16 +231,16 @@ const Header = () => {
                       {t('header.explore')}
                     </Link>
                     <Link 
-                      to="/weather" 
+                      to="/smart-weather" 
                       className={`p-3 rounded-lg transition-colors flex items-center space-x-2 ${
-                        isActive('/weather') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                        isActive('/smart-weather') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
                       }`}
                       onClick={() => {
                         setMobileMenuOpen(false);
-                        handleNavClick('/weather', 'Weather');
+                        handleNavClick('/smart-weather', 'Smart Weather');
                       }}
                     >
-                      <span>Weather</span>
+                      <span>Smart Weather</span>
                     </Link>
                     <Link 
                       to="/about" 
@@ -254,16 +254,30 @@ const Header = () => {
                     
                     {/* AI Trip Planner Mobile */}
                     <Link 
-                      to="/ai-itinerary" 
+                      to="/ai-trip-planner" 
                       className={`p-3 rounded-lg transition-colors ${
-                        isActive('/ai-itinerary') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                        isActive('/ai-trip-planner') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
                       }`}
                       onClick={() => {
                         setMobileMenuOpen(false);
-                        handleNavClick('/ai-itinerary', 'AI Trip Planner');
+                        handleNavClick('/ai-trip-planner', 'AI Trip Planner');
                       }}
                     >
                       <span className="font-medium">{t('header.aiPlanner')}</span>
+                    </Link>
+                    
+                    {/* Predictive Booking Mobile */}
+                    <Link 
+                      to="/predictive-booking" 
+                      className={`p-3 rounded-lg transition-colors ${
+                        isActive('/predictive-booking') ? 'bg-primary/10 text-primary font-medium' : 'text-foreground hover:bg-accent'
+                      }`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleNavClick('/predictive-booking', 'AI Recommendations');
+                      }}
+                    >
+                      <span className="font-medium">AI Recommendations</span>
                     </Link>
                   </nav>
                   
