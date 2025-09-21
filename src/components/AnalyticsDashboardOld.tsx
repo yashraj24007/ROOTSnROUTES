@@ -38,9 +38,7 @@ import {
   RefreshCw,
   Wifi,
   WifiOff,
-  Clock,
-  Zap,
-  AlertCircle
+  Clock
 } from 'lucide-react';
 
 // Real-time data interfaces
@@ -165,7 +163,7 @@ const generateLiveAttractions = (): LiveAttraction[] => {
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
 
-const AnalyticsDashboardRealtime: React.FC = () => {
+const AnalyticsDashboard: React.FC = () => {
   const [timeRange, setTimeRange] = useState('live');
   const [selectedDistrict, setSelectedDistrict] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
@@ -391,188 +389,275 @@ const AnalyticsDashboardRealtime: React.FC = () => {
         </Card>
       </div>
 
-      {/* Real-time Charts Section */}
+      {/* Key Metrics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Visitors</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{totalVisitors.toLocaleString()}</div>
+            <div className="flex items-center text-xs text-muted-foreground">
+              <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              <span className="text-green-500">+{growthRate.toFixed(1)}%</span>
+              <span className="ml-1">vs last period</span>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Revenue Generated</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">₹{(totalRevenue / 10000000).toFixed(1)}Cr</div>
+            <div className="flex items-center text-xs text-muted-foreground">
+              <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              <span className="text-green-500">+12.3%</span>
+              <span className="ml-1">vs last period</span>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Avg. Rating</CardTitle>
+            <Star className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{avgRating.toFixed(1)}</div>
+            <div className="flex items-center text-xs text-muted-foreground">
+              <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              <span className="text-green-500">+0.2</span>
+              <span className="ml-1">vs last period</span>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active Districts</CardTitle>
+            <MapPin className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">24</div>
+            <div className="flex items-center text-xs text-muted-foreground">
+              <Activity className="h-3 w-3 mr-1 text-blue-500" />
+              <span className="text-blue-500">100%</span>
+              <span className="ml-1">coverage</span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Charts Section */}
       <Tabs defaultValue="visitors" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="visitors" className="flex items-center gap-2">
             <BarChart3 className="w-4 h-4" />
-            Live Flow
+            Visitors
           </TabsTrigger>
           <TabsTrigger value="districts" className="flex items-center gap-2">
             <PieChartIcon className="w-4 h-4" />
             Districts
           </TabsTrigger>
-          <TabsTrigger value="attractions" className="flex items-center gap-2">
-            <Star className="w-4 h-4" />
-            Hot Spots
+          <TabsTrigger value="demographics" className="flex items-center gap-2">
+            <Globe className="w-4 h-4" />
+            Demographics
           </TabsTrigger>
-          <TabsTrigger value="realtime" className="flex items-center gap-2">
-            <Zap className="w-4 h-4" />
-            Live Feed
+          <TabsTrigger value="attractions" className="flex items-center gap-2">
+            <Eye className="w-4 h-4" />
+            Attractions
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="visitors" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Activity className="w-5 h-5 text-blue-500" />
-                Real-time Visitor Flow
-              </CardTitle>
-              <CardDescription>
-                Live visitor count updates every 30 seconds
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="h-80">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={visitorHistory}>
+          <div className="grid lg:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Monthly Visitors Trend</CardTitle>
+                <CardDescription>Visitor count over the last 9 months</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <AreaChart data={monthlyVisitors}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis 
-                      dataKey="timestamp"
-                      tickFormatter={(time) => new Date(time).toLocaleTimeString('en-US', { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                      })}
-                    />
+                    <XAxis dataKey="month" />
                     <YAxis />
-                    <Tooltip 
-                      labelFormatter={(time) => `Time: ${new Date(time).toLocaleTimeString()}`}
-                      formatter={(value: number, name: string) => [
-                        name === 'visitors' ? `${value} visitors` : 
-                        name === 'onlineUsers' ? `${value} online` : 
-                        `₹${(value/1000).toFixed(1)}K`,
-                        name === 'visitors' ? 'Current Visitors' : 
-                        name === 'onlineUsers' ? 'Online Users' : 'Revenue'
-                      ]}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="visitors"
-                      stackId="1"
-                      stroke="#8884d8"
-                      fill="#8884d8"
-                      fillOpacity={0.6}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="onlineUsers"
-                      stackId="2"
-                      stroke="#82ca9d"
-                      fill="#82ca9d"
-                      fillOpacity={0.6}
+                    <Tooltip formatter={(value) => [value.toLocaleString(), 'Visitors']} />
+                    <Area 
+                      type="monotone" 
+                      dataKey="visitors" 
+                      stroke="#8884d8" 
+                      fill="#8884d8" 
+                      fillOpacity={0.3}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+              </CardContent>
+            </Card>
 
-        <TabsContent value="districts" className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>Live District Performance</CardTitle>
-                <CardDescription>Real-time visitor distribution by district</CardDescription>
+                <CardTitle>Revenue Trend</CardTitle>
+                <CardDescription>Monthly revenue generated (₹ Crores)</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={monthlyVisitors}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <Tooltip formatter={(value: number) => [`₹${(value / 10000000).toFixed(1)}Cr`, 'Revenue']} />
+                    <Line 
+                      type="monotone" 
+                      dataKey="revenue" 
+                      stroke="#82ca9d" 
+                      strokeWidth={3}
+                      dot={{ fill: '#82ca9d', strokeWidth: 2 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="districts">
+          <div className="grid lg:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>District-wise Visitor Distribution</CardTitle>
+                <CardDescription>Percentage share of total visitors</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={districtPopularity}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ district, percentage }) => `${district} ${percentage}%`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="visitors"
+                    >
+                      {districtPopularity.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [value.toLocaleString(), 'Visitors']} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Top Performing Districts</CardTitle>
+                <CardDescription>Ranked by total visitors</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {districtMetrics.map((district, index) => (
+                  {districtPopularity.map((district, index) => (
                     <div key={district.district} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+                        <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-semibold">
+                          {index + 1}
+                        </div>
                         <span className="font-medium">{district.district}</span>
-                        {district.status === 'trending_up' && <TrendingUp className="w-4 h-4 text-green-500" />}
-                        {district.status === 'trending_down' && <TrendingDown className="w-4 h-4 text-red-500" />}
                       </div>
                       <div className="text-right">
-                        <div className="font-semibold">{district.visitors}</div>
-                        <div className={`text-xs ${
-                          district.growth >= 0 ? 'text-green-500' : 'text-red-500'
-                        }`}>
-                          {district.growth >= 0 ? '+' : ''}{district.growth}%
-                        </div>
+                        <div className="font-semibold">{district.visitors.toLocaleString()}</div>
+                        <div className="text-xs text-muted-foreground">{district.percentage}%</div>
                       </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>District Distribution</CardTitle>
-                <CardDescription>Live percentage breakdown</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={districtMetrics}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ district, percentage }) => `${district} (${percentage.toFixed(1)}%)`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="visitors"
-                      >
-                        {districtMetrics.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip formatter={(value: number) => [`${value} visitors`, 'Visitors']} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </TabsContent>
 
-        <TabsContent value="attractions" className="space-y-6">
+        <TabsContent value="demographics">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-yellow-500" />
-                Live Attraction Hotspots
-              </CardTitle>
-              <CardDescription>Real-time attraction performance and trends</CardDescription>
+              <CardTitle>Visitor Demographics</CardTitle>
+              <CardDescription>Breakdown of visitor types</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-8">
+                <ResponsiveContainer width="100%" height={250}>
+                  <PieChart>
+                    <Pie
+                      data={visitorDemographics}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={100}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {visitorDemographics.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [`${value}%`, 'Share']} />
+                  </PieChart>
+                </ResponsiveContainer>
+                
+                <div className="space-y-4">
+                  {visitorDemographics.map((demo, index) => (
+                    <div key={demo.category} className="flex items-center justify-between p-3 bg-card/50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div 
+                          className="w-4 h-4 rounded-full" 
+                          style={{ backgroundColor: COLORS[index] }}
+                        />
+                        <span className="font-medium">{demo.category}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-semibold">{demo.count.toLocaleString()}</div>
+                        <div className="text-xs text-muted-foreground">{demo.value}%</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="attractions">
+          <Card>
+            <CardHeader>
+              <CardTitle>Top Attractions Performance</CardTitle>
+              <CardDescription>Most viewed and booked destinations</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {liveAttractions.map((attraction, index) => (
-                  <div key={attraction.name} className="flex items-center justify-between p-4 rounded-lg border hover:shadow-md transition-shadow">
+                {topAttractions.map((attraction, index) => (
+                  <div key={attraction.name} className="flex items-center justify-between p-4 bg-card/30 rounded-lg">
                     <div className="flex items-center gap-4">
-                      <div className="w-2 h-8 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-semibold">
+                        {index + 1}
+                      </div>
                       <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold">{attraction.name}</span>
-                          {attraction.trend === 'hot' && (
-                            <Badge className="bg-red-100 text-red-800 border-red-300">🔥 Hot</Badge>
-                          )}
-                          {attraction.trend === 'trending' && (
-                            <Badge className="bg-orange-100 text-orange-800 border-orange-300">📈 Trending</Badge>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <span>{attraction.views} views</span>
-                          <span>{attraction.bookings} bookings</span>
-                          <span className="flex items-center gap-1">
-                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                            {attraction.rating}
-                          </span>
+                        <h4 className="font-semibold">{attraction.name}</h4>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Eye className="w-3 h-3" />
+                          <span>{attraction.views.toLocaleString()} views</span>
+                          <span>•</span>
+                          <span>{attraction.bookings.toLocaleString()} bookings</span>
                         </div>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Eye className="w-4 h-4 text-blue-500" />
-                        <span className="font-semibold text-blue-600">{attraction.currentViewers}</span>
-                      </div>
-                      <div className="text-xs text-muted-foreground">viewing now</div>
+                    <div className="flex items-center gap-2">
+                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <span className="font-semibold">{attraction.rating}</span>
                     </div>
                   </div>
                 ))}
@@ -580,75 +665,9 @@ const AnalyticsDashboardRealtime: React.FC = () => {
             </CardContent>
           </Card>
         </TabsContent>
-
-        <TabsContent value="realtime" className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-yellow-500" />
-                  Live Activity Feed
-                </CardTitle>
-                <CardDescription>Real-time events and updates</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4 max-h-80 overflow-y-auto">
-                  {[...Array(10)].map((_, i) => (
-                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2 animate-pulse" />
-                      <div className="flex-1">
-                        <div className="text-sm font-medium">New booking at {liveAttractions[i % liveAttractions.length]?.name}</div>
-                        <div className="text-xs text-muted-foreground">
-                          {Math.floor(Math.random() * 60)} seconds ago
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-blue-500" />
-                  System Health
-                </CardTitle>
-                <CardDescription>Real-time monitoring status</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span>Data Sync</span>
-                    <Badge className="bg-green-100 text-green-800 border-green-300">
-                      <Wifi className="w-3 h-3 mr-1" />
-                      Active
-                    </Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>API Response</span>
-                    <span className="text-green-600 font-mono">~45ms</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Update Frequency</span>
-                    <span className="text-blue-600">30s</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Data Points</span>
-                    <span className="text-purple-600">{visitorHistory.length}/20</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Uptime</span>
-                    <span className="text-green-600">99.8%</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
       </Tabs>
     </div>
   );
 };
 
-export default AnalyticsDashboardRealtime;
+export default AnalyticsDashboard;
