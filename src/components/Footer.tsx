@@ -179,7 +179,7 @@ const Footer = () => {
               </span>
             </h4>
             <div className="space-y-3">
-              <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
+              <Link to="/tour-packages" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.tourPackages')}
               </Link>
               <Link to="/stays" className="block text-muted-foreground hover:text-primary transition-colors">

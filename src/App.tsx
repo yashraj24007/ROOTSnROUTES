@@ -17,6 +17,9 @@ const About = lazy(() => import('./pages/About'));
 const Destinations = lazy(() => import('./pages/Destinations'));
 const Services = lazy(() => import('./pages/Services'));
 const DestinationDetail = lazy(() => import('./pages/DestinationDetail'));
+const MarketplaceDetail = lazy(() => import('./pages/MarketplaceDetail'));
+const RestaurantDetail = lazy(() => import('./pages/RestaurantDetail'));
+const HotelDetail = lazy(() => import('./pages/HotelDetail'));
 const AuthenticStays = lazy(() => import('./pages/AuthenticStays'));
 const CulturalHeritage = lazy(() => import('./pages/CulturalHeritage'));
 const NaturalWonders = lazy(() => import('./pages/NaturalWonders'));
@@ -43,6 +46,7 @@ const Restaurants = lazy(() => import('./pages/Restaurants'));
 const AITripPlannerPage = lazy(() => import('./pages/AITripPlannerPage'));
 const SmartWeatherPage = lazy(() => import('./pages/SmartWeatherPage'));
 const PredictiveBookingPage = lazy(() => import('./pages/PredictiveBookingPage'));
+const TestPage = lazy(() => import('./pages/TestPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
@@ -104,6 +108,9 @@ const App = () => {
                       <Route path="/smart-weather" element={<SmartWeatherPage />} />
                       <Route path="/predictive-booking" element={<PredictiveBookingPage />} />
                       <Route path="/marketplace" element={<Marketplace />} />
+                      <Route path="/marketplace/:id" element={<MarketplaceDetail />} />
+                      <Route path="/restaurants/:id" element={<RestaurantDetail />} />
+                      <Route path="/stays/:id" element={<HotelDetail />} />
                       <Route path="/feedback-analysis" element={<FeedbackAnalysis />} />
                       <Route path="/share-feedback" element={<FeedbackAnalysis />} />
                       <Route path="/analytics-dashboard" element={<AnalyticsDashboard />} />
@@ -120,6 +127,7 @@ const App = () => {
                       <Route path="/report-issues" element={<Support />} />
                       <Route path="/profile" element={<UserProfile />} />
                       <Route path="/favorites" element={<Favorites />} />
+                      <Route path="/test" element={<TestPage />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Suspense>

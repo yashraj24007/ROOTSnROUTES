@@ -71,7 +71,7 @@ const Hero = () => {
               </Link>
               
               {/* AI Planning - Outlined Button */}
-              <Link to="/ai-itinerary">
+              <Link to="/ai-trip-planner">
                 <Button 
                   size="lg"
                   variant="outline"

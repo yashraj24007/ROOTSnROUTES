@@ -9,6 +9,7 @@ import { MapPin, Star, ArrowRight, Users, Wifi, UtensilsCrossed, TreePine, Mount
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { authenticStays, generateStayId } from "@/data/stayData";
 import santhaliHome from "@/assets/santhali-home.jpg";
 import ecoLodge from "@/assets/eco-lodge.jpg";
 
@@ -1465,99 +1466,103 @@ const AuthenticStays = () => {
       <section className="py-20 bg-gradient-subtle">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredStays.map((stay) => (
-              <Card key={stay.id} className="group overflow-hidden hover:shadow-organic-lg transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={stay.image}
-                    alt={stay.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-golden-500 text-white">
-                      {stay.type}
-                    </Badge>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge variant="outline" className="bg-white/90 text-forest-900">
-                      {stay.capacity}
-                    </Badge>
-                  </div>
-                  <div className="absolute bottom-4 left-4">
-                    <div className="flex items-center text-white bg-black/60 px-2 py-1 rounded">
-                      <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium">{stay.rating}</span>
-                      <span className="text-xs ml-1">({stay.reviews})</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-foreground mb-1">
-                        {stay.name}
-                      </h3>
-                      <div className="flex items-center text-muted-foreground text-sm mb-2">
-                        <MapPin className="w-3 h-3 mr-1" />
-                        {stay.location}
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Host: {stay.host}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-forest-600">{stay.price}</div>
-                      <div className="text-xs text-muted-foreground">per night</div>
-                    </div>
-                  </div>
-                  
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                    {stay.description}
-                  </p>
-                  
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-foreground text-sm mb-2">Features:</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {stay.features.map((feature, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {feature}
+            {filteredStays.map((stay) => {
+              return (
+                <Link key={stay.id} to={`/stays/${stay.id}`} className="block">
+                  <Card className="group overflow-hidden hover:shadow-organic-lg transition-all duration-300">
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={stay.image}
+                        alt={stay.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <Badge className="bg-golden-500 text-white">
+                          {stay.type}
                         </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-foreground text-sm mb-2">Amenities:</h4>
-                    <div className="grid grid-cols-2 gap-1 text-xs text-muted-foreground">
-                      {stay.amenities.slice(0, 4).map((amenity, idx) => (
-                        <div key={idx} className="flex items-center">
-                          <div className="w-1 h-1 bg-forest-500 rounded-full mr-2" />
-                          {amenity}
-                        </div>
-                      ))}
-                    </div>
-                    {stay.amenities.length > 4 && (
-                      <div className="text-xs text-primary mt-1">
-                        +{stay.amenities.length - 4} more amenities
                       </div>
-                    )}
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <Button className="flex-1 group text-sm">
-                      Book Now
-                      <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Details
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                      <div className="absolute top-4 right-4">
+                        <Badge variant="outline" className="bg-white/90 text-forest-900">
+                          {stay.capacity}
+                        </Badge>
+                      </div>
+                      <div className="absolute bottom-4 left-4">
+                        <div className="flex items-center text-white bg-black/60 px-2 py-1 rounded">
+                          <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm font-medium">{stay.rating}</span>
+                          <span className="text-xs ml-1">({stay.reviews})</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-foreground mb-1">
+                            {stay.name}
+                          </h3>
+                          <div className="flex items-center text-muted-foreground text-sm mb-2">
+                            <MapPin className="w-3 h-3 mr-1" />
+                            {stay.location}
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            Host: {stay.host}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-forest-600">{stay.price}</div>
+                          <div className="text-xs text-muted-foreground">per night</div>
+                        </div>
+                      </div>
+                      
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                        {stay.description}
+                      </p>
+                      
+                      <div className="mb-4">
+                        <h4 className="font-semibold text-foreground text-sm mb-2">Features:</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {stay.features.map((feature, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-xs">
+                              {feature}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="mb-4">
+                        <h4 className="font-semibold text-foreground text-sm mb-2">Amenities:</h4>
+                        <div className="grid grid-cols-2 gap-1 text-xs text-muted-foreground">
+                          {stay.amenities.slice(0, 4).map((amenity, idx) => (
+                            <div key={idx} className="flex items-center">
+                              <div className="w-1 h-1 bg-forest-500 rounded-full mr-2" />
+                              {amenity}
+                            </div>
+                          ))}
+                        </div>
+                        {stay.amenities.length > 4 && (
+                          <div className="text-xs text-primary mt-1">
+                            +{stay.amenities.length - 4} more amenities
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        <Button className="flex-1 group text-sm">
+                          Book Now
+                          <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          Details
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

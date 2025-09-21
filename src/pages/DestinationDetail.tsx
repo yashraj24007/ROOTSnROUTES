@@ -3,10 +3,11 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Star, Calendar, Clock, Phone, Camera, Navigation, Users, Car, Home } from "lucide-react";
+import { MapPin, Star, Calendar, Clock, Phone, Camera, Navigation, Users, Car, Home, ExternalLink } from "lucide-react";
 import { useParams, Link } from "react-router-dom";
 import { allDestinations, type Destination } from "@/data/completeDestinations";
 import { useEffect, useState } from "react";
+import { generateGoogleMapsUrl, generateDirectionsUrl, formatLocationString, getDistrictCoordinates } from "@/utils/googleMaps";
 
 const DestinationDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -90,7 +91,15 @@ const DestinationDetail = () => {
               </div>
               <div className="flex items-center gap-1">
                 <MapPin className="w-5 h-5" />
-                <span>{destination.district} District, Jharkhand</span>
+                <a
+                  href={generateGoogleMapsUrl(formatLocationString(destination.name, destination.district), destination.coordinates)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white/80 transition-colors flex items-center gap-1"
+                >
+                  {destination.district} District, Jharkhand
+                  <ExternalLink className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
@@ -248,11 +257,11 @@ const DestinationDetail = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MapPin className="w-5 h-5" />
-                  Location Details
+                  Location & Directions
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div>
                     <span className="font-semibold">District:</span>
                     <p className="text-muted-foreground">{destination.district}</p>
@@ -266,6 +275,28 @@ const DestinationDetail = () => {
                     <p className="text-muted-foreground">
                       {destination.coordinates.lat}, {destination.coordinates.lng}
                     </p>
+                  </div>
+                  <div className="flex flex-wrap gap-3 pt-3 border-t">
+                    <a
+                      href={generateGoogleMapsUrl(formatLocationString(destination.name, destination.district), destination.coordinates)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
+                    >
+                      <MapPin className="w-4 h-4" />
+                      View on Google Maps
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <a
+                      href={generateDirectionsUrl(formatLocationString(destination.name, destination.district), destination.coordinates)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium"
+                    >
+                      <Navigation className="w-4 h-4" />
+                      Get Directions
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                 </div>
               </CardContent>

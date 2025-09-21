@@ -3,59 +3,58 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Calendar, Car, Users, Camera, Mountain, Shield, Phone } from "lucide-react";
-import { useLanguage } from "@/hooks/useLanguage";
+import { Link } from "react-router-dom";
 
 const Services = () => {
-  const { t } = useLanguage();
 
   const services = [
     {
       icon: MapPin,
-      titleKey: 'services.tourPlanning.title',
-      descriptionKey: 'services.tourPlanning.description',
-      featuresKey: 'services.tourPlanning.features'
+      title: 'Tour Planning',
+      description: 'Customized itineraries for your perfect Jharkhand adventure',
+      features: ['Personalized routes', 'Local insights', 'Budget planning', 'Time optimization']
     },
     {
       icon: Calendar,
-      titleKey: 'services.booking.title',
-      descriptionKey: 'services.booking.description',
-      featuresKey: 'services.booking.features'
+      title: 'Booking Services',
+      description: 'Easy booking for accommodations, activities, and experiences',
+      features: ['Hotel bookings', 'Activity reservations', 'Group bookings', 'Instant confirmation']
     },
     {
       icon: Car,
-      titleKey: 'services.transport.title',
-      descriptionKey: 'services.transport.description',
-      featuresKey: 'services.transport.features'
+      title: 'Transportation',
+      description: 'Reliable transport solutions for your entire journey',
+      features: ['Car rentals', 'Driver services', 'Airport transfers', 'Local transport']
     },
     {
       icon: Users,
-      titleKey: 'services.groupTours.title',
-      descriptionKey: 'services.groupTours.description',
-      featuresKey: 'services.groupTours.features'
+      title: 'Group Tours',
+      description: 'Organized group experiences with professional guides',
+      features: ['Expert guides', 'Group discounts', 'Safety assured', 'Cultural immersion']
     },
     {
       icon: Camera,
-      titleKey: 'services.photography.title',
-      descriptionKey: 'services.photography.description',
-      featuresKey: 'services.photography.features'
+      title: 'Photography Tours',
+      description: 'Capture the beauty of Jharkhand with expert photography guidance',
+      features: ['Professional guides', 'Best locations', 'Equipment advice', 'Photo editing tips']
     },
     {
       icon: Mountain,
-      titleKey: 'services.adventure.title',
-      descriptionKey: 'services.adventure.description',
-      featuresKey: 'services.adventure.features'
+      title: 'Adventure Activities',
+      description: 'Thrilling outdoor adventures in Jharkhand\'s natural landscapes',
+      features: ['Rock climbing', 'Trekking expeditions', 'Water sports', 'Wildlife safaris']
     },
     {
       icon: Shield,
-      titleKey: 'services.insurance.title',
-      descriptionKey: 'services.insurance.description',
-      featuresKey: 'services.insurance.features'
+      title: 'Travel Insurance',
+      description: 'Comprehensive travel insurance for peace of mind',
+      features: ['Medical coverage', 'Trip cancellation', '24/7 support', 'Emergency assistance']
     },
     {
       icon: Phone,
-      titleKey: 'services.support.title',
-      descriptionKey: 'services.support.description',
-      featuresKey: 'services.support.features'
+      title: '24/7 Support',
+      description: 'Round-the-clock assistance for all your travel needs',
+      features: ['Emergency hotline', 'Local assistance', 'Language support', 'Real-time updates']
     }
   ];
 
@@ -64,13 +63,13 @@ const Services = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 mt-16 bg-gradient-hero">
+      <section className="relative py-20 mt-16 bg-forest-600">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            {t('services.title')}
+            Tour Packages & Services
           </h1>
           <p className="text-xl text-forest-300 max-w-3xl mx-auto">
-            {t('services.subtitle')}
+            Comprehensive travel services to make your Jharkhand journey unforgettable
           </p>
         </div>
       </section>
@@ -81,19 +80,18 @@ const Services = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {services.map((service, index) => {
               const IconComponent = service.icon;
-              const features = t(service.featuresKey);
               return (
                 <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300 bg-card/50 border-border">
                   <CardHeader className="text-center">
                     <div className="w-16 h-16 bg-forest-100 dark:bg-forest-800 rounded-full flex items-center justify-center mx-auto mb-4">
                       <IconComponent className="w-8 h-8 text-forest-600 dark:text-forest-400" />
                     </div>
-                    <CardTitle className="text-xl text-foreground">{t(service.titleKey)}</CardTitle>
+                    <CardTitle className="text-xl text-foreground">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <p className="text-muted-foreground mb-4">{t(service.descriptionKey)}</p>
+                    <p className="text-muted-foreground mb-4">{service.description}</p>
                     <div className="space-y-2">
-                      {Array.isArray(features) && features.map((feature, featureIndex) => (
+                      {service.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="text-sm text-left">
                           <span className="text-forest-600 dark:text-forest-400">✓</span> <span className="text-card-foreground">{feature}</span>
                         </div>
@@ -108,21 +106,25 @@ const Services = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-card">
+      <section className="py-20 bg-forest-600 dark:bg-forest-800">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-            {t('services.cta.title')}
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+            Ready to Start Your Adventure?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-muted-foreground">
-            {t('services.cta.subtitle')}
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-forest-100">
+            Contact us today to discuss your travel needs and get a personalized quote
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="default" className="bg-forest-500 hover:bg-forest-600 text-white">
-              {t('services.cta.getQuote')}
-            </Button>
-            <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-accent hover:text-accent-foreground">
-              {t('services.cta.contactUs')}
-            </Button>
+            <Link to="/ai-trip-planner">
+              <Button size="lg" variant="default" className="bg-white text-forest-600 hover:bg-forest-50 font-semibold">
+                Get AI Quote & Plan Trip
+              </Button>
+            </Link>
+            <Link to="/support">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-forest-600">
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

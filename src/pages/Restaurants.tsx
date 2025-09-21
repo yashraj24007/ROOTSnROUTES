@@ -15,7 +15,9 @@ import {
   Filter
 } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
+import { allRestaurants, generateRestaurantId } from "@/data/restaurantData";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -1158,94 +1160,99 @@ const Restaurants = () => {
       <section className="py-16 bg-gradient-subtle">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {filteredRestaurants.map((restaurant) => (
-              <Card key={restaurant.id} className="overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300 group">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={restaurant.image}
-                    alt={restaurant.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute top-4 right-4">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                    >
-                      <Heart className="w-4 h-4 text-white" />
-                    </Button>
-                  </div>
-                  <div className="absolute bottom-4 left-4">
-                    <Badge className="bg-white/90 text-black">
-                      {restaurant.cuisine}
-                    </Badge>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                      {restaurant.name}
-                    </h3>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium">{restaurant.rating}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 mb-3 text-muted-foreground">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{restaurant.location}</span>
-                    <span className="mx-2">•</span>
-                    <span className="text-sm font-semibold text-primary">{restaurant.price}</span>
-                  </div>
-
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {restaurant.specialty}
-                  </p>
-
-                  {/* Popular Dishes */}
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-sm mb-2">Popular Dishes:</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {restaurant.dishes.slice(0, 3).map((dish, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs">
-                          {dish}
+            {filteredRestaurants.map((restaurant) => {
+              const restaurantId = generateRestaurantId(restaurant.name);
+              return (
+                <Link key={restaurant.id} to={`/restaurants/${restaurantId}`} className="block">
+                  <Card className="overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300 group">
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={restaurant.image}
+                        alt={restaurant.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute top-4 right-4">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="bg-white/20 backdrop-blur-sm hover:bg-white/30"
+                        >
+                          <Heart className="w-4 h-4 text-white" />
+                        </Button>
+                      </div>
+                      <div className="absolute bottom-4 left-4">
+                        <Badge className="bg-white/90 text-black">
+                          {restaurant.cuisine}
                         </Badge>
-                      ))}
-                      {restaurant.dishes.length > 3 && (
-                        <Badge variant="secondary" className="text-xs">
-                          +{restaurant.dishes.length - 3} more
-                        </Badge>
-                      )}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Contact Info */}
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      <span>{restaurant.timings}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Phone className="w-3 h-3" />
-                      <span>{restaurant.phone}</span>
-                    </div>
-                  </div>
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                          {restaurant.name}
+                        </h3>
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm font-medium">{restaurant.rating}</span>
+                        </div>
+                      </div>
 
-                  <div className="flex gap-2">
-                    <Button className="flex-1" size="sm">
-                      View Details
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Call Now
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
+                      <div className="flex items-center gap-2 mb-3 text-muted-foreground">
+                        <MapPin className="w-4 h-4" />
+                        <span className="text-sm">{restaurant.location}</span>
+                        <span className="mx-2">•</span>
+                        <span className="text-sm font-semibold text-primary">{restaurant.price}</span>
+                      </div>
+
+                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                        {restaurant.specialty}
+                      </p>
+
+                      {/* Popular Dishes */}
+                      <div className="mb-4">
+                        <h4 className="font-semibold text-sm mb-2">Popular Dishes:</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {restaurant.dishes.slice(0, 3).map((dish, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {dish}
+                            </Badge>
+                          ))}
+                          {restaurant.dishes.length > 3 && (
+                            <Badge variant="secondary" className="text-xs">
+                              +{restaurant.dishes.length - 3} more
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Contact Info */}
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{restaurant.timings}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Phone className="w-3 h-3" />
+                          <span>{restaurant.phone}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <Button className="flex-1" size="sm">
+                          View Details
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          Call Now
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
 
           {filteredRestaurants.length === 0 && (

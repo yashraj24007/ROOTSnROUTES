@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { MapPin, Star, Heart, ShoppingBag, Home, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { handicrafts, generateItemId } from "@/data/marketplaceData";
 import dokraElephant from "@/assets/dokra-elephant.jpg";
 import santhaliHome from "@/assets/santhali-home.jpg";
 import ecoLodge from "@/assets/eco-lodge.jpg";
@@ -2068,54 +2070,59 @@ const Marketplace = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredHandicrafts.map((craft, index) => (
-                <Card key={index} className="overflow-hidden bg-card border-border hover:shadow-card transition-all duration-300 group">
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                    src={craft.image}
-                    alt={`${craft.name} by ${craft.artist} - Traditional handicraft with ${craft.rating} star rating`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                    <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-white text-sm font-medium">{craft.rating}</span>
-                    </div>
-                    <div className="absolute top-4 left-4">
-                      <Heart className="w-6 h-6 text-white hover:text-red-400 cursor-pointer transition-colors" />
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-foreground mb-2">
-                      {craft.name}
-                    </h3>
-                    <p className="text-sm text-primary font-medium mb-2">
-                      by {craft.artist}
-                    </p>
-                    
-                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
-                      {craft.description}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-4 text-sm text-muted-foreground">
-                      <span>{craft.artisan}</span>
-                      <span>Delivery: {craft.delivery}</span>
+            {filteredHandicrafts.map((craft, index) => {
+              const craftId = generateItemId(craft.name);
+              return (
+                <Link key={index} to={`/marketplace/${craftId}`} className="block">
+                  <Card className="overflow-hidden bg-card border-border hover:shadow-card transition-all duration-300 group">
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                      src={craft.image}
+                      alt={`${craft.name} by ${craft.artist} - Traditional handicraft with ${craft.rating} star rating`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="text-white text-sm font-medium">{craft.rating}</span>
+                      </div>
+                      <div className="absolute top-4 left-4">
+                        <Heart className="w-6 h-6 text-white hover:text-red-400 cursor-pointer transition-colors" />
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-primary">
-                        {craft.price}
-                      </span>
-                      <Button variant="default">
-                        <ShoppingBag className="w-4 h-4 mr-2" />
-                        View Details
-                      </Button>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-foreground mb-2">
+                        {craft.name}
+                      </h3>
+                      <p className="text-sm text-primary font-medium mb-2">
+                        by {craft.artist}
+                      </p>
+                      
+                      <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                        {craft.description}
+                      </p>
+
+                      <div className="flex items-center justify-between mb-4 text-sm text-muted-foreground">
+                        <span>{craft.artisan}</span>
+                        <span>Delivery: {craft.delivery}</span>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-2xl font-bold text-primary">
+                          {craft.price}
+                        </span>
+                        <Button variant="default">
+                          <ShoppingBag className="w-4 h-4 mr-2" />
+                          View Details
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
           </div>
         </section>
 

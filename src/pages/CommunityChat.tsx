@@ -15,7 +15,7 @@ const CommunityChat = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-subtle pt-16 flex items-center justify-center">
+      <div className="min-h-screen bg-forest-100 pt-16 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-forest-600"></div>
           <p className="mt-4 text-gray-600">Loading...</p>
@@ -26,7 +26,7 @@ const CommunityChat = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-subtle pt-16">
+      <div className="min-h-screen bg-forest-100 pt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">

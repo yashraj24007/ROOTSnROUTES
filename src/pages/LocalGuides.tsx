@@ -371,19 +371,18 @@ const LocalGuides = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-green-50 to-emerald-50">
+    <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-amber-600/20"></div>
+      <section className="relative py-20 overflow-hidden bg-forest-600">
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              {t('localGuides.title', 'Meet Your Local Guides')}
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Meet Your Local Guides
             </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-              {t('localGuides.subtitle', 'Connect with certified local experts who know Jharkhand like the back of their hand')}
+            <p className="text-xl text-forest-300 max-w-3xl mx-auto mb-8">
+              Connect with certified local experts who know Jharkhand like the back of their hand
             </p>
             
             {/* Search and Filters */}
@@ -606,37 +605,37 @@ const LocalGuides = () => {
       </section>
 
       {/* Information Section */}
-      <section className="py-16 bg-white/50">
+      <section className="py-16 bg-forest-50 dark:bg-forest-900">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose Our Local Guides?</h2>
-              <p className="text-lg text-gray-700">Experience authentic Jharkhand through the eyes of local experts</p>
+              <h2 className="text-3xl font-bold text-foreground mb-6">Why Choose Our Local Guides?</h2>
+              <p className="text-lg text-muted-foreground">Experience authentic Jharkhand through the eyes of local experts</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-500 to-amber-500 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-forest-600 rounded-full flex items-center justify-center">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Verified & Certified</h3>
-                <p className="text-gray-600">All our guides are verified, licensed, and have undergone safety training</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">Verified & Certified</h3>
+                <p className="text-muted-foreground">All our guides are verified, licensed, and have undergone safety training</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-forest-500 rounded-full flex items-center justify-center">
                   <Users className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Local Expertise</h3>
-                <p className="text-gray-600">Deep knowledge of local culture, hidden gems, and authentic experiences</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">Local Expertise</h3>
+                <p className="text-muted-foreground">Deep knowledge of local culture, hidden gems, and authentic experiences</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-forest-700 rounded-full flex items-center justify-center">
                   <Globe className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Multi-lingual</h3>
-                <p className="text-gray-600">Communicate in your preferred language for better understanding</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">Multi-lingual</h3>
+                <p className="text-muted-foreground">Communicate in your preferred language for better understanding</p>
               </div>
             </div>
 
@@ -648,29 +647,29 @@ const LocalGuides = () => {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-xl font-bold text-green-600">1</span>
+                    <div className="w-12 h-12 bg-forest-100 dark:bg-forest-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-xl font-bold text-forest-600 dark:text-forest-300">1</span>
                     </div>
-                    <h3 className="font-semibold mb-2 text-gray-900">Choose Your Guide</h3>
-                    <p className="text-sm text-gray-600">
+                    <h3 className="font-semibold mb-2 text-foreground">Choose Your Guide</h3>
+                    <p className="text-sm text-muted-foreground">
                       Browse profiles and select based on specialties, location, and reviews
                     </p>
                   </div>
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-xl font-bold text-blue-600">2</span>
+                    <div className="w-12 h-12 bg-forest-100 dark:bg-forest-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-xl font-bold text-forest-600 dark:text-forest-300">2</span>
                     </div>
-                    <h3 className="font-semibold mb-2 text-gray-900">Contact Directly</h3>
-                    <p className="text-sm text-gray-600">
+                    <h3 className="font-semibold mb-2 text-foreground">Contact Directly</h3>
+                    <p className="text-sm text-muted-foreground">
                       WhatsApp or call directly to discuss your requirements and customize your tour
                     </p>
                   </div>
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-xl font-bold text-purple-600">3</span>
+                    <div className="w-12 h-12 bg-forest-100 dark:bg-forest-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-xl font-bold text-forest-600 dark:text-forest-300">3</span>
                     </div>
-                    <h3 className="font-semibold mb-2 text-gray-900">Enjoy Your Experience</h3>
-                    <p className="text-sm text-gray-600">
+                    <h3 className="font-semibold mb-2 text-foreground">Enjoy Your Experience</h3>
+                    <p className="text-sm text-muted-foreground">
                       Discover authentic Jharkhand with personalized insights and local stories
                     </p>
                   </div>
@@ -709,12 +708,12 @@ const LocalGuides = () => {
                   </div>
                 </div>
                 
-                <div className="mt-6 p-4 bg-amber-50 rounded-lg">
+                <div className="mt-6 p-4 bg-forest-50 dark:bg-forest-800 rounded-lg">
                   <div className="flex items-start space-x-3">
-                    <Phone className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <Phone className="w-5 h-5 text-forest-600 dark:text-forest-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <h4 className="font-semibold text-amber-800 mb-1">Need Help Choosing?</h4>
-                      <p className="text-sm text-amber-700 mb-2">
+                      <h4 className="font-semibold text-forest-800 dark:text-forest-200 mb-1">Need Help Choosing?</h4>
+                      <p className="text-sm text-forest-700 dark:text-forest-300 mb-2">
                         Our team can help match you with the perfect guide based on your interests and requirements.
                       </p>
                       <div className="space-y-1 text-sm">

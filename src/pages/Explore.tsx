@@ -235,7 +235,7 @@ const Explore = () => {
               </div>
               <h3 className="font-bold text-lg mb-2 text-blue-800 dark:text-blue-200">AI Trip Planner 🤖</h3>
               <p className="text-sm text-blue-700 dark:text-blue-300 mb-4 font-medium">Personalized itinerary planning powered by AI</p>
-              <Link to="/ai-itinerary">
+              <Link to="/ai-trip-planner">
                 <Button variant="outline" size="sm" className="border-blue-400 text-blue-800 dark:text-blue-200 hover:bg-blue-100 dark:hover:bg-blue-900/30 font-semibold">
                   Plan Trip
                 </Button>
