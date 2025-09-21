@@ -16,6 +16,9 @@ const AuthenticStays = () => {
   const { t } = useLanguage();
   const [selectedDistrict, setSelectedDistrict] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
+  const [selectedRating, setSelectedRating] = useState("all");
+  const [selectedPrice, setSelectedPrice] = useState("all");
+  const [includeHidden, setIncludeHidden] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const authenticStays = [
@@ -1169,22 +1172,33 @@ const AuthenticStays = () => {
     }
   ];
 
-  // District categories for filtering
+  // All 24 Districts of Jharkhand for filtering
   const districts = [
     { id: "all", name: "All Districts", count: authenticStays.length },
     { id: "ranchi", name: "Ranchi", count: authenticStays.filter(s => s.location.toLowerCase().includes("ranchi")).length },
     { id: "jamshedpur", name: "Jamshedpur", count: authenticStays.filter(s => s.location.toLowerCase().includes("jamshedpur")).length },
     { id: "dhanbad", name: "Dhanbad", count: authenticStays.filter(s => s.location.toLowerCase().includes("dhanbad")).length },
-    { id: "dumka", name: "Dumka", count: authenticStays.filter(s => s.location.toLowerCase().includes("dumka")).length },
+    { id: "bokaro", name: "Bokaro", count: authenticStays.filter(s => s.location.toLowerCase().includes("bokaro")).length },
     { id: "deoghar", name: "Deoghar", count: authenticStays.filter(s => s.location.toLowerCase().includes("deoghar")).length },
-    { id: "palamu", name: "Palamu", count: authenticStays.filter(s => s.location.toLowerCase().includes("palamu")).length },
     { id: "hazaribagh", name: "Hazaribagh", count: authenticStays.filter(s => s.location.toLowerCase().includes("hazaribagh")).length },
-    { id: "khunti", name: "Khunti", count: authenticStays.filter(s => s.location.toLowerCase().includes("khunti")).length },
-    { id: "others", name: "Other Districts", count: authenticStays.filter(s => 
-      !["ranchi", "jamshedpur", "dhanbad", "dumka", "deoghar", "palamu", "hazaribagh", "khunti"].some(district => 
-        s.location.toLowerCase().includes(district)
-      )
-    ).length }
+    { id: "giridih", name: "Giridih", count: authenticStays.filter(s => s.location.toLowerCase().includes("giridih")).length },
+    { id: "ramgarh", name: "Ramgarh", count: authenticStays.filter(s => s.location.toLowerCase().includes("ramgarh")).length },
+    { id: "west-singhbhum", name: "West Singhbhum", count: authenticStays.filter(s => s.location.toLowerCase().includes("west singhbhum") || s.location.toLowerCase().includes("chaibasa")).length },
+    { id: "seraikela-kharsawan", name: "Seraikela-Kharsawan", count: authenticStays.filter(s => s.location.toLowerCase().includes("seraikela")).length },
+    { id: "palamu", name: "Palamu", count: authenticStays.filter(s => s.location.toLowerCase().includes("palamu")).length },
+    { id: "latehar", name: "Latehar", count: authenticStays.filter(s => s.location.toLowerCase().includes("latehar")).length },
+    { id: "garhwa", name: "Garhwa", count: authenticStays.filter(s => s.location.toLowerCase().includes("garhwa")).length },
+    { id: "chatra", name: "Chatra", count: authenticStays.filter(s => s.location.toLowerCase().includes("chatra")).length },
+    { id: "koderma", name: "Koderma", count: authenticStays.filter(s => s.location.toLowerCase().includes("koderma")).length },
+    { id: "jamtara", name: "Jamtara", count: authenticStays.filter(s => s.location.toLowerCase().includes("jamtara")).length },
+    { id: "dumka", name: "Dumka", count: authenticStays.filter(s => s.location.toLowerCase().includes("dumka")).length },
+    { id: "pakur", name: "Pakur", count: authenticStays.filter(s => s.location.toLowerCase().includes("pakur")).length },
+    { id: "godda", name: "Godda", count: authenticStays.filter(s => s.location.toLowerCase().includes("godda")).length },
+    { id: "sahebganj", name: "Sahebganj", count: authenticStays.filter(s => s.location.toLowerCase().includes("sahebganj")).length },
+    { id: "lohardaga", name: "Lohardaga", count: authenticStays.filter(s => s.location.toLowerCase().includes("lohardaga")).length },
+    { id: "gumla", name: "Gumla", count: authenticStays.filter(s => s.location.toLowerCase().includes("gumla")).length },
+    { id: "simdega", name: "Simdega", count: authenticStays.filter(s => s.location.toLowerCase().includes("simdega")).length },
+    { id: "khunti", name: "Khunti", count: authenticStays.filter(s => s.location.toLowerCase().includes("khunti")).length }
   ];
 
   // Accommodation type filters (secondary)
@@ -1197,28 +1211,71 @@ const AuthenticStays = () => {
     { id: "eco", name: "Eco Stays", count: authenticStays.filter(s => s.type.toLowerCase().includes("eco")).length }
   ];
 
-  // Filter stays based on selected district and type
+  // Rating filters
+  const ratingFilters = [
+    { id: "all", name: "All Ratings", count: authenticStays.length },
+    { id: "4.5", name: "4.5+ Stars", count: authenticStays.filter(s => s.rating >= 4.5).length },
+    { id: "4.0", name: "4.0+ Stars", count: authenticStays.filter(s => s.rating >= 4.0).length },
+    { id: "3.5", name: "3.5+ Stars", count: authenticStays.filter(s => s.rating >= 3.5).length },
+    { id: "3.0", name: "3.0+ Stars", count: authenticStays.filter(s => s.rating >= 3.0).length }
+  ];
+
+  // Price range filters
+  const priceFilters = [
+    { id: "all", name: "All Prices", count: authenticStays.length },
+    { id: "budget", name: "Budget (₹1000-2500)", count: authenticStays.filter(s => {
+      const price = parseInt(s.price.replace(/[^\d]/g, ''));
+      return price >= 1000 && price <= 2500;
+    }).length },
+    { id: "mid", name: "Mid-range (₹2500-5000)", count: authenticStays.filter(s => {
+      const price = parseInt(s.price.replace(/[^\d]/g, ''));
+      return price >= 2500 && price <= 5000;
+    }).length },
+    { id: "premium", name: "Premium (₹5000-8000)", count: authenticStays.filter(s => {
+      const price = parseInt(s.price.replace(/[^\d]/g, ''));
+      return price >= 5000 && price <= 8000;
+    }).length },
+    { id: "luxury", name: "Luxury (₹8000+)", count: authenticStays.filter(s => {
+      const price = parseInt(s.price.replace(/[^\d]/g, ''));
+      return price >= 8000;
+    }).length }
+  ];
+
+  // Filter stays based on selected district, type, rating, price, and search
   const filteredStays = authenticStays.filter(stay => {
     const matchesDistrict = selectedDistrict === "all" || 
-      (selectedDistrict === "others" ? 
-        !["ranchi", "jamshedpur", "dhanbad", "dumka", "deoghar", "palamu", "hazaribagh", "khunti"].some(district => 
-          stay.location.toLowerCase().includes(district)
-        ) :
+      (selectedDistrict === "west-singhbhum" ? 
+        (stay.location.toLowerCase().includes("west singhbhum") || stay.location.toLowerCase().includes("chaibasa")) :
+        selectedDistrict === "seraikela-kharsawan" ?
+        stay.location.toLowerCase().includes("seraikela") :
         stay.location.toLowerCase().includes(selectedDistrict)
       );
     
     const matchesType = selectedType === "all" || stay.type.toLowerCase().includes(selectedType);
+    
+    const matchesRating = selectedRating === "all" || stay.rating >= parseFloat(selectedRating);
+    
+    const matchesPrice = selectedPrice === "all" || (() => {
+      const price = parseInt(stay.price.replace(/[^\d]/g, ''));
+      switch (selectedPrice) {
+        case "budget": return price >= 1000 && price <= 2500;
+        case "mid": return price >= 2500 && price <= 5000;
+        case "premium": return price >= 5000 && price <= 8000;
+        case "luxury": return price >= 8000;
+        default: return true;
+      }
+    })();
     
     const matchesSearch = searchTerm === "" || 
       stay.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       stay.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
       stay.description.toLowerCase().includes(searchTerm.toLowerCase());
 
-    return matchesDistrict && matchesType && matchesSearch;
+    return matchesDistrict && matchesType && matchesRating && matchesPrice && matchesSearch;
   });
 
   return (
-    <main className="min-h-screen bg-background">
+    <>
       <Header />
       
       {/* Hero Section */}
@@ -1246,76 +1303,160 @@ const AuthenticStays = () => {
         </div>
       </section>
 
-      {/* Filters Section */}
-      <section className="py-8 bg-background border-b border-border">
+      {/* Advanced Filtering Section */}
+      <section className="py-8 bg-black border-b border-gray-800">
         <div className="container mx-auto px-6">
           {/* Search Bar */}
           <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 type="text"
                 placeholder="Search stays by name, location, or description..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 h-12 text-lg"
+                className="pl-10 h-12 text-lg bg-gray-900 border-gray-700 text-white placeholder-gray-400"
               />
             </div>
           </div>
 
-          {/* District Filter (Primary) */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-primary" />
-              Select District / Area
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {districts.map((district) => (
-                <Button
-                  key={district.id}
-                  variant={selectedDistrict === district.id ? "default" : "outline"}
-                  onClick={() => setSelectedDistrict(district.id)}
-                  className="flex items-center gap-2"
-                  disabled={district.count === 0}
-                >
-                  {district.name}
-                  <Badge variant="secondary" className="ml-1">
-                    {district.count}
-                  </Badge>
-                </Button>
-              ))}
+          {/* Dropdown Filters Row */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+            {/* Filters Label */}
+            <div className="flex items-center gap-2 text-gray-400">
+              <Filter className="h-5 w-5" />
+              <span className="text-sm font-medium">Filters:</span>
             </div>
-          </div>
 
-          {/* Accommodation Type Filter (Secondary) */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <Filter className="h-5 w-5 text-primary" />
-              Accommodation Type
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {accommodationTypes.map((type) => (
-                <Button
-                  key={type.id}
-                  variant={selectedType === type.id ? "default" : "outline"}
-                  onClick={() => setSelectedType(type.id)}
-                  className="flex items-center gap-2"
-                  disabled={type.count === 0}
-                >
-                  {type.name}
-                  <Badge variant="secondary" className="ml-1">
-                    {type.count}
-                  </Badge>
-                </Button>
-              ))}
-            </div>
+            {/* District Filter Dropdown */}
+            <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Districts" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Districts</SelectItem>
+                {districts.filter(d => d.id !== "all").map((district) => (
+                  <SelectItem key={district.id} value={district.id}>
+                    {district.name} ({district.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Accommodation Type Filter Dropdown */}
+            <Select value={selectedType} onValueChange={setSelectedType}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Types" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Types</SelectItem>
+                {accommodationTypes.filter(t => t.id !== "all").map((type) => (
+                  <SelectItem key={type.id} value={type.id}>
+                    {type.name} ({type.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Rating Filter Dropdown */}
+            <Select value={selectedRating} onValueChange={setSelectedRating}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Ratings" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Ratings</SelectItem>
+                {ratingFilters.filter(r => r.id !== "all").map((rating) => (
+                  <SelectItem key={rating.id} value={rating.id}>
+                    {rating.name} ({rating.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Price Filter Dropdown */}
+            <Select value={selectedPrice} onValueChange={setSelectedPrice}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Prices" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Prices</SelectItem>
+                {priceFilters.filter(p => p.id !== "all").map((price) => (
+                  <SelectItem key={price.id} value={price.id}>
+                    {price.name} ({price.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Include Hidden Toggle */}
+            <Button
+              variant={includeHidden ? "default" : "outline"}
+              onClick={() => setIncludeHidden(!includeHidden)}
+              className="flex items-center gap-2 border-gray-700 text-white"
+            >
+              <Filter className="h-4 w-4" />
+              Include Hidden
+            </Button>
           </div>
 
           {/* Results Count */}
-          <div className="text-center text-muted-foreground">
+          <div className="text-center text-gray-400 text-sm">
             Showing {filteredStays.length} stays
             {selectedDistrict !== "all" && ` in ${districts.find(d => d.id === selectedDistrict)?.name}`}
             {selectedType !== "all" && ` • ${accommodationTypes.find(t => t.id === selectedType)?.name}`}
+            {selectedRating !== "all" && ` • ${ratingFilters.find(r => r.id === selectedRating)?.name}`}
+            {selectedPrice !== "all" && ` • ${priceFilters.find(p => p.id === selectedPrice)?.name}`}
+            {includeHidden && ` • Including Hidden`}
+          </div>
+        </div>
+      </section>
+
+      {/* Category Filter Buttons Section */}
+      <section className="py-6 bg-gray-900 border-b border-gray-700">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Button
+              variant={selectedType === "all" ? "default" : "outline"}
+              onClick={() => setSelectedType("all")}
+              className="bg-green-600 hover:bg-green-700 text-white border-0 rounded-full px-6"
+            >
+              All Destinations <Badge variant="secondary" className="ml-2">{authenticStays.length}</Badge>
+            </Button>
+            <Button
+              variant={selectedType === "eco" ? "default" : "outline"}
+              onClick={() => setSelectedType("eco")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Eco Stays <Badge variant="secondary" className="ml-2">{accommodationTypes.find(t => t.id === "eco")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedType === "homestay" ? "default" : "outline"}
+              onClick={() => setSelectedType("homestay")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Homestays <Badge variant="secondary" className="ml-2">{accommodationTypes.find(t => t.id === "homestay")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedType === "resort" ? "default" : "outline"}
+              onClick={() => setSelectedType("resort")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Resorts <Badge variant="secondary" className="ml-2">{accommodationTypes.find(t => t.id === "resort")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedType === "hotel" ? "default" : "outline"}
+              onClick={() => setSelectedType("hotel")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Hotels <Badge variant="secondary" className="ml-2">{accommodationTypes.find(t => t.id === "hotel")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedType === "lodge" ? "default" : "outline"}
+              onClick={() => setSelectedType("lodge")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Lodges <Badge variant="secondary" className="ml-2">{accommodationTypes.find(t => t.id === "lodge")?.count || 0}</Badge>
+            </Button>
           </div>
         </div>
       </section>
@@ -1324,7 +1465,7 @@ const AuthenticStays = () => {
       <section className="py-20 bg-gradient-subtle">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {authenticStays.map((stay) => (
+            {filteredStays.map((stay) => (
               <Card key={stay.id} className="group overflow-hidden hover:shadow-organic-lg transition-all duration-300">
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -1576,7 +1717,7 @@ const AuthenticStays = () => {
       </section>
 
       <Footer />
-    </main>
+    </>
   );
 };
 

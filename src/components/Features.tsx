@@ -113,31 +113,6 @@ const Features = () => {
             </Card>
           ))}
         </div>
-
-        {/* Call to Action */}
-        <div className="mt-16 text-center stagger-item">
-          <Card className="card-brand-featured p-8 max-w-2xl mx-auto">
-            <Heart className="w-12 h-12 mx-auto text-white mb-4 icon-pulse" />
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Ready to Explore Jharkhand?
-            </h3>
-            <p className="text-white/90 mb-6">
-              Join thousands of travelers discovering the hidden gems of Jharkhand with our platform.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/destinations">
-                <Button className="btn-brand-secondary">
-                  Start Exploring
-                </Button>
-              </Link>
-              <Link to="/chatbot">
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                  Get AI Recommendations
-                </Button>
-              </Link>
-            </div>
-          </Card>
-        </div>
       </div>
     </section>
   );

@@ -142,7 +142,10 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
 
   // Fetch user profile
   const fetchProfile = async () => {
-    if (!user) return;
+    if (!user?.id) {
+      console.log('No authenticated user found, skipping profile fetch');
+      return;
+    }
     
     setProfileLoading(true);
     try {
@@ -159,7 +162,10 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
       setUserProfile(data || null);
     } catch (err: any) {
       console.error('Error fetching profile:', err);
-      setError(err.message);
+      // Don't set error state for missing tables in development
+      if (!err.message?.includes('relation') && !err.message?.includes('does not exist')) {
+        setError(err.message);
+      }
     } finally {
       setProfileLoading(false);
     }
@@ -167,7 +173,10 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
 
   // Fetch user favorites
   const fetchFavorites = async () => {
-    if (!user) return;
+    if (!user?.id) {
+      console.log('No authenticated user found, skipping favorites fetch');
+      return;
+    }
     
     setFavoritesLoading(true);
     try {
@@ -181,7 +190,10 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
       setFavorites(data || []);
     } catch (err: any) {
       console.error('Error fetching favorites:', err);
-      setError(err.message);
+      // Don't set error state for missing tables in development
+      if (!err.message?.includes('relation') && !err.message?.includes('does not exist')) {
+        setError(err.message);
+      }
     } finally {
       setFavoritesLoading(false);
     }
@@ -189,7 +201,10 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
 
   // Fetch user reviews
   const fetchReviews = async () => {
-    if (!user) return;
+    if (!user?.id) {
+      console.log('No authenticated user found, skipping reviews fetch');
+      return;
+    }
     
     try {
       const { data, error } = await supabase
@@ -202,13 +217,19 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
       setReviews(data || []);
     } catch (err: any) {
       console.error('Error fetching reviews:', err);
-      setError(err.message);
+      // Don't set error state for missing tables in development
+      if (!err.message?.includes('relation') && !err.message?.includes('does not exist')) {
+        setError(err.message);
+      }
     }
   };
 
   // Fetch trip history
   const fetchTripHistory = async () => {
-    if (!user) return;
+    if (!user?.id) {
+      console.log('No authenticated user found, skipping trip history fetch');
+      return;
+    }
     
     try {
       const { data, error } = await supabase
@@ -221,13 +242,19 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
       setTripHistory(data || []);
     } catch (err: any) {
       console.error('Error fetching trip history:', err);
-      setError(err.message);
+      // Don't set error state for missing tables in development
+      if (!err.message?.includes('relation') && !err.message?.includes('does not exist')) {
+        setError(err.message);
+      }
     }
   };
 
   // Refresh all user data
   const refreshUserData = async () => {
-    if (!user) return;
+    if (!user?.id) {
+      console.log('No authenticated user found, skipping data refresh');
+      return;
+    }
     
     setLoading(true);
     setError(null);

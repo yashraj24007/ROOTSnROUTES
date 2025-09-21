@@ -66,7 +66,7 @@ const WeatherDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-blue-800 dark:from-purple-700 dark:via-blue-700 dark:to-blue-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
@@ -156,15 +156,15 @@ const WeatherDashboard: React.FC = () => {
 
         {/* Weather Grid/List */}
         {viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
             {filteredDistricts.map((district, index) => (
               <div key={index} className="group">
                 <Card className="h-full transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
                   <CardHeader className="pb-2">
-                    <CardTitle className="flex items-center justify-between text-lg">
+                    <CardTitle className="flex items-center justify-between text-sm">
                       <div>
-                        <h3 className="font-bold">{district.name}</h3>
-                        <p className="text-sm text-muted-foreground font-normal">
+                        <h3 className="font-bold text-sm">{district.name}</h3>
+                        <p className="text-xs text-muted-foreground font-normal">
                           {district.city}
                         </p>
                       </div>

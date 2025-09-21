@@ -185,7 +185,7 @@ const Footer = () => {
               <Link to="/stays" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.homestays')}
               </Link>
-              <Link to="/handicrafts" className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.handicrafts')}
               </Link>
               <Link to="/local-guides" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -220,7 +220,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Feedback & Analytics */}
+          {/* Share Your Experience */}
           <div className="flex-shrink-0">
             <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
               <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">

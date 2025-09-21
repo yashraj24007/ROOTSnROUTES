@@ -14,10 +14,10 @@ const Index = () => {
       <Hero />
       <SectionDivider responsive={true} delay={800} />
       <Destinations />
-      <SectionDivider responsive={true} delay={800} />
-      <Features />
       <SectionDivider responsive={true} delay={600} />
       <Marketplace />
+      <SectionDivider responsive={true} delay={800} />
+      <Features />
       <CTA />
       <Footer />
     </main>

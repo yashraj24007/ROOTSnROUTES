@@ -16,20 +16,6 @@ const Marketplace = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Handicraft categories for filtering
-  const craftCategories = [
-    { id: "all", name: "All Handicrafts", count: 112 },
-    { id: "metal-art", name: "Metal Art & Dokra", count: 15 },
-    { id: "textiles", name: "Textiles & Fabrics", count: 18 },
-    { id: "folk-art", name: "Folk Art & Paintings", count: 12 },
-    { id: "basketry", name: "Basketry & Bamboo", count: 14 },
-    { id: "tribal-art", name: "Tribal Crafts", count: 16 },
-    { id: "pottery", name: "Pottery & Ceramics", count: 8 },
-    { id: "wood-crafts", name: "wood-crafts", count: 11 },
-    { id: "jewelry", name: "Traditional Jewelry", count: 9 },
-    { id: "others", name: "Other Crafts", count: 9 }
-  ];
-
   const handicrafts = [
     {
       name: "Dokra Art Elephant",
@@ -1384,9 +1370,37 @@ const Marketplace = () => {
     }
   ];
 
+  // Helper function to categorize handicrafts
+  const getCategoryGroup = (category) => {
+    const categoryLower = category.toLowerCase();
+    if (categoryLower.includes('metal') || categoryLower.includes('dokra')) return 'metal-art';
+    if (categoryLower.includes('textile') || categoryLower.includes('fabric')) return 'textiles';
+    if (categoryLower.includes('folk') || categoryLower.includes('painting')) return 'folk-art';
+    if (categoryLower.includes('basketry') || categoryLower.includes('bamboo')) return 'basketry';
+    if (categoryLower.includes('tribal')) return 'tribal-art';
+    if (categoryLower.includes('wood') || categoryLower.includes('forest')) return 'wood-crafts';
+    if (categoryLower.includes('religious') || categoryLower.includes('temple')) return 'religious-crafts';
+    if (categoryLower.includes('heritage') || categoryLower.includes('palace') || categoryLower.includes('museum')) return 'heritage-crafts';
+    return 'tribal-art'; // Default to tribal-art for others
+  };
+
+  // Calculate dynamic category counts
+  const craftCategories = [
+    { id: "all", name: "All Handicrafts", count: handicrafts.length },
+    { id: "metal-art", name: "Metal Art & Dokra", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'metal-art').length },
+    { id: "textiles", name: "Textiles & Fabrics", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'textiles').length },
+    { id: "folk-art", name: "Folk Art", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'folk-art').length },
+    { id: "basketry", name: "Basketry & Bamboo", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'basketry').length },
+    { id: "tribal-art", name: "Tribal Crafts", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'tribal-art').length },
+    { id: "wood-crafts", name: "Wood Crafts", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'wood-crafts').length },
+    { id: "religious-crafts", name: "Religious Items", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'religious-crafts').length },
+    { id: "heritage-crafts", name: "Heritage Crafts", count: handicrafts.filter(h => getCategoryGroup(h.category) === 'heritage-crafts').length }
+  ];
+
   // Filter handicrafts based on category and search term
   const filteredHandicrafts = handicrafts.filter(item => {
-    const matchesCategory = selectedCategory === "all" || item.category === selectedCategory;
+    const itemCategory = getCategoryGroup(item.category);
+    const matchesCategory = selectedCategory === "all" || itemCategory === selectedCategory;
     const matchesSearch = searchTerm === "" || 
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.artist.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -1421,32 +1435,37 @@ const Marketplace = () => {
         </div>
       </section>
 
-      {/* Category Navigation */}
+      {/* Clean Category Filter Section */}
       <section className="py-8 bg-background border-b border-border">
         <div className="container mx-auto px-6">
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 text-center">Browse by Craft Category</h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {craftCategories.map((category) => (
-                <Button
-                  key={category.id}
-                  variant={selectedCategory === category.id ? "default" : "outline"}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className="flex items-center gap-2"
-                >
-                  {category.name}
-                  <Badge variant="secondary" className="ml-1">
-                    {selectedCategory === category.id ? filteredHandicrafts.length : category.count}
-                  </Badge>
-                </Button>
-              ))}
-            </div>
+          {/* Category Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            {craftCategories.map((category) => (
+              <Button
+                key={category.id}
+                variant={selectedCategory === category.id ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category.id)}
+                className="flex items-center gap-2"
+              >
+                {category.name}
+                <Badge variant="secondary" className="text-xs">
+                  {selectedCategory === category.id ? filteredHandicrafts.length : category.count}
+                </Badge>
+              </Button>
+            ))}
           </div>
           
-          {/* Results Count */}
-          <div className="text-center text-muted-foreground">
-            Showing {filteredHandicrafts.length} handicrafts
-            {selectedCategory !== "all" && ` in ${craftCategories.find(c => c.id === selectedCategory)?.name}`}
+          {/* Results Summary */}
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              {filteredHandicrafts.length} Handicrafts Available
+            </h2>
+            <p className="text-muted-foreground">
+              {selectedCategory !== "all" 
+                ? `Showing ${craftCategories.find(c => c.id === selectedCategory)?.name} collection`
+                : "Discover authentic handicrafts from local artisans across Jharkhand"
+              }
+            </p>
           </div>
         </div>
       </section>

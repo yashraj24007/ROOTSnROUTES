@@ -110,7 +110,7 @@ const Weather = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-900 dark:to-slate-800">
       <Header />
       <motion.main 
         className="container mx-auto px-6 py-24"
@@ -220,9 +220,9 @@ const Weather = () => {
           {/* Weather Grid */}
           {filteredDistricts.length > 0 && (
             <motion.div 
-              className={`grid gap-6 mb-12 ${
+              className={`grid gap-4 mb-12 ${
                 viewMode === 'grid' 
-                  ? 'md:grid-cols-2 xl:grid-cols-3' 
+                  ? 'md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3' 
                   : 'grid-cols-1'
               }`}
               variants={shouldReduceMotion ? {} : containerVariants}
@@ -238,13 +238,13 @@ const Weather = () => {
                   custom={index}
                 >
                   <Card className="overflow-hidden h-full">
-                    <CardHeader className="pb-3">
+                    <CardHeader className="pb-2">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <MapPin className="h-4 w-4 text-primary" />
+                          <MapPin className="h-3 w-3 text-primary" />
                           <div>
-                            <CardTitle className="text-lg">{district.name}</CardTitle>
-                            <p className="text-sm text-muted-foreground">
+                            <CardTitle className="text-sm">{district.name}</CardTitle>
+                            <p className="text-xs text-muted-foreground">
                               {district.city}, Jharkhand
                             </p>
                           </div>

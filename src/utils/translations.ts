@@ -180,6 +180,8 @@ export const translations = {
       subtitle: 'Connect with local artisans and experience authentic homestays',
       homestaysTitle: 'Cozy Homestays',
       handicraftsTitle: 'Authentic Handicrafts',
+      viewAll: 'View All',
+      buyNow: 'Buy Now',
       homestays: {
         birsaMunda: {
           name: 'Birsa Munda Eco Retreat',
@@ -425,6 +427,35 @@ export const translations = {
       description: 'हमारे AI-संचालित ट्रैवल प्लेटफॉर्म के माध्यम से प्रामाणिक गांव जीवन का अनुभव करें',
       exploreButton: 'गंतव्य खोजें',
       bookButton: 'अनुभव बुक करें'
+    },
+
+    // MARKETPLACE SECTION (स्थानीय बाज़ार)
+    marketplace: {
+      title: 'स्थानीय बाज़ार',
+      subtitle: 'स्थानीय कारीगरों से जुड़ें और प्रामाणिक होमस्टे का अनुभव करें',
+      homestaysTitle: 'आरामदायक होमस्टे',
+      handicraftsTitle: 'प्रामाणिक हस्तशिल्प',
+      viewAll: 'सभी देखें',
+      buyNow: 'अभी खरीदें',
+      homestays: {
+        birsaMunda: {
+          name: 'बिरसा मुंडा इको रिट्रीट',
+          location: 'नेतरहाट, लातेहार',
+          price: '₹2500/रात'
+        },
+        santhalHeritage: {
+          name: 'संथाल हेरिटेज होम',
+          location: 'दुमका, संथाल परगना',
+          price: '₹1800/रात'
+        }
+      },
+      handicrafts: {
+        dokraElephant: {
+          name: 'डोकरा कला हाथी',
+          artist: 'सुनील महतो द्वारा',
+          price: '₹2850'
+        }
+      }
     },
 
     features: {

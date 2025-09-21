@@ -71,28 +71,28 @@ export const useDeviceDimensions = () => {
         padding: '1rem',
         gap: '0.75rem',
         fontSize: '0.875rem',
-        titleSize: '1.25rem',
+        titleSize: '1.1rem',
         iconSize: '1rem'
       };
     }
     if (isTablet) {
       return {
-        width: 'calc(50% - 0.5rem)',
+        width: '100%',
         height: 'auto',
         padding: '1.25rem',
         gap: '1rem',
-        fontSize: '1rem',
-        titleSize: '1.5rem',
+        fontSize: '0.95rem',
+        titleSize: '1.3rem',
         iconSize: '1.25rem'
       };
     }
     return {
-      width: 'calc(33.333% - 0.667rem)',
+      width: '100%',
       height: 'auto',
       padding: '1.5rem',
       gap: '1.25rem',
       fontSize: '1rem',
-      titleSize: '1.75rem',
+      titleSize: '1.4rem',
       iconSize: '1.5rem'
     };
   };
@@ -133,7 +133,7 @@ export const useDeviceDimensions = () => {
       return {
         columns: 1,
         gap: '1rem',
-        itemMinWidth: '100%'
+        itemMinWidth: '280px'
       };
     }
     if (isTablet) {
@@ -146,7 +146,7 @@ export const useDeviceDimensions = () => {
     return {
       columns: 3,
       gap: '2rem',
-      itemMinWidth: '350px'
+      itemMinWidth: '320px'
     };
   };
 

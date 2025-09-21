@@ -65,11 +65,14 @@ const App = () => {
         <LanguageProvider>
           <AuthProvider>
             <UserPreferencesProvider>
-              <Router>
+              <Router 
+                future={{
+                  v7_startTransition: true,
+                  v7_relativeSplatPath: true
+                }}
+              >
                 <RedirectHandler />
-                <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-                  <Header />
-                <main className="flex-1">
+                <div className="flex flex-col bg-background text-foreground transition-colors duration-300 overflow-x-hidden">
                   <Suspense fallback={<Loading />}>
                     <Routes>
                       <Route path="/" element={<Index />} />
@@ -114,8 +117,7 @@ const App = () => {
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Suspense>
-                </main>
-              </div>
+                </div>
             </Router>
             <Toaster />
           </UserPreferencesProvider>

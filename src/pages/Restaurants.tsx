@@ -23,22 +23,38 @@ const Restaurants = () => {
   const { t } = useLanguage();
   const [selectedDistrict, setSelectedDistrict] = useState("all");
   const [selectedCuisine, setSelectedCuisine] = useState("all");
+  const [selectedRating, setSelectedRating] = useState("all");
+  const [selectedPrice, setSelectedPrice] = useState("all");
+  const [includeHidden, setIncludeHidden] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // District-based filtering (Primary)
+  // All 24 Districts of Jharkhand for filtering
   const districts = [
     { id: "all", name: "All Districts", count: 63 },
     { id: "ranchi", name: "Ranchi", count: 8 },
     { id: "jamshedpur", name: "Jamshedpur", count: 6 },
     { id: "dhanbad", name: "Dhanbad", count: 5 },
+    { id: "bokaro", name: "Bokaro", count: 2 },
     { id: "dumka", name: "Dumka", count: 4 },
+    { id: "deoghar", name: "Deoghar", count: 3 },
     { id: "palamu", name: "Palamu", count: 4 },
     { id: "hazaribagh", name: "Hazaribagh", count: 4 },
-    { id: "deoghar", name: "Deoghar", count: 3 },
-    { id: "khunti", name: "Khunti", count: 3 },
-    { id: "pakur", name: "Pakur", count: 3 },
+    { id: "giridih", name: "Giridih", count: 2 },
     { id: "ramgarh", name: "Ramgarh", count: 3 },
-    { id: "others", name: "Other Districts", count: 20 }
+    { id: "west-singhbhum", name: "West Singhbhum", count: 2 },
+    { id: "seraikela-kharsawan", name: "Seraikela-Kharsawan", count: 2 },
+    { id: "latehar", name: "Latehar", count: 1 },
+    { id: "garhwa", name: "Garhwa", count: 2 },
+    { id: "chatra", name: "Chatra", count: 2 },
+    { id: "koderma", name: "Koderma", count: 2 },
+    { id: "jamtara", name: "Jamtara", count: 2 },
+    { id: "pakur", name: "Pakur", count: 3 },
+    { id: "godda", name: "Godda", count: 2 },
+    { id: "sahebganj", name: "Sahebganj", count: 1 },
+    { id: "lohardaga", name: "Lohardaga", count: 1 },
+    { id: "gumla", name: "Gumla", count: 2 },
+    { id: "simdega", name: "Simdega", count: 1 },
+    { id: "khunti", name: "Khunti", count: 3 }
   ];
 
   // Cuisine types (Secondary)
@@ -51,6 +67,24 @@ const Restaurants = () => {
     { id: "fast-food", name: "Fast Food", count: 6 },
     { id: "eco-friendly", name: "Eco-Friendly", count: 4 },
     { id: "others", name: "Other Cuisines", count: 8 }
+  ];
+
+  // Rating filters
+  const ratingFilters = [
+    { id: "all", name: "All Ratings", count: 63 },
+    { id: "4.5", name: "4.5+ Stars", count: 15 },
+    { id: "4.0", name: "4.0+ Stars", count: 28 },
+    { id: "3.5", name: "3.5+ Stars", count: 45 },
+    { id: "3.0", name: "3.0+ Stars", count: 58 }
+  ];
+
+  // Price range filters  
+  const priceFilters = [
+    { id: "all", name: "All Prices", count: 63 },
+    { id: "₹", name: "Budget (₹)", count: 18 },
+    { id: "₹₹", name: "Mid-range (₹₹)", count: 25 },
+    { id: "₹₹₹", name: "Premium (₹₹₹)", count: 15 },
+    { id: "₹₹₹₹", name: "Luxury (₹₹₹₹)", count: 5 }
   ];
 
   // All restaurants from across Jharkhand districts
@@ -904,18 +938,24 @@ const Restaurants = () => {
     }
   ];
 
-  // Filter restaurants based on district, cuisine, and search term
+  // Filter restaurants based on district, cuisine, rating, price, and search term
   const filteredRestaurants = allRestaurants.filter(restaurant => {
     const matchesDistrict = selectedDistrict === "all" || 
-      (selectedDistrict === "others" ? 
-        !["ranchi", "jamshedpur", "dhanbad", "dumka", "palamu", "hazaribagh", "deoghar", "khunti", "pakur", "ramgarh"].some(district => 
-          restaurant.location.toLowerCase().includes(district)
-        ) :
+      (selectedDistrict === "west-singhbhum" ? 
+        (restaurant.location.toLowerCase().includes("west singhbhum") || restaurant.location.toLowerCase().includes("chaibasa")) :
+        selectedDistrict === "seraikela-kharsawan" ?
+        restaurant.location.toLowerCase().includes("seraikela") :
         restaurant.location.toLowerCase().includes(selectedDistrict)
       );
     
     const matchesCuisine = selectedCuisine === "all" || 
       restaurant.cuisine.toLowerCase().replace(/[^a-z]/g, '').includes(selectedCuisine.replace('-', '').toLowerCase());
+    
+    const matchesRating = selectedRating === "all" || 
+      restaurant.rating >= parseFloat(selectedRating);
+      
+    const matchesPrice = selectedPrice === "all" || 
+      restaurant.price === selectedPrice;
     
     const matchesSearch = searchTerm === "" || 
       restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -923,11 +963,11 @@ const Restaurants = () => {
       restaurant.cuisine.toLowerCase().includes(searchTerm.toLowerCase()) ||
       restaurant.specialty.toLowerCase().includes(searchTerm.toLowerCase());
 
-    return matchesDistrict && matchesCuisine && matchesSearch;
+    return matchesDistrict && matchesCuisine && matchesRating && matchesPrice && matchesSearch;
   });
 
   return (
-    <main>
+    <>
       <Header />
       
       {/* Hero Section */}
@@ -956,76 +996,160 @@ const Restaurants = () => {
         </div>
       </section>
 
-      {/* Filters Section */}
-      <section className="py-8 bg-background border-b border-border">
+      {/* Advanced Filtering Section */}
+      <section className="py-8 bg-black border-b border-gray-800">
         <div className="container mx-auto px-6">
           {/* Search Bar */}
           <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 type="text"
                 placeholder="Search restaurants by name, location, or cuisine..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 h-12 text-lg"
+                className="pl-10 h-12 text-lg bg-gray-900 border-gray-700 text-white placeholder-gray-400"
               />
             </div>
           </div>
 
-          {/* District Filter (Primary) */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-primary" />
-              Select District / Area
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {districts.map((district) => (
-                <Button
-                  key={district.id}
-                  variant={selectedDistrict === district.id ? "default" : "outline"}
-                  onClick={() => setSelectedDistrict(district.id)}
-                  className="flex items-center gap-2"
-                  disabled={district.count === 0}
-                >
-                  {district.name}
-                  <Badge variant="secondary" className="ml-1">
-                    {district.count}
-                  </Badge>
-                </Button>
-              ))}
+          {/* Dropdown Filters Row */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+            {/* Filters Label */}
+            <div className="flex items-center gap-2 text-gray-400">
+              <Filter className="h-5 w-5" />
+              <span className="text-sm font-medium">Filters:</span>
             </div>
-          </div>
 
-          {/* Cuisine Type Filter (Secondary) */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <UtensilsCrossed className="h-5 w-5 text-primary" />
-              Cuisine Type
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {cuisineTypes.map((cuisine) => (
-                <Button
-                  key={cuisine.id}
-                  variant={selectedCuisine === cuisine.id ? "default" : "outline"}
-                  onClick={() => setSelectedCuisine(cuisine.id)}
-                  className="flex items-center gap-2"
-                  disabled={cuisine.count === 0}
-                >
-                  {cuisine.name}
-                  <Badge variant="secondary" className="ml-1">
-                    {cuisine.count}
-                  </Badge>
-                </Button>
-              ))}
-            </div>
+            {/* District Filter Dropdown */}
+            <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Districts" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Districts</SelectItem>
+                {districts.filter(d => d.id !== "all").map((district) => (
+                  <SelectItem key={district.id} value={district.id}>
+                    {district.name} ({district.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Cuisine Filter Dropdown */}
+            <Select value={selectedCuisine} onValueChange={setSelectedCuisine}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Cuisines" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Cuisines</SelectItem>
+                {cuisineTypes.filter(c => c.id !== "all").map((cuisine) => (
+                  <SelectItem key={cuisine.id} value={cuisine.id}>
+                    {cuisine.name} ({cuisine.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Rating Filter Dropdown */}
+            <Select value={selectedRating} onValueChange={setSelectedRating}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Ratings" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Ratings</SelectItem>
+                {ratingFilters.filter(r => r.id !== "all").map((rating) => (
+                  <SelectItem key={rating.id} value={rating.id}>
+                    {rating.name} ({rating.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Price Filter Dropdown */}
+            <Select value={selectedPrice} onValueChange={setSelectedPrice}>
+              <SelectTrigger className="w-48 bg-gray-900 border-gray-700 text-white">
+                <SelectValue placeholder="All Prices" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 border-gray-700">
+                <SelectItem value="all">All Prices</SelectItem>
+                {priceFilters.filter(p => p.id !== "all").map((price) => (
+                  <SelectItem key={price.id} value={price.id}>
+                    {price.name} ({price.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Include Hidden Toggle */}
+            <Button
+              variant={includeHidden ? "default" : "outline"}
+              onClick={() => setIncludeHidden(!includeHidden)}
+              className="flex items-center gap-2 border-gray-700 text-white"
+            >
+              <Filter className="h-4 w-4" />
+              Include Hidden
+            </Button>
           </div>
 
           {/* Results Count */}
-          <div className="text-center text-muted-foreground">
+          <div className="text-center text-gray-400 text-sm">
             Showing {filteredRestaurants.length} restaurants
             {selectedDistrict !== "all" && ` in ${districts.find(d => d.id === selectedDistrict)?.name}`}
             {selectedCuisine !== "all" && ` • ${cuisineTypes.find(c => c.id === selectedCuisine)?.name}`}
+            {selectedRating !== "all" && ` • ${ratingFilters.find(r => r.id === selectedRating)?.name}`}
+            {selectedPrice !== "all" && ` • ${priceFilters.find(p => p.id === selectedPrice)?.name}`}
+            {includeHidden && ` • Including Hidden`}
+          </div>
+        </div>
+      </section>
+
+      {/* Category Filter Buttons Section */}
+      <section className="py-6 bg-gray-900 border-b border-gray-700">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Button
+              variant={selectedCuisine === "all" ? "default" : "outline"}
+              onClick={() => setSelectedCuisine("all")}
+              className="bg-green-600 hover:bg-green-700 text-white border-0 rounded-full px-6"
+            >
+              All Restaurants <Badge variant="secondary" className="ml-2">{allRestaurants.length}</Badge>
+            </Button>
+            <Button
+              variant={selectedCuisine === "tribal" ? "default" : "outline"}
+              onClick={() => setSelectedCuisine("tribal")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Tribal Cuisine <Badge variant="secondary" className="ml-2">{cuisineTypes.find(c => c.id === "tribal")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedCuisine === "traditional" ? "default" : "outline"}
+              onClick={() => setSelectedCuisine("traditional")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Traditional <Badge variant="secondary" className="ml-2">{cuisineTypes.find(c => c.id === "traditional")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedCuisine === "north-indian" ? "default" : "outline"}
+              onClick={() => setSelectedCuisine("north-indian")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              North Indian <Badge variant="secondary" className="ml-2">{cuisineTypes.find(c => c.id === "north-indian")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedCuisine === "multi-cuisine" ? "default" : "outline"}
+              onClick={() => setSelectedCuisine("multi-cuisine")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Multi-Cuisine <Badge variant="secondary" className="ml-2">{cuisineTypes.find(c => c.id === "multi-cuisine")?.count || 0}</Badge>
+            </Button>
+            <Button
+              variant={selectedCuisine === "fast-food" ? "default" : "outline"}
+              onClick={() => setSelectedCuisine("fast-food")}
+              className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600 rounded-full px-6"
+            >
+              Fast Food <Badge variant="secondary" className="ml-2">{cuisineTypes.find(c => c.id === "fast-food")?.count || 0}</Badge>
+            </Button>
           </div>
         </div>
       </section>
@@ -1188,7 +1312,7 @@ const Restaurants = () => {
       </section>
 
       <Footer />
-    </main>
+    </>
   );
 };
 
