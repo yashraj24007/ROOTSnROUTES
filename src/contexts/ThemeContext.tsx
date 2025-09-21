@@ -16,7 +16,7 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
-    // Check localStorage first, then system preference
+    // Check localStorage first, then system preference, default to dark
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('theme') as Theme;
       if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
@@ -24,11 +24,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       }
       
       // Check system preference
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
+      if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
       }
     }
-    return 'light';
+    // Default to dark theme instead of light
+    return 'dark';
   });
 
   useEffect(() => {
@@ -46,10 +47,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
     const handleChange = (e: MediaQueryListEvent) => {
       if (!localStorage.getItem('theme')) {
-        setThemeState(e.matches ? 'dark' : 'light');
+        // If system prefers light, use light; otherwise use dark (default)
+        setThemeState(e.matches ? 'light' : 'dark');
       }
     };
 
