@@ -16,19 +16,31 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
-    // Check localStorage first, then system preference, default to dark
+    // Theme version for cache busting
+    const THEME_VERSION = '2.0';
+    
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme') as Theme;
-      if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
-        return savedTheme;
+      const currentVersion = localStorage.getItem('theme_version');
+      
+      // If this is a new version, clear old theme preference
+      if (currentVersion !== THEME_VERSION) {
+        localStorage.removeItem('theme');
+        localStorage.setItem('theme_version', THEME_VERSION);
       }
       
-      // Check system preference
+      const savedTheme = localStorage.getItem('theme') as Theme;
+      
+      // Check if user explicitly set light mode (respect their choice)
+      if (savedTheme === 'light') {
+        return 'light';
+      }
+      
+      // Check system preference for light mode
       if (window.matchMedia('(prefers-color-scheme: light)').matches) {
         return 'light';
       }
     }
-    // Default to dark theme instead of light
+    // Default to dark theme for all other cases
     return 'dark';
   });
 
