@@ -5,6 +5,7 @@ import { Toaster } from './components/ui/toaster';
 import Loading from './components/Loading';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import AIChatbot from './components/AIChatbot';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -79,6 +80,7 @@ const App = () => {
                   v7_relativeSplatPath: true
                 }}
               >
+                <ScrollToTop />
                 <RedirectHandler />
                 <div className="flex flex-col bg-background text-foreground transition-colors duration-300 overflow-x-hidden">
                   <Suspense fallback={<Loading />}>
