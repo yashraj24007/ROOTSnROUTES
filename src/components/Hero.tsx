@@ -33,7 +33,18 @@ const Hero = () => {
             
             {/* Hero Headline */}
             <div className="mb-8">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-2xl animate-fade-in-up">
+              <h1 className="mb-6 leading-tight animate-fade-in-up" style={{
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 'bold',
+                fontSize: 'clamp(3rem, 8vw, 4.5rem)',
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #00BFFF 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
+                letterSpacing: '-0.02em',
+                lineHeight: '1.1'
+              }}>
                 Discover Hidden Gems of Jharkhand
               </h1>
               

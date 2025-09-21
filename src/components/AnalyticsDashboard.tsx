@@ -90,14 +90,14 @@ const generateRealtimeVisitorData = (): VisitorData => {
   else if (hour >= 18 && hour <= 21) baseVisitors = 90;
   else if (hour >= 22 || hour <= 6) baseVisitors = 20;
   
-  const randomVariation = Math.random() * 40 - 20; // ±20 variation
+  const randomVariation = Math.random() * 20 - 10; // ±10 variation (reduced from 20)
   const visitors = Math.max(0, Math.floor(baseVisitors + randomVariation));
   
   return {
     timestamp: now,
     visitors,
-    revenue: visitors * (2500 + Math.random() * 1000), // ₹2500-3500 per visitor
-    onlineUsers: Math.floor(visitors * 0.3 + Math.random() * 20) // 30% online + variation
+    revenue: visitors * (2800 + Math.random() * 400), // ₹2800-3200 per visitor (more stable)
+    onlineUsers: Math.floor(visitors * 0.3 + Math.random() * 10) // 30% online + smaller variation
   };
 };
 
@@ -112,13 +112,13 @@ const generateLiveDistrictData = (): DistrictMetrics[] => {
   ];
 
   return districts.map(district => {
-    const variation = (Math.random() - 0.5) * 0.3; // ±15% variation
+    const variation = (Math.random() - 0.5) * 0.1; // ±5% variation (reduced from 15%)
     const visitors = Math.floor(district.baseVisitors * (1 + variation));
-    const growth = (Math.random() - 0.5) * 30; // ±15% growth
+    const growth = (Math.random() - 0.5) * 10; // ±5% growth (reduced from 15%)
     
     let status: 'trending_up' | 'trending_down' | 'stable' = 'stable';
-    if (growth > 5) status = 'trending_up';
-    else if (growth < -5) status = 'trending_down';
+    if (growth > 3) status = 'trending_up';
+    else if (growth < -3) status = 'trending_down';
     
     return {
       district: district.name,
@@ -204,22 +204,22 @@ const AnalyticsDashboardRealtime: React.FC = () => {
       setLiveAttractions(newAttractionData);
       
       // Calculate live metrics
-      const totalVisitors = visitorHistory.reduce((sum, data) => sum + data.visitors, 0) + newVisitorData.visitors;
-      const totalRevenue = visitorHistory.reduce((sum, data) => sum + data.revenue, 0) + newVisitorData.revenue;
-      const avgRating = newAttractionData.reduce((sum, attr) => sum + attr.rating, 0) / newAttractionData.length;
-      const todayBookings = newAttractionData.reduce((sum, attr) => sum + attr.bookings, 0);
-      const previousHourVisitors = visitorHistory[visitorHistory.length - 2]?.visitors || newVisitorData.visitors;
-      const realtimeGrowth = previousHourVisitors > 0 ? 
-        ((newVisitorData.visitors - previousHourVisitors) / previousHourVisitors * 100) : 0;
-      
-      setLiveMetrics({
-        totalVisitors,
-        totalRevenue,
-        avgRating: Number(avgRating.toFixed(1)),
-        activeDistricts: 24,
-        currentOnlineUsers: newVisitorData.onlineUsers,
-        todayBookings,
-        realtimeGrowth: Number(realtimeGrowth.toFixed(1))
+      setLiveMetrics(prev => {
+        const todayBookings = newAttractionData.reduce((sum, attr) => sum + attr.bookings, 0);
+        const avgRating = newAttractionData.reduce((sum, attr) => sum + attr.rating, 0) / newAttractionData.length;
+        const realtimeGrowth = prev.currentOnlineUsers > 0 ? 
+          ((newVisitorData.onlineUsers - prev.currentOnlineUsers) / prev.currentOnlineUsers * 100) : 0;
+        
+        return {
+          ...prev,
+          totalVisitors: prev.totalVisitors + newVisitorData.visitors,
+          totalRevenue: prev.totalRevenue + newVisitorData.revenue,
+          avgRating: Number(avgRating.toFixed(1)),
+          activeDistricts: 24,
+          currentOnlineUsers: newVisitorData.onlineUsers,
+          todayBookings,
+          realtimeGrowth: Number(realtimeGrowth.toFixed(1))
+        };
       });
       
       setLastUpdated(new Date());
@@ -228,26 +228,26 @@ const AnalyticsDashboardRealtime: React.FC = () => {
       console.error('Real-time update failed:', error);
       setIsConnected(false);
     }
-  }, [visitorHistory]);
+  }, []); // Remove visitorHistory dependency to prevent constant recreation
 
   // Initialize and setup real-time updates
   useEffect(() => {
     // Initial data load
     updateRealtimeData();
     
-    // Set up real-time updates every 30 seconds
-    const interval = setInterval(updateRealtimeData, 30000);
+    // Set up real-time updates every 2 minutes (more realistic for tourism data)
+    const interval = setInterval(updateRealtimeData, 120000); // 2 minutes instead of 30 seconds
     
-    // Simulate network connectivity check
+    // Simulate network connectivity check every 5 minutes
     const connectivityCheck = setInterval(() => {
-      setIsConnected(Math.random() > 0.05); // 95% uptime simulation
-    }, 60000);
+      setIsConnected(Math.random() > 0.02); // 98% uptime simulation
+    }, 300000);
     
     return () => {
       clearInterval(interval);
       clearInterval(connectivityCheck);
     };
-  }, [updateRealtimeData]);
+  }, []); // Remove updateRealtimeData dependency
 
   const refreshData = async () => {
     setIsLoading(true);
@@ -420,7 +420,7 @@ const AnalyticsDashboardRealtime: React.FC = () => {
                 Real-time Visitor Flow
               </CardTitle>
               <CardDescription>
-                Live visitor count updates every 30 seconds
+                Live visitor count updates every 2 minutes
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -631,7 +631,7 @@ const AnalyticsDashboardRealtime: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Update Frequency</span>
-                    <span className="text-blue-600">30s</span>
+                    <span className="text-blue-600">2 min</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Data Points</span>
