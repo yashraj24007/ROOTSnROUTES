@@ -190,10 +190,14 @@ const FloatingChatbot: React.FC = () => {
       <div className="fixed bottom-6 right-6 z-[9999]">
         <Button
           onClick={() => setIsOpen(true)}
-          className="w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-2xl border-0 transition-all duration-300 hover:scale-110"
+          className="w-16 h-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-2xl border-0 transition-all duration-300 hover:scale-110 group animate-bounce hover:animate-none"
           aria-label="Open Jharkhand Travel Assistant"
+          style={{ animationDuration: '2s' }}
         >
-          <MessageSquare className="w-6 h-6" />
+          <div className="relative">
+            <Bot className="w-8 h-8 group-hover:scale-110 transition-transform duration-200" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+          </div>
         </Button>
       </div>
     );
@@ -204,14 +208,11 @@ const FloatingChatbot: React.FC = () => {
       <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-2xl border-2 border-emerald-200 transition-all duration-300 ${
         isMinimized ? 'h-14' : 'h-[500px] max-h-[calc(100vh-8rem)]'
       }`}>
-        <Card className={`w-full shadow-2xl border-2 border-emerald-200 transition-all duration-300 ${
-          isMinimized ? 'h-14' : 'h-[500px]'
-        }`}>
-        <CardHeader className="p-3 border-b bg-emerald-600 text-white rounded-t-lg">
+        <CardHeader className="p-3 border-b bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-sm font-medium">
-              <Bot className="w-4 h-4" />
-              Jharkhand Travel Assistant
+              <Bot className="w-5 h-5 animate-pulse" />
+              🤖 Jharkhand AI Guide
             </CardTitle>
             <div className="flex gap-1">
               <Button
