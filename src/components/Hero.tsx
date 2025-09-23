@@ -15,7 +15,13 @@ const Hero = () => {
   }, []);
   
   return (
-    <section className="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      className="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden"
+      style={{ 
+        paddingTop: 'calc(var(--dev-notice-height, 0px) + 72px)',
+        minHeight: 'calc(100vh - var(--dev-notice-height, 0px))'
+      }}
+    >
       {/* Fullscreen Animated Background with Waterfall/Forest */}
       <VideoBackground
         videoSrc="/videos/hero_section.mp4.mp4"
@@ -30,8 +36,8 @@ const Hero = () => {
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10" />
         
-        <div className="relative z-20 min-h-screen flex items-center justify-center px-4 py-12">
-          <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ease-out mt-8 md:mt-12 ${
+        <div className="relative z-20 min-h-[calc(100vh-140px)] flex items-center justify-center px-4 py-6 md:py-12">
+          <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             

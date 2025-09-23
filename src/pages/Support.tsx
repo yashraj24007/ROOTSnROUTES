@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import DevelopmentNotice from "@/components/DevelopmentNotice";
 import EmergencyDialer from "@/components/EmergencyDialer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -69,6 +70,7 @@ const Support = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <DevelopmentNotice />
       <Header />
       
       {/* Hero Section */}

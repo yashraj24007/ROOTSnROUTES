@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import DevelopmentNotice from "@/components/DevelopmentNotice";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -1990,6 +1991,7 @@ const Marketplace = () => {
 
   return (
     <main>
+      <DevelopmentNotice />
       <Header />
       
       {/* Hero Section */}

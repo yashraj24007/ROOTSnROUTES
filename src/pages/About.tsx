@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import DevelopmentNotice from "@/components/DevelopmentNotice";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TeamMember from "@/components/TeamMember";
@@ -152,11 +153,16 @@ const About = () => {
 
   return (
     <main>
+      <DevelopmentNotice />
       <Header />
       
       {/* Hero Section */}
       <motion.section 
-        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        style={{ 
+          paddingTop: 'calc(var(--dev-notice-height, 0px) + 80px)',
+          minHeight: 'calc(100vh - var(--dev-notice-height, 0px))'
+        }}
         initial="hidden"
         animate="visible"
         variants={shouldReduceMotion ? {} : containerVariants}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import DevelopmentNotice from "@/components/DevelopmentNotice";
 import WeatherSafetyWidget from "@/components/WeatherSafetyWidget";
 import { useLanguage } from "@/hooks/useLanguage";
 import { motion, useReducedMotion } from "framer-motion";
@@ -111,6 +112,7 @@ const Weather = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-900 dark:to-slate-800">
+      <DevelopmentNotice />
       <Header />
       <motion.main 
         className="container mx-auto px-6 py-24"

@@ -6,10 +6,12 @@ import Marketplace from "@/components/Marketplace";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import SectionDivider from "@/components/SectionDivider";
+import DevelopmentNotice from "@/components/DevelopmentNotice";
 
 const Index = () => {
   return (
     <main>
+      <DevelopmentNotice />
       <Header />
       <Hero />
       <SectionDivider responsive={true} delay={800} />

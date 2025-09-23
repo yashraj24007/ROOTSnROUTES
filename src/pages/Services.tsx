@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import DevelopmentNotice from "@/components/DevelopmentNotice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Calendar, Car, Users, Camera, Mountain, Shield, Phone } from "lucide-react";
@@ -60,6 +61,7 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <DevelopmentNotice />
       <Header />
       
       {/* Hero Section */}

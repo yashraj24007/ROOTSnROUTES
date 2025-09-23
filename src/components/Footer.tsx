@@ -122,11 +122,11 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-subtle border-t border-border">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-6">
         {/* Single Row Layout */}
-        <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
+        <div className="flex flex-wrap items-start justify-between gap-6 mb-6">
           {/* Brand Section */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 max-w-xs">
             <div className="flex items-center space-x-3 mb-4">
               <img 
                 src="/logo.png" 
@@ -143,7 +143,7 @@ const Footer = () => {
               />
               <span className="text-xl font-bold text-foreground">ROOTSnROUTES</span>
             </div>
-            <p className="text-muted-foreground mb-4 leading-relaxed max-w-xs">
+            <p className="text-muted-foreground mb-4 leading-relaxed">
               {t('footer.tagline')}
             </p>
             <div className="space-y-2">
@@ -160,7 +160,7 @@ const Footer = () => {
 
           {/* Explore Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
+            <h4 className="text-lg font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent">
                 {t('footer.explore')}
               </span>
@@ -183,7 +183,7 @@ const Footer = () => {
 
           {/* Services Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
+            <h4 className="text-lg font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                 {t('footer.services')}
               </span>
@@ -206,7 +206,7 @@ const Footer = () => {
 
           {/* AI Services Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
+            <h4 className="text-lg font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-violet-500 to-purple-600 bg-clip-text text-transparent">
                 AI Services
               </span>
@@ -229,7 +229,7 @@ const Footer = () => {
 
           {/* Support Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
+            <h4 className="text-lg font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
                 {t('footer.support')}
               </span>
@@ -250,36 +250,33 @@ const Footer = () => {
               <Link to="/privacy-policy" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.privacyPolicy')}
               </Link>
-              <Link to="/terms-of-service" className="block text-muted-foreground hover:text-primary transition-colors">
-                {t('footer.termsOfService')}
-              </Link>
             </div>
           </div>
         </div>
 
-        {/* Stay Connected Section */}
-        <div className="border-t border-border pt-6">
-          <div className="text-center mb-4">
-            <h4 className="text-2xl font-bold text-foreground mb-2">Stay Connected</h4>
-            <p className="text-muted-foreground mb-4">
-              Subscribe to our newsletter and follow us on social media for the latest updates
+        {/* Newsletter & Social Media Section */}
+        <div className="border-t border-border pt-6 pb-4">
+          <div className="text-center">
+            <h4 className="text-xl font-bold text-foreground mb-3">Stay Connected</h4>
+            <p className="text-muted-foreground mb-4 max-w-xl mx-auto">
+              Subscribe for travel updates and exclusive offers from Jharkhand.
             </p>
             
             {/* Newsletter Signup */}
-            <div className="flex justify-center mb-4">
-              <form onSubmit={handleSubscribe} className="flex gap-4 w-full max-w-md">
+            <div className="flex justify-center mb-6">
+              <form onSubmit={handleSubscribe} className="flex gap-3 w-full max-w-md">
                 <Input
                   type="email"
                   placeholder={t('footer.emailPlaceholder')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-card border-border focus:border-primary"
+                  className="bg-card border-border focus:border-primary flex-1"
                   required
                 />
                 <Button 
                   type="submit" 
                   variant="default" 
-                  className="px-6 bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600"
+                  className="px-4 bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600"
                   disabled={isSubscribing}
                 >
                   {isSubscribing ? "..." : t('footer.subscribe')}
@@ -296,7 +293,7 @@ const Footer = () => {
                 className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
                 aria-label="Follow us on Facebook"
               >
-                <Facebook className="w-6 h-6 text-muted-foreground group-hover:text-blue-600 transition-colors" />
+                <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-blue-600 transition-colors" />
               </a>
               <a 
                 href="#youtube" 
@@ -305,7 +302,7 @@ const Footer = () => {
                 className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
                 aria-label="Follow us on YouTube"
               >
-                <Youtube className="w-6 h-6 text-muted-foreground group-hover:text-red-600 transition-colors" />
+                <Youtube className="w-5 h-5 text-muted-foreground group-hover:text-red-600 transition-colors" />
               </a>
               <a 
                 href="#instagram" 
@@ -314,14 +311,14 @@ const Footer = () => {
                 className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
                 aria-label="Follow us on Instagram"
               >
-                <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-pink-600 transition-colors" />
+                <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-pink-600 transition-colors" />
               </a>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-border mt-6 pt-4 text-center">
+        <div className="border-t border-border pt-4 text-center">
           <p className="text-muted-foreground">
             {t('footer.copyright')}
           </p>

@@ -131,7 +131,8 @@ const Header = () => {
       </div>
 
       <header 
-        className="fixed top-0 left-0 right-0 z-50 nav-brand border-b border-border/50 transition-all duration-300 min-h-[64px] md:min-h-[72px]"
+        className="fixed left-0 right-0 z-40 nav-brand border-b border-border/50 transition-all duration-300 min-h-[64px] md:min-h-[72px]"
+        style={{ top: 'var(--dev-notice-height, 0px)' }}
         role="banner"
         aria-label="Main navigation"
       >
