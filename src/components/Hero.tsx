@@ -2,7 +2,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import VideoBackground from "@/components/VideoBackground";
-import jharkhandHero from "@/assets/jharkhand-hero.jpg";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -17,8 +16,7 @@ const Hero = () => {
     <section className="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden">
       {/* Fullscreen Animated Background with Waterfall/Forest */}
       <VideoBackground
-        videoSrc="https://videos.pexels.com/video-files/6985066/6985066-uhd_2732_1440_25fps.mp4"
-        fallbackImage={jharkhandHero}
+        videoSrc="/videos/hero_section.mp4.mp4"
         className="absolute inset-0 w-full h-full"
         autoPlay={true}
         muted={true}
@@ -35,15 +33,13 @@ const Hero = () => {
             <div className="mb-8">
               <h1 className="mb-6 leading-tight animate-fade-in-up" style={{
                 fontFamily: 'Poppins, sans-serif',
-                fontWeight: 'bold',
+                fontWeight: '700',
                 fontSize: 'clamp(3rem, 8vw, 4.5rem)',
-                background: 'linear-gradient(135deg, #FFFFFF 0%, #00BFFF 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
+                color: '#FFFFFF',
+                textShadow: '0px 2px 8px rgba(0, 0, 0, 0.5), 0px 4px 16px rgba(0, 0, 0, 0.3)',
                 letterSpacing: '-0.02em',
-                lineHeight: '1.1'
+                lineHeight: '1.1',
+                filter: 'drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.2))'
               }}>
                 Discover Hidden Gems of Jharkhand
               </h1>
