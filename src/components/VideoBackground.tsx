@@ -18,7 +18,7 @@ interface VideoBackgroundProps {
 
 const VideoBackground: React.FC<VideoBackgroundProps> = ({
   videoSrc = "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4", // Sample waterfall video
-  fallbackImage = "/src/assets/jharkhand-hero.jpg",
+  fallbackImage = "", // No fallback image to prevent old hero from showing
   className = "",
   children,
   showControls = true,

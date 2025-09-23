@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Settings, Heart } from "lucide-react";
+import { Globe, Languages, ChevronDown, User, LogOut, Menu, X, Settings, Heart, Flag, Mountain, TreePine } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
@@ -38,21 +38,61 @@ const Header = () => {
   const getLanguageDisplay = (lang: string) => {
     switch (lang) {
       case 'en':
-        return { name: 'English' };
+        return { 
+          name: 'English', 
+          flag: '🇺🇸',
+          icon: Flag,
+          color: 'text-blue-600'
+        };
       case 'hi':
-        return { name: 'हिंदी' };
+        return { 
+          name: 'हिंदी (Hindi)', 
+          flag: '🇮🇳',
+          icon: Flag,
+          color: 'text-orange-500'
+        };
       case 'snt':
-        return { name: 'ᱥᱟᱱᱛᱟᱲᱤ' };
+        return { 
+          name: 'ᱥᱟᱱᱛᱟᱲᱤ (Santali)', 
+          flag: '🏔️',
+          icon: Mountain,
+          color: 'text-green-600'
+        };
       case 'ho':
-        return { name: 'हो' };
+        return { 
+          name: 'हो (Ho)', 
+          flag: '🌲',
+          icon: TreePine,
+          color: 'text-emerald-600'
+        };
       case 'mun':
-        return { name: 'मुंडारी' };
+        return { 
+          name: 'मुंडारी (Mundari)', 
+          flag: '🌿',
+          icon: TreePine,
+          color: 'text-forest-600'
+        };
       case 'kur':
-        return { name: 'कुरुख' };
+        return { 
+          name: 'कुरुख (Kurukh)', 
+          flag: '⛰️',
+          icon: Mountain,
+          color: 'text-amber-600'
+        };
       case 'kha':
-        return { name: 'खड़िया' };
+        return { 
+          name: 'खड़िया (Kharia)', 
+          flag: '🌳',
+          icon: TreePine,
+          color: 'text-teal-600'
+        };
       default:
-        return { name: 'English' };
+        return { 
+          name: 'English', 
+          flag: '🇺🇸',
+          icon: Flag,
+          color: 'text-blue-600'
+        };
     }
   };
 
@@ -408,6 +448,7 @@ const Header = () => {
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="w-full">
+                          <span className="mr-1 text-sm">{getLanguageDisplay(language).flag}</span>
                           <Globe className="w-4 h-4 mr-2" />
                           <span>{getLanguageDisplay(language).name}</span>
                           <ChevronDown className="w-3 h-3 ml-auto" />
@@ -415,25 +456,32 @@ const Header = () => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-full">
                         <DropdownMenuItem onClick={() => handleLanguageChange('en')}>
+                          <span className="mr-2 text-sm">{getLanguageDisplay('en').flag}</span>
                           <span>English</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('hi')}>
-                          <span>हिंदी</span>
+                          <span className="mr-2 text-sm">{getLanguageDisplay('hi').flag}</span>
+                          <span>हिंदी (Hindi)</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('snt')}>
-                          <span>ᱥᱟᱱᱛᱟᱲᱤ</span>
+                          <span className="mr-2 text-sm">{getLanguageDisplay('snt').flag}</span>
+                          <span>ᱥᱟᱱᱛᱟᱲᱤ (Santali)</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('ho')}>
-                          <span>हो</span>
+                          <span className="mr-2 text-sm">{getLanguageDisplay('ho').flag}</span>
+                          <span>हो (Ho)</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('mun')}>
-                          <span>मुंडारी</span>
+                          <span className="mr-2 text-sm">{getLanguageDisplay('mun').flag}</span>
+                          <span>मुंडारी (Mundari)</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('kur')}>
-                          <span>कुरुख</span>
+                          <span className="mr-2 text-sm">{getLanguageDisplay('kur').flag}</span>
+                          <span>कुरुख (Kurukh)</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleLanguageChange('kha')}>
-                          <span>खड़िया</span>
+                          <span className="mr-2 text-sm">{getLanguageDisplay('kha').flag}</span>
+                          <span>खड़िया (Kharia)</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -470,6 +518,7 @@ const Header = () => {
                       text-xs lg:text-sm
                     "
                   >
+                    <span className="mr-1 text-sm">{getLanguageDisplay(language).flag}</span>
                     <Globe className="w-3 h-3 lg:w-4 lg:h-4" />
                     <span className="text-xs lg:text-sm font-medium">
                       <span>{getLanguageDisplay(language).name}</span>
@@ -495,6 +544,7 @@ const Header = () => {
                       ${language === 'en' ? 'bg-autumn-800' : ''}
                     `}
                   >
+                    <span className="mr-2 text-sm">{getLanguageDisplay('en').flag}</span>
                     <span>English</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
@@ -505,7 +555,8 @@ const Header = () => {
                       ${language === 'hi' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>हिंदी</span>
+                    <span className="mr-2 text-sm">{getLanguageDisplay('hi').flag}</span>
+                    <span>हिंदी (Hindi)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('snt')}
@@ -515,7 +566,8 @@ const Header = () => {
                       ${language === 'snt' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>ᱥᱟᱱᱛᱟᱲᱤ</span>
+                    <span className="mr-2 text-sm">{getLanguageDisplay('snt').flag}</span>
+                    <span>ᱥᱟᱱᱛᱟᱲᱤ (Santali)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('ho')}
@@ -525,7 +577,8 @@ const Header = () => {
                       ${language === 'ho' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>हो</span>
+                    <span className="mr-2 text-sm">{getLanguageDisplay('ho').flag}</span>
+                    <span>हो (Ho)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('mun')}
@@ -535,7 +588,8 @@ const Header = () => {
                       ${language === 'mun' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>मुंडारी</span>
+                    <span className="mr-2 text-sm">{getLanguageDisplay('mun').flag}</span>
+                    <span>मुंडारी (Mundari)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('kur')}
@@ -545,7 +599,8 @@ const Header = () => {
                       ${language === 'kur' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>कुरुख</span>
+                    <span className="mr-2 text-sm">{getLanguageDisplay('kur').flag}</span>
+                    <span>कुरुख (Kurukh)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('kha')}
@@ -555,7 +610,8 @@ const Header = () => {
                       ${language === 'kha' ? 'bg-autumn-800' : ''}
                     `}
                   >
-                    <span>खड़िया</span>
+                    <span className="mr-2 text-sm">{getLanguageDisplay('kha').flag}</span>
+                    <span>खड़िया (Kharia)</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

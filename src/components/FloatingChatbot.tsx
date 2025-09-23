@@ -188,17 +188,58 @@ const FloatingChatbot: React.FC = () => {
   if (!isOpen) {
     return (
       <div className="fixed bottom-6 right-6 z-[9999]">
-        <Button
+        <button
           onClick={() => setIsOpen(true)}
-          className="w-16 h-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-2xl border-0 transition-all duration-300 hover:scale-110 group animate-bounce hover:animate-none"
+          className="bg-transparent border-0 p-0 transition-all duration-300 hover:scale-110 group animate-bounce hover:animate-none"
           aria-label="Open Jharkhand Travel Assistant"
           style={{ animationDuration: '2s' }}
         >
           <div className="relative">
-            <Bot className="w-8 h-8 group-hover:scale-110 transition-transform duration-200" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+            {/* Custom Robot SVG Icon */}
+            <svg
+              width="64"
+              height="64"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="drop-shadow-2xl group-hover:scale-110 transition-transform duration-200"
+            >
+              {/* Robot Body */}
+              <rect x="14" y="24" width="36" height="32" rx="8" fill="#10B981" stroke="#059669" strokeWidth="2"/>
+              
+              {/* Robot Head */}
+              <rect x="20" y="8" width="24" height="20" rx="6" fill="#34D399" stroke="#10B981" strokeWidth="2"/>
+              
+              {/* Robot Eyes */}
+              <circle cx="28" cy="16" r="3" fill="#065F46"/>
+              <circle cx="36" cy="16" r="3" fill="#065F46"/>
+              <circle cx="28" cy="16" r="1.5" fill="#10B981"/>
+              <circle cx="36" cy="16" r="1.5" fill="#10B981"/>
+              
+              {/* Robot Antenna */}
+              <line x1="32" y1="8" x2="32" y2="4" stroke="#059669" strokeWidth="2"/>
+              <circle cx="32" cy="4" r="2" fill="#F59E0B"/>
+              
+              {/* Robot Arms */}
+              <rect x="6" y="28" width="8" height="16" rx="4" fill="#34D399" stroke="#10B981" strokeWidth="2"/>
+              <rect x="50" y="28" width="8" height="16" rx="4" fill="#34D399" stroke="#10B981" strokeWidth="2"/>
+              
+              {/* Robot Legs */}
+              <rect x="20" y="56" width="6" height="6" rx="2" fill="#059669"/>
+              <rect x="38" y="56" width="6" height="6" rx="2" fill="#059669"/>
+              
+              {/* Robot Chest Panel */}
+              <rect x="26" y="32" width="12" height="8" rx="2" fill="#065F46"/>
+              <circle cx="32" cy="36" r="2" fill="#10B981"/>
+              
+              {/* Robot Mouth */}
+              <rect x="28" y="20" width="8" height="2" rx="1" fill="#065F46"/>
+            </svg>
+            
+            {/* Online indicator */}
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse border-2 border-white"></div>
           </div>
-        </Button>
+        </button>
       </div>
     );
   }

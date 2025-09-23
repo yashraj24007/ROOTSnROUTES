@@ -7,7 +7,7 @@ import FAQ from "@/components/FAQ";
 import { motion, useReducedMotion } from "framer-motion";
 import { Zap, Shield, Leaf, Users, Heart, Award, Globe, TreePine } from "lucide-react";
 import { Link } from "react-router-dom";
-import jharkhandHero from "@/assets/jharkhand-hero.jpg";
+import hundruFalls from "@/assets/hundru-falls.jpg";
 import { useLanguage } from "@/hooks/useLanguage";
 
 // Animation variants
@@ -106,39 +106,39 @@ const About = () => {
 
   const team = [
     {
-      name: "Tanish Oberoi",
-      role: "Project Lead & System Architect",
-      description: "Visionary leader orchestrating project architecture and stakeholder coordination. Led technical strategy, system integration planning, and ensured alignment with Smart India Hackathon objectives while managing development workflows.",
+      name: "Yash Raj",
+      role: "Team Lead & Chief Technology Officer",
+      description: "Visionary team leader and chief technology officer driving the ROOTSnROUTES platform. Orchestrates overall project strategy, AI integration, full-stack architecture, and stakeholder coordination. Leading the mission to revolutionize sustainable tourism in Jharkhand through innovative technology solutions.",
       image: ""
     },
     {
-      name: "Yash Raj",
-      role: "Full-Stack Lead & AI Specialist",
-      description: "Full-stack development leader specializing in AI integration and modern web technologies. Architected the platform's core infrastructure, AI-powered itinerary system, and coordinated frontend-backend integration.",
+      name: "Tanish Oberoi",
+      role: "Project Manager & System Integration Lead",
+      description: "Strategic project manager ensuring seamless execution and system integration. Manages development workflows, coordinates cross-functional teams, and ensures alignment with Smart India Hackathon objectives while maintaining project timelines and quality standards.",
       image: ""
     },
     {
       name: "Shreesh Kambampally", 
-      role: "Backend Lead & Database Architect",
-      description: "Backend systems expert and database architecture specialist. Developed secure payment processing, user authentication, real-time data synchronization, API design, and scalable cloud infrastructure.",
+      role: "Backend Lead & Cloud Infrastructure Architect",
+      description: "Backend systems expert and cloud infrastructure specialist. Architected secure payment processing, scalable database systems, real-time data synchronization, robust API design, and enterprise-grade cloud infrastructure for the tourism platform.",
       image: ""
     },
     {
       name: "Pakkireddy Nihal Reddy",
-      role: "Frontend Lead & UI Developer", 
-      description: "Frontend development specialist and responsive design expert. Created interactive maps, weather integration, multilingual support, component libraries, and optimized user interface performance.",
+      role: "Frontend Lead & Interactive Experience Developer", 
+      description: "Frontend development specialist creating immersive user experiences. Developed interactive tourism maps, weather-based recommendations, multilingual interfaces, responsive component libraries, and optimized performance for seamless user journeys.",
       image: ""
     },
     {
       name: "Sriya Gayatri",
-      role: "Design Lead & UX Strategist",
-      description: "Creative design leader and user experience strategist. Designed the complete visual identity, UX/UI flows, accessibility features, brand guidelines, and conducted user research for inclusive tourism experiences.",
+      role: "Design Lead & User Experience Strategist",
+      description: "Creative design leader crafting authentic tourism experiences. Designed comprehensive visual identity, intuitive UX/UI flows, accessibility-first interfaces, cultural branding, and conducted extensive user research for inclusive digital tourism.",
       image: ""
     },
     {
       name: "Kulkarni Sahithi",
-      role: "Research Lead & Content Architect",
-      description: "Tourism research specialist and comprehensive content strategist. Compiled destination databases, developed cultural sensitivity guidelines, content management systems, and coordinated stakeholder research for authentic experiences.",
+      role: "Research Lead & Content Strategy Director",
+      description: "Tourism research specialist and strategic content director. Curated comprehensive destination databases, developed cultural authenticity guidelines, managed content ecosystems, and coordinated community partnerships for genuine local experiences.",
       image: ""
     }
   ];
@@ -163,7 +163,7 @@ const About = () => {
       >
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${jharkhandHero})` }}
+          style={{ backgroundImage: `url(${hundruFalls})` }}
         />
         <div className="absolute inset-0 bg-gradient-hero opacity-80" />
         <div className="absolute inset-0 bg-background/40" />

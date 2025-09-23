@@ -22,6 +22,7 @@ const Hero = () => {
         muted={true}
         overlay={true}
         overlayOpacity={0.4}
+        showControls={false}
       >
         {/* Hero Content */}
         <div className="relative z-20 min-h-screen flex items-center justify-center px-4 py-12">
