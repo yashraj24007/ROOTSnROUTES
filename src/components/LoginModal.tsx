@@ -298,22 +298,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                         Traveller
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        id="user-type-admin"
-                        type="radio"
-                        name="userType"
-                        value="admin"
-                        checked={formData.userType === 'admin'}
-                        onChange={(e) => handleInputChange("userType", e.target.value)}
-                        className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                        aria-describedby="user-type-help"
-                        aria-label="Select Admin account type"
-                      />
-                      <Label htmlFor="user-type-admin" className="text-sm cursor-pointer">
-                        Admin
-                      </Label>
-                    </div>
                   </div>
                   <p id="user-type-help" className="text-xs text-muted-foreground">
                     Select your account type to access appropriate features

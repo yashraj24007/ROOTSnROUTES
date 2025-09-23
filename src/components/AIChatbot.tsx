@@ -56,7 +56,7 @@ const AIChatbot = () => {
       const welcomeMessage: ChatMessage = {
         id: Date.now().toString(),
         type: 'bot',
-        message: "🙏 Namaste! I'm your AI travel assistant for Jharkhand. I can help you with destinations, bookings, weather, local culture, and more. How can I assist you today?",
+        message: "hey traveller how can i help u",
         timestamp: new Date(),
         suggestions: [
           "Show me top destinations",
@@ -247,7 +247,7 @@ const AIChatbot = () => {
           className="w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary/90"
           size="lg"
         >
-          <MessageSquare className="h-6 w-6" />
+          <Bot className="h-6 w-6" />
         </Button>
         
         {/* Notification dot for new features */}

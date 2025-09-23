@@ -20,7 +20,7 @@ const FloatingChatbot: React.FC = () => {
     {
       id: '1',
       role: 'assistant',
-      content: 'Hello! I\'m your Jharkhand travel assistant. Ask me about destinations, transportation, local culture, or anything else about your trip!',
+      content: 'hey traveller how can i help u',
       timestamp: new Date()
     }
   ]);

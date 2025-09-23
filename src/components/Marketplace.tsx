@@ -180,7 +180,7 @@ const Marketplace = () => {
         setCurrentIndex((prevIndex) => 
           prevIndex >= handicrafts.length - 1 ? 0 : prevIndex + 1
         );
-      }, 3000); // Change slide every 3 seconds
+      }, 4000); // Change slide every 4 seconds for smoother experience
     }
     
     return () => {
@@ -387,17 +387,6 @@ const Marketplace = () => {
               <ChevronRight className="w-4 h-4" />
             </Button>
           </div>
-
-          {/* Auto-scroll Status */}
-          <div className="text-center mb-8">
-            <button
-              onClick={() => setIsAutoScrolling(!isAutoScrolling)}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Auto-scroll: {isAutoScrolling ? 'ON' : 'OFF'} • Click to {isAutoScrolling ? 'pause' : 'resume'}
-            </button>
-          </div>
-
           <motion.div 
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={shouldReduceMotion ? {} : responsiveContainerVariants}

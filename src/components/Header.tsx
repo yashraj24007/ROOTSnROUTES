@@ -12,6 +12,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
 import LoginModal from "@/components/LoginModal";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useState, useRef, useCallback } from "react";
 
 const Header = () => {
@@ -436,6 +437,11 @@ const Header = () => {
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
+                    
+                    {/* Mobile Theme Toggle */}
+                    <div className="flex items-center justify-center pt-2">
+                      <ThemeToggle />
+                    </div>
                   </div>
                 </div>
               </SheetContent>
@@ -553,6 +559,11 @@ const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+            </div>
+            
+            {/* Theme Toggle */}
+            <div className="hidden md:block">
+              <ThemeToggle />
             </div>
             
             {/* Login/Profile Section - Rightmost */}
