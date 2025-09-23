@@ -6,7 +6,7 @@ import Loading from './components/Loading';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import AIChatbot from './components/AIChatbot';
+import FloatingChatbot from './components/FloatingChatbot';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -137,7 +137,7 @@ const App = () => {
                   </Suspense>
                 </div>
             </Router>
-            <AIChatbot />
+            <FloatingChatbot />
             <Toaster />
           </UserPreferencesProvider>
         </AuthProvider>

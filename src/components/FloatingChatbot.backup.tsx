@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Send, Bot, User, X, Minimize2, MessageSquare, Trash2 } from 'lucide-react';
+import { Send, Bot, User, X, Minimize2, MessageSquare } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -26,17 +26,35 @@ const FloatingChatbot: React.FC = () => {
   const [notificationIndex, setNotificationIndex] = useState(0);
 
   const helpNotifications = [
-    { emoji: "🌟", text: "Discover amazing places in Jharkhand! ✨" },
-    { emoji: "🏔️", text: "Need travel tips? I'm here to help! 🗺️" },
-    { emoji: "🎒", text: "Planning your adventure? Let's explore! �" },
-    { emoji: "�", text: "Got questions about tourism? Ask away! 🚀" },
-    { emoji: "🌺", text: "Explore hidden gems with me! 🏞️" },
-    { emoji: "�", text: "Looking for the perfect destination? �" }
+    { emoji: "👋", text: "Hey! Can I help you explore? 😊" },
+    { emoji: "🔍", text: "Searching for something? I can help! ✨" },
+    { emoji: "🗺️", text: "Need travel guidance? Let's chat! 🌟" },
+    { emoji: "💬", text: "Got questions? I'm here to assist! 🚀" },
+    { emoji: "🎒", text: "Planning your adventure? Ask me! 🌄" },
+    { emoji: "📍", text: "Looking for destinations? I know them! 🏞️" },
+    { emoji: "🤝", text: "Need recommendations? Happy to help! ✨" }
+  ];
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const [lastHelpMessageTime, setLastHelpMessageTime] = useState<number>(Date.now());
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationIndex, setNotificationIndex] = useState(0);
+
+  const helpNotifications = [
+    { emoji: "👋", text: "Hey! Can I help you? 😊" },
+    { emoji: "🤝", text: "Need assistance exploring? �" },
+    { emoji: "💬", text: "Got questions? I'm here! ✨" },
+    { emoji: "🗺️", text: "Ready to explore Jharkhand? 🌄" },
+    { emoji: "🎒", text: "Planning your trip? Let's chat! �" }
   ];
 
   // Periodic help notifications
   useEffect(() => {
-    // Show first notification when user opens site
+    // Show first notification immediately when component mounts (user opens site)
     const firstTimeout = setTimeout(() => {
       if (!isOpen) {
         setShowNotification(true);
@@ -44,18 +62,22 @@ const FloatingChatbot: React.FC = () => {
         setLastHelpMessageTime(Date.now());
         setTimeout(() => setShowNotification(false), 5000);
       }
-    }, 2000);
+    }, 2000); // Show after 2 seconds of site load
 
     const interval = setInterval(() => {
       const now = Date.now();
-      // Show notification every 30 seconds regardless of user activity
+      // Show notification every 30 seconds regardless of user activity (as long as chatbot is closed)
       if (!isOpen && (now - lastHelpMessageTime) >= 30000) {
         setShowNotification(true);
         setNotificationIndex((prev) => (prev + 1) % helpNotifications.length);
         setLastHelpMessageTime(now);
-        setTimeout(() => setShowNotification(false), 5000);
+        
+        // Hide notification after 5 seconds
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 5000);
       }
-    }, 30000);
+    }, 30000); // Check every 30 seconds
 
     return () => {
       clearTimeout(firstTimeout);
@@ -95,15 +117,10 @@ const FloatingChatbot: React.FC = () => {
     const welcomeMessage: Message = {
       id: '1',
       role: 'assistant',
-      content: '🌟 Welcome to Jharkhand! I\'m your AI travel guide 🗺️\n\nI can help you with:\n🏔️ Tourist destinations\n🏨 Hotels & accommodations\n🍽️ Local cuisine\n🚗 Transportation\n🌤️ Weather updates\n\nWhat would you like to explore today? ✨',
+      content: 'hey traveller how can i help u',
       timestamp: new Date()
     };
     setMessages([welcomeMessage]);
-  };
-
-  const clearChat = () => {
-    localStorage.removeItem('chatbot-messages');
-    initializeWelcomeMessage();
   };
 
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
@@ -296,33 +313,35 @@ const FloatingChatbot: React.FC = () => {
               className="drop-shadow-2xl group-hover:scale-110 transition-transform duration-200"
             >
               {/* Robot Body */}
-              <rect x="14" y="24" width="36" height="32" rx="8" fill="#10B981" stroke="#059669" strokeWidth="2"/>
+              <rect x="14" y="24" width="36" height="32" rx="8" fill="#3B82F6" stroke="#2563EB" strokeWidth="2"/>
               
               {/* Robot Head */}
-              <rect x="20" y="8" width="24" height="20" rx="6" fill="#34D399" stroke="#10B981" strokeWidth="2"/>
+              <rect x="20" y="8" width="24" height="20" rx="6" fill="#60A5FA" stroke="#3B82F6" strokeWidth="2"/>
               
               {/* Robot Eyes */}
-              <circle cx="28" cy="16" r="3" fill="#065F46"/>
-              <circle cx="36" cy="16" r="3" fill="#065F46"/>
-              <circle cx="28" cy="16" r="1.5" fill="#10B981"/>
-              <circle cx="36" cy="16" r="1.5" fill="#10B981"/>
+              <circle cx="28" cy="16" r="3" fill="#1E40AF"/>
+              <circle cx="36" cy="16" r="3" fill="#1E40AF"/>
+              <circle cx="28" cy="16" r="1.5" fill="#60A5FA"/>
+              <circle cx="36" cy="16" r="1.5" fill="#60A5FA"/>
               
               {/* Robot Antenna */}
-              <line x1="32" y1="8" x2="32" y2="4" stroke="#059669" strokeWidth="2"/>
-              <circle cx="32" cy="4" r="2" fill="#F59E0B"/>
+              <line x1="32" y1="8" x2="32" y2="4" stroke="#2563EB" strokeWidth="2"/>
+              <circle cx="32" cy="4" r="2" fill="#A855F7"/>
               
               {/* Robot Arms */}
-              <rect x="6" y="28" width="8" height="16" rx="4" fill="#34D399" stroke="#10B981" strokeWidth="2"/>
-              <rect x="50" y="28" width="8" height="16" rx="4" fill="#34D399" stroke="#10B981" strokeWidth="2"/>
+              <rect x="6" y="28" width="8" height="16" rx="4" fill="#60A5FA" stroke="#3B82F6" strokeWidth="2"/>
+              <rect x="50" y="28" width="8" height="16" rx="4" fill="#60A5FA" stroke="#3B82F6" strokeWidth="2"/>
               
               {/* Robot Legs */}
-              <rect x="20" y="56" width="6" height="6" rx="2" fill="#059669"/>
-              <rect x="38" y="56" width="6" height="6" rx="2" fill="#059669"/>
+              <rect x="20" y="56" width="6" height="6" rx="2" fill="#2563EB"/>
+              <rect x="38" y="56" width="6" height="6" rx="2" fill="#2563EB"/>
               
               {/* Robot Chest Panel */}
-              <rect x="26" y="32" width="12" height="8" rx="2" fill="#065F46"/>
-              <circle cx="32" cy="36" r="2" fill="#10B981"/>
+              <rect x="26" y="32" width="12" height="8" rx="2" fill="#1E40AF"/>
+              <circle cx="32" cy="36" r="2" fill="#60A5FA"/>
               
+              {/* Purple accent */}
+              <rect x="28" y="38" width="8" height="2" rx="1" fill="#A855F7"/>
               {/* Robot Mouth */}
               <rect x="28" y="20" width="8" height="2" rx="1" fill="#065F46"/>
             </svg>
@@ -337,33 +356,34 @@ const FloatingChatbot: React.FC = () => {
 
   return (
     <>
-      {/* Help Notification */}
+      {/* Help Notification - Separate fixed position */}
       {showNotification && !isOpen && (
         <div className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 z-[10000]">
           <div className="animate-bounce">
             <div 
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-5 py-4 rounded-2xl shadow-2xl border-2 border-white/20 relative cursor-pointer hover:scale-105 hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
+              className="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-3 rounded-2xl shadow-2xl border-2 border-blue-200 relative cursor-pointer hover:scale-105 hover:bg-white transition-all duration-300"
               onClick={() => {
                 setIsOpen(true);
                 setShowNotification(false);
               }}
-              style={{ minWidth: '280px', maxWidth: '320px' }}
+              style={{ minWidth: '250px', maxWidth: '300px' }}
             >
-              <div className="flex items-center gap-3">
-                <span className="text-2xl animate-pulse">{helpNotifications[notificationIndex].emoji}</span>
-                <span className="text-sm font-semibold text-white drop-shadow-sm">{helpNotifications[notificationIndex].text}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-xl">{helpNotifications[notificationIndex].emoji}</span>
+                <span className="text-sm font-semibold text-gray-800">{helpNotifications[notificationIndex].text}</span>
               </div>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowNotification(false);
                 }}
-                className="absolute -top-2 -right-2 w-7 h-7 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-all duration-200 font-bold backdrop-blur-sm"
+                className="absolute -top-1 -right-1 w-6 h-6 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-gray-600 text-xs transition-all duration-200 font-bold"
                 aria-label="Close notification"
               >
                 ×
               </button>
-              <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-blue-500"></div>
+              {/* Notification arrow pointing to chatbot */}
+              <div className="absolute -bottom-2 right-6 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
             </div>
           </div>
         </div>
@@ -371,9 +391,8 @@ const FloatingChatbot: React.FC = () => {
 
       {/* Main Chatbot Container */}
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end">
-      {/* Modern chat container with black outer background */}
       <div className="bg-black/90 backdrop-blur-sm rounded-2xl p-1 shadow-2xl">
-        <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-none border-0 bg-white/95 backdrop-blur-sm transition-all duration-300 rounded-xl ${
+        <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-xl border-2 border-blue-200/50 bg-white backdrop-blur-sm transition-all duration-300 rounded-xl ${
           isMinimized ? 'h-14' : 'h-[500px] max-h-[calc(100vh-8rem)]'
         }`}>
           <CardHeader className="p-3 border-b bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-xl shadow-lg">
@@ -383,16 +402,6 @@ const FloatingChatbot: React.FC = () => {
                 🤖 Jharkhand AI Guide
               </CardTitle>
               <div className="flex gap-1">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearChat}
-                  className="h-6 w-6 p-0 text-white hover:bg-white/20 rounded-lg transition-all duration-200"
-                  aria-label="Clear chat"
-                  title="Clear chat history"
-                >
-                  <Trash2 className="w-3 h-3" />
-                </Button>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -416,9 +425,9 @@ const FloatingChatbot: React.FC = () => {
         </CardHeader>
         
         {!isMinimized && (
-          <CardContent className="flex flex-col h-[440px] max-h-[calc(100vh-12rem)] p-0 bg-gray-50/50">
+          <CardContent className="flex flex-col h-[440px] max-h-[calc(100vh-12rem)] p-0 bg-gradient-to-b from-gray-50 to-white">
             <ScrollArea 
-              className="flex-1 p-4" 
+              className="flex-1 p-4 chatbot-scroll" 
               ref={scrollAreaRef}
               onScrollCapture={handleScroll}
             >
@@ -452,12 +461,12 @@ const FloatingChatbot: React.FC = () => {
                       className={`max-w-[75%] p-4 text-sm leading-relaxed whitespace-pre-wrap shadow-md transition-all duration-200 hover:shadow-lg ${
                         message.role === 'user'
                           ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl rounded-br-md'
-                          : 'bg-white text-gray-700 border border-gray-300 rounded-2xl rounded-bl-md'
+                          : 'bg-white text-gray-900 border border-gray-300 rounded-2xl rounded-bl-md'
                       }`}
                     >
                       <p className="break-words font-medium">{message.content}</p>
                       <p className={`text-xs mt-3 opacity-70 font-normal ${
-                        message.role === 'user' ? 'text-blue-100' : 'text-gray-500'
+                        message.role === 'user' ? 'text-blue-100' : 'text-gray-600'
                       }`}>
                         {message.timestamp.toLocaleTimeString()}
                       </p>
@@ -505,7 +514,7 @@ const FloatingChatbot: React.FC = () => {
             )}
             
             {/* Modern input area */}
-            <div className="border-t bg-white/80 backdrop-blur-sm p-4 rounded-b-xl">
+            <div className="border-t bg-white/90 backdrop-blur-sm p-4 rounded-b-xl shadow-inner">
               <div className="flex gap-3 items-center">
                 <Input
                   value={input}
@@ -513,7 +522,7 @@ const FloatingChatbot: React.FC = () => {
                   onKeyPress={handleKeyPress}
                   placeholder="Ask me about Jharkhand tourism..."
                   disabled={loading}
-                  className="flex-1 h-12 text-sm px-4 bg-gray-50 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400"
+                  className="flex-1 h-12 text-sm px-4 bg-gray-50 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-600 text-gray-900 font-medium"
                 />
                 <Button
                   onClick={sendMessage}
@@ -521,7 +530,7 @@ const FloatingChatbot: React.FC = () => {
                   size="sm"
                   className="h-12 w-12 p-0 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-5 h-5" />
+                  <Send className="w-5 h-5 text-white" />
                 </Button>
               </div>
             </div>
