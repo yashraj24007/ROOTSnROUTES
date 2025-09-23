@@ -13,8 +13,6 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
 import LoginModal from "@/components/LoginModal";
 import { useState, useRef, useCallback } from "react";
-import logoFullSvg from "@/assets/logo.svg";
-import logoIconSvg from "@/assets/logo.svg";
 
 const Header = () => {
   const location = useLocation();
@@ -104,11 +102,6 @@ const Header = () => {
             className="logo-enhanced flex-shrink-0"
             aria-label="ROOTSnROUTES - Go to homepage"
           >
-            <img 
-              src={logoIconSvg} 
-              alt="ROOTSnROUTES Tourism Platform Logo" 
-              className="logo-icon w-10 h-10 md:w-12 md:h-12 rounded-lg shadow-md transition-transform duration-300 hover:scale-110"
-            />
             <span className="logo-text text-lg md:text-2xl">ROOTSnROUTES</span>
           </Link>
 
@@ -242,11 +235,6 @@ const Header = () => {
                   {/* Mobile Menu Header */}
                   <div className="flex items-center justify-between p-4 border-b">
                     <div className="flex items-center space-x-2">
-                      <img 
-                        src={logoIconSvg} 
-                        alt="ROOTSnROUTES" 
-                        className="w-8 h-8 rounded-md transition-transform duration-300 hover:scale-110"
-                      />
                       <span className="font-bold text-lg">ROOTSnROUTES</span>
                     </div>
                   </div>
