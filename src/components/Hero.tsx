@@ -3,9 +3,11 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import VideoBackground from "@/components/VideoBackground";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useLanguage();
   
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
@@ -41,12 +43,12 @@ const Hero = () => {
                 lineHeight: '1.1',
                 filter: 'drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5))'
               }}>
-                Discover Hidden Gems of Jharkhand
+                {t('hero.title')} {t('hero.subtitle')}
               </h1>
               
               {/* Subtext */}
               <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed text-white/95 dark:text-white/95 font-medium drop-shadow-lg bg-black/40 dark:bg-black/30 backdrop-blur-sm px-8 py-4 rounded-2xl border border-white/20 shadow-xl" style={{ animationDelay: '0.3s' }}>
-                Experience authentic village life, eco-tourism, and rich cultural heritage
+                {t('hero.description')}
               </p>
             </div>
 
@@ -59,7 +61,7 @@ const Hero = () => {
                   className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 text-white font-semibold px-10 py-4 rounded-full shadow-2xl transition-all duration-500 ease-out hover:scale-110 hover:shadow-emerald-500/50 active:scale-95 border-0 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
-                    Explore Destinations
+                    {t('hero.exploreButton')}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/20 to-transparent transition-opacity duration-500" />
@@ -74,7 +76,7 @@ const Hero = () => {
                   className="group relative overflow-hidden bg-transparent border-2 border-white/70 hover:border-white text-white hover:text-black font-semibold px-10 py-4 rounded-full backdrop-blur-sm shadow-lg hover:shadow-white/30 hover:shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-white active:scale-95 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
-                    AI Planning
+                    {t('hero.aiPlanningButton')}
                   </span>
                   <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 </Button>

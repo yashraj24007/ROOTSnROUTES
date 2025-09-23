@@ -354,9 +354,9 @@ const InteractiveMap = () => {
             <Card className="card-enhanced p-6 text-center">
               <div className="mb-4">
                 <MapPin size={48} className="mx-auto text-muted-foreground mb-2" />
-                <h3 className="text-lg font-semibold">Select a District</h3>
+                <h3 className="text-lg font-semibold">{t('map.selectDistrict')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Click on any district marker to learn more about its attractions and specialities.
+                  {t('map.selectDistrictDescription')}
                 </p>
               </div>
             </Card>
@@ -366,7 +366,7 @@ const InteractiveMap = () => {
           <Card className="card-enhanced p-6">
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <Zap className="text-primary" />
-              Quick Facts
+              {t('map.quickFacts')}
             </h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between">

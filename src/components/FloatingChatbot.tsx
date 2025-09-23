@@ -16,17 +16,49 @@ interface Message {
 const FloatingChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+
+  // Load messages from localStorage on component mount
+  useEffect(() => {
+    const savedMessages = localStorage.getItem('chatbot-messages');
+    if (savedMessages) {
+      try {
+        const parsedMessages = JSON.parse(savedMessages).map((msg: Omit<Message, 'timestamp'> & { timestamp: string }) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        }));
+        setMessages(parsedMessages);
+      } catch (error) {
+        console.error('Error parsing saved messages:', error);
+        // Initialize with welcome message if parsing fails
+        initializeWelcomeMessage();
+      }
+    } else {
+      // Initialize with welcome message
+      initializeWelcomeMessage();
+    }
+  }, []);
+
+  // Save messages to localStorage whenever messages change
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem('chatbot-messages', JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  const initializeWelcomeMessage = () => {
+    const welcomeMessage: Message = {
       id: '1',
       role: 'assistant',
       content: 'hey traveller how can i help u',
       timestamp: new Date()
-    }
-  ]);
-  const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+    };
+    setMessages([welcomeMessage]);
+  };
 
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
 
@@ -67,10 +99,20 @@ const FloatingChatbot: React.FC = () => {
   }, [apiKey, testAPIConnection]);
 
   useEffect(() => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+    if (scrollAreaRef.current && shouldAutoScroll) {
+      const scrollElement = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]') as HTMLDivElement;
+      if (scrollElement) {
+        scrollElement.scrollTop = scrollElement.scrollHeight;
+      }
     }
-  }, [messages]);
+  }, [messages, shouldAutoScroll]);
+
+  // Handle scroll events to detect if user is manually scrolling
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const element = event.currentTarget;
+    const isNearBottom = element.scrollHeight - element.scrollTop - element.clientHeight < 50;
+    setShouldAutoScroll(isNearBottom);
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -246,69 +288,83 @@ const FloatingChatbot: React.FC = () => {
 
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end">
-      <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-2xl border-2 border-emerald-200 transition-all duration-300 ${
-        isMinimized ? 'h-14' : 'h-[500px] max-h-[calc(100vh-8rem)]'
-      }`}>
-        <CardHeader className="p-3 border-b bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-t-lg">
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2 text-sm font-medium">
-              <Bot className="w-5 h-5 animate-pulse" />
-              🤖 Jharkhand AI Guide
-            </CardTitle>
-            <div className="flex gap-1">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsMinimized(!isMinimized)}
-                className="h-6 w-6 p-0 text-white hover:bg-emerald-700"
-                aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
-              >
-                <Minimize2 className="w-3 h-3" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsOpen(false)}
-                className="h-6 w-6 p-0 text-white hover:bg-emerald-700"
-                aria-label="Close chat"
-              >
-                <X className="w-3 h-3" />
-              </Button>
+      {/* Modern chat container with black outer background */}
+      <div className="bg-black/90 backdrop-blur-sm rounded-2xl p-1 shadow-2xl">
+        <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-none border-0 bg-white/95 backdrop-blur-sm transition-all duration-300 rounded-xl ${
+          isMinimized ? 'h-14' : 'h-[500px] max-h-[calc(100vh-8rem)]'
+        }`}>
+          <CardHeader className="p-3 border-b bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-t-xl">
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                <Bot className="w-5 h-5 animate-pulse" />
+                🤖 Jharkhand AI Guide
+              </CardTitle>
+              <div className="flex gap-1">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsMinimized(!isMinimized)}
+                  className="h-6 w-6 p-0 text-white hover:bg-emerald-700 rounded-lg"
+                  aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
+                >
+                  <Minimize2 className="w-3 h-3" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsOpen(false)}
+                  className="h-6 w-6 p-0 text-white hover:bg-emerald-700 rounded-lg"
+                  aria-label="Close chat"
+                >
+                  <X className="w-3 h-3" />
+                </Button>
+              </div>
             </div>
-          </div>
         </CardHeader>
         
         {!isMinimized && (
-          <CardContent className="flex flex-col h-[440px] max-h-[calc(100vh-12rem)] p-0">
-            <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
+          <CardContent className="flex flex-col h-[440px] max-h-[calc(100vh-12rem)] p-0 bg-gray-50/50">
+            <ScrollArea 
+              className="flex-1 p-4" 
+              ref={scrollAreaRef}
+              onScrollCapture={handleScroll}
+            >
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`flex gap-3 items-start ${
+                    className={`flex gap-3 items-start animate-fadeIn ${
                       message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                     }`}
                   >
-                    <Avatar className="w-7 h-7 flex-shrink-0 mt-1">
-                      <AvatarFallback className="text-xs bg-emerald-100">
+                    <Avatar className={`w-8 h-8 flex-shrink-0 mt-1 ${
+                      message.role === 'user' 
+                        ? 'bg-blue-500 text-white' 
+                        : 'bg-emerald-100 text-emerald-700'
+                    }`}>
+                      <AvatarFallback className={`text-xs ${
+                        message.role === 'user' 
+                          ? 'bg-blue-500 text-white' 
+                          : 'bg-emerald-100 text-emerald-700'
+                      }`}>
                         {message.role === 'user' ? (
-                          <User className="w-3 h-3 text-emerald-700" />
+                          <User className="w-4 h-4" />
                         ) : (
-                          <Bot className="w-3 h-3 text-emerald-700" />
+                          <Bot className="w-4 h-4" />
                         )}
                       </AvatarFallback>
                     </Avatar>
                     
                     <div
-                      className={`max-w-[80%] p-3 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${
+                      className={`max-w-[75%] p-4 text-sm leading-relaxed whitespace-pre-wrap shadow-md transition-all duration-200 hover:shadow-lg ${
                         message.role === 'user'
-                          ? 'bg-emerald-600 text-white rounded-br-sm'
-                          : 'bg-card text-foreground border border-border rounded-bl-sm shadow-sm'
+                          ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl rounded-br-md'
+                          : 'bg-white text-gray-800 border border-gray-200 rounded-2xl rounded-bl-md'
                       }`}
                     >
                       <p className="break-words">{message.content}</p>
-                      <p className={`text-xs mt-2 opacity-70 ${
-                        message.role === 'user' ? 'text-emerald-100' : 'text-muted-foreground'
+                      <p className={`text-xs mt-3 opacity-70 ${
+                        message.role === 'user' ? 'text-blue-100' : 'text-gray-500'
                       }`}>
                         {message.timestamp.toLocaleTimeString()}
                       </p>
@@ -317,13 +373,13 @@ const FloatingChatbot: React.FC = () => {
                 ))}
                 
                 {loading && (
-                  <div className="flex gap-3 items-start">
-                    <Avatar className="w-7 h-7 mt-1">
-                      <AvatarFallback className="text-xs bg-emerald-100">
-                        <Bot className="w-3 h-3 text-emerald-700" />
+                  <div className="flex gap-3 items-start animate-fadeIn">
+                    <Avatar className="w-8 h-8 mt-1 bg-emerald-100 text-emerald-700">
+                      <AvatarFallback className="text-xs bg-emerald-100 text-emerald-700">
+                        <Bot className="w-4 h-4" />
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
+                    <div className="bg-white p-4 rounded-2xl rounded-bl-md border border-gray-200 shadow-md">
                       <div className="flex space-x-1">
                         <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce [animation-delay:0.1s]"></div>
@@ -335,29 +391,51 @@ const FloatingChatbot: React.FC = () => {
               </div>
             </ScrollArea>
             
-            <div className="border-t bg-gray-50 p-4">
-              <div className="flex gap-2">
+            {/* Scroll to bottom button */}
+            {!shouldAutoScroll && (
+              <div className="absolute bottom-20 right-4">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="rounded-full shadow-lg"
+                  onClick={() => {
+                    setShouldAutoScroll(true);
+                    const scrollElement = scrollAreaRef.current?.querySelector('[data-radix-scroll-area-viewport]') as HTMLDivElement;
+                    if (scrollElement) {
+                      scrollElement.scrollTop = scrollElement.scrollHeight;
+                    }
+                  }}
+                >
+                  <span className="text-xs">↓</span>
+                </Button>
+              </div>
+            )}
+            
+            {/* Modern input area */}
+            <div className="border-t bg-white/80 backdrop-blur-sm p-4 rounded-b-xl">
+              <div className="flex gap-3 items-center">
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Ask me about Jharkhand tourism..."
                   disabled={loading}
-                  className="flex-1 h-10 text-sm px-4 border-gray-300 rounded-full focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="flex-1 h-12 text-sm px-4 bg-gray-50 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400"
                 />
                 <Button
                   onClick={sendMessage}
                   disabled={loading || !input.trim()}
                   size="sm"
-                  className="h-10 w-10 p-0 bg-emerald-600 hover:bg-emerald-700 rounded-full shadow-lg"
+                  className="h-12 w-12 p-0 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-5 h-5" />
                 </Button>
               </div>
             </div>
           </CardContent>
         )}
       </Card>
+      </div>
     </div>
   );
 };

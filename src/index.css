@@ -64,8 +64,8 @@ All colors MUST be HSL for perfect theme transitions.
     --shadow-nature: 0 8px 25px hsl(25 70% 65% / 0.12);
     --shadow-dashboard: 0 6px 30px hsl(140 45% 45% / 0.1);
 
-    /* Video Background Overlays */
-    --overlay-gradient-light: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.3) 100%);
+    /* Video Background Overlays - White overlay for light mode, black for dark mode */
+    --overlay-gradient-light: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%);
     --overlay-gradient-dark: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.5) 100%);
 
     /* Sidebar - Light Mode with Dark Text */

@@ -140,10 +140,20 @@ const Header = () => {
           {/* Logo */}
           <Link 
             to="/" 
-            className="logo-enhanced flex-shrink-0"
+            className="logo-enhanced flex-shrink-0 flex items-center gap-2 hover:opacity-80 transition-opacity"
             aria-label="ROOTSnROUTES - Go to homepage"
           >
-            <span className="logo-text text-lg md:text-2xl">ROOTSnROUTES</span>
+            <img 
+              src="/logo.png" 
+              alt="ROOTSnROUTES Logo" 
+              className="h-8 md:h-10 w-auto object-contain"
+              onError={(e) => {
+                // Fallback to text if logo doesn't load
+                console.log('Logo failed to load');
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+            <span className="logo-text text-lg md:text-2xl font-bold text-primary">ROOTSnROUTES</span>
           </Link>
 
           {/* Navigation */}

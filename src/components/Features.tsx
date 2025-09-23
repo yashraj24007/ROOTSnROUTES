@@ -17,8 +17,8 @@ const Features = () => {
     },
     {
       icon: MapPin,
-      title: 'Interactive Districts Map',
-      description: 'Explore all 24 districts of Jharkhand with our interactive map featuring detailed information about each region.',
+      titleKey: 'features.interactiveMap.title',
+      descriptionKey: 'features.interactiveMap.description',
       gradient: 'text-brand-secondary',
       bgGradient: 'pattern-forest',
       link: '/explore-districts'
@@ -38,13 +38,13 @@ const Features = () => {
     },
     {
       icon: Camera,
-      title: 'Photo Sharing',
-      description: 'Share your travel memories and discover hidden gems through community photos.',
+      titleKey: 'features.photoSharing.title',
+      descriptionKey: 'features.photoSharing.description',
     },
     {
       icon: Compass,
-      title: 'Smart Navigation',
-      description: 'Get intelligent route suggestions and local transportation options.',
+      titleKey: 'features.smartNavigation.title',
+      descriptionKey: 'features.smartNavigation.description',
     },
   ];
 
@@ -71,21 +71,21 @@ const Features = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold mb-3 text-brand-glow">
-                    {feature.titleKey ? t(feature.titleKey) : feature.title}
+                    {t(feature.titleKey)}
                   </h3>
                   <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                    {feature.descriptionKey ? t(feature.descriptionKey) : feature.description}
+                    {t(feature.descriptionKey)}
                   </p>
                   {feature.link ? (
                     <Link to={feature.link}>
                       <Button className="btn-brand-primary">
-                        Explore Map
+                        {t('common.exploreMap')}
                       </Button>
                     </Link>
                   ) : (
                     <Link to="/chatbot">
                       <Button className="btn-brand-primary">
-                        Try AI Assistant
+                        {t('common.tryAIAssistant')}
                       </Button>
                     </Link>
                   )}
@@ -104,10 +104,10 @@ const Features = () => {
                   <feature.icon size={24} className="icon-brand-primary" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">
-                  {feature.titleKey ? t(feature.titleKey) : feature.title}
+                  {t(feature.titleKey)}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {feature.descriptionKey ? t(feature.descriptionKey) : feature.description}
+                  {t(feature.descriptionKey)}
                 </p>
               </div>
             </Card>

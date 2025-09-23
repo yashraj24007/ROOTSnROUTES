@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,6 +20,12 @@ import {
 import { messageService, ChatMessage } from '@/services/messageService';
 import { allDestinations } from '@/data/completeDestinations';
 
+// Avatar colors for different users - moved outside component to avoid dependency issues
+const AVATAR_COLORS = [
+  'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500',
+  'bg-purple-500', 'bg-pink-500', 'bg-indigo-500', 'bg-teal-500'
+];
+
 interface LocalChatProps {
   destinationId?: string;
   destinationName?: string;
@@ -40,16 +46,13 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
   const [isLoading, setIsLoading] = useState(false);
   const [onlineUsers] = useState<User[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const [replyingTo, setReplyingTo] = useState<ChatMessage | null>(null);
-
-  // Avatar colors for different users
-  const avatarColors = [
-    'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500',
-    'bg-purple-500', 'bg-pink-500', 'bg-indigo-500', 'bg-teal-500'
-  ];
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
 
   // Generate a consistent user session
   useEffect(() => {
+    
     const generateUser = () => {
       const names = [
         'Travel Explorer', 'Nature Lover', 'Adventure Seeker', 'Culture Enthusiast',
@@ -65,13 +68,13 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
         names[Math.floor(Math.random() * names.length)] + '_' + userId.substr(-3);
       localStorage.setItem('chat_user_name', userName);
 
-      const colorIndex = parseInt(userId.substr(-1), 16) % avatarColors.length;
+      const colorIndex = parseInt(userId.substr(-1), 16) % AVATAR_COLORS.length;
       
       return {
         id: userId,
         name: userName,
         avatar: userName.charAt(0).toUpperCase(),
-        color: avatarColors[colorIndex]
+        color: AVATAR_COLORS[colorIndex]
       };
     };
 
@@ -96,11 +99,24 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
   }, [loadMessages]);
 
   // Scroll to bottom when new messages arrive
+  const scrollToBottom = useCallback(() => {
+    if (shouldAutoScroll && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [shouldAutoScroll]);
+
+  // Handle scroll events to detect if user is manually scrolling
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const element = event.currentTarget;
+    const isNearBottom = element.scrollHeight - element.scrollTop - element.clientHeight < 50;
+    setShouldAutoScroll(isNearBottom);
+  };
+
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, scrollToBottom]);
 
-  const scrollToBottom = () => {
+  const scrollToBottomOld = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -223,7 +239,11 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
 
         <CardContent className="flex-1 flex flex-col p-0">
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div 
+            className="flex-1 overflow-y-auto p-4 space-y-4"
+            ref={messagesContainerRef}
+            onScroll={handleScroll}
+          >
             {isLoading ? (
               <div className="flex items-center justify-center h-32">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -249,7 +269,7 @@ const LocalChat: React.FC<LocalChatProps> = ({ destinationId, destinationName })
                   >
                     {showAvatar && !isCurrentUser && (
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold ${
-                        avatarColors[parseInt(message.user_id.substr(-1), 16) % avatarColors.length]
+                        AVATAR_COLORS[parseInt(message.user_id.substr(-1), 16) % AVATAR_COLORS.length]
                       }`}>
                         {message.user_avatar || message.user_name.charAt(0)}
                       </div>

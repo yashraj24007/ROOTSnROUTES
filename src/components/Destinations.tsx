@@ -70,15 +70,15 @@ const Destinations = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Iconic Destinations
+            {t('explore.destinations.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover the hidden gems and famous attractions across Jharkhand's beautiful districts
+            {t('explore.destinations.subtitle')}
           </p>
           <div className="flex justify-end mt-8">
             <Link to="/destinations">
               <Button variant="outline" className="gap-2">
-                View All {allDestinations.length} Destinations
+                {t('common.viewAll')} {allDestinations.length} {t('explore.destinations.destinationsLabel')}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>

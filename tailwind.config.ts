@@ -237,6 +237,16 @@ export default {
             transform: "translateY(0)" 
           },
         },
+        "fadeIn": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(10px)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)"
+          }
+        },
         "scale-in": {
           "0%": { 
             opacity: "0", 
@@ -263,6 +273,7 @@ export default {
         // Tourism animations
         "gentle-float": "gentle-float 6s ease-in-out infinite",
         "fade-in-up": "fade-in-up 0.8s ease-out",
+        "fadeIn": "fadeIn 0.5s ease-out",
         "scale-in": "scale-in 0.6s ease-out",
         "shimmer": "shimmer 2s linear infinite",
         "water-flow": "water-flow 4s ease-in-out infinite",

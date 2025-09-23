@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -41,14 +41,25 @@ const AIChatbot = () => {
   
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollToBottom = useCallback(() => {
+    if (shouldAutoScroll && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [shouldAutoScroll]);
+
+  // Handle scroll events to detect if user is manually scrolling
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const element = event.currentTarget;
+    const isNearBottom = element.scrollHeight - element.scrollTop - element.clientHeight < 50;
+    setShouldAutoScroll(isNearBottom);
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatState.messages]);
+  }, [chatState.messages, scrollToBottom]);
 
   // Initialize with welcome message
   useEffect(() => {
@@ -71,7 +82,7 @@ const AIChatbot = () => {
         messages: [welcomeMessage]
       }));
     }
-  }, [chatState.isOpen]);
+  }, [chatState.isOpen, chatState.messages.length]);
 
   const quickActionButtons: QuickAction[] = [
     { label: "Destinations", action: "destinations", icon: "🏔️" },
@@ -318,7 +329,11 @@ const AIChatbot = () => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div 
+              className="flex-1 overflow-y-auto p-4 space-y-4"
+              ref={messagesContainerRef}
+              onScroll={handleScroll}
+            >
               {chatState.messages.map((message) => (
                 <div
                   key={message.id}

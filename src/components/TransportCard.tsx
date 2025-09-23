@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, Phone, Globe, MapPin, Clock } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface TransportCardProps {
   name: string;
@@ -18,16 +19,17 @@ interface TransportCardProps {
 
 const TransportCard = ({ 
   name, 
-  type, 
-  rating, 
-  description, 
-  routes, 
-  timing, 
-  avgFare, 
-  contact, 
+  type,
+  rating,
+  description,
+  routes,
+  timing,
+  avgFare,
+  contact,
   icon,
   bookingUrl
 }: TransportCardProps) => {
+  const { t } = useLanguage();
   return (
     <Card className="p-6 bg-card border-border hover:shadow-card transition-all duration-300">
       <div className="flex items-start gap-4">
@@ -50,7 +52,7 @@ const TransportCard = ({
           
           <div className="space-y-3 mb-4">
             <div>
-              <h4 className="font-medium text-foreground mb-2">Key Routes:</h4>
+              <h4 className="font-medium text-foreground mb-2">{t('transport.keyRoutes')}:</h4>
               <div className="flex flex-wrap gap-2">
                 {routes.map((route, index) => (
                   <Badge key={index} variant="outline" className="text-xs">
@@ -67,20 +69,20 @@ const TransportCard = ({
               </div>
               <div className="flex items-center gap-1">
                 <span className="font-medium text-primary">{avgFare}</span>
-                <span>Average Fare</span>
+                <span>{t('transport.averageFare')}</span>
               </div>
             </div>
           </div>
           
           <div className="flex items-center justify-between">
             <div className="text-sm text-muted-foreground">
-              Contact: {contact}
+              {t('transport.contact')}: {contact}
             </div>
             <div className="flex gap-2">
               {!bookingUrl ? (
                 <Button variant="outline" size="sm">
                   <Phone className="w-4 h-4" />
-                  Call
+                  {t('transport.call')}
                 </Button>
               ) : (
                 <Button 
@@ -90,12 +92,12 @@ const TransportCard = ({
                   className="bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600 text-white"
                 >
                   <Globe className="w-4 h-4 mr-2" />
-                  Book Now
+                  {t('common.bookNow')}
                 </Button>
               )}
               <Button variant="outline" size="sm">
                 <Phone className="w-4 h-4" />
-                Contact
+                {t('transport.contact')}
               </Button>
             </div>
           </div>

@@ -35,7 +35,9 @@ export const translations = {
       next: 'Next',
       previous: 'Previous',
       close: 'Close',
-      open: 'Open'
+      open: 'Open',
+      exploreMap: 'Explore Map',
+      tryAIAssistant: 'Try AI Assistant'
     },
 
     // HOMEPAGE CONTENT
@@ -44,7 +46,8 @@ export const translations = {
       subtitle: 'Jharkhand',
       description: 'Experience authentic village life, eco-tourism, and rich cultural heritage through our AI-powered travel platform.',
       exploreButton: 'Explore Destinations',
-      bookButton: 'Book Experience'
+      bookButton: 'Book Experience',
+      aiPlanningButton: 'AI Planning'
     },
 
     features: {
@@ -65,6 +68,18 @@ export const translations = {
       support: {
         title: '24/7 Support',
         description: 'Round-the-clock assistance for all your travel needs'
+      },
+      interactiveMap: {
+        title: 'Interactive Districts Map',
+        description: 'Explore all 24 districts of Jharkhand with our interactive map featuring detailed information about each region.'
+      },
+      photoSharing: {
+        title: 'Photo Sharing',
+        description: 'Share your travel memories and discover hidden gems through community photos.'
+      },
+      smartNavigation: {
+        title: 'Smart Navigation',
+        description: 'Get intelligent route suggestions and local transportation options.'
       }
     },
 
@@ -91,7 +106,8 @@ export const translations = {
     explore: {
       destinations: {
         title: 'Iconic Destinations',
-        subtitle: 'Explore the most breathtaking places in Jharkhand',
+        subtitle: 'Discover the hidden gems and famous attractions across Jharkhand\'s beautiful districts',
+        destinationsLabel: 'Destinations',
         page: {
           title: 'Explore Destinations',
           subtitle: 'Discover the breathtaking beauty of Jharkhand\'s natural wonders, ancient temples, and cultural heritage sites',
@@ -223,7 +239,17 @@ export const translations = {
         helpline: 'Jharkhand Transport Helpline',
         emergency: 'Emergency Services',
         booking: 'Booking Assistance'
-      }
+      },
+      keyRoutes: 'Key Routes',
+      averageFare: 'Average Fare',
+      call: 'Call'
+    },
+
+    // MAP SECTION
+    map: {
+      selectDistrict: 'Select a District',
+      selectDistrictDescription: 'Click on any district marker to learn more about its attractions and specialities.',
+      quickFacts: 'Quick Facts'
     },
 
     // SUPPORT SECTION (Help & Customer Service)
@@ -355,6 +381,14 @@ export const translations = {
       }
     },
 
+    // CTA SECTION
+    cta: {
+      title: 'Ready to Explore Jharkhand?',
+      description: 'Let our AI assistant help you plan the perfect eco-tourism adventure',
+      startPlanningButton: 'Start Planning with AI',
+      browseDestinationsButton: 'Browse Destinations'
+    },
+
     // FOOTER SECTION
     footer: {
       tagline: 'Discover the authentic beauty of Jharkhand through sustainable eco-tourism',
@@ -417,16 +451,19 @@ export const translations = {
       next: 'अगला',
       previous: 'पिछला',
       close: 'बंद करें',
-      open: 'खोलें'
+      open: 'खोलें',
+      exploreMap: 'नक्शा खोजें',
+      tryAIAssistant: 'AI सहायक आज़माएं'
     },
 
     // HOMEPAGE CONTENT
     hero: {
       title: 'झारखंड के छुपे हुए रत्नों को',
       subtitle: 'खोजें',
-      description: 'हमारे AI-संचालित ट्रैवल प्लेटफॉर्म के माध्यम से प्रामाणिक गांव जीवन का अनुभव करें',
+      description: 'हमारे AI-संचालित ट्रैवल प्लेटफॉर्म के माध्यम से प्रामाणिक ग्रामीण जीवन, पर्यावरण-पर्यटन, और समृद्ध सांस्कृतिक विरासत का अनुभव करें',
       exploreButton: 'गंतव्य खोजें',
-      bookButton: 'अनुभव बुक करें'
+      bookButton: 'अनुभव बुक करें',
+      aiPlanningButton: 'AI योजना'
     },
 
     // MARKETPLACE SECTION (स्थानीय बाज़ार)
@@ -476,6 +513,18 @@ export const translations = {
       support: {
         title: '24/7 सहायता',
         description: 'चौबीसों घंटे सहायता'
+      },
+      interactiveMap: {
+        title: 'इंटरैक्टिव जिला मानचित्र',
+        description: 'हमारे इंटरैक्टिव मानचित्र के साथ झारखंड के सभी 24 जिलों को खोजें'
+      },
+      photoSharing: {
+        title: 'फोटो शेयरिंग',
+        description: 'अपनी यात्रा की यादों को साझा करें और समुदाय के फोटो के माध्यम से छुपे हुए रत्न खोजें'
+      },
+      smartNavigation: {
+        title: 'स्मार्ट नेवीगेशन',
+        description: 'बुद्धिमान रूट सुझाव और स्थानीय परिवहन विकल्प प्राप्त करें'
       }
     },
 
@@ -496,6 +545,38 @@ export const translations = {
         number: '10K+',
         label: 'खुश यात्री'
       }
+    },
+
+    // EXPLORE SECTION (गंतव्य और स्थान)
+    explore: {
+      destinations: {
+        title: 'प्रतिष्ठित गंतव्य',
+        subtitle: 'झारखंड के सुंदर जिलों में छुपे हुए रत्न और प्रसिद्ध आकर्षणों की खोज करें',
+        destinationsLabel: 'गंतव्य'
+      }
+    },
+
+    // TRANSPORT SECTION (परिवहन)
+    transport: {
+      keyRoutes: 'मुख्य रूट',
+      averageFare: 'औसत किराया',
+      contact: 'संपर्क',
+      call: 'कॉल करें'
+    },
+
+    // MAP SECTION (मानचित्र)
+    map: {
+      selectDistrict: 'एक जिला चुनें',
+      selectDistrictDescription: 'आकर्षण और विशेषताओं के बारे में जानने के लिए किसी भी जिला मार्कर पर क्लिक करें।',
+      quickFacts: 'त्वरित तथ्य'
+    },
+
+    // CTA SECTION
+    cta: {
+      title: 'झारखंड की खोज के लिए तैयार हैं?',
+      description: 'हमारे AI सहायक से आदर्श पर्यावरण-पर्यटन रोमांच की योजना बनवाएं',
+      startPlanningButton: 'AI के साथ योजना शुरू करें',
+      browseDestinationsButton: 'गंतव्य ब्राउज़ करें'
     },
 
     // ABOUT SECTION (Company & Regional Information)

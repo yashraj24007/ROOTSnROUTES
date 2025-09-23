@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Youtube, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useState } from "react";
@@ -122,24 +122,34 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-subtle border-t border-border">
-      <div className="container mx-auto px-6 py-16">
+      <div className="container mx-auto px-6 py-8">
         {/* Single Row Layout */}
-        <div className="flex flex-wrap items-start justify-between gap-8 mb-12">
+        <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
           {/* Brand Section */}
           <div className="flex-shrink-0">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-card rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-pink">
-                R&R
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/logo.png" 
+                alt="ROOTSnROUTES Logo" 
+                className="w-12 h-12 object-contain"
+                onError={(e) => {
+                  // Fallback if logo doesn't load - show the original R&R icon
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  const fallback = document.createElement('div');
+                  fallback.className = "w-12 h-12 bg-gradient-card rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-pink";
+                  fallback.textContent = "R&R";
+                  (e.target as HTMLImageElement).parentNode?.insertBefore(fallback, e.target);
+                }}
+              />
               <span className="text-xl font-bold text-foreground">ROOTSnROUTES</span>
             </div>
-            <p className="text-muted-foreground mb-6 leading-relaxed max-w-xs">
+            <p className="text-muted-foreground mb-4 leading-relaxed max-w-xs">
               {t('footer.tagline')}
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <span className="text-muted-foreground">info@rootsnroutes.com</span>
+                <span className="text-muted-foreground">rootsnroutesofficial@gmail.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary" />
@@ -150,12 +160,12 @@ const Footer = () => {
 
           {/* Explore Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent">
                 {t('footer.explore')}
               </span>
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <Link to="/destinations" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.destinations')}
               </Link>
@@ -173,12 +183,12 @@ const Footer = () => {
 
           {/* Services Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                 {t('footer.services')}
               </span>
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <Link to="/tour-packages" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.tourPackages')}
               </Link>
@@ -196,12 +206,12 @@ const Footer = () => {
 
           {/* AI Services Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-violet-500 to-purple-600 bg-clip-text text-transparent">
                 AI Services
               </span>
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <Link to="/ai-trip-planner" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 AI Trip Planner
               </Link>
@@ -219,12 +229,12 @@ const Footer = () => {
 
           {/* Support Links */}
           <div className="flex-shrink-0">
-            <h4 className="text-xl font-bold text-foreground mb-6 flex items-center">
+            <h4 className="text-xl font-bold text-foreground mb-4 flex items-center">
               <span className="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
                 {t('footer.support')}
               </span>
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <Link to="/support" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
                 {t('footer.helpCenter')}
               </Link>
@@ -247,40 +257,71 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="border-t border-border pt-12">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div>
-              <h4 className="text-2xl font-bold text-foreground mb-2">{t('footer.newsletter')}</h4>
-              <p className="text-muted-foreground">
-                {t('footer.newsletterDesc')}
-              </p>
-            </div>
-            <div className="flex gap-4 w-full lg:w-auto">
-              <form onSubmit={handleSubscribe} className="flex gap-4 w-full lg:w-auto">
+        {/* Stay Connected Section */}
+        <div className="border-t border-border pt-6">
+          <div className="text-center mb-4">
+            <h4 className="text-2xl font-bold text-foreground mb-2">Stay Connected</h4>
+            <p className="text-muted-foreground mb-4">
+              Subscribe to our newsletter and follow us on social media for the latest updates
+            </p>
+            
+            {/* Newsletter Signup */}
+            <div className="flex justify-center mb-4">
+              <form onSubmit={handleSubscribe} className="flex gap-4 w-full max-w-md">
                 <Input
                   type="email"
                   placeholder={t('footer.emailPlaceholder')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="lg:w-80 bg-card border-border focus:border-primary"
+                  className="bg-card border-border focus:border-primary"
                   required
                 />
                 <Button 
                   type="submit" 
                   variant="default" 
-                  className="px-8 bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600"
+                  className="px-6 bg-gradient-to-r from-forest-500 to-autumn-500 hover:from-forest-600 hover:to-autumn-600"
                   disabled={isSubscribing}
                 >
-                  {isSubscribing ? "Subscribing..." : t('footer.subscribe')}
+                  {isSubscribing ? "..." : t('footer.subscribe')}
                 </Button>
               </form>
+            </div>
+            
+            {/* Social Media Icons */}
+            <div className="flex justify-center gap-4">
+              <a 
+                href="#facebook" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
+                aria-label="Follow us on Facebook"
+              >
+                <Facebook className="w-6 h-6 text-muted-foreground group-hover:text-blue-600 transition-colors" />
+              </a>
+              <a 
+                href="#youtube" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
+                aria-label="Follow us on YouTube"
+              >
+                <Youtube className="w-6 h-6 text-muted-foreground group-hover:text-red-600 transition-colors" />
+              </a>
+              <a 
+                href="#instagram" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
+                aria-label="Follow us on Instagram"
+              >
+                <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-pink-600 transition-colors" />
+              </a>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-border mt-12 pt-8 text-center">
+        <div className="border-t border-border mt-6 pt-4 text-center">
           <p className="text-muted-foreground">
             {t('footer.copyright')}
           </p>

@@ -47,6 +47,7 @@ const Restaurants = lazy(() => import('./pages/Restaurants'));
 const AITripPlannerPage = lazy(() => import('./pages/AITripPlannerPage'));
 const SmartWeatherPage = lazy(() => import('./pages/SmartWeatherPage'));
 const PredictiveBookingPage = lazy(() => import('./pages/PredictiveBookingPage'));
+const Settings = lazy(() => import('./pages/Settings'));
 const TestPage = lazy(() => import('./pages/TestPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -128,6 +129,7 @@ const App = () => {
                       <Route path="/contact-us" element={<Support />} />
                       <Route path="/report-issues" element={<Support />} />
                       <Route path="/profile" element={<UserProfile />} />
+                      <Route path="/settings" element={<Settings />} />
                       <Route path="/favorites" element={<Favorites />} />
                       <Route path="/test" element={<TestPage />} />
                       <Route path="*" element={<NotFound />} />

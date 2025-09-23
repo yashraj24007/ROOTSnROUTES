@@ -4,5 +4,6 @@ import "./index.css";
 import "./styles/animations.css";
 import "./styles/branding.css";
 import "./styles/accessibility.css";
+import "./utils/scrollRestoration.ts";
 
 createRoot(document.getElementById("root")!).render(<App />);
