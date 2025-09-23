@@ -1,5 +1,5 @@
 ﻿import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import VideoBackground from "@/components/VideoBackground";
 import { useEffect, useState } from "react";
@@ -27,64 +27,77 @@ const Hero = () => {
         showControls={false}
       >
         {/* Hero Content */}
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10" />
+        
         <div className="relative z-20 min-h-screen flex items-center justify-center px-4 py-12">
           <div className={`text-center max-w-6xl mx-auto transition-all duration-1000 ease-out mt-8 md:mt-12 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
+            
+            {/* Tagline */}
+            <div className="mb-4 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <p className="text-emerald-200 text-lg md:text-xl font-medium tracking-wide uppercase">
+                {t('hero.tagline')}
+              </p>
+            </div>
             
             {/* Hero Headline */}
             <div className="mb-8">
               <h1 className="mb-6 leading-tight animate-fade-in-up text-white dark:text-white" style={{
                 fontFamily: 'Poppins, sans-serif',
                 fontWeight: '700',
-                fontSize: 'clamp(3rem, 8vw, 4.5rem)',
+                fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
                 textShadow: '0px 2px 8px rgba(0, 0, 0, 0.8), 0px 4px 16px rgba(0, 0, 0, 0.6)',
                 letterSpacing: '-0.02em',
                 lineHeight: '1.1',
-                filter: 'drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5))'
+                filter: 'drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5))',
+                animationDelay: '0.2s'
               }}>
-                {t('hero.title')} {t('hero.subtitle')}
+                {t('hero.title')}
               </h1>
               
               {/* Subtext */}
-              <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed text-white/95 dark:text-white/95 font-medium drop-shadow-lg bg-black/40 dark:bg-black/30 backdrop-blur-sm px-8 py-4 rounded-2xl border border-white/20 shadow-xl" style={{ animationDelay: '0.3s' }}>
+              <p className="text-base md:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed text-white/95 dark:text-white/95 font-medium drop-shadow-lg bg-black/50 dark:bg-black/40 backdrop-blur-md px-8 py-4 rounded-2xl border border-white/30 shadow-xl" style={{ animationDelay: '0.3s', whiteSpace: 'nowrap' }}>
                 {t('hero.description')}
               </p>
             </div>
 
-            {/* Styled Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12" style={{ animationDelay: '0.6s' }}>
-              {/* Explore Destinations - Gradient Button */}
+            {/* Enhanced Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8" style={{ animationDelay: '0.6s' }}>
+              {/* Explore Destinations - Enhanced Primary Button */}
               <Link to="/destinations">
                 <Button 
                   size="lg" 
-                  className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 text-white font-semibold px-10 py-4 rounded-full shadow-2xl transition-all duration-500 ease-out hover:scale-110 hover:shadow-emerald-500/50 active:scale-95 border-0 text-lg"
+                  className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 text-white font-bold px-12 py-5 rounded-full shadow-2xl transition-all duration-500 ease-out hover:scale-110 hover:shadow-emerald-500/60 active:scale-95 border-0 text-lg ring-4 ring-emerald-500/30 hover:ring-emerald-400/50"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {t('hero.exploreButton')}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/20 to-transparent transition-opacity duration-500" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/30 to-transparent transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-cyan-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
                 </Button>
               </Link>
               
-              {/* AI Planning - Outlined Button */}
+              {/* Smart Travel Planning - Secondary Button */}
               <Link to="/ai-trip-planner">
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="group relative overflow-hidden bg-transparent border-2 border-white/70 hover:border-white text-white hover:text-black font-semibold px-10 py-4 rounded-full backdrop-blur-sm shadow-lg hover:shadow-white/30 hover:shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-white active:scale-95 text-lg"
+                  className="group relative overflow-hidden bg-transparent border-2 border-white/70 hover:border-emerald-300 text-white hover:text-emerald-900 font-semibold px-10 py-4 rounded-full backdrop-blur-sm shadow-lg hover:shadow-emerald-300/30 hover:shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-emerald-300 active:scale-95 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {t('hero.aiPlanningButton')}
+                    <Sparkles className="w-5 h-5" />
                   </span>
                   <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 </Button>
               </Link>
             </div>
-
+            
             {/* Interactive Feature Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto" style={{ animationDelay: '0.9s' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto animate-fade-in-up" style={{ animationDelay: '1.0s' }}>
               {/* Natural Wonders Card */}
               <Link to="/natural-wonders" className="group block">
                 <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-emerald-100/20 to-teal-100/20 border border-emerald-200/30 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 hover:border-emerald-300/50 hover:bg-gradient-to-br hover:from-emerald-200/30 hover:to-teal-200/30">

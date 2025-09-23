@@ -42,12 +42,13 @@ export const translations = {
 
     // HOMEPAGE CONTENT
     hero: {
-      title: 'Discover Hidden Gems of',
-      subtitle: 'Jharkhand',
-      description: 'Experience authentic village life, eco-tourism, and rich cultural heritage through our AI-powered travel platform.',
+      tagline: 'Rooted in Culture, Driven by Nature',
+      title: 'Unveil Jharkhand\'s Untouched Beauty',
+      description: 'Experience eco-tourism, village life, and cultural heritage — powered by AI.',
       exploreButton: 'Explore Destinations',
       bookButton: 'Book Experience',
-      aiPlanningButton: 'AI Planning'
+      aiPlanningButton: 'Smart Travel Planning',
+      trustSignal: 'Trusted by 5,000+ travelers'
     },
 
     features: {
