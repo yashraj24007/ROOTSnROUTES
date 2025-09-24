@@ -97,7 +97,7 @@ const CommunityChat = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <Card className="lg:col-span-3">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">

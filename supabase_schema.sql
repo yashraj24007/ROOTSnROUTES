@@ -1,5 +1,64 @@
--- Supabase Database Schema for ROOTSnROUTES Messaging System
+-- Supabase Database Schema for ROOTSnROUTES Platform
 -- Execute these commands in your Supabase SQL editor
+
+-- =============================================================================
+-- USER PROFILES TABLE (for Google OAuth and user management)
+-- =============================================================================
+
+-- Create profiles table for additional user data
+CREATE TABLE IF NOT EXISTS profiles (
+    id UUID REFERENCES auth.users ON DELETE CASCADE,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+    username TEXT UNIQUE,
+    full_name TEXT,
+    avatar_url TEXT,
+    phone TEXT,
+    user_type TEXT DEFAULT 'traveller' CHECK (user_type IN ('traveller', 'admin', 'guide', 'local')),
+    location TEXT,
+    preferred_language TEXT DEFAULT 'en',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    
+    PRIMARY KEY (id),
+    CONSTRAINT username_length CHECK (char_length(username) >= 3)
+);
+
+-- Set up Row Level Security (RLS) for profiles
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+
+-- Create policies for profiles
+CREATE POLICY "Public profiles are viewable by everyone." ON profiles
+    FOR SELECT USING (true);
+
+CREATE POLICY "Users can insert their own profile." ON profiles
+    FOR INSERT WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "Users can update own profile." ON profiles
+    FOR UPDATE USING (auth.uid() = id);
+
+-- Create function to handle new user registration (Google OAuth)
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO public.profiles (id, full_name, avatar_url, username)
+    VALUES (
+        NEW.id,
+        NEW.raw_user_meta_data->>'full_name',
+        NEW.raw_user_meta_data->>'avatar_url',
+        COALESCE(NEW.raw_user_meta_data->>'user_name', split_part(NEW.email, '@', 1))
+    );
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Create trigger for new user registration
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created
+    AFTER INSERT ON auth.users
+    FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+-- =============================================================================
+-- MESSAGING SYSTEM TABLES
+-- =============================================================================
 
 -- Create user_messages table for feedback and support
 CREATE TABLE IF NOT EXISTS user_messages (

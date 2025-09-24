@@ -49,6 +49,8 @@ const SmartWeatherPage = lazy(() => import('./pages/SmartWeatherPage'));
 const PredictiveBookingPage = lazy(() => import('./pages/PredictiveBookingPage'));
 const Settings = lazy(() => import('./pages/Settings'));
 const TestPage = lazy(() => import('./pages/TestPage'));
+const GoogleAuthTestPage = lazy(() => import('./pages/GoogleAuthTestPage'));
+const TestSupabasePage = lazy(() => import('./pages/TestSupabasePage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
@@ -132,6 +134,8 @@ const App = () => {
                       <Route path="/settings" element={<Settings />} />
                       <Route path="/favorites" element={<Favorites />} />
                       <Route path="/test" element={<TestPage />} />
+                      <Route path="/google-auth-test" element={<GoogleAuthTestPage />} />
+                      <Route path="/supabase-test" element={<TestSupabasePage />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Suspense>
