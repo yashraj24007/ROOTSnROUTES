@@ -273,7 +273,7 @@ export const translations = {
         email: {
           title: 'Email Support',
           description: 'Send us your queries about Jharkhand destinations',
-          contact: 'support@rootsnroutes.com',
+          contact: 'rootsnroutesofficial@gmail.com',
           availability: 'Response within 2 hours'
         },
         chat: {

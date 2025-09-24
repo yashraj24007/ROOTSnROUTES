@@ -1,17 +1,23 @@
 import React from 'react';
 import { districtsData } from '../data/newDistrictsData';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import DevelopmentNotice from '@/components/DevelopmentNotice';
 
 const DestinationsList = () => {
   const districts = ['Khunti', 'Kodarma', 'Latehar', 'Lohardaga'];
   
   return (
-    <div className="container mx-auto p-6 bg-white min-h-screen">
-      <h1 className="text-4xl font-bold text-center mb-8 text-blue-600">
-        🎉 NEW DESTINATIONS ADDED! 🎉
-      </h1>
-      <p className="text-center text-lg mb-8 text-gray-700">
-        Total Destinations Added: <span className="font-bold text-green-600">{districtsData.length}</span>
-      </p>
+    <>
+      <DevelopmentNotice />
+      <Header />
+      <div className="container mx-auto p-6 bg-background min-h-screen pt-20">
+        <h1 className="text-4xl font-bold text-center mb-8 text-primary">
+          🎉 NEW DESTINATIONS ADDED! 🎉
+        </h1>
+        <p className="text-center text-lg mb-8 text-muted-foreground">
+          Total Destinations Added: <span className="font-bold text-primary">{districtsData.length}</span>
+        </p>
 
       {districts.map((district) => {
         const districtPlaces = districtsData.filter(d => d.district === district);
@@ -19,14 +25,14 @@ const DestinationsList = () => {
         const hiddenGems = districtPlaces.filter(d => d.type === 'hidden');
 
         return (
-          <div key={district} className="mb-8 border-2 border-blue-200 rounded-lg p-6 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 text-purple-700 border-b-2 border-purple-300 pb-2">
+          <div key={district} className="mb-8 border-2 border-border rounded-lg p-6 shadow-lg bg-card">
+            <h2 className="text-2xl font-bold mb-4 text-primary border-b-2 border-border pb-2">
               📍 {district.toUpperCase()} DISTRICT ({districtPlaces.length} places)
             </h2>
             
             {/* Famous Places */}
             <div className="mb-4">
-              <h3 className="text-lg font-semibold text-green-600 mb-2">
+              <h3 className="text-lg font-semibold text-primary mb-2">
                 🌟 Famous Places ({famousPlaces.length})
               </h3>
               <div className="grid md:grid-cols-2 gap-2">
@@ -95,8 +101,10 @@ const DestinationsList = () => {
           <li><strong>Best time to visit</strong> information</li>
           <li><strong>Filter system</strong> by district, type, and category</li>
         </ul>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -1,29 +1,35 @@
 import React from 'react';
 import GlowingLine from '@/components/GlowingLine';
 import SectionDivider from '@/components/SectionDivider';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import DevelopmentNotice from '@/components/DevelopmentNotice';
 
 const GlowingLineDemo = () => {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <>
+      <DevelopmentNotice />
+      <Header />
+      <div className="min-h-screen bg-background pt-16">
       {/* Full screen responsive demo */}
       <div className="mb-4">
         <GlowingLine responsive={true} />
       </div>
       
       {/* Embedded responsive examples */}
-      <div className="bg-gray-800 p-4 sm:p-8 space-y-8">
+      <div className="bg-card p-4 sm:p-8 space-y-8">
         <div className="text-center">
-          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-2">
             Responsive Glowing Lines Demo
           </h1>
-          <p className="text-gray-300 text-sm sm:text-base">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Lines adapt automatically to different screen sizes
           </p>
         </div>
         
         {/* Auto-responsive section dividers */}
         <div className="space-y-6">
-          <h2 className="text-xl sm:text-2xl text-cyan-300 font-semibold">
+          <h2 className="text-xl sm:text-2xl text-primary font-semibold">
             Auto-Responsive Lines
           </h2>
           <SectionDivider responsive={true} delay={1000} />
@@ -99,7 +105,7 @@ const GlowingLineDemo = () => {
           <h3 className="text-lg text-cyan-300 font-medium mb-2">
             Testing Info
           </h3>
-          <div className="text-gray-300 text-sm space-y-1">
+          <div className="text-muted-foreground text-sm space-y-1">
             <p>• Mobile: Lines are smaller with reduced glow</p>
             <p>• Tablet: Medium-sized lines with balanced effects</p>
             <p>• Desktop: Full-sized lines with maximum glow</p>
@@ -107,7 +113,9 @@ const GlowingLineDemo = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 

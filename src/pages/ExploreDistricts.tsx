@@ -5,12 +5,18 @@ import { Card } from '@/components/ui/card';
 import { ArrowLeft, MapPin, Navigation, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import DevelopmentNotice from '@/components/DevelopmentNotice';
 
 const ExploreDistricts = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/5 pt-24 pb-16">
+    <>
+      <DevelopmentNotice />
+      <Header />
+      <div className="min-h-screen bg-background pt-24 pb-16">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="mb-8">
@@ -103,7 +109,9 @@ const ExploreDistricts = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 

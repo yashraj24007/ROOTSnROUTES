@@ -585,7 +585,7 @@ export const translations = {
         email: {
           title: 'Email Support',
           description: 'Send us your queries and get detailed responses',
-          contact: 'support@rootsnroutes.com',
+          contact: 'rootsnroutesofficial@gmail.com',
           availability: 'Response within 2 hours'
         },
         chat: {
@@ -802,7 +802,7 @@ export const translations = {
         email: {
           title: 'Email Support',
           description: 'Send us your queries and get detailed responses',
-          contact: 'support@rootsnroutes.com',
+          contact: 'rootsnroutesofficial@gmail.com',
           availability: 'Response within 2 hours'
         },
         chat: {
@@ -1110,7 +1110,7 @@ export const translations = {
         email: {
           title: 'ईमेल सहायता',
           description: 'हमें अपने प्रश्न भेजें और विस्तृत उत्तर प्राप्त करें',
-          contact: 'support@rootsnroutes.com',
+          contact: 'rootsnroutesofficial@gmail.com',
           availability: '2 घंटे में उत्तर'
         },
         chat: {
@@ -1520,7 +1520,7 @@ export const translations = {
         email: {
           title: 'ईमेल साहायता',
           description: 'आले आमाक् प्रश्न कुल्मे आर विस्तृत उत्तर निमे',
-          contact: 'support@rootsnroutes.com',
+          contact: 'rootsnroutesofficial@gmail.com',
           availability: '2 घंटा रे उत्तर'
         },
         chat: {

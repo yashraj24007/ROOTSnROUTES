@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Send, Bot, User } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import DevelopmentNotice from '@/components/DevelopmentNotice';
 
 interface Message {
   id: string;
@@ -143,8 +146,11 @@ const Chatbot: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-4">
-      <div className="max-w-4xl mx-auto">
+    <>
+      <DevelopmentNotice />
+      <Header />
+      <div className="min-h-screen bg-background pt-16 p-4">
+        <div className="max-w-4xl mx-auto">
         <Card className="h-[80vh] flex flex-col">
           <CardHeader className="border-b">
             <CardTitle className="flex items-center gap-2">
@@ -231,8 +237,10 @@ const Chatbot: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
