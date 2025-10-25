@@ -32,12 +32,12 @@ const Hero = () => {
         overlayOpacity={0.2}
         showControls={false}
       >
-        {/* Enhanced overlay for rich, natural background tone */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-800/25 to-slate-900/50 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/20 via-transparent to-teal-900/20 z-10" />
-        <div className="absolute inset-0 bg-black/20 z-10" />
+        {/* Lighter overlay for brighter appearance */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-slate-800/15 to-slate-900/40 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/10 via-transparent to-teal-900/10 z-10" />
+        <div className="absolute inset-0 bg-black/15 z-10" />
         
-        <div className="relative z-20 min-h-[calc(100vh-140px)] flex flex-col justify-center px-4 py-8 md:py-16">
+        <div className="relative z-20 min-h-[calc(100vh-140px)] flex flex-col justify-center px-4 py-12 md:py-20 pb-24">
           {/* Main Hero Content - Centered */}
           <div className={`text-center max-w-5xl mx-auto transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -52,10 +52,10 @@ const Hero = () => {
             
             {/* Hero Headline */}
             <div className="mb-12">
-              <h1 className="mb-8 leading-tight animate-fade-in-up text-white" style={{
+              <h1 className="mb-8 leading-tight animate-fade-in-up text-white whitespace-nowrap" style={{
                 fontFamily: 'Poppins, sans-serif',
                 fontWeight: '700',
-                fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 textShadow: '0px 2px 8px rgba(0, 0, 0, 0.8), 0px 4px 16px rgba(0, 0, 0, 0.6)',
                 letterSpacing: '-0.02em',
                 lineHeight: '1.2',
@@ -102,18 +102,18 @@ const Hero = () => {
             </div>
             
             {/* Feature Cards Section */}
-            <div className={`animate-fade-in-up ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ animationDelay: '1.0s' }}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className={`animate-fade-in-up mt-12 pb-16 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ animationDelay: '1.0s' }}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
                 {/* Natural Wonders Card */}
                 <Link to="/natural-wonders" className="group block">
-                  <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-emerald-900/25 to-teal-900/20 border border-emerald-200/30 dark:border-emerald-200/25 backdrop-blur-md shadow-lg transition-all duration-500 ease-out hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/20 hover:border-emerald-300/50 dark:hover:border-emerald-300/40 hover:bg-gradient-to-br hover:from-emerald-800/30 hover:to-teal-800/25 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/8 to-teal-400/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="text-center p-6 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/30 hover:border-white/55 hover:bg-white/25 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="relative z-10">
-                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-2xl">🏞️</div>
-                      <h3 className="font-bold text-white text-lg mb-2 group-hover:text-emerald-100 transition-colors duration-300 tracking-wide drop-shadow-2xl">
+                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-xl">🏞️</div>
+                      <h3 className="font-bold text-white text-xl mb-2 group-hover:text-emerald-100 transition-colors duration-300 tracking-wide drop-shadow-lg">
                         Natural Wonders
                       </h3>
-                      <p className="text-white/95 group-hover:text-white transition-colors duration-300 text-sm font-medium drop-shadow-xl">
+                      <p className="text-white/95 group-hover:text-white transition-colors duration-300 text-base font-medium drop-shadow-md">
                         Waterfalls & Forests
                       </p>
                     </div>
@@ -122,14 +122,14 @@ const Hero = () => {
                 
                 {/* Cultural Heritage Card */}
                 <Link to="/cultural-heritage" className="group block">
-                  <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-amber-900/25 to-orange-900/20 border border-orange-200/30 dark:border-orange-200/25 backdrop-blur-md shadow-lg transition-all duration-500 ease-out hover:scale-105 hover:shadow-xl hover:shadow-orange-500/20 hover:border-orange-300/50 dark:hover:border-orange-300/40 hover:bg-gradient-to-br hover:from-amber-800/30 hover:to-orange-800/25 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400/8 to-amber-400/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="text-center p-6 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/30 hover:border-white/55 hover:bg-white/25 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="relative z-10">
-                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-2xl">🎨</div>
-                      <h3 className="font-bold text-white text-lg mb-2 group-hover:text-orange-100 transition-colors duration-300 tracking-wide drop-shadow-2xl">
+                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-xl">🎨</div>
+                      <h3 className="font-bold text-white text-xl mb-2 group-hover:text-orange-100 transition-colors duration-300 tracking-wide drop-shadow-lg">
                         Cultural Heritage
                       </h3>
-                      <p className="text-white/95 group-hover:text-white transition-colors duration-300 text-sm font-medium drop-shadow-xl">
+                      <p className="text-white/95 group-hover:text-white transition-colors duration-300 text-base font-medium drop-shadow-md">
                         Art & Traditions
                       </p>
                     </div>
@@ -138,14 +138,14 @@ const Hero = () => {
                 
                 {/* Authentic Stays Card */}
                 <Link to="/stays" className="group block">
-                  <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-slate-900/25 to-blue-900/20 border border-blue-200/30 dark:border-blue-200/25 backdrop-blur-md shadow-lg transition-all duration-500 ease-out hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-300/50 dark:hover:border-blue-300/40 hover:bg-gradient-to-br hover:from-slate-800/30 hover:to-blue-800/25 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/8 to-purple-400/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="text-center p-6 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 hover:border-white/55 hover:bg-white/25 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="relative z-10">
-                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-2xl">🏡</div>
-                      <h3 className="font-bold text-white text-lg mb-2 group-hover:text-blue-100 transition-colors duration-300 tracking-wide drop-shadow-2xl">
+                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-xl">🏡</div>
+                      <h3 className="font-bold text-white text-xl mb-2 group-hover:text-blue-100 transition-colors duration-300 tracking-wide drop-shadow-lg">
                         Authentic Stays
                       </h3>
-                      <p className="text-white/95 group-hover:text-white transition-colors duration-300 text-sm font-medium drop-shadow-xl">
+                      <p className="text-white/95 group-hover:text-white transition-colors duration-300 text-base font-medium drop-shadow-md">
                         Eco-lodges
                       </p>
                     </div>
