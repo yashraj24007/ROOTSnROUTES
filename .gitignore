@@ -32,3 +32,7 @@ dist-ssr
 # Note: .env.example should be committed to show required variables
 *.env
 !.env.example
+
+# Security cleanup files
+cleanup-security.ps1
+SECURITY_BREACH_FIX.md

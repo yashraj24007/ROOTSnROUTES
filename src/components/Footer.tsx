@@ -189,17 +189,20 @@ const Footer = () => {
               </span>
             </h4>
             <div className="space-y-2">
-              <Link to="/tour-packages" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
-                {t('footer.tourPackages')}
+              <Link to="/explore-districts" className="block text-muted-foreground hover:text-primary transition-colors font-medium">
+                Interactive Map
               </Link>
               <Link to="/stays" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.homestays')}
               </Link>
-              <Link to="/marketplace" className="block text-muted-foreground hover:text-primary transition-colors">
-                {t('footer.handicrafts')}
+              <Link to="/restaurants" className="block text-muted-foreground hover:text-primary transition-colors">
+                Local Dining
               </Link>
               <Link to="/local-guides" className="block text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.localGuides')}
+              </Link>
+              <Link to="/transport" className="block text-muted-foreground hover:text-primary transition-colors">
+                Transport Services
               </Link>
             </div>
           </div>

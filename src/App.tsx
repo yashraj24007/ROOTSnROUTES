@@ -94,7 +94,9 @@ const App = () => {
                       <Route path="/explore" element={<Explore />} />
                       <Route path="/destinations" element={<Destinations />} />
                       <Route path="/destinations/:id" element={<DestinationDetail />} />
+                      <Route path="/destination/:id" element={<DestinationDetail />} />
                       <Route path="/districts" element={<ExploreDistricts />} />
+                      <Route path="/explore-districts" element={<ExploreDistricts />} />
                       <Route path="/districts/:districtName" element={<DistrictDestinations />} />
                       <Route path="/destinations-list" element={<DestinationsList />} />
                       <Route path="/restaurants" element={<Restaurants />} />

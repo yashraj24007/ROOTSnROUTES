@@ -7,17 +7,26 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Star, Clock, IndianRupee, Camera, Eye, EyeOff, Filter, Search, ArrowRight } from "lucide-react";
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { allDestinations } from "@/data/completeDestinations";
 import FavoriteButton from "@/components/FavoriteButton";
 
 const Destinations = () => {
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeDistrict, setActiveDistrict] = useState("all");
   const [activeType, setActiveType] = useState("all");
   const [showHidden, setShowHidden] = useState(false);
+
+  // Check for district filter from URL params
+  useEffect(() => {
+    const districtParam = searchParams.get('district');
+    if (districtParam) {
+      setActiveDistrict(districtParam);
+    }
+  }, [searchParams]);
 
   // Calculate category counts dynamically
   const categories = useMemo(() => {
@@ -68,12 +77,12 @@ const Destinations = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-hero">
+      <section className="pt-24 pb-16 bg-gradient-to-br from-primary/90 via-accent/80 to-secondary/90">
         <div className="container mx-auto px-6">
           <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Explore Jharkhand</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Discover Jharkhand Destinations</h1>
             <p className="text-xl mb-8 max-w-4xl mx-auto">
-              Discover hidden gems, majestic waterfalls, ancient temples, and cultural heritage across Jharkhand's four beautiful districts
+              Explore over 200 destinations across all 24 districts - from hidden gems to famous landmarks
             </p>
             
             {/* Search Bar */}
