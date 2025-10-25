@@ -156,7 +156,7 @@ const About = () => {
       <DevelopmentNotice />
       <Header />
       
-      {/* Hero Section */}
+      {/* Hero Section - Enhanced Background */}
       <motion.section 
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{ 
@@ -171,25 +171,27 @@ const About = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${hundruFalls})` }}
         />
-        <div className="absolute inset-0 bg-gradient-hero opacity-80" />
-        <div className="absolute inset-0 bg-background/40" />
+        <div className="absolute inset-0 bg-gradient-hero opacity-90" />
+        <div className="absolute inset-0 bg-black/25 dark:bg-black/40" />
 
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold text-white mb-8"
+            className="text-5xl md:text-7xl font-bold text-white mb-8 drop-shadow-2xl"
             variants={shouldReduceMotion ? {} : itemVariants}
           >
             {t('about.title')}
           </motion.h1>
           <motion.p 
-            className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8 leading-relaxed"
+            className="text-xl md:text-2xl text-white/95 max-w-4xl mx-auto mb-8 leading-relaxed drop-shadow-lg"
             variants={shouldReduceMotion ? {} : itemVariants}
           >
             Connecting travelers with the authentic soul of Jharkhand through technology, sustainability, and community empowerment
           </motion.p>
           <motion.div variants={shouldReduceMotion ? {} : itemVariants}>
             <Link to="/destinations">
-              <Button variant="hero" size="lg">Start Your Journey</Button>
+              <Button variant="hero" size="lg" className="cta-primary-button font-semibold text-lg px-10 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300">
+                Start Your Journey
+              </Button>
             </Link>
           </motion.div>
         </div>
@@ -359,8 +361,8 @@ const About = () => {
               >
                 <Card className="p-8 bg-card/50 border-border hover:bg-card/80 transition-all duration-300 h-full">
                   <div className="flex items-start gap-6">
-                    <div className="w-16 h-16 bg-gradient-card rounded-2xl flex items-center justify-center flex-shrink-0">
-                      <feature.icon className="w-8 h-8 text-white" />
+                    <div className="w-16 h-16 bg-gradient-card rounded-2xl flex items-center justify-center flex-shrink-0 about-icon-container">
+                      <feature.icon className="w-8 h-8 text-white icon-text" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-foreground mb-4">{feature.title}</h3>
@@ -434,8 +436,8 @@ const About = () => {
                 whileHover={shouldReduceMotion ? {} : "hover"}
               >
                 <Card className="p-8 bg-card/50 border-border hover:bg-card/80 transition-all duration-300 text-center h-full">
-                  <div className="w-16 h-16 bg-gradient-nature rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <value.icon className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 bg-gradient-nature rounded-2xl flex items-center justify-center mx-auto mb-6 about-icon-container">
+                    <value.icon className="w-8 h-8 text-white icon-text" />
                   </div>
                   <h3 className="text-2xl font-bold text-foreground mb-4">{value.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{value.description}</p>
@@ -567,24 +569,32 @@ const About = () => {
       {/* FAQ Section */}
       <FAQ />
 
-      {/* CTA Section */}
+      {/* CTA Section - Enhanced with Better Button Styling */}
       <section className="py-20 bg-gradient-subtle">
         <div className="container mx-auto px-6">
           <Card className="bg-gradient-hero p-12 text-center border-0 shadow-2xl">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
                 Ready to Explore Jharkhand?
               </h2>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+              <p className="text-xl text-white/95 mb-8 leading-relaxed drop-shadow-lg">
                 Join thousands of travelers discovering the authentic beauty of Jharkhand through sustainable tourism
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/destinations">
-                  <Button variant="hero" size="lg" className="bg-white text-primary hover:bg-white/90">
+                  <Button 
+                    variant="hero" 
+                    size="lg" 
+                    className="w-full sm:w-auto cta-primary-button font-semibold text-lg px-10 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+                  >
                     Start Planning Now
                   </Button>
                 </Link>
-                <Button variant="hero-outline" size="lg" className="border-white text-white hover:bg-white/10">
+                <Button 
+                  variant="hero-outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto cta-secondary-button font-medium text-lg px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                >
                   Contact Our Team
                 </Button>
               </div>

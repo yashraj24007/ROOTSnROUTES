@@ -4,6 +4,28 @@
 */
 
 
+/* Enhanced Logo and Header Styling for Light Mode */
+
+.light .logo-enhanced img {
+    filter: brightness(1) contrast(1.1) saturate(1.1);
+    transition: filter 0.3s ease;
+}
+
+.light .logo-enhanced:hover img {
+    filter: brightness(1.1) contrast(1.2) saturate(1.2);
+}
+
+.light .logo-text {
+    color: hsl(140 70% 35%) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+.light .logo-enhanced:hover .logo-text {
+    color: hsl(140 75% 30%) !important;
+}
+
+
 /* Enhanced Hero Gradient Sections for Light Mode */
 
 .light .bg-gradient-hero {
@@ -511,4 +533,81 @@
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* About Page Icon Container Enhancements */
+
+.about-icon-container {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Enhanced icon visibility for light mode */
+
+.light .about-icon-container {
+    background: rgba(34, 197, 94, 0.12) !important;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.light .about-icon-container .icon-text {
+    color: rgba(34, 197, 94, 0.85) !important;
+    font-weight: 600 !important;
+}
+
+
+/* Dark mode keeps original styling */
+
+.dark .about-icon-container .icon-text {
+    color: white !important;
+}
+
+
+/* Team Member Avatar Enhancements */
+
+.team-avatar-container {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.team-avatar-container:hover {
+    transform: scale(1.05);
+}
+
+.team-avatar-container:hover .avatar-initials>div {
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+.light .team-avatar-container {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.25);
+}
+
+.light .team-avatar-container:hover {
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.35);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.light .team-avatar-container .avatar-initials {
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dark .team-avatar-container .avatar-initials {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
