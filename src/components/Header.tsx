@@ -154,7 +154,17 @@ const Header = () => {
                 (e.target as HTMLImageElement).style.display = 'none';
               }}
             />
-            <span className="logo-text text-lg md:text-2xl font-bold text-primary">ROOTSnROUTES</span>
+            <span 
+              className="logo-text text-lg md:text-2xl font-bold"
+              style={{
+                background: 'linear-gradient(to right, hsl(140 40% 35%), hsl(25 75% 58%))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            >
+              ROOTSnROUTES
+            </span>
           </Link>
 
           {/* Navigation */}
@@ -418,7 +428,7 @@ const Header = () => {
                         >
                           <Avatar className="h-8 w-8">
                             <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
-                            <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white text-xs">
+                            <AvatarFallback className="bg-gradient-to-br from-forest-600 to-autumn-600 text-white text-xs">
                               {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
                             </AvatarFallback>
                           </Avatar>
@@ -647,7 +657,7 @@ const Header = () => {
                   <Button variant="ghost" className="flex items-center gap-1 lg:gap-2 hover:bg-accent p-1 lg:p-2 flex-shrink-0 h-8 lg:h-9">
                     <Avatar className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8">
                       <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
-                      <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white text-xs lg:text-sm">
+                      <AvatarFallback className="bg-gradient-to-br from-forest-600 to-autumn-600 text-white text-xs lg:text-sm">
                         {(user.user_metadata?.name || user.email || 'U').charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
@@ -694,8 +704,8 @@ const Header = () => {
                     size="default"
                     className="
                       flex items-center justify-center
-                      bg-gradient-to-r from-purple-600 to-blue-500 
-                      hover:from-purple-500 hover:to-blue-400
+                      bg-gradient-to-r from-forest-600 to-autumn-600 
+                      hover:from-forest-500 hover:to-autumn-500
                       text-white font-semibold
                       shadow-lg hover:shadow-xl
                       transition-all duration-300
