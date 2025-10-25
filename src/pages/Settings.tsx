@@ -7,46 +7,32 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
 import { 
-  User, 
   Mail, 
   Lock, 
-  Trash2, 
-  AlertTriangle, 
   Save, 
   Eye, 
   EyeOff, 
   Shield, 
   Bell, 
   Globe, 
-  Palette,
   Download,
   Upload,
-  Camera,
-  X,
-  Check,
-  Settings as SettingsIcon
+  User,
+  Settings as SettingsIcon,
+  AlertTriangle
 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 
 const Settings: React.FC = () => {
   const { user, signOut } = useAuth();
-  const navigate = useNavigate();
   
   // Form states
   const [formData, setFormData] = useState({
-    name: user?.user_metadata?.name || user?.user_metadata?.full_name || '',
     email: user?.email || '',
-    phone: user?.user_metadata?.phone || '',
-    bio: user?.user_metadata?.bio || '',
-    location: user?.user_metadata?.location || '',
   });
   
   const [passwordData, setPasswordData] = useState({
@@ -72,7 +58,6 @@ const Settings: React.FC = () => {
   
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
-  const [deleteConfirmText, setDeleteConfirmText] = useState('');
 
   if (!user) {
     return (
@@ -92,27 +77,6 @@ const Settings: React.FC = () => {
   const showMessage = (type: 'success' | 'error', text: string) => {
     setMessage({ type, text });
     setTimeout(() => setMessage({ type: '', text: '' }), 5000);
-  };
-
-  const handleProfileUpdate = async () => {
-    setLoading(true);
-    try {
-      const { error } = await supabase.auth.updateUser({
-        data: {
-          name: formData.name,
-          phone: formData.phone,
-          bio: formData.bio,
-          location: formData.location,
-        }
-      });
-
-      if (error) throw error;
-      showMessage('success', 'Profile updated successfully!');
-    } catch (error: any) {
-      showMessage('error', error.message || 'Failed to update profile');
-    } finally {
-      setLoading(false);
-    }
   };
 
   const handlePasswordChange = async () => {
@@ -159,31 +123,6 @@ const Settings: React.FC = () => {
       showMessage('success', 'Email update initiated! Check your new email for confirmation.');
     } catch (error: any) {
       showMessage('error', error.message || 'Failed to update email');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAccountDeletion = async () => {
-    if (deleteConfirmText !== 'DELETE MY ACCOUNT') {
-      showMessage('error', 'Please type "DELETE MY ACCOUNT" to confirm deletion');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      // Note: Supabase doesn't have a direct delete user API from client
-      // In production, you'd call a server function or use RPC
-      // For now, we'll sign out and show a message
-      await signOut();
-      
-      // In a real app, you'd call your backend to delete the user:
-      // const { error } = await supabase.rpc('delete_user_account');
-      
-      navigate('/');
-      showMessage('success', 'Account deletion request submitted. You have been signed out.');
-    } catch (error: any) {
-      showMessage('error', error.message || 'Failed to delete account');
     } finally {
       setLoading(false);
     }
@@ -468,15 +407,6 @@ const Settings: React.FC = () => {
     }
   };
 
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map(word => word.charAt(0))
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Header />
@@ -484,12 +414,22 @@ const Settings: React.FC = () => {
       <div className="container mx-auto px-6 py-20 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Account Settings
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Manage your account, privacy, and preferences
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Account Settings
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400">
+                Manage your account security, preferences, and data privacy
+              </p>
+            </div>
+            <Link to="/profile">
+              <Button variant="outline" className="flex items-center space-x-2">
+                <User className="h-4 w-4" />
+                <span>View Profile</span>
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Message Alert */}
@@ -503,88 +443,226 @@ const Settings: React.FC = () => {
         )}
 
         <div className="grid gap-6">
-          {/* Profile Information */}
+          {/* Account Security */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <User className="h-5 w-5" />
-                <span>Profile Information</span>
+                <Shield className="h-5 w-5" />
+                <span>Account Security</span>
               </CardTitle>
               <CardDescription>
-                Update your personal information and profile details
+                Manage your email, password, and account security settings
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {/* Avatar Section */}
-              <div className="flex items-center space-x-4">
-                <Avatar className="h-20 w-20">
-                  <AvatarImage src={user.user_metadata?.avatar_url || user.user_metadata?.picture} />
-                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-lg">
-                    {getInitials(formData.name || user.email || 'U')}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="space-y-2">
-                  <Button variant="outline" size="sm">
-                    <Camera className="h-4 w-4 mr-2" />
-                    Change Photo
+              {/* Email Update Section */}
+              <div className="space-y-4">
+                <h4 className="text-sm font-medium text-foreground">Email Address</h4>
+                <div className="flex items-center space-x-4">
+                  <div className="flex-1">
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                      placeholder="Enter new email address"
+                      className="max-w-md"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Current: {user.email}
+                    </p>
+                  </div>
+                  <Button onClick={handleEmailUpdate} disabled={loading || formData.email === user.email}>
+                    <Mail className="h-4 w-4 mr-2" />
+                    {loading ? 'Updating...' : 'Update Email'}
                   </Button>
-                  <p className="text-xs text-muted-foreground">
-                    JPG, GIF or PNG. Max size of 800KB
-                  </p>
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    placeholder="Enter your full name"
-                  />
+              <Separator />
+
+              {/* Password Change Section */}
+              <div className="space-y-4">
+                <h4 className="text-sm font-medium text-foreground">Change Password</h4>
+                <div className="grid gap-4 max-w-md">
+                  <div className="space-y-2">
+                    <Label htmlFor="currentPassword">Current Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="currentPassword"
+                        type={showPasswords.current ? "text" : "password"}
+                        value={passwordData.currentPassword}
+                        onChange={(e) => setPasswordData(prev => ({ ...prev, currentPassword: e.target.value }))}
+                        placeholder="Enter current password"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                        onClick={() => setShowPasswords(prev => ({ ...prev, current: !prev.current }))}
+                      >
+                        {showPasswords.current ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="newPassword">New Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="newPassword"
+                        type={showPasswords.new ? "text" : "password"}
+                        value={passwordData.newPassword}
+                        onChange={(e) => setPasswordData(prev => ({ ...prev, newPassword: e.target.value }))}
+                        placeholder="Enter new password"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                        onClick={() => setShowPasswords(prev => ({ ...prev, new: !prev.new }))}
+                      >
+                        {showPasswords.new ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="confirmPassword"
+                        type={showPasswords.confirm ? "text" : "password"}
+                        value={passwordData.confirmPassword}
+                        onChange={(e) => setPasswordData(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                        placeholder="Confirm new password"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                        onClick={() => setShowPasswords(prev => ({ ...prev, confirm: !prev.confirm }))}
+                      >
+                        {showPasswords.confirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={handlePasswordChange} 
+                    disabled={loading || !passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword}
+                    className="w-fit"
+                  >
+                    <Lock className="h-4 w-4 mr-2" />
+                    {loading ? 'Updating...' : 'Update Password'}
+                  </Button>
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input
-                    id="phone"
-                    value={formData.phone}
-                    onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                    placeholder="Enter your phone number"
-                  />
-                </div>
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="bio">Bio</Label>
-                <Textarea
-                  id="bio"
-                  value={formData.bio}
-                  onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
-                  placeholder="Tell us about yourself..."
-                  rows={3}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="location">Location</Label>
-                <Input
-                  id="location"
-                  value={formData.location}
-                  onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                  placeholder="Your current location"
-                />
-              </div>
-
-              <Button onClick={handleProfileUpdate} disabled={loading}>
-                <Save className="h-4 w-4 mr-2" />
-                {loading ? 'Saving...' : 'Save Changes'}
-              </Button>
             </CardContent>
           </Card>
 
-          {/* Email Settings */}
+          {/* Application Preferences */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <SettingsIcon className="h-5 w-5" />
+                <span>Application Preferences</span>
+              </CardTitle>
+              <CardDescription>
+                Customize your app experience and notification settings
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-4">
+                  <h4 className="text-sm font-medium text-foreground">Notifications</h4>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <Label className="text-sm font-medium">Email Notifications</Label>
+                        <p className="text-xs text-muted-foreground">Receive updates about your trips and bookings</p>
+                      </div>
+                      <Switch
+                        checked={preferences.emailNotifications}
+                        onCheckedChange={(checked) => setPreferences(prev => ({ ...prev, emailNotifications: checked }))}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <Label className="text-sm font-medium">Push Notifications</Label>
+                        <p className="text-xs text-muted-foreground">Get real-time alerts on your device</p>
+                      </div>
+                      <Switch
+                        checked={preferences.pushNotifications}
+                        onCheckedChange={(checked) => setPreferences(prev => ({ ...prev, pushNotifications: checked }))}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <Label className="text-sm font-medium">Marketing Emails</Label>
+                        <p className="text-xs text-muted-foreground">Receive news and promotional content</p>
+                      </div>
+                      <Switch
+                        checked={preferences.marketingEmails}
+                        onCheckedChange={(checked) => setPreferences(prev => ({ ...prev, marketingEmails: checked }))}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className="text-sm font-medium text-foreground">Display & Privacy</h4>
+                  
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="language">Language</Label>
+                      <Select value={preferences.language} onValueChange={(value) => setPreferences(prev => ({ ...prev, language: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select language" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="en">English</SelectItem>
+                          <SelectItem value="hi">Hindi</SelectItem>
+                          <SelectItem value="bn">Bengali</SelectItem>
+                          <SelectItem value="te">Telugu</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="theme">Theme</Label>
+                      <Select value={preferences.theme} onValueChange={(value) => setPreferences(prev => ({ ...prev, theme: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select theme" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="light">Light</SelectItem>
+                          <SelectItem value="dark">Dark</SelectItem>
+                          <SelectItem value="system">System</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <Label className="text-sm font-medium">Data Sharing</Label>
+                        <p className="text-xs text-muted-foreground">Help improve our services with anonymous usage data</p>
+                      </div>
+                      <Switch
+                        checked={preferences.dataSharing}
+                        onCheckedChange={(checked) => setPreferences(prev => ({ ...prev, dataSharing: checked }))}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>          {/* Email Settings */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -770,15 +848,15 @@ const Settings: React.FC = () => {
             </CardContent>
           </Card>
 
-          {/* Data & Privacy */}
+          {/* Data Export & Privacy */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Download className="h-5 w-5" />
-                <span>Data & Privacy</span>
+                <span>Data Export & Privacy</span>
               </CardTitle>
               <CardDescription>
-                Download your data, manage privacy settings, and understand how your data is used
+                Download your data and understand how we protect your privacy
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -823,7 +901,7 @@ const Settings: React.FC = () => {
               {/* Privacy Information */}
               <div className="space-y-4">
                 <h4 className="text-sm font-medium text-foreground">Privacy & Data Protection</h4>
-                <div className="space-y-3">
+                <div className="grid gap-3 sm:grid-cols-3">
                   <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
                     <Shield className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
                     <div>
@@ -844,81 +922,19 @@ const Settings: React.FC = () => {
                     <Eye className="h-5 w-5 text-purple-600 dark:text-purple-400 mt-0.5" />
                     <div>
                       <p className="text-sm font-medium">Privacy Control</p>
-                      <p className="text-xs text-muted-foreground">Manage what data you share and with whom</p>
+                      <p className="text-xs text-muted-foreground">Manage visibility settings in your profile</p>
                     </div>
                   </div>
                 </div>
+                
+                <div className="bg-card/30 rounded-lg p-4 border border-border">
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">Need to delete your account?</strong> 
+                    Visit your <Link to="/profile" className="text-primary hover:underline">profile page</Link> to access account deletion options.
+                    This ensures you can review your data and understand what will be deleted before taking this irreversible action.
+                  </p>
+                </div>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Danger Zone */}
-          <Card className="border-red-200 dark:border-red-800">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 text-red-600 dark:text-red-400">
-                <AlertTriangle className="h-5 w-5" />
-                <span>Danger Zone</span>
-              </CardTitle>
-              <CardDescription>
-                Irreversible and destructive actions
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Alert className="border-red-200 bg-red-50 dark:bg-red-900/20">
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription className="text-red-700 dark:text-red-400">
-                  <strong>Warning:</strong> Deleting your account is permanent and cannot be undone. 
-                  All your data, including travel history, bookings, and preferences will be permanently deleted.
-                </AlertDescription>
-              </Alert>
-
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="destructive" className="w-full sm:w-auto">
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Delete Account
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle className="flex items-center space-x-2 text-red-600">
-                      <AlertTriangle className="h-5 w-5" />
-                      <span>Delete Account</span>
-                    </AlertDialogTitle>
-                    <AlertDialogDescription className="space-y-4">
-                      <p>
-                        This action cannot be undone. This will permanently delete your account 
-                        and remove all your data from our servers.
-                      </p>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="deleteConfirm">
-                          Type <strong>"DELETE MY ACCOUNT"</strong> to confirm:
-                        </Label>
-                        <Input
-                          id="deleteConfirm"
-                          value={deleteConfirmText}
-                          onChange={(e) => setDeleteConfirmText(e.target.value)}
-                          placeholder="DELETE MY ACCOUNT"
-                          className="font-mono"
-                        />
-                      </div>
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel onClick={() => setDeleteConfirmText('')}>
-                      Cancel
-                    </AlertDialogCancel>
-                    <AlertDialogAction
-                      onClick={handleAccountDeletion}
-                      disabled={deleteConfirmText !== 'DELETE MY ACCOUNT' || loading}
-                      className="bg-red-600 hover:bg-red-700"
-                    >
-                      {loading ? 'Deleting...' : 'Delete Account'}
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
             </CardContent>
           </Card>
         </div>
