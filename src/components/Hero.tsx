@@ -73,11 +73,11 @@ const Hero = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 md:mb-20" style={{ animationDelay: '0.6s' }}>
-              {/* Primary CTA */}
+              {/* Primary CTA - Forest & Autumn theme */}
               <Link to="/destinations">
                 <Button 
                   size="lg" 
-                  className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold px-10 py-4 rounded-full shadow-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-emerald-500/40 active:scale-95 text-lg"
+                  className="group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 dark:from-green-500 dark:to-emerald-500 dark:hover:from-green-400 dark:hover:to-emerald-400 text-white font-semibold px-10 py-4 rounded-full shadow-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-green-500/40 active:scale-95 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {t('hero.exploreButton')}
@@ -86,12 +86,12 @@ const Hero = () => {
                 </Button>
               </Link>
               
-              {/* Secondary CTA */}
+              {/* Secondary CTA - Autumn accent */}
               <Link to="/ai-trip-planner">
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="group relative overflow-hidden bg-white/10 border-2 border-white/40 hover:border-white/60 text-white hover:text-white font-medium px-8 py-4 rounded-full backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:bg-white/15 active:scale-95 text-lg"
+                  className="group relative overflow-hidden bg-amber-50/10 dark:bg-amber-900/10 border-2 border-amber-100/40 dark:border-amber-400/40 hover:border-amber-200/60 dark:hover:border-amber-300/60 text-white hover:text-white font-medium px-8 py-4 rounded-full backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:bg-amber-100/15 dark:hover:bg-amber-800/15 active:scale-95 text-lg"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {t('hero.aiPlanningButton')}
