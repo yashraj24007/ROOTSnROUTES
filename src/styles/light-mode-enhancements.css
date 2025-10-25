@@ -611,3 +611,183 @@
     color: white !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
+
+
+/* AI Chatbot Dark Mode Enhancements */
+
+
+/* Chatbot Container */
+
+.dark .chatbot-container {
+    background: rgba(15, 23, 42, 0.95) !important;
+    border: 1px solid rgba(51, 65, 85, 0.8) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+
+/* Chatbot Header */
+
+.dark .chatbot-header {
+    background: linear-gradient(135deg, rgba(51, 65, 85, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%) !important;
+    border-bottom: 1px solid rgba(71, 85, 105, 0.5) !important;
+}
+
+
+/* Chatbot Quick Actions Bar */
+
+.dark .chatbot-quick-actions {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5) !important;
+}
+
+.dark .chatbot-quick-action-btn {
+    background: rgba(51, 65, 85, 0.6) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(71, 85, 105, 0.5) !important;
+}
+
+.dark .chatbot-quick-action-btn:hover {
+    background: rgba(71, 85, 105, 0.8) !important;
+    color: #f1f5f9 !important;
+    border-color: rgba(100, 116, 139, 0.7) !important;
+}
+
+
+/* Messages Container */
+
+.dark .chatbot-messages {
+    background: rgba(15, 23, 42, 0.4) !important;
+}
+
+
+/* Bot Messages */
+
+.dark .chatbot-bot-message {
+    background: rgba(51, 65, 85, 0.8) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(71, 85, 105, 0.3) !important;
+}
+
+
+/* User Messages */
+
+.dark .chatbot-user-message {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3) !important;
+}
+
+
+/* Typing Indicator */
+
+.dark .chatbot-typing {
+    background: rgba(51, 65, 85, 0.8) !important;
+    color: #94a3b8 !important;
+}
+
+.dark .chatbot-typing .typing-dot {
+    background: #22c55e !important;
+}
+
+
+/* Suggestions */
+
+.dark .chatbot-suggestion {
+    background: rgba(30, 41, 59, 0.7) !important;
+    color: #cbd5e1 !important;
+    border: 1px solid rgba(51, 65, 85, 0.6) !important;
+}
+
+.dark .chatbot-suggestion:hover {
+    background: rgba(51, 65, 85, 0.9) !important;
+    color: #f1f5f9 !important;
+    border-color: rgba(71, 85, 105, 0.8) !important;
+}
+
+
+/* Input Area */
+
+.dark .chatbot-input-area {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border-top: 1px solid rgba(51, 65, 85, 0.5) !important;
+}
+
+.dark .chatbot-input {
+    background: rgba(51, 65, 85, 0.6) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(71, 85, 105, 0.5) !important;
+}
+
+.dark .chatbot-input:focus {
+    background: rgba(51, 65, 85, 0.8) !important;
+    border-color: #22c55e !important;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2) !important;
+}
+
+.dark .chatbot-input::placeholder {
+    color: #94a3b8 !important;
+}
+
+.dark .chatbot-send-btn {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.dark .chatbot-send-btn:hover {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3) !important;
+}
+
+.dark .chatbot-send-btn:disabled {
+    background: rgba(71, 85, 105, 0.5) !important;
+    color: #64748b !important;
+}
+
+
+/* Floating Button */
+
+.dark .chatbot-float-btn {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4) !important;
+}
+
+.dark .chatbot-float-btn:hover {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+    box-shadow: 0 15px 35px rgba(34, 197, 94, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+
+/* Quick Action Buttons in Messages */
+
+.dark .chatbot-quick-action-message {
+    background: rgba(34, 197, 94, 0.8) !important;
+    color: white !important;
+    border: 1px solid rgba(34, 197, 94, 0.3) !important;
+}
+
+.dark .chatbot-quick-action-message:hover {
+    background: rgba(34, 197, 94, 0.9) !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3) !important;
+}
+
+
+/* Scrollbar */
+
+.dark .chatbot-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dark .chatbot-scroll::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.3);
+}
+
+.dark .chatbot-scroll::-webkit-scrollbar-thumb {
+    background: rgba(71, 85, 105, 0.6);
+    border-radius: 3px;
+}
+
+.dark .chatbot-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.8);
+}

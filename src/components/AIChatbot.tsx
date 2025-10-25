@@ -255,7 +255,7 @@ const AIChatbot = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={toggleChat}
-          className="w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary/90"
+          className="w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary/90 chatbot-float-btn"
           size="lg"
         >
           <Bot className="h-6 w-6" />
@@ -274,9 +274,9 @@ const AIChatbot = () => {
   // Chat Interface
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <Card className={`w-96 shadow-2xl transition-all duration-300 ${chatState.isMinimized ? 'h-16' : 'h-[600px]'}`}>
+      <Card className={`w-96 shadow-2xl transition-all duration-300 chatbot-container ${chatState.isMinimized ? 'h-16' : 'h-[600px]'}`}>
         {/* Header */}
-        <CardHeader className="p-4 border-b bg-primary text-white rounded-t-lg">
+        <CardHeader className="p-4 border-b bg-primary text-white rounded-t-lg chatbot-header">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
@@ -309,9 +309,9 @@ const AIChatbot = () => {
         </CardHeader>
 
         {!chatState.isMinimized && (
-          <CardContent className="p-0 flex flex-col h-[536px]">
+          <CardContent className="p-0 flex flex-col h-[536px] chatbot-messages">
             {/* Quick Actions */}
-            <div className="p-4 border-b bg-muted/30">
+            <div className="p-4 border-b bg-muted/30 chatbot-quick-actions">
               <div className="flex flex-wrap gap-2">
                 {quickActionButtons.map((action) => (
                   <Button
@@ -319,7 +319,7 @@ const AIChatbot = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => handleQuickAction(action.action)}
-                    className="text-xs"
+                    className="text-xs chatbot-quick-action-btn"
                   >
                     <span className="mr-1">{action.icon}</span>
                     {action.label}
@@ -345,8 +345,8 @@ const AIChatbot = () => {
                   <div className={`max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
                     <div className={`p-3 rounded-lg ${
                       message.type === 'user' 
-                        ? 'bg-primary text-white' 
-                        : 'bg-muted text-foreground'
+                        ? 'bg-primary text-white chatbot-user-message' 
+                        : 'bg-muted text-foreground chatbot-bot-message'
                     }`}>
                       <div className="flex items-start gap-2">
                         {message.type === 'bot' && <Bot className="h-4 w-4 mt-1 flex-shrink-0" />}
@@ -369,7 +369,7 @@ const AIChatbot = () => {
                             variant="outline"
                             size="sm"
                             onClick={() => handleSuggestionClick(suggestion)}
-                            className="text-xs mr-2 mb-1"
+                            className="text-xs mr-2 mb-1 chatbot-suggestion"
                           >
                             {suggestion}
                           </Button>
@@ -386,7 +386,7 @@ const AIChatbot = () => {
                             variant="default"
                             size="sm"
                             onClick={() => handleQuickAction(action.action)}
-                            className="text-xs"
+                            className="text-xs chatbot-quick-action-message"
                           >
                             <span className="mr-1">{action.icon}</span>
                             {action.label}
@@ -400,13 +400,13 @@ const AIChatbot = () => {
 
               {chatState.isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-muted p-3 rounded-lg max-w-[80%]">
+                  <div className="bg-muted p-3 rounded-lg max-w-[80%] chatbot-typing">
                     <div className="flex items-center gap-2">
                       <Bot className="h-4 w-4" />
                       <div className="flex gap-1">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce typing-dot"></div>
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce typing-dot" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce typing-dot" style={{ animationDelay: '0.2s' }}></div>
                       </div>
                     </div>
                   </div>
@@ -416,16 +416,20 @@ const AIChatbot = () => {
             </div>
 
             {/* Input */}
-            <div className="p-4 border-t">
+            <div className="p-4 border-t chatbot-input-area">
               <div className="flex gap-2">
                 <Input
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   placeholder="Ask me anything about Jharkhand..."
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  className="flex-1"
+                  className="flex-1 chatbot-input"
                 />
-                <Button onClick={handleSendMessage} disabled={!inputMessage.trim()}>
+                <Button 
+                  onClick={handleSendMessage} 
+                  disabled={!inputMessage.trim()}
+                  className="chatbot-send-btn"
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>

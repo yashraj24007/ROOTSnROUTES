@@ -371,12 +371,12 @@ const FloatingChatbot: React.FC = () => {
 
       {/* Main Chatbot Container */}
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end">
-      {/* Modern chat container with black outer background */}
-      <div className="bg-black/90 backdrop-blur-sm rounded-2xl p-1 shadow-2xl">
-        <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-none border-0 bg-white/95 backdrop-blur-sm transition-all duration-300 rounded-xl ${
+      {/* Modern chat container with theme-aware outer background */}
+      <div className="bg-black/90 dark:bg-slate-900/95 backdrop-blur-sm rounded-2xl p-1 shadow-2xl chatbot-container">
+        <Card className={`w-[380px] max-w-[calc(100vw-2rem)] shadow-none border-0 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm transition-all duration-300 rounded-xl ${
           isMinimized ? 'h-14' : 'h-[500px] max-h-[calc(100vh-8rem)]'
         }`}>
-          <CardHeader className="p-3 border-b bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-xl shadow-lg">
+          <CardHeader className="p-3 border-b bg-gradient-to-r from-blue-500 to-purple-600 dark:from-emerald-600 dark:to-green-600 text-white rounded-t-xl shadow-lg chatbot-header">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Bot className="w-5 h-5 animate-pulse" />
@@ -387,7 +387,7 @@ const FloatingChatbot: React.FC = () => {
                   variant="ghost"
                   size="sm"
                   onClick={clearChat}
-                  className="h-6 w-6 p-0 text-white hover:bg-white/20 rounded-lg transition-all duration-200"
+                  className="h-6 w-6 p-0 text-white hover:bg-white/20 dark:hover:bg-white/10 rounded-lg transition-all duration-200"
                   aria-label="Clear chat"
                   title="Clear chat history"
                 >
@@ -397,7 +397,7 @@ const FloatingChatbot: React.FC = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsMinimized(!isMinimized)}
-                  className="h-6 w-6 p-0 text-white hover:bg-white/20 rounded-lg transition-all duration-200"
+                  className="h-6 w-6 p-0 text-white hover:bg-white/20 dark:hover:bg-white/10 rounded-lg transition-all duration-200"
                   aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
                 >
                   <Minimize2 className="w-3 h-3" />
@@ -406,7 +406,7 @@ const FloatingChatbot: React.FC = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  className="h-6 w-6 p-0 text-white hover:bg-white/20 rounded-lg transition-all duration-200"
+                  className="h-6 w-6 p-0 text-white hover:bg-white/20 dark:hover:bg-white/10 rounded-lg transition-all duration-200"
                   aria-label="Close chat"
                 >
                   <X className="w-3 h-3" />
@@ -416,9 +416,9 @@ const FloatingChatbot: React.FC = () => {
         </CardHeader>
         
         {!isMinimized && (
-          <CardContent className="flex flex-col h-[440px] max-h-[calc(100vh-12rem)] p-0 bg-gray-50/50">
+          <CardContent className="flex flex-col h-[440px] max-h-[calc(100vh-12rem)] p-0 bg-gray-50/50 dark:bg-slate-800/30 chatbot-messages">
             <ScrollArea 
-              className="flex-1 p-4" 
+              className="flex-1 p-4 chatbot-scroll" 
               ref={scrollAreaRef}
               onScrollCapture={handleScroll}
             >
@@ -432,13 +432,13 @@ const FloatingChatbot: React.FC = () => {
                   >
                     <Avatar className={`w-8 h-8 flex-shrink-0 mt-1 ${
                       message.role === 'user' 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' 
-                        : 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white'
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 dark:from-emerald-500 dark:to-green-500 text-white' 
+                        : 'bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-green-600 dark:to-emerald-600 text-white'
                     }`}>
                       <AvatarFallback className={`text-xs ${
                         message.role === 'user' 
-                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' 
-                          : 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white'
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 dark:from-emerald-500 dark:to-green-500 text-white' 
+                          : 'bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-green-600 dark:to-emerald-600 text-white'
                       }`}>
                         {message.role === 'user' ? (
                           <User className="w-4 h-4" />
@@ -451,13 +451,13 @@ const FloatingChatbot: React.FC = () => {
                     <div
                       className={`max-w-[75%] p-4 text-sm leading-relaxed whitespace-pre-wrap shadow-md transition-all duration-200 hover:shadow-lg ${
                         message.role === 'user'
-                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl rounded-br-md'
-                          : 'bg-white text-gray-700 border border-gray-300 rounded-2xl rounded-bl-md'
+                          ? 'bg-gradient-to-r from-blue-500 to-purple-600 dark:from-emerald-500 dark:to-green-500 text-white rounded-2xl rounded-br-md chatbot-user-message'
+                          : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-100 border border-gray-300 dark:border-slate-600 rounded-2xl rounded-bl-md chatbot-bot-message'
                       }`}
                     >
                       <p className="break-words font-medium">{message.content}</p>
                       <p className={`text-xs mt-3 opacity-70 font-normal ${
-                        message.role === 'user' ? 'text-blue-100' : 'text-gray-500'
+                        message.role === 'user' ? 'text-blue-100 dark:text-green-100' : 'text-gray-500 dark:text-gray-400'
                       }`}>
                         {message.timestamp.toLocaleTimeString()}
                       </p>
@@ -467,16 +467,16 @@ const FloatingChatbot: React.FC = () => {
                 
                 {loading && (
                   <div className="flex gap-3 items-start animate-fadeIn">
-                    <Avatar className="w-8 h-8 mt-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white">
-                      <AvatarFallback className="text-xs bg-gradient-to-r from-emerald-500 to-teal-600 text-white">
+                    <Avatar className="w-8 h-8 mt-1 bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-green-600 dark:to-emerald-600 text-white">
+                      <AvatarFallback className="text-xs bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-green-600 dark:to-emerald-600 text-white">
                         <Bot className="w-4 h-4" />
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-white p-4 rounded-2xl rounded-bl-md border border-gray-300 shadow-md">
+                    <div className="bg-white dark:bg-slate-700 p-4 rounded-2xl rounded-bl-md border border-gray-300 dark:border-slate-600 shadow-md chatbot-typing">
                       <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full animate-bounce [animation-delay:0.1s]"></div>
-                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-green-500 dark:to-emerald-500 rounded-full animate-bounce typing-dot"></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-green-500 dark:to-emerald-500 rounded-full animate-bounce [animation-delay:0.1s] typing-dot"></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-green-500 dark:to-emerald-500 rounded-full animate-bounce [animation-delay:0.2s] typing-dot"></div>
                       </div>
                     </div>
                   </div>
@@ -490,7 +490,7 @@ const FloatingChatbot: React.FC = () => {
                 <Button
                   size="sm"
                   variant="secondary"
-                  className="rounded-full shadow-lg"
+                  className="rounded-full shadow-lg bg-white dark:bg-slate-700 hover:bg-gray-100 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-200"
                   onClick={() => {
                     setShouldAutoScroll(true);
                     const scrollElement = scrollAreaRef.current?.querySelector('[data-radix-scroll-area-viewport]') as HTMLDivElement;
@@ -505,7 +505,7 @@ const FloatingChatbot: React.FC = () => {
             )}
             
             {/* Modern input area */}
-            <div className="border-t bg-white/80 backdrop-blur-sm p-4 rounded-b-xl">
+            <div className="border-t bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm p-4 rounded-b-xl chatbot-input-area">
               <div className="flex gap-3 items-center">
                 <Input
                   value={input}
@@ -513,13 +513,13 @@ const FloatingChatbot: React.FC = () => {
                   onKeyPress={handleKeyPress}
                   placeholder="Ask me about Jharkhand tourism..."
                   disabled={loading}
-                  className="flex-1 h-12 text-sm px-4 bg-gray-50 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400"
+                  className="flex-1 h-12 text-sm px-4 bg-gray-50 dark:bg-slate-700 border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-gray-100 chatbot-input"
                 />
                 <Button
                   onClick={sendMessage}
                   disabled={loading || !input.trim()}
                   size="sm"
-                  className="h-12 w-12 p-0 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="h-12 w-12 p-0 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-emerald-500 dark:to-green-500 dark:hover:from-emerald-600 dark:hover:to-green-600 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed chatbot-send-btn"
                 >
                   <Send className="w-5 h-5" />
                 </Button>
