@@ -221,7 +221,7 @@ const AITripPlanner = () => {
         'Evening temperatures drop, pack warm clothes'
       ],
       culturalTips: [
-        `Each region (${preferences.targetAreas.join(', ')}) has unique tribal customs`,
+        `Each region(${preferences.targetAreas.join(', ')}) has unique tribal customs`,
         'Try regional specialties - each area has distinct cuisine',
         'Local festivals vary by region - check regional calendar',
         'Respect photography permissions in tribal areas'
@@ -554,7 +554,7 @@ const AITripPlanner = () => {
 
             <div className="flex gap-4">
               <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
-                Back to Edit
+                Refine choices
               </Button>
               <Button 
                 onClick={generateItinerary}
