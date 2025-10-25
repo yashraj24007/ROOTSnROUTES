@@ -108,7 +108,7 @@ const MarketplaceDetail = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-4 right-4 bg-white/80 hover:bg-white"
+                className="absolute top-4 right-4 bg-card/80 hover:bg-card border border-border"
               >
                 <Heart className="w-5 h-5" />
               </Button>
@@ -185,8 +185,8 @@ const MarketplaceDetail = () => {
                     <h4 className="font-semibold">{item.artisan}</h4>
                     <p className="text-sm text-muted-foreground">Specializing in {item.category}</p>
                     <div className="flex items-center gap-1 mt-1">
-                      <Shield className="w-3 h-3 text-green-600" />
-                      <span className="text-xs text-green-600">Verified Artisan</span>
+                      <Shield className="w-3 h-3 text-accent" />
+                      <span className="text-xs text-accent">Verified Artisan</span>
                     </div>
                   </div>
                 </div>
@@ -198,8 +198,8 @@ const MarketplaceDetail = () => {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
-                      <MapPin className="w-6 h-6 text-blue-600" />
+                    <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                      <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <div>
                       <h4 className="font-semibold">Crafted in {item.location}</h4>
@@ -211,7 +211,7 @@ const MarketplaceDetail = () => {
                       href={generateGoogleMapsUrl(formatLocationString(item.name, item.location!))}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                      className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 font-medium"
                     >
                       View on Map
                       <ExternalLink className="w-3 h-3" />
@@ -220,7 +220,7 @@ const MarketplaceDetail = () => {
                       href={generateDirectionsUrl(formatLocationString(item.name, item.location!))}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sm text-green-600 hover:text-green-700 font-medium"
+                      className="flex items-center gap-1 text-sm text-accent hover:text-accent/80 font-medium"
                     >
                       <Navigation className="w-3 h-3" />
                       Directions
@@ -255,7 +255,7 @@ const MarketplaceDetail = () => {
         <div className="grid md:grid-cols-2 gap-6 mt-12">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-600">
+              <CardTitle className="flex items-center gap-2 text-accent">
                 <CheckCircle className="w-5 h-5" />
                 Pros
               </CardTitle>
@@ -264,7 +264,7 @@ const MarketplaceDetail = () => {
               <ul className="space-y-2">
                 {pros.map((pro, index) => (
                   <li key={index} className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
                     <span className="text-sm">{pro}</span>
                   </li>
                 ))}

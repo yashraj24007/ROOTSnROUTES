@@ -416,10 +416,10 @@ const Settings: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              <h1 className="text-3xl font-bold text-foreground mb-2">
                 Account Settings
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-muted-foreground">
                 Manage your account security, preferences, and data privacy
               </p>
             </div>
@@ -434,9 +434,9 @@ const Settings: React.FC = () => {
 
         {/* Message Alert */}
         {message.text && (
-          <Alert className={`mb-6 ${message.type === 'success' ? 'border-green-200 bg-green-50 dark:bg-green-900/20' : 'border-red-200 bg-red-50 dark:bg-red-900/20'}`}>
+          <Alert className={`mb-6 ${message.type === 'success' ? 'border-accent/20 bg-accent/5' : 'border-destructive/20 bg-destructive/5'}`}>
             <AlertTriangle className="h-4 w-4" />
-            <AlertDescription className={message.type === 'success' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}>
+            <AlertDescription className={message.type === 'success' ? 'text-accent' : 'text-destructive'}>
               {message.text}
             </AlertDescription>
           </Alert>
@@ -885,9 +885,9 @@ const Settings: React.FC = () => {
                   </Button>
                 </div>
                 
-                <Alert className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+                <Alert className="bg-primary/5 border-primary/20">
                   <Download className="h-4 w-4" />
-                  <AlertDescription className="text-blue-700 dark:text-blue-400">
+                  <AlertDescription className="text-primary">
                     <strong>What's included:</strong> 
                     <br />• <strong>Personal Data:</strong> Profile information, account settings, and preferences
                     <br />• <strong>Travel History:</strong> Trip records, reviews, ratings, and favorites from your ROOTSnROUTES journey
@@ -903,7 +903,7 @@ const Settings: React.FC = () => {
                 <h4 className="text-sm font-medium text-foreground">Privacy & Data Protection</h4>
                 <div className="grid gap-3 sm:grid-cols-3">
                   <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
-                    <Shield className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
+                    <Shield className="h-5 w-5 text-accent mt-0.5" />
                     <div>
                       <p className="text-sm font-medium">Data Encryption</p>
                       <p className="text-xs text-muted-foreground">All your data is encrypted in transit and at rest</p>
@@ -911,7 +911,7 @@ const Settings: React.FC = () => {
                   </div>
                   
                   <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
-                    <Globe className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
+                    <Globe className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-sm font-medium">Data Portability</p>
                       <p className="text-xs text-muted-foreground">Download your data anytime in JSON format</p>
@@ -919,7 +919,7 @@ const Settings: React.FC = () => {
                   </div>
                   
                   <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
-                    <Eye className="h-5 w-5 text-purple-600 dark:text-purple-400 mt-0.5" />
+                    <Eye className="h-5 w-5 text-secondary mt-0.5" />
                     <div>
                       <p className="text-sm font-medium">Privacy Control</p>
                       <p className="text-xs text-muted-foreground">Manage visibility settings in your profile</p>

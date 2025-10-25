@@ -26,9 +26,9 @@ const Explore = () => {
       title: 'Destinations',
       description: 'Discover breathtaking waterfalls, ancient temples, and natural wonders across Jharkhand',
       icon: MapPin,
-      iconColor: 'text-blue-600',
-      bgGradient: 'from-blue-500/10 to-purple-500/10',
-      borderColor: 'border-blue-200',
+      iconColor: 'text-primary',
+      bgGradient: 'from-primary/10 to-accent/10',
+      borderColor: 'border-primary/20',
       link: '/destinations',
       features: ['100+ Destinations ✨', 'Hidden Gems 🏔️', '24 Districts 🌍', 'Expert Guides 👨‍🏫'],
       stats: { primary: '100+', secondary: 'Places' }
@@ -38,9 +38,9 @@ const Explore = () => {
       title: 'Marketplace',
       description: 'Connect with local artisans and discover authentic handicrafts, homestays, and experiences',
       icon: ShoppingBag,
-      iconColor: 'text-green-600',
-      bgGradient: 'from-green-500/10 to-emerald-500/10',
-      borderColor: 'border-green-200',
+      iconColor: 'text-accent',
+      bgGradient: 'from-accent/10 to-secondary/10',
+      borderColor: 'border-accent/20',
       link: '/marketplace',
       features: ['Local Artisans 🎨', 'Authentic Crafts 🏺', 'Homestays 🏡', 'Cultural Tours 🎭'],
       stats: { primary: '500+', secondary: 'Artisans' }
@@ -50,9 +50,9 @@ const Explore = () => {
       title: 'Hotels',
       description: 'Find comfortable accommodations from luxury resorts to cozy eco-lodges',
       icon: Building,
-      iconColor: 'text-purple-600',
-      bgGradient: 'from-purple-500/10 to-pink-500/10',
-      borderColor: 'border-purple-200',
+      iconColor: 'text-secondary-foreground',
+      bgGradient: 'from-secondary/10 to-muted/10',
+      borderColor: 'border-secondary/20',
       link: '/stays',
       features: ['Luxury Resorts 🏨', 'Eco Lodges 🌿', 'Budget Stays 💰', 'Local Recommendations ⭐'],
       stats: { primary: '50+', secondary: 'Hotels' }
@@ -74,9 +74,9 @@ const Explore = () => {
       title: 'Transportation',
       description: 'Plan your journey with reliable transport options and local guidance',
       icon: Car,
-      iconColor: 'text-indigo-600',
-      bgGradient: 'from-indigo-500/10 to-blue-500/10',
-      borderColor: 'border-indigo-200',
+      iconColor: 'text-muted-foreground',
+      bgGradient: 'from-muted/10 to-card/10',
+      borderColor: 'border-muted/20',
       link: '/transport',
       features: ['Bus Services 🚌', 'Car Rentals 🚗', 'Local Guides 👨‍💼', 'Route Planning 🗺️'],
       stats: { primary: '24/7', secondary: 'Support' }
@@ -110,19 +110,19 @@ const Explore = () => {
               {/* Better sized stats grid */}
               <div className="pt-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="text-center bg-card/25 backdrop-blur-lg rounded-xl p-5 border border-border/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                     <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">100+</div>
                     <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">✨ Destinations</div>
                   </div>
-                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="text-center bg-card/25 backdrop-blur-lg rounded-xl p-5 border border-border/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                     <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">500+</div>
                     <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">🎨 Local Partners</div>
                   </div>
-                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="text-center bg-card/25 backdrop-blur-lg rounded-xl p-5 border border-border/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                     <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">24</div>
                     <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">🏞️ Districts</div>
                   </div>
-                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="text-center bg-card/25 backdrop-blur-lg rounded-xl p-5 border border-border/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                     <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">10K+</div>
                     <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">💖 Happy Travelers</div>
                   </div>
@@ -160,7 +160,7 @@ const Explore = () => {
                     {/* Icon and Stats */}
                     <div className="relative z-10">
                       <div className="flex items-start justify-between mb-6">
-                        <div className={`p-4 rounded-2xl bg-white shadow-lg`}>
+                        <div className="p-4 rounded-2xl bg-card shadow-lg border border-border">
                           <IconComponent className={`w-8 h-8 ${section.iconColor}`} />
                         </div>
                         <div className="text-right">
@@ -224,48 +224,48 @@ const Explore = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {/* Emergency Support */}
-            <Card className="p-6 text-center bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 hover:shadow-lg transition-shadow">
+            <Card className="p-6 text-center bg-destructive/5 border-destructive/20 hover:shadow-lg transition-shadow">
               <div className="mb-4">
-                <div className="w-12 h-12 bg-red-100 dark:bg-red-900/50 rounded-full flex items-center justify-center mx-auto">
-                  <Phone className="w-6 h-6 text-red-600 dark:text-red-400" />
+                <div className="w-12 h-12 bg-destructive/10 rounded-full flex items-center justify-center mx-auto">
+                  <Phone className="w-6 h-6 text-destructive" />
                 </div>
               </div>
-              <h3 className="font-bold text-lg mb-2 text-red-800 dark:text-red-200">Emergency Help 🆘</h3>
-              <p className="text-sm text-red-700 dark:text-red-300 mb-4 font-medium">24/7 support for travelers in need</p>
+              <h3 className="font-bold text-lg mb-2 text-destructive">Emergency Help 🆘</h3>
+              <p className="text-sm text-muted-foreground mb-4 font-medium">24/7 support for travelers in need</p>
               <Link to="/support">
-                <Button variant="outline" size="sm" className="border-red-400 text-red-800 dark:text-red-200 hover:bg-red-100 dark:hover:bg-red-900/30 font-semibold">
+                <Button variant="outline" size="sm" className="border-destructive/40 text-destructive hover:bg-destructive/10 font-semibold">
                   Get Help
                 </Button>
               </Link>
             </Card>
 
             {/* AI Trip Planner */}
-            <Card className="p-6 text-center bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 hover:shadow-lg transition-shadow">
+            <Card className="p-6 text-center bg-primary/5 border-primary/20 hover:shadow-lg transition-shadow">
               <div className="mb-4">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto">
-                  <Star className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                  <Star className="w-6 h-6 text-primary" />
                 </div>
               </div>
-              <h3 className="font-bold text-lg mb-2 text-blue-800 dark:text-blue-200">AI Trip Planner 🤖</h3>
-              <p className="text-sm text-blue-700 dark:text-blue-300 mb-4 font-medium">Personalized itinerary planning powered by AI</p>
+              <h3 className="font-bold text-lg mb-2 text-primary">AI Trip Planner 🤖</h3>
+              <p className="text-sm text-muted-foreground mb-4 font-medium">Personalized itinerary planning powered by AI</p>
               <Link to="/ai-trip-planner">
-                <Button variant="outline" size="sm" className="border-blue-400 text-blue-800 dark:text-blue-200 hover:bg-blue-100 dark:hover:bg-blue-900/30 font-semibold">
+                <Button variant="outline" size="sm" className="border-primary/40 text-primary hover:bg-primary/10 font-semibold">
                   Plan Trip
                 </Button>
               </Link>
             </Card>
 
             {/* Community Chat */}
-            <Card className="p-6 text-center bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 hover:shadow-lg transition-shadow">
+            <Card className="p-6 text-center bg-accent/5 border-accent/20 hover:shadow-lg transition-shadow">
               <div className="mb-4">
-                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mx-auto">
-                  <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
+                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
+                  <Users className="w-6 h-6 text-accent" />
                 </div>
               </div>
-              <h3 className="font-bold text-lg mb-2 text-green-800 dark:text-green-200">Community 💬</h3>
-              <p className="text-sm text-green-700 dark:text-green-300 mb-4 font-medium">Connect with fellow travelers and locals</p>
+              <h3 className="font-bold text-lg mb-2 text-accent">Community 💬</h3>
+              <p className="text-sm text-muted-foreground mb-4 font-medium">Connect with fellow travelers and locals</p>
               <Link to="/community-chat">
-                <Button variant="outline" size="sm" className="border-green-400 text-green-800 dark:text-green-200 hover:bg-green-100 dark:hover:bg-green-900/30 font-semibold">
+                <Button variant="outline" size="sm" className="border-accent/40 text-accent hover:bg-accent/10 font-semibold">
                   Join Chat
                 </Button>
               </Link>

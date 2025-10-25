@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, MessageSquare, HelpCircle, BookOpen, Users } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare, HelpCircle, BookOpen, Users, Heart, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -113,13 +113,13 @@ const Support = () => {
       </section>
 
       {/* Emergency Support Section */}
-      <section className="py-20 bg-red-50 dark:bg-red-950/10">
+      <section className="py-20 bg-destructive/5">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-red-800 dark:text-red-200 mb-4">
+            <h2 className="text-3xl font-bold text-destructive mb-4">
               🚨 Emergency Support
             </h2>
-            <p className="text-lg text-red-700 dark:text-red-300 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               In case of emergency during your travel, use these quick dial options for immediate assistance
             </p>
           </div>
@@ -142,8 +142,8 @@ const Support = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="text-center hover:shadow-lg transition-all duration-300 bg-card border-border">
               <CardHeader>
-                <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                <div className="w-16 h-16 bg-accent/10 border border-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-accent" />
                 </div>
                 <CardTitle className="text-foreground">Tribal Community Guides 🏕️</CardTitle>
               </CardHeader>
@@ -152,7 +152,7 @@ const Support = () => {
                   Connect with certified local guides from Santhal, Ho, Munda, and other tribal communities for authentic cultural experiences.
                 </p>
                 <Link to="/local-guides" className="w-full">
-                  <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white">
+                  <Button className="w-full bg-accent hover:bg-accent/80 text-accent-foreground">
                     Find Local Guides
                   </Button>
                 </Link>
@@ -161,8 +161,8 @@ const Support = () => {
             
             <Card className="text-center hover:shadow-lg transition-all duration-300 bg-card border-border">
               <CardHeader>
-                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <BookOpen className="w-8 h-8 text-green-600 dark:text-green-400" />
+                <div className="w-16 h-16 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-8 h-8 text-primary" />
                 </div>
                 <CardTitle className="text-foreground">Multi-Language Support 🗣️</CardTitle>
               </CardHeader>
@@ -173,7 +173,7 @@ const Support = () => {
                 <Link to="/chatbot" className="w-full">
                   <Button 
                     variant="outline" 
-                    className="w-full border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/30"
+                    className="w-full border-accent text-accent hover:bg-accent/10"
                   >
                     Language Support
                   </Button>
@@ -183,8 +183,8 @@ const Support = () => {
             
             <Card className="text-center hover:shadow-lg transition-all duration-300 bg-card border-border">
               <CardHeader>
-                <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MapPin className="w-8 h-8 text-primary" />
                 </div>
                 <CardTitle className="text-foreground">Regional Expertise 🗺️</CardTitle>
               </CardHeader>
@@ -195,7 +195,7 @@ const Support = () => {
                 <Link to="/explore-districts" className="w-full">
                   <Button 
                     variant="outline" 
-                    className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                    className="w-full border-primary text-primary hover:bg-primary/10"
                   >
                     Explore Districts
                   </Button>
@@ -327,14 +327,14 @@ const Support = () => {
       </section>
 
       {/* Emergency Contact */}
-      <section className="py-20 bg-red-100 border-t-4 border-red-500">
+      <section className="py-20 bg-destructive/5 border-t-4 border-destructive">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-red-900 mb-6">{t('support.emergency.title')}</h2>
-          <p className="text-lg text-red-800 mb-8 font-medium">
+          <h2 className="text-3xl font-bold text-destructive mb-6">{t('support.emergency.title')}</h2>
+          <p className="text-lg text-destructive/80 mb-8 font-medium">
             {t('support.emergency.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="destructive" className="bg-red-600 hover:bg-red-700 text-white shadow-lg">
+            <Button size="lg" variant="destructive" className="shadow-lg">
               <Phone className="w-5 h-5 mr-2" />
               {t('support.emergency.call')}
             </Button>
@@ -342,7 +342,7 @@ const Support = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-2 border-red-600 text-red-700 bg-white hover:bg-red-50 shadow-lg"
+                className="border-2 border-destructive text-destructive bg-background hover:bg-destructive/5 shadow-lg"
               >
                 <MessageSquare className="w-5 h-5 mr-2" />
                 AI Emergency Support

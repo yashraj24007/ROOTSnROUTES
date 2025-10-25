@@ -495,9 +495,9 @@ const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
   const getVisitStatusBadge = (status: string) => {
     switch (status) {
       case 'visited':
-        return <Badge variant="default" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Visited</Badge>;
+        return <Badge variant="default" className="bg-accent/10 text-accent border-accent/20">Visited</Badge>;
       case 'planning':
-        return <Badge variant="default" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">Planning</Badge>;
+        return <Badge variant="default" className="bg-primary/10 text-primary border-primary/20">Planning</Badge>;
       default:
         return <Badge variant="outline">Wishlist</Badge>;
     }
@@ -559,8 +559,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
                           {userProfile.member_level}
                         </Badge>
                       )}
-                      <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                      <Badge variant="secondary" className="bg-accent/10 text-accent border-accent/20">
+                        <div className="w-2 h-2 bg-accent rounded-full mr-1"></div>
                         Active
                       </Badge>
                     </div>
@@ -931,7 +931,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
                                 </div>
                               </div>
                               {review.is_verified && (
-                                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                                <Badge variant="secondary" className="bg-accent/10 text-accent border-accent/20">
                                   Verified
                                 </Badge>
                               )}

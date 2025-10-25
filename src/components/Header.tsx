@@ -42,7 +42,7 @@ const Header = () => {
           name: 'English', 
           flag: '🇺🇸',
           icon: Flag,
-          color: 'text-blue-600'
+          color: 'text-primary'
         };
       case 'hi':
         return { 
@@ -56,7 +56,7 @@ const Header = () => {
           name: 'ᱥᱟᱱᱛᱟᱲᱤ (Santali)', 
           flag: '🏔️',
           icon: Mountain,
-          color: 'text-green-600'
+          color: 'text-accent'
         };
       case 'ho':
         return { 
@@ -91,7 +91,7 @@ const Header = () => {
           name: 'English', 
           flag: '🇺🇸',
           icon: Flag,
-          color: 'text-blue-600'
+          color: 'text-primary'
         };
     }
   };
@@ -676,7 +676,7 @@ const Header = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={signOut}
-                    className="text-red-600 focus:text-red-600"
+                    className="text-destructive focus:text-destructive"
                   >
                     <LogOut className="h-4 w-4 mr-2" />
                     <span>Sign Out</span>
