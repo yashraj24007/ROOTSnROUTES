@@ -515,18 +515,20 @@ const Header = () => {
                     size="sm"
                     className="
                       flex items-center gap-1 lg:gap-2 
-                      border-border
-                      bg-forest-900
-                      hover:bg-autumn-800
-                      text-foreground
+                      border-border/60 dark:border-border
+                      bg-background/80 dark:bg-forest-900
+                      hover:bg-accent/20 dark:hover:bg-autumn-800
+                      text-foreground dark:text-foreground
                       min-w-[50px] sm:min-w-[60px] md:min-w-[70px] lg:min-w-[120px] 
                       h-8 lg:h-9
                       transition-all duration-300 ease-smooth
                       backdrop-blur-sm
-                      shadow-organic
+                      shadow-lg shadow-primary/10 dark:shadow-organic
+                      hover:shadow-xl hover:shadow-primary/20 dark:hover:shadow-organic
                       px-1.5 sm:px-2 lg:px-3
                       flex-shrink-0
                       text-xs lg:text-sm
+                      hover:scale-105
                     "
                   >
                     <span className="mr-1 text-sm">{getLanguageDisplay(language).flag}</span>
@@ -541,18 +543,19 @@ const Header = () => {
                   align="end" 
                   className="
                     w-40 
-                    bg-card/95
-                    border-border
+                    bg-popover/95 dark:bg-card/95
+                    border-border/60 dark:border-border
                     backdrop-blur-md
-                    shadow-organic
+                    shadow-xl shadow-primary/15 dark:shadow-organic
                   "
                 >
                   <DropdownMenuItem 
                     onClick={() => handleLanguageChange('en')}
                     className={`
                       flex items-center cursor-pointer 
-                      hover:bg-forest-800
-                      ${language === 'en' ? 'bg-autumn-800' : ''}
+                      hover:bg-accent/20 dark:hover:bg-forest-800
+                      text-foreground dark:text-foreground
+                      ${language === 'en' ? 'bg-primary/10 dark:bg-autumn-800' : ''}
                     `}
                   >
                     <span className="mr-2 text-sm">{getLanguageDisplay('en').flag}</span>
@@ -562,8 +565,9 @@ const Header = () => {
                     onClick={() => handleLanguageChange('hi')}
                     className={`
                       flex items-center cursor-pointer 
-                      hover:bg-forest-800
-                      ${language === 'hi' ? 'bg-autumn-800' : ''}
+                      hover:bg-accent/20 dark:hover:bg-forest-800
+                      text-foreground dark:text-foreground
+                      ${language === 'hi' ? 'bg-primary/10 dark:bg-autumn-800' : ''}
                     `}
                   >
                     <span className="mr-2 text-sm">{getLanguageDisplay('hi').flag}</span>
@@ -573,8 +577,9 @@ const Header = () => {
                     onClick={() => handleLanguageChange('snt')}
                     className={`
                       flex items-center cursor-pointer 
-                      hover:bg-forest-800
-                      ${language === 'snt' ? 'bg-autumn-800' : ''}
+                      hover:bg-accent/20 dark:hover:bg-forest-800
+                      text-foreground dark:text-foreground
+                      ${language === 'snt' ? 'bg-primary/10 dark:bg-autumn-800' : ''}
                     `}
                   >
                     <span className="mr-2 text-sm">{getLanguageDisplay('snt').flag}</span>
@@ -584,8 +589,9 @@ const Header = () => {
                     onClick={() => handleLanguageChange('ho')}
                     className={`
                       flex items-center cursor-pointer 
-                      hover:bg-forest-800
-                      ${language === 'ho' ? 'bg-autumn-800' : ''}
+                      hover:bg-accent/20 dark:hover:bg-forest-800
+                      text-foreground dark:text-foreground
+                      ${language === 'ho' ? 'bg-primary/10 dark:bg-autumn-800' : ''}
                     `}
                   >
                     <span className="mr-2 text-sm">{getLanguageDisplay('ho').flag}</span>
@@ -595,8 +601,9 @@ const Header = () => {
                     onClick={() => handleLanguageChange('mun')}
                     className={`
                       flex items-center cursor-pointer 
-                      hover:bg-forest-800
-                      ${language === 'mun' ? 'bg-autumn-800' : ''}
+                      hover:bg-accent/20 dark:hover:bg-forest-800
+                      text-foreground dark:text-foreground
+                      ${language === 'mun' ? 'bg-primary/10 dark:bg-autumn-800' : ''}
                     `}
                   >
                     <span className="mr-2 text-sm">{getLanguageDisplay('mun').flag}</span>

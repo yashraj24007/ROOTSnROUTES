@@ -9,15 +9,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow hover:shadow-lg transform hover:scale-105",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-border bg-transparent hover:bg-card hover:shadow-card transform hover:scale-105",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow hover:shadow-xl transform hover:scale-105 font-semibold",
-        "hero-outline": "border-2 border-primary bg-transparent text-primary hover:bg-primary/10 hover:shadow-glow transform hover:scale-105",
-        ai: "bg-gradient-card text-white hover:shadow-nature transform hover:scale-105 font-semibold",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transform hover:scale-105 dark:shadow-glow dark:hover:shadow-lg",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-lg shadow-destructive/20",
+        outline: "border-2 border-border bg-background/50 backdrop-blur-sm hover:bg-accent/10 hover:border-accent/50 shadow-md shadow-border/10 hover:shadow-lg hover:shadow-accent/20 transform hover:scale-105 dark:bg-transparent dark:hover:bg-card dark:hover:shadow-card",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-md shadow-secondary/15 hover:shadow-lg hover:shadow-secondary/25",
+        ghost: "hover:bg-accent/20 hover:text-accent-foreground transition-colors",
+        link: "text-primary underline-offset-4 hover:underline hover:text-primary/80",
+        hero: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/35 transform hover:scale-105 font-semibold dark:shadow-glow dark:hover:shadow-xl",
+        "hero-outline": "border-2 border-primary bg-background/80 backdrop-blur-sm text-primary hover:bg-primary/10 hover:border-primary/70 shadow-lg shadow-primary/15 hover:shadow-xl hover:shadow-primary/25 transform hover:scale-105 dark:bg-transparent dark:hover:shadow-glow",
+        ai: "bg-gradient-to-r from-primary to-accent text-white hover:from-primary/90 hover:to-accent/90 shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 transform hover:scale-105 font-semibold dark:shadow-nature",
       },
       size: {
         default: "h-12 px-6 py-3",

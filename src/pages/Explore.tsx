@@ -88,34 +88,45 @@ const Explore = () => {
       <DevelopmentNotice />
       <Header />
       
-      {/* Hero Section - Keep original gradient-hero theme */}
-      <section className="pt-24 pb-16 bg-gradient-hero">
-        <div className="container mx-auto px-6">
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Explore Jharkhand ✨</h1>
-            <p className="text-xl mb-8 max-w-4xl mx-auto leading-relaxed">
-              Your gateway to discovering the authentic beauty of Jharkhand! 🌈 
-              From majestic destinations to local experiences, find everything 
-              you need for an unforgettable journey! 💫
-            </p>
-            
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-300">100+</div>
-                <div className="text-sm opacity-90">✨ Destinations</div>
+      {/* Hero Section - Better Content Colors & Sizing */}
+      <section className="min-h-screen flex items-center justify-center bg-gradient-hero relative overflow-hidden">
+        {/* Enhanced background overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/20 dark:bg-black/30"></div>
+        <div className="container mx-auto px-6 relative z-10 py-16">
+          <div className="text-center max-w-6xl mx-auto">
+            <div className="space-y-10">
+              {/* Better sized and colored heading */}
+              <div className="space-y-6">
+                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white drop-shadow-2xl">
+                  Explore Jharkhand ✨
+                </h1>
+                <p className="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed font-medium text-white/95 drop-shadow-lg">
+                  Your gateway to discovering the authentic beauty of Jharkhand! 🌈 
+                  From majestic destinations to local experiences, find everything 
+                  you need for an unforgettable journey! 💫
+                </p>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-300">500+</div>
-                <div className="text-sm opacity-90">🎨 Local Partners</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-300">24</div>
-                <div className="text-sm opacity-90">🏞️ Districts</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-pink-300">10K+</div>
-                <div className="text-sm opacity-90">💖 Happy Travelers</div>
+              
+              {/* Better sized stats grid */}
+              <div className="pt-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">100+</div>
+                    <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">✨ Destinations</div>
+                  </div>
+                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">500+</div>
+                    <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">🎨 Local Partners</div>
+                  </div>
+                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">24</div>
+                    <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">🏞️ Districts</div>
+                  </div>
+                  <div className="text-center bg-white/25 dark:bg-black/40 backdrop-blur-lg rounded-xl p-5 border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div className="text-2xl md:text-3xl font-bold text-white drop-shadow-2xl mb-2">10K+</div>
+                    <div className="text-sm md:text-base text-white/95 font-medium drop-shadow-lg">💖 Happy Travelers</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -263,27 +274,44 @@ const Explore = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="container mx-auto px-6">
-          <Card className="bg-white/10 backdrop-blur-md p-12 text-center border-0 shadow-2xl">
-            <div className="max-w-4xl mx-auto text-white">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Ready for Your Jharkhand Adventure? 🎉
-              </h2>
-              <p className="text-xl mb-8 leading-relaxed opacity-90">
-                Join thousands of travelers who have discovered the magic of Jharkhand through our platform. 
-                Start planning your perfect journey today! ✨
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/destinations">
-                  <Button variant="hero" size="lg" className="bg-white text-primary hover:bg-white/90">
-                    🌟 Start Exploring Now
+      {/* Enhanced Call to Action - Fixed for Both Light & Dark Mode */}
+      <section className="py-20 bg-gradient-hero relative overflow-hidden">
+        {/* Enhanced background overlay */}
+        <div className="absolute inset-0 bg-black/15 dark:bg-black/40"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <Card className="cta-section-card p-12 md:p-16 text-center border-0 shadow-2xl relative overflow-hidden rounded-2xl max-w-4xl mx-auto">
+            <div className="text-white relative z-10 space-y-8">
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight drop-shadow-2xl leading-tight">
+                  Ready for Your Jharkhand Adventure? 🎉
+                </h2>
+                <p className="text-lg md:text-xl leading-relaxed text-white/95 font-medium drop-shadow-lg max-w-3xl mx-auto">
+                  Join thousands of travelers who have discovered the magic of Jharkhand through our platform. 
+                  Start planning your perfect journey today! ✨
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4">
+                <Link to="/destinations" className="w-full sm:w-auto">
+                  <Button 
+                    variant="hero" 
+                    size="lg" 
+                    className="w-full sm:w-auto cta-primary-button font-semibold text-lg px-10 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
+                  >
+                    <span className="flex items-center gap-3">
+                      🌟 Start Exploring Now
+                    </span>
                   </Button>
                 </Link>
-                <Link to="/chatbot">
-                  <Button variant="hero-outline" size="lg" className="border-white text-white hover:bg-white/10">
-                    🤖 Ask AI Assistant
+                <Link to="/chatbot" className="w-full sm:w-auto">
+                  <Button 
+                    variant="hero-outline" 
+                    size="lg" 
+                    className="w-full sm:w-auto cta-secondary-button font-medium text-lg px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <span className="flex items-center gap-3">
+                      🤖 Ask AI Assistant
+                    </span>
                   </Button>
                 </Link>
               </div>

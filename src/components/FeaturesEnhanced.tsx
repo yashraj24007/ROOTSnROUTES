@@ -119,29 +119,40 @@ const Features = () => {
           ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-16 text-center stagger-item">
-          <Card className="card-brand-featured p-8 max-w-2xl mx-auto">
-            <Heart className="w-12 h-12 mx-auto text-white mb-4 icon-pulse" />
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Ready to Explore Jharkhand?
-            </h3>
-            <p className="text-white/90 mb-6">
-              Join thousands of travelers discovering the hidden gems of Jharkhand with our platform.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/destinations">
-                <Button className="btn-brand-secondary">
-                  Start Exploring
+        {/* Enhanced Call to Action with Improved Colors & Better Space Usage */}
+        <div className="mt-20 text-center stagger-item">
+          <Card className="card-brand-featured p-12 md:p-16 max-w-4xl mx-auto relative overflow-hidden rounded-3xl">
+            {/* Enhanced background overlay with brighter colors */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-white/10 dark:from-black/15 dark:to-black/25 rounded-3xl"></div>
+            <div className="relative z-10 space-y-8">
+              <div className="space-y-6">
+                <Heart className="w-16 h-16 mx-auto text-white mb-6 icon-pulse filter drop-shadow-2xl" />
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-wide leading-tight drop-shadow-2xl">
+                  Ready to Explore Jharkhand?
+                </h3>
+                <p className="text-white/95 text-lg md:text-xl lg:text-2xl leading-relaxed font-medium max-w-3xl mx-auto drop-shadow-lg">
+                  Join thousands of travelers discovering the hidden gems of Jharkhand with our platform.
+                </p>
+              </div>
+              
+              <div className="flex flex-col lg:flex-row gap-6 justify-center items-center pt-4">
+                <Link to="/destinations" className="w-full lg:w-auto">
+                  <Button className="w-full lg:w-auto bg-white text-emerald-700 hover:bg-emerald-50 font-bold text-lg lg:text-xl px-10 py-4 lg:px-12 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 border-2 border-white/20">
+                    <span className="flex items-center gap-3">
+                      🌟 Start Exploring
+                    </span>
+                  </Button>
+                </Link>
+                <Button 
+                  variant="outline" 
+                  onClick={handleAISupport}
+                  className="w-full lg:w-auto border-3 border-white/80 text-white hover:bg-white/20 hover:border-white/95 backdrop-blur-sm font-bold text-lg lg:text-xl px-10 py-4 lg:px-12 lg:py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
+                >
+                  <span className="flex items-center gap-3">
+                    🤖 Get AI Help
+                  </span>
                 </Button>
-              </Link>
-              <Button 
-                variant="outline" 
-                onClick={handleAISupport}
-                className="border-white/30 text-white hover:bg-white/10"
-              >
-                Get AI Recommendations
-              </Button>
+              </div>
             </div>
           </Card>
         </div>

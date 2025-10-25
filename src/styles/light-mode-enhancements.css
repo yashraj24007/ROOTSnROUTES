@@ -1,0 +1,514 @@
+/* Light Mode Enhancements for ROOTSnROUTES
+   Enhanced visual appeal while maintaining color consistency
+   Professional, modern, and accessible design improvements
+*/
+
+
+/* Enhanced Hero Gradient Sections for Light Mode */
+
+.light .bg-gradient-hero {
+    background: linear-gradient(135deg, hsl(140 60% 45%) 0%, hsl(25 85% 55%) 50%, hsl(45 75% 60%) 100%);
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.light .bg-gradient-hero h1,
+.light .bg-gradient-hero h2,
+.light .bg-gradient-hero h3 {
+    color: white;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+}
+
+.light .bg-gradient-hero p {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Enhanced CTA Cards in Light Mode */
+
+.light .card-brand-featured {
+    background: linear-gradient(135deg, hsl(140 60% 45%) 0%, hsl(25 85% 55%) 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.light .card-brand-featured:hover {
+    background: linear-gradient(135deg, hsl(140 65% 42%) 0%, hsl(25 90% 52%) 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+}
+
+.light .card-brand-featured h3,
+.light .card-brand-featured p {
+    color: white;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Enhanced CTA Section for Both Light and Dark Mode */
+
+.light .cta-section-card {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.dark .cta-section-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+
+/* CTA Button Enhancements - Better Colors for Primary Button */
+
+.light .cta-primary-button {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+    border: 2px solid rgba(251, 191, 36, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+}
+
+.light .cta-primary-button:hover {
+    background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
+    color: #78350f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(245, 158, 11, 0.35);
+    border-color: rgba(245, 158, 11, 0.5);
+}
+
+.dark .cta-primary-button {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    border: 2px solid rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+.dark .cta-primary-button:hover {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+    border-color: rgba(52, 211, 153, 0.5);
+}
+
+.light .cta-secondary-button {
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    color: white;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.light .cta-secondary-button:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.2) 100%);
+    border-color: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.dark .cta-secondary-button {
+    border: 2px solid rgba(156, 163, 175, 0.8);
+    color: #e5e7eb;
+    background: linear-gradient(135deg, rgba(75, 85, 99, 0.3) 0%, rgba(55, 65, 81, 0.3) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dark .cta-secondary-button:hover {
+    background: linear-gradient(135deg, rgba(107, 114, 128, 0.4) 0%, rgba(75, 85, 99, 0.4) 100%);
+    border-color: rgba(209, 213, 219, 0.9);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Enhanced Stats and Numbers in Hero Sections */
+
+.light .bg-gradient-hero .text-yellow-300,
+.light .bg-gradient-hero .text-green-300,
+.light .bg-gradient-hero .text-blue-300,
+.light .bg-gradient-hero .text-purple-300 {
+    color: white !important;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Enhanced Buttons in Hero Sections */
+
+.light .bg-gradient-hero .bg-white {
+    background: white !important;
+    color: hsl(140 70% 35%) !important;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.light .bg-gradient-hero .bg-white:hover {
+    background: hsl(140 95% 97%) !important;
+    color: hsl(140 75% 30%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.light .bg-gradient-hero .border-white {
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    color: white !important;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.12) !important;
+    font-weight: 500;
+    border-width: 2px;
+}
+
+.light .bg-gradient-hero .border-white:hover {
+    border-color: rgba(255, 255, 255, 0.95) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Enhanced CTA Section Button Styling */
+
+.light .card-brand-featured .bg-white {
+    background: white !important;
+    color: hsl(140 70% 35%) !important;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light .card-brand-featured .bg-white:hover {
+    background: hsl(140 95% 97%) !important;
+    color: hsl(140 75% 30%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* Enhanced Form Elements for Light Mode */
+
+.light input,
+.light textarea,
+.light select {
+    background: hsl(var(--input));
+    border: 2px solid hsl(var(--border) / 0.5);
+    box-shadow: 0 2px 8px hsl(var(--muted) / 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light input:focus,
+.light textarea:focus,
+.light select:focus {
+    border-color: hsl(var(--ring) / 0.6);
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1), 0 4px 12px hsl(var(--primary) / 0.15);
+    background: hsl(var(--background));
+}
+
+
+/* Enhanced Card Hover Effects */
+
+.light .card-enhanced {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: 0 4px 20px hsl(var(--muted) / 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light .card-enhanced:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px hsl(var(--primary) / 0.15);
+    border-color: hsl(var(--primary) / 0.2);
+}
+
+
+/* Enhanced Navigation Items */
+
+.light .nav-item-enhanced {
+    color: hsl(var(--foreground) / 0.8);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.light .nav-item-enhanced:hover {
+    color: hsl(var(--primary));
+    background: hsl(var(--accent) / 0.1);
+    transform: translateY(-1px);
+}
+
+.light .nav-item-enhanced.active {
+    color: hsl(var(--primary));
+    background: hsl(var(--primary) / 0.1);
+    font-weight: 600;
+}
+
+
+/* Enhanced Dropdown Menus */
+
+.light .dropdown-enhanced {
+    background: hsl(var(--popover));
+    border: 1px solid hsl(var(--border) / 0.4);
+    box-shadow: 0 8px 30px hsl(var(--muted) / 0.2);
+    backdrop-filter: blur(20px);
+}
+
+.light .dropdown-item-enhanced {
+    color: hsl(var(--foreground) / 0.9);
+    transition: all 0.2s ease;
+}
+
+.light .dropdown-item-enhanced:hover {
+    background: hsl(var(--accent) / 0.1);
+    color: hsl(var(--primary));
+}
+
+
+/* Enhanced Badge Styling */
+
+.light .badge-enhanced {
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    border: 1px solid hsl(var(--primary) / 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+
+/* Enhanced Progress Indicators */
+
+.light .progress-enhanced {
+    background: hsl(var(--muted));
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px hsl(var(--muted) / 0.3);
+}
+
+.light .progress-bar-enhanced {
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    transition: width 0.3s ease;
+    box-shadow: 0 2px 8px hsl(var(--primary) / 0.3);
+}
+
+
+/* Enhanced Alert/Notification Styling */
+
+.light .alert-enhanced {
+    border: 1px solid hsl(var(--border) / 0.4);
+    border-radius: 12px;
+    padding: 16px;
+    background: hsl(var(--background));
+    box-shadow: 0 4px 20px hsl(var(--muted) / 0.15);
+}
+
+.light .alert-success {
+    border-color: hsl(140 50% 50% / 0.3);
+    background: hsl(140 50% 50% / 0.05);
+    color: hsl(140 50% 30%);
+}
+
+.light .alert-warning {
+    border-color: hsl(45 90% 60% / 0.3);
+    background: hsl(45 90% 60% / 0.05);
+    color: hsl(45 90% 35%);
+}
+
+.light .alert-error {
+    border-color: hsl(var(--destructive) / 0.3);
+    background: hsl(var(--destructive) / 0.05);
+    color: hsl(var(--destructive));
+}
+
+
+/* Enhanced Modal/Dialog Styling */
+
+.light .modal-enhanced {
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border) / 0.3);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px hsl(var(--muted) / 0.3);
+    backdrop-filter: blur(20px);
+}
+
+.light .modal-overlay-enhanced {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(8px);
+}
+
+
+/* Enhanced Search Input */
+
+.light .search-enhanced {
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--border) / 0.4);
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px hsl(var(--muted) / 0.1);
+    transition: all 0.3s ease;
+}
+
+.light .search-enhanced:focus {
+    border-color: hsl(var(--primary) / 0.6);
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1), 0 8px 25px hsl(var(--primary) / 0.15);
+}
+
+
+/* Enhanced Toggle/Switch Styling */
+
+.light .toggle-enhanced {
+    background: hsl(var(--muted));
+    border: 2px solid hsl(var(--border) / 0.4);
+    transition: all 0.3s ease;
+}
+
+.light .toggle-enhanced.active {
+    background: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+}
+
+
+/* Enhanced Table Styling */
+
+.light .table-enhanced {
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border) / 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px hsl(var(--muted) / 0.1);
+}
+
+.light .table-header-enhanced {
+    background: hsl(var(--muted) / 0.5);
+    color: hsl(var(--foreground));
+    font-weight: 600;
+}
+
+.light .table-row-enhanced:hover {
+    background: hsl(var(--accent) / 0.05);
+}
+
+
+/* Enhanced Tooltip Styling */
+
+.light .tooltip-enhanced {
+    background: hsl(var(--popover));
+    color: hsl(var(--popover-foreground));
+    border: 1px solid hsl(var(--border) / 0.4);
+    border-radius: 8px;
+    box-shadow: 0 8px 25px hsl(var(--muted) / 0.2);
+    backdrop-filter: blur(20px);
+}
+
+
+/* Enhanced Loading States */
+
+.light .skeleton-enhanced {
+    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.5) 50%, hsl(var(--muted)) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
+/* Enhanced Focus States */
+
+.light *:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring) / 0.3);
+}
+
+
+/* Enhanced Scrollbar for Light Mode */
+
+.light ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.light ::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.3);
+    border-radius: 5px;
+}
+
+.light ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.4);
+    border-radius: 5px;
+    border: 2px solid hsl(var(--background));
+    transition: background 0.3s ease;
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.6);
+}
+
+
+/* Enhanced Selection Styling */
+
+.light ::selection {
+    background: hsl(var(--primary) / 0.15);
+    color: hsl(var(--primary));
+}
+
+
+/* Hero Section Enhancement */
+
+.hero-card-enhanced {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.hero-card-enhanced:hover {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+
+/* Custom shadow utilities */
+
+.shadow-3xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Enhanced glass morphism for light mode */
+
+.glass-light {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-light-subtle {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
