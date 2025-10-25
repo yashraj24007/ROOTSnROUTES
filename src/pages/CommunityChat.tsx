@@ -140,6 +140,7 @@ const CommunityChat = () => {
           </div>
         </div>
       </div>
+      </div>
       <Footer />
     </>
   );
