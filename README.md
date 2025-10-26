@@ -26,8 +26,8 @@ The platform connects tourists with local communities while promoting **sustaina
 ## 👥 Team Members
 | Roll No.     | Name              |
 |--------------|-------------------|
-| 2410030170   | Tanish Oberoi     |
 | 2410030316   | Yash Raj          |
+| 2410030170   | Tanish Oberoi         |
 | 2410030304   | Shreesh           |
 | 2410030533   | Pakkireddy Nihal Reddy |
 | 2410030020   | Sriya Gayatri     |
