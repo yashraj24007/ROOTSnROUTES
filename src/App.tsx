@@ -49,6 +49,7 @@ const SmartWeatherPage = lazy(() => import('./pages/SmartWeatherPage'));
 const PredictiveBookingPage = lazy(() => import('./pages/PredictiveBookingPage'));
 const Settings = lazy(() => import('./pages/Settings'));
 const GoogleAuthTestPage = lazy(() => import('./pages/GoogleAuthTestPage'));
+const ARVRPreviewPage = lazy(() => import('./pages/ARVRPreviewPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
@@ -112,6 +113,7 @@ const App = () => {
                       <Route path="/ai-trip-planner" element={<AITripPlannerPage />} />
                       <Route path="/smart-weather" element={<SmartWeatherPage />} />
                       <Route path="/predictive-booking" element={<PredictiveBookingPage />} />
+                      <Route path="/ar-vr-preview" element={<ARVRPreviewPage />} />
                       <Route path="/marketplace" element={<Marketplace />} />
                       <Route path="/marketplace/:id" element={<MarketplaceDetail />} />
                       <Route path="/restaurants/:id" element={<RestaurantDetail />} />

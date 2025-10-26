@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { QRCodeSVG } from 'qrcode.react';
 import { 
   Eye, 
   Camera, 
@@ -9,8 +10,33 @@ import {
   Monitor, 
   X, 
   Play,
-  AlertCircle
+  AlertCircle,
+  QrCode
 } from 'lucide-react';
+
+// Extend Window type for A-Frame
+declare global {
+  interface Window {
+    AFRAME?: any;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'a-scene': any;
+      'a-assets': any;
+      'a-asset-item': any;
+      'a-sky': any;
+      'a-light': any;
+      'a-text': any;
+      'a-box': any;
+      'a-cylinder': any;
+      'a-sphere': any;
+      'a-plane': any;
+      'a-camera': any;
+      'a-entity': any;
+      'a-marker': any;
+    }
+  }
+}
 
 interface ExploreARVRSimpleProps {
   category?: 'destinations' | 'marketplace' | 'restaurants' | 'hotels' | 'all';
@@ -19,7 +45,9 @@ interface ExploreARVRSimpleProps {
 const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' }) => {
   const [isVRActive, setIsVRActive] = useState(false);
   const [isARActive, setIsARActive] = useState(false);
+  const [showQRModal, setShowQRModal] = useState(false);
   const [aframeLoaded, setAframeLoaded] = useState(false);
+  const [vrReady, setVrReady] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState<string>('destination');
   const sceneRef = useRef<HTMLDivElement>(null);
 
@@ -56,17 +84,17 @@ const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' 
     const loadAFrame = async () => {
       try {
         if (typeof window !== 'undefined' && !window.AFRAME) {
+          // Load A-Frame core
           await import('aframe');
-          // Load AR.js for AR functionality
-          await import('ar.js/aframe/build/aframe-ar');
+          console.log('✅ A-Frame loaded successfully');
           setAframeLoaded(true);
-          console.log('✅ A-Frame and AR.js loaded successfully');
         } else if (window.AFRAME) {
           setAframeLoaded(true);
+          console.log('✅ A-Frame already loaded');
         }
       } catch (error) {
         console.error('❌ Failed to load A-Frame:', error);
-        // Still set as loaded to allow basic VR
+        // Still set as loaded to show the interface
         setAframeLoaded(true);
       }
     };
@@ -74,11 +102,51 @@ const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' 
     loadAFrame();
   }, []);
 
+  // Monitor VR scene readiness
+  useEffect(() => {
+    if (isVRActive && aframeLoaded) {
+      const checkVRReady = () => {
+        const scene = document.querySelector('a-scene');
+        if (scene && scene.hasLoaded) {
+          setVrReady(true);
+          console.log('✅ VR Scene is ready');
+        } else {
+          setTimeout(checkVRReady, 100);
+        }
+      };
+      checkVRReady();
+    } else {
+      setVrReady(false);
+    }
+  }, [isVRActive, aframeLoaded]);
+
+  // Check URL parameters for auto-launch AR from QR code scan
+  useEffect(() => {
+    if (!aframeLoaded) return;
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    const experience = urlParams.get('experience');
+    
+    if (mode === 'ar' && experience) {
+      setSelectedExperience(experience);
+      // Auto-launch AR on mobile devices
+      const isMobile = navigator.userAgent.match(/Mobile|Android|iPhone|iPad/);
+      if (isMobile) {
+        setTimeout(() => {
+          setIsARActive(true);
+        }, 1000); // Small delay to ensure everything is loaded
+      }
+    }
+  }, [aframeLoaded]);
+
   const enterVR = () => {
     if (!aframeLoaded) {
       alert('VR is still loading, please wait...');
       return;
     }
+    console.log('🚀 Entering VR mode with experience:', selectedExperience);
+    console.log('📸 Panorama URL:', experiences[selectedExperience as keyof typeof experiences].panoramaUrl);
     setIsVRActive(true);
   };
 
@@ -88,18 +156,22 @@ const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' 
       return;
     }
     
-    // Check if device supports AR
-    if (!navigator.userAgent.match(/Mobile|Android|iPhone|iPad/)) {
-      alert('AR mode works best on mobile devices. You can still try the VR mode!');
-      return;
-    }
+    // Check if on mobile device
+    const isMobile = navigator.userAgent.match(/Mobile|Android|iPhone|iPad/);
     
-    setIsARActive(true);
+    if (isMobile) {
+      // If already on mobile, launch AR directly
+      setIsARActive(true);
+    } else {
+      // If on desktop, show QR code for mobile scanning
+      setShowQRModal(true);
+    }
   };
 
   const exitImmersive = () => {
     setIsVRActive(false);
     setIsARActive(false);
+    setShowQRModal(false);
   };
 
   const currentExperience = experiences[selectedExperience as keyof typeof experiences];
@@ -205,6 +277,17 @@ const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' 
       {/* A-Frame VR Scene */}
       {isVRActive && (
         <div className="fixed inset-0 z-50 bg-black">
+          {/* Loading indicator */}
+          {!vrReady && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black z-20">
+              <div className="text-center text-white">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-white mx-auto mb-4"></div>
+                <p className="text-lg">Loading VR Experience...</p>
+                <p className="text-sm text-gray-400 mt-2">Please wait while we prepare your virtual tour</p>
+              </div>
+            </div>
+          )}
+          
           <div className="absolute top-4 right-4 z-10">
             <Button onClick={exitImmersive} variant="secondary" size="sm">
               <X className="w-4 h-4 mr-2" />
@@ -344,6 +427,82 @@ const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' 
           {aframeLoaded ? '✅ AR/VR Ready' : '⏳ Loading AR/VR Engine...'}
         </Badge>
       </div>
+
+      {/* QR Code Modal for AR on Mobile */}
+      {showQRModal && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-background border border-primary/20 rounded-xl shadow-2xl max-w-md w-full p-8 relative">
+            {/* Close button */}
+            <Button
+              onClick={() => setShowQRModal(false)}
+              variant="ghost"
+              size="sm"
+              className="absolute top-4 right-4"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+
+            {/* Modal content */}
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                <QrCode className="w-8 h-8 text-white" />
+              </div>
+              
+              <h3 className="text-2xl font-bold mb-2">Scan to View in AR</h3>
+              <p className="text-muted-foreground mb-6">
+                Open your mobile camera and scan this QR code to experience {currentExperience.title} in Augmented Reality
+              </p>
+
+              {/* QR Code */}
+              <div className="bg-white p-6 rounded-lg inline-block mb-6 shadow-lg">
+                <QRCodeSVG
+                  value={`${window.location.origin}/ar-vr-preview?mode=ar&experience=${selectedExperience}`}
+                  size={200}
+                  level="H"
+                  includeMargin={true}
+                />
+              </div>
+
+              {/* Instructions */}
+              <div className="space-y-3 text-left bg-muted/30 p-4 rounded-lg">
+                <h4 className="font-semibold text-center mb-3">How to use:</h4>
+                <div className="flex items-start gap-3 text-sm">
+                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                    1
+                  </div>
+                  <p>Open your phone's camera app</p>
+                </div>
+                <div className="flex items-start gap-3 text-sm">
+                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                    2
+                  </div>
+                  <p>Point at the QR code above</p>
+                </div>
+                <div className="flex items-start gap-3 text-sm">
+                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                    3
+                  </div>
+                  <p>Tap the notification to open AR view</p>
+                </div>
+                <div className="flex items-start gap-3 text-sm">
+                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                    4
+                  </div>
+                  <p>Move your phone to explore in 3D</p>
+                </div>
+              </div>
+
+              {/* Mobile app suggestion */}
+              <div className="mt-6 p-3 bg-accent/10 border border-accent/20 rounded-lg">
+                <p className="text-xs text-muted-foreground flex items-center justify-center gap-2">
+                  <Smartphone className="w-4 h-4" />
+                  <span>Works best with AR-enabled mobile browsers</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
