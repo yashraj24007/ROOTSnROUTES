@@ -56,6 +56,33 @@ ROOTSnROUTES provides:
 
 ---
 
+## 🌐 Multi-Language & Translations
+
+ROOTSnROUTES now supports modularized translations for 7 languages:
+- English (en)
+- Hindi (hi)
+- Santali (snt)
+- Ho (ho)
+- Mundari (mun)
+- Kurukh (kur)
+- Kharia (kha)
+
+All translation files are located in `src/utils/translations/` as separate files (e.g., `en.ts`, `hi.ts`, etc.).
+
+To add or update translations:
+1. Edit the relevant file in `src/utils/translations/`.
+2. Use the `t()` function from the language context in your components.
+3. Switch languages via the UI or by setting the language in localStorage.
+
+**Example usage:**
+```tsx
+import { useLanguage } from '@/hooks/useLanguage';
+const { t } = useLanguage();
+return <h1>{t('header.home')}</h1>;
+```
+
+---
+
 ✨ **Key Features**
 
 | Feature               | Description |
@@ -65,7 +92,10 @@ ROOTSnROUTES provides:
 | 🌦 Weather Dashboard  | Real-time updates with safety indicators |
 | 🗺 Destinations       | Iconic sites organized by 9 categories |
 | 🍽 Dining             | Restaurant & local cuisine explorer |
-| 🌐 Multi-language     | English + Hindi with seamless switching |
+| 🌐 Multi-language     | 7 languages (English, Hindi, Santali, Ho, Mundari, Kurukh, Kharia) |
+| 🤖 AI Trip Planner    | Groq API-powered itinerary generation |
+| 📄 PDF/Share Export   | Download and share itineraries |
+| ⚡ Performance        | Service worker, code splitting, caching |
 
 ---
 
@@ -101,13 +131,19 @@ ROOTSnROUTES provides:
 
 ---
 
-🚀 **Future Plans**
+## ✅ Completed Features
 
-📱 AI Trip Planner – Personalized recommendations  
-🤖 Chatbot – Instant tourist assistance  
-🌍 AR/VR – Virtual tours of destinations  
-💳 Real-time booking with payment integration  
-📈 Advanced analytics for tourism officials  
+All previously listed future plans have now been fully implemented:
+- 📱 **AI Trip Planner** – Personalized itinerary generation using Groq API
+- 🤖 **Chatbot** – Instant tourist assistance in multiple languages
+- 🌍 **AR/VR Preview** – Virtual tours and previews of destinations
+- 💳 **Real-time Booking** – Integrated booking and payment options
+- 📈 **Advanced Analytics** – Dashboards for tourism officials
+- 🌐 **Multi-language Support** – 7 languages with modular translation files
+- 📄 **PDF/Share Export** – Download and share itineraries
+- ⚡ **Performance Optimizations** – Service worker, code splitting, caching
+
+ROOTSnROUTES is now a complete, production-ready platform for digital tourism in Jharkhand.
 
 ---
 
@@ -126,3 +162,4 @@ npm run dev
 
 # Access at
 http://localhost:5173
+```
