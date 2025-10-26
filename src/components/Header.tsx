@@ -206,7 +206,7 @@ const Header = () => {
                   }`}
                   aria-label="AI Services menu"
                 >
-                  AI Services
+                  {t('header.aiServices')}
                   <ChevronDown className="w-3 h-3 opacity-60" />
                 </Button>
               </DropdownMenuTrigger>
@@ -219,8 +219,8 @@ const Header = () => {
                   >
                     <span className="mr-3">🧭</span>
                     <div>
-                      <div className="font-medium">AI Trip Planner</div>
-                      <div className="text-xs text-muted-foreground">Personalized itineraries</div>
+                      <div className="font-medium">{t('header.aiTripPlanner')}</div>
+                      <div className="text-xs text-muted-foreground">{t('header.aiTripPlannerDesc')}</div>
                     </div>
                   </Link>
                 </DropdownMenuItem>
@@ -232,8 +232,8 @@ const Header = () => {
                   >
                     <span className="mr-3">🌤️</span>
                     <div>
-                      <div className="font-medium">Smart Weather</div>
-                      <div className="text-xs text-muted-foreground">Weather-based recommendations</div>
+                      <div className="font-medium">{t('header.smartWeather')}</div>
+                      <div className="text-xs text-muted-foreground">{t('header.smartWeatherDesc')}</div>
                     </div>
                   </Link>
                 </DropdownMenuItem>
@@ -245,8 +245,8 @@ const Header = () => {
                   >
                     <span className="mr-3">🎯</span>
                     <div>
-                      <div className="font-medium">Smart Booking</div>
-                      <div className="text-xs text-muted-foreground">Predictive recommendations</div>
+                      <div className="font-medium">{t('header.smartBooking')}</div>
+                      <div className="text-xs text-muted-foreground">{t('header.smartBookingDesc')}</div>
                     </div>
                   </Link>
                 </DropdownMenuItem>
@@ -333,7 +333,7 @@ const Header = () => {
                     
                     {/* AI Services Section */}
                     <div className="border-t pt-2 mt-2">
-                      <div className="text-xs font-medium text-muted-foreground px-3 py-2">AI SERVICES</div>
+                      <div className="text-xs font-medium text-muted-foreground px-3 py-2">{t('header.aiServices').toUpperCase()}</div>
                       
                       <Link 
                         to="/ai-trip-planner" 
@@ -347,8 +347,8 @@ const Header = () => {
                       >
                         <span>🧭</span>
                         <div>
-                          <div className="font-medium">AI Trip Planner</div>
-                          <div className="text-xs text-muted-foreground">Personalized itineraries</div>
+                          <div className="font-medium">{t('header.aiTripPlanner')}</div>
+                          <div className="text-xs text-muted-foreground">{t('header.aiTripPlannerDesc')}</div>
                         </div>
                       </Link>
                       
@@ -364,8 +364,8 @@ const Header = () => {
                       >
                         <span>🌤️</span>
                         <div>
-                          <div className="font-medium">Smart Weather</div>
-                          <div className="text-xs text-muted-foreground">Weather recommendations</div>
+                          <div className="font-medium">{t('header.smartWeather')}</div>
+                          <div className="text-xs text-muted-foreground">{t('header.smartWeatherDesc')}</div>
                         </div>
                       </Link>
                       
@@ -381,8 +381,8 @@ const Header = () => {
                       >
                         <span>🎯</span>
                         <div>
-                          <div className="font-medium">Smart Booking</div>
-                          <div className="text-xs text-muted-foreground">AI recommendations</div>
+                          <div className="font-medium">{t('header.smartBooking')}</div>
+                          <div className="text-xs text-muted-foreground">{t('header.smartBookingDesc')}</div>
                         </div>
                       </Link>
                       
