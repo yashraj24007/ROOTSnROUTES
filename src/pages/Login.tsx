@@ -107,9 +107,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-amber-50 dark:from-emerald-950/30 dark:via-amber-950/20 dark:to-orange-950/30 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <Card className="w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl">
+        <Card className="w-full bg-white/95 dark:bg-emerald-950/50 backdrop-blur-sm border border-gray-200 dark:border-emerald-800 shadow-2xl">
           {/* Header */}
           <CardHeader className="space-y-1 relative pb-6">
             {onClose && (
@@ -160,7 +160,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
                       placeholder="Enter your full name"
                       value={formData.name}
                       onChange={(e) => handleInputChange("name", e.target.value)}
-                      className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                      className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-emerald-500 dark:focus:border-emerald-400 bg-white dark:bg-emerald-950/50"
                       required={!isLogin}
                     />
                   </div>
@@ -181,7 +181,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
                       placeholder="Enter your phone number"
                       value={formData.phone}
                       onChange={(e) => handleInputChange("phone", e.target.value)}
-                      className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                      className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-emerald-500 dark:focus:border-emerald-400 bg-white dark:bg-emerald-950/50"
                       required={!isLogin}
                     />
                   </div>
@@ -201,7 +201,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                    className="pl-10 h-11 border-gray-300 dark:border-gray-600 focus:border-emerald-500 dark:focus:border-emerald-400 bg-white dark:bg-emerald-950/50"
                     required
                   />
                 </div>
@@ -220,7 +220,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={(e) => handleInputChange("password", e.target.value)}
-                    className="pl-10 pr-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                    className="pl-10 pr-10 h-11 border-gray-300 dark:border-gray-600 focus:border-emerald-500 dark:focus:border-emerald-400 bg-white dark:bg-emerald-950/50"
                     required
                   />
                   <Button
@@ -252,7 +252,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                      className="pl-10 pr-10 h-11 border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 bg-white dark:bg-gray-800"
+                      className="pl-10 pr-10 h-11 border-gray-300 dark:border-gray-600 focus:border-emerald-500 dark:focus:border-emerald-400 bg-white dark:bg-emerald-950/50"
                       required={!isLogin}
                     />
                     <Button
@@ -294,7 +294,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
                 <Separator className="w-full" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white dark:bg-gray-900 px-2 text-gray-500">Or continue with</span>
+                <span className="bg-white dark:bg-emerald-950/50 px-2 text-gray-500">Or continue with</span>
               </div>
             </div>
 

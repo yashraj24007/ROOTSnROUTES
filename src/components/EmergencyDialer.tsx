@@ -32,14 +32,14 @@ const EmergencyDialer = () => {
       number: '1363',
       description: '24/7 Tourist Assistance',
       icon: MapPin,
-      color: 'bg-blue-600 hover:bg-blue-700'
+      color: 'bg-teal-600 hover:bg-teal-700'
     },
     {
       name: 'Women Helpline',
       number: '1091',
       description: 'Women Safety & Support',
       icon: Shield,
-      color: 'bg-purple-600 hover:bg-purple-700'
+      color: 'bg-amber-600 hover:bg-amber-700'
     }
   ];
 
@@ -128,12 +128,12 @@ const EmergencyDialer = () => {
       </div>
 
       {/* Additional Safety Information */}
-      <Card className="mt-6 bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+      <Card className="mt-6 bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
         <div className="p-6">
-          <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-3">
+          <h4 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-3">
             📍 Safety Tips for Travelers
           </h4>
-          <ul className="space-y-2 text-sm text-blue-700 dark:text-blue-300">
+          <ul className="space-y-2 text-sm text-emerald-700 dark:text-emerald-300">
             <li>• Always inform someone about your travel plans and itinerary</li>
             <li>• Keep emergency contacts saved in your phone</li>
             <li>• Carry a physical copy of important documents</li>

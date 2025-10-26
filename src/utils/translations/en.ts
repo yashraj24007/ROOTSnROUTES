@@ -451,6 +451,7 @@ export const en = {
     handicrafts: 'Handicrafts',
     tourPackages: 'Tour Packages',
     localGuides: 'Local Guides',
+    multilingualChatbot: 'Multilingual AI Chatbot',
     support: 'Support',
     helpCenter: 'Help Center',
     contactUs: 'Contact Us',

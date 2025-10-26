@@ -268,7 +268,7 @@ const EnhancedInteractiveMap = () => {
             </div>
 
             {/* Embedded Google Map */}
-            <div className="relative bg-gradient-to-br from-emerald-50 to-blue-50 dark:from-emerald-950 dark:to-blue-950 rounded-xl overflow-hidden">
+            <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl overflow-hidden">
               <iframe
                 title="Jharkhand Tourism Interactive Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1858459.2285021635!2d83.82965537343751!3d23.610201700000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e104aa5db7dd%3A0dc9ff4e3e2a4a1b!2sJharkhand%2C%20India!5e0!3m2!1sen!2sin!4v1698845678123!5m2!1sen!2sin"

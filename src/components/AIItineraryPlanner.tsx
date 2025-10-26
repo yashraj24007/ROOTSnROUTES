@@ -412,7 +412,7 @@ const AIItineraryPlanner: React.FC = () => {
           {/* Itinerary Days */}
           {itinerary.map((day) => (
             <Card key={day.day} className="overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20">
+              <CardHeader className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="text-lg">Day {day.day}</CardTitle>

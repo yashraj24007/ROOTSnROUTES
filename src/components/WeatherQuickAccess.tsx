@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const WeatherQuickAccess: React.FC = () => {
   return (
-    <Card className="bg-gradient-to-br from-blue-50 to-sky-100 dark:from-blue-900/20 dark:to-sky-900/20 border-blue-200 dark:border-blue-800">
+    <Card className="bg-gradient-to-br from-teal-50 to-emerald-100 dark:from-emerald-900/20 dark:to-teal-900/20 border-emerald-200 dark:border-emerald-800">
       <CardContent className="p-6">
         <div className="text-center space-y-4">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500 rounded-full mb-4">

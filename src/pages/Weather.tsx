@@ -111,7 +111,7 @@ const Weather = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-900 dark:from-emerald-950 dark:to-teal-950">
       <DevelopmentNotice />
       <Header />
       <motion.main 

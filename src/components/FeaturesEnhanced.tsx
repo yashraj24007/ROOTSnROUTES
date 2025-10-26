@@ -82,14 +82,14 @@ const Features = () => {
                   </p>
                   {feature.link ? (
                     <Link to={feature.link}>
-                      <Button className="btn-brand-primary">
+                      <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                         Explore Map
                       </Button>
                     </Link>
                   ) : (
                     <Button 
                       onClick={handleAISupport}
-                      className="btn-brand-primary"
+                      className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       Try AI Assistant
                     </Button>
@@ -119,11 +119,11 @@ const Features = () => {
           ))}
         </div>
 
-        {/* Enhanced Call to Action with Improved Colors & Better Space Usage */}
+        {/* Enhanced Call to Action with Autumn/Forest Theme */}
         <div className="mt-20 text-center stagger-item">
-          <Card className="card-brand-featured p-12 md:p-16 max-w-4xl mx-auto relative overflow-hidden rounded-3xl">
-            {/* Enhanced background overlay with brighter colors */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-white/10 dark:from-black/15 dark:to-black/25 rounded-3xl"></div>
+          <Card className="p-12 md:p-16 max-w-4xl mx-auto relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-amber-600 shadow-2xl">
+            {/* Enhanced background overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-black/20 rounded-3xl"></div>
             <div className="relative z-10 space-y-8">
               <div className="space-y-6">
                 <Heart className="w-16 h-16 mx-auto text-white mb-6 icon-pulse filter drop-shadow-2xl" />
@@ -137,7 +137,7 @@ const Features = () => {
               
               <div className="flex flex-col lg:flex-row gap-6 justify-center items-center pt-4">
                 <Link to="/destinations" className="w-full lg:w-auto">
-                  <Button className="w-full lg:w-auto bg-white text-emerald-700 hover:bg-emerald-50 font-bold text-lg lg:text-xl px-10 py-4 lg:px-12 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 border-2 border-white/20">
+                  <Button className="w-full lg:w-auto bg-white text-emerald-700 hover:bg-amber-50 hover:text-amber-700 font-bold text-lg lg:text-xl px-10 py-4 lg:px-12 lg:py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 border-2 border-white/20">
                     <span className="flex items-center gap-3">
                       🌟 Start Exploring
                     </span>

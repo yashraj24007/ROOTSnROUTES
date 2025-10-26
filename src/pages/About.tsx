@@ -508,14 +508,14 @@ const About = () => {
               <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Key Innovations</h3>
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl">🤖</span>
                   </div>
                   <h4 className="text-lg font-semibold text-foreground mb-2">AI Itinerary Planner</h4>
                   <p className="text-sm text-muted-foreground">Personalized travel plans based on preferences, weather, and local events</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl">🌦️</span>
                   </div>
                   <h4 className="text-lg font-semibold text-foreground mb-2">Weather Intelligence</h4>

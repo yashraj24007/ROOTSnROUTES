@@ -103,7 +103,7 @@ const ARVRPreview: React.FC<ARVRPreviewProps> = ({ destination }) => {
 
         {/* 360° View */}
         {currentView === '360' && (
-          <div className="relative bg-gradient-to-br from-blue-50 to-green-50 dark:from-blue-950 dark:to-green-950">
+          <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950">
             <div className="flex items-center justify-center h-64 md:h-80">
               <div className="text-center">
                 <div className="w-20 h-20 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
@@ -143,7 +143,7 @@ const ARVRPreview: React.FC<ARVRPreviewProps> = ({ destination }) => {
 
         {/* AR Preview */}
         {currentView === 'ar' && (
-          <div className="relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950">
+          <div className="relative bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950">
             <div className="flex items-center justify-center h-64 md:h-80">
               <div className="text-center">
                 <div className="w-20 h-20 mx-auto mb-4 bg-emerald-500/20 rounded-full flex items-center justify-center">

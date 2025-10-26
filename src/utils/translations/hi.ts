@@ -451,6 +451,7 @@ export const hi = {
     handicrafts: 'हस्तशिल्प',
     tourPackages: 'टूर पैकेज',
     localGuides: 'स्थानीय गाइड',
+    multilingualChatbot: 'बहुभाषी AI चैटबॉट',
     support: 'सहायता',
     helpCenter: 'सहायता केंद्र',
     contactUs: 'संपर्क करें',

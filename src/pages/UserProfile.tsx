@@ -87,7 +87,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-amber-50 dark:from-emerald-950/30 dark:to-amber-950/30 flex items-center justify-center">
         <Card className="p-6 text-center">
           <p className="text-muted-foreground mb-4">Please sign in to view your profile</p>
           <Button onClick={() => window.history.back()}>Go Back</Button>

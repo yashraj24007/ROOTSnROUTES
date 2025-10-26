@@ -200,7 +200,7 @@ const InteractiveMap = () => {
               </div>
             </div>
 
-            <div className="relative bg-gradient-to-br from-emerald-50 to-blue-50 dark:from-emerald-950 dark:to-blue-950 rounded-xl overflow-hidden">
+            <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl overflow-hidden">
               <svg
                 ref={mapRef}
                 viewBox="0 0 600 400"
