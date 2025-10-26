@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import DevelopmentNotice from "@/components/DevelopmentNotice";
+import ExploreARVRSimple from "@/components/explore/ExploreARVRSimple";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { 
@@ -129,6 +130,25 @@ const Explore = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AR/VR Experience Section */}
+      <section className="py-16 bg-emerald-50 dark:bg-emerald-950/20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-emerald-900 dark:text-emerald-100">
+              🥽 Immersive AR/VR Experience
+            </h2>
+            <p className="text-xl text-emerald-700 dark:text-emerald-300 max-w-3xl mx-auto">
+              Step into the future of travel! Experience destinations, hotels, and local attractions in stunning 3D virtual reality or through augmented reality on your mobile device.
+            </p>
+          </div>
+          
+          {/* AR/VR Component */}
+          <div className="max-w-6xl mx-auto">
+            <ExploreARVRSimple category="all" />
           </div>
         </div>
       </section>

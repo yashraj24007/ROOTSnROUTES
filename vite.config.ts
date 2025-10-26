@@ -26,7 +26,8 @@ export default defineConfig(() => ({
           'ui-components': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-select', '@radix-ui/react-tabs'],
           'groq-ai': ['groq-sdk'],
           'supabase': ['@supabase/supabase-js'],
-          'maps': ['leaflet', 'react-leaflet']
+          'maps': ['leaflet', 'react-leaflet'],
+          'aframe': ['aframe', 'aframe-extras']
         }
       }
     },
@@ -38,5 +39,8 @@ export default defineConfig(() => ({
         drop_debugger: true
       }
     }
+  },
+  optimizeDeps: {
+    include: ['aframe', 'aframe-extras']
   }
 }));
