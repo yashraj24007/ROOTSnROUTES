@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
-import { Calendar, Clock, MapPin, Users, Sparkles, Download, Share } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, Sparkles, Download, Share, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import Groq from 'groq-sdk';
 
 interface TripPreferences {
   duration: string;
@@ -75,6 +76,9 @@ const AITripPlanner = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedItinerary, setGeneratedItinerary] = useState<GeneratedItinerary | null>(null);
   const [step, setStep] = useState(1);
+
+  // Cache for API responses
+  const itineraryCache = useMemo(() => new Map<string, GeneratedItinerary>(), []);
 
   const interestOptions = [
     'Tribal Culture', 'Waterfalls', 'Wildlife', 'Temples', 'Handicrafts', 
@@ -192,46 +196,168 @@ const AITripPlanner = () => {
     }));
   };
 
-  // AI Trip Generation Function (Mock implementation - in production use OpenAI API)
-  const generateItinerary = async () => {
+  // AI Trip Generation Function using Groq API with caching
+  const generateItinerary = useCallback(async () => {
     setIsGenerating(true);
     
-    // Simulate AI processing
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    // Create cache key from preferences
+    const cacheKey = JSON.stringify({
+      duration: preferences.duration,
+      budget: preferences.budget,
+      interests: preferences.interests.sort(),
+      groupSize: preferences.groupSize,
+      targetAreas: preferences.targetAreas.sort()
+    });
+    
+    // Check cache first
+    const cachedResult = itineraryCache.get(cacheKey);
+    if (cachedResult) {
+      console.log('Using cached itinerary');
+      setGeneratedItinerary(cachedResult);
+      setIsGenerating(false);
+      setStep(3);
+      return;
+    }
+    
+    try {
+      // Initialize Groq client
+      const groq = new Groq({
+        apiKey: import.meta.env.VITE_GROQ_API_KEY,
+        dangerouslyAllowBrowser: true
+      });
 
-    // Mock AI-generated itinerary based on preferences and selected areas
-    const mockItinerary: GeneratedItinerary = {
-      title: preferences.targetAreas.length > 1 
-        ? `${preferences.duration}-Day ${preferences.targetAreas.join(' & ')} Circuit`
-        : `${preferences.duration}-Day ${preferences.targetAreas[0] || 'Jharkhand'} Experience`,
-      description: `A personalized journey through ${preferences.targetAreas.length > 1 ? 'multiple regions' : preferences.targetAreas[0] || 'Jharkhand'}, featuring ${preferences.interests.slice(0, 3).join(', ')} experiences, crafted for ${preferences.groupSize} travelers.`,
-      totalCost: preferences.budget === 'budget' ? '₹8,500' : preferences.budget === 'mid-range' ? '₹15,000' : '₹25,000',
-      days: generateAreaBasedDays(),
-      recommendations: [
-        `Focus on ${preferences.targetAreas.length > 1 ? 'inter-region' : 'intra-region'} travel efficiency`,
-        'Book accommodations in advance during festival seasons',
-        'Carry cash for local purchases and small vendors',
-        'Learn basic Hindi/tribal greetings for better local interactions',
-        `Optimal travel route planned for ${preferences.targetAreas.join(' → ')}`
-      ],
-      weatherTips: [
-        'Current weather is perfect for outdoor activities',
-        'Carry light rain gear as afternoon showers are common',
-        'Morning temperatures are ideal for inter-district travel',
-        'Evening temperatures drop, pack warm clothes'
-      ],
-      culturalTips: [
-        `Each region(${preferences.targetAreas.join(', ')}) has unique tribal customs`,
-        'Try regional specialties - each area has distinct cuisine',
-        'Local festivals vary by region - check regional calendar',
-        'Respect photography permissions in tribal areas'
-      ]
-    };
+      // Create detailed prompt for AI
+      const prompt = `You are an expert travel planner specializing in Jharkhand tourism. Create a detailed, personalized ${preferences.duration}-day itinerary based on the following preferences:
 
-    setGeneratedItinerary(mockItinerary);
-    setIsGenerating(false);
-    setStep(3);
-  };
+**Trip Details:**
+- Duration: ${preferences.duration} days
+- Budget: ${preferences.budget} (${preferences.budget === 'budget' ? '₹2,000-5,000/day' : preferences.budget === 'mid-range' ? '₹5,000-10,000/day' : '₹10,000+/day'})
+- Group Size: ${preferences.groupSize}
+- Travel Style: ${preferences.travelStyle}
+- Accommodation Preference: ${preferences.accommodation}
+- Target Areas: ${preferences.targetAreas.join(', ') || 'All of Jharkhand'}
+- Interests: ${preferences.interests.join(', ') || 'General sightseeing'}
+- Special Requests: ${preferences.specialRequests || 'None'}
+
+**Requirements:**
+1. Provide a catchy title for the trip
+2. Write an engaging description (2-3 sentences)
+3. Calculate realistic total trip cost in INR
+4. Create day-by-day itinerary with specific timings, locations, and activities
+5. Include meal recommendations with restaurant names and cuisine types
+6. Suggest appropriate accommodations for each night
+7. Provide practical recommendations, weather tips, and cultural tips specific to Jharkhand
+
+**Format your response as a valid JSON object with this exact structure:**
+{
+  "title": "Trip title",
+  "description": "Trip description",
+  "totalCost": "₹XX,XXX",
+  "days": [
+    {
+      "day": 1,
+      "title": "Day title",
+      "activities": [
+        {
+          "time": "09:00 AM",
+          "activity": "Activity name",
+          "location": "Specific location",
+          "description": "Detailed description",
+          "cost": "₹XXX",
+          "type": "Cultural/Nature/Adventure/etc"
+        }
+      ],
+      "meals": [
+        {
+          "time": "12:00 PM",
+          "restaurant": "Restaurant name",
+          "cuisine": "Cuisine type",
+          "cost": "₹XXX"
+        }
+      ],
+      "accommodation": {
+        "name": "Hotel/Lodge name",
+        "type": "Hotel type",
+        "location": "Location",
+        "cost": "₹X,XXX"
+      },
+      "totalDayCost": "₹X,XXX"
+    }
+  ],
+  "recommendations": ["tip1", "tip2", ...],
+  "weatherTips": ["tip1", "tip2", ...],
+  "culturalTips": ["tip1", "tip2", ...]
+}
+
+Make it specific to Jharkhand with real places, tribal culture, waterfalls, wildlife sanctuaries, and local experiences. Be creative and detailed!`;
+
+      // Call Groq API
+      const chatCompletion = await groq.chat.completions.create({
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an expert Jharkhand travel planner. Always respond with valid JSON format only, no additional text or markdown.'
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        model: 'llama-3.1-8b-instant',
+        temperature: 0.7,
+        max_tokens: 4000,
+        response_format: { type: 'json_object' }
+      });
+
+      const responseContent = chatCompletion.choices[0]?.message?.content || '';
+      
+      // Parse AI response
+      const aiItinerary = JSON.parse(responseContent);
+      
+      // Cache the result
+      itineraryCache.set(cacheKey, aiItinerary as GeneratedItinerary);
+      
+      setGeneratedItinerary(aiItinerary as GeneratedItinerary);
+      setStep(3);
+      
+    } catch (error) {
+      console.error('Error generating itinerary:', error);
+      
+      // Fallback to mock itinerary if API fails
+      const mockItinerary: GeneratedItinerary = {
+        title: preferences.targetAreas.length > 1 
+          ? `${preferences.duration}-Day ${preferences.targetAreas.join(' & ')} Circuit`
+          : `${preferences.duration}-Day ${preferences.targetAreas[0] || 'Jharkhand'} Experience`,
+        description: `A personalized journey through ${preferences.targetAreas.length > 1 ? 'multiple regions' : preferences.targetAreas[0] || 'Jharkhand'}, featuring ${preferences.interests.slice(0, 3).join(', ')} experiences.`,
+        totalCost: preferences.budget === 'budget' ? '₹8,500' : preferences.budget === 'mid-range' ? '₹15,000' : '₹25,000',
+        days: generateAreaBasedDays(),
+        recommendations: [
+          'Book accommodations in advance during festival seasons',
+          'Carry cash for local purchases and small vendors',
+          'Learn basic Hindi/tribal greetings for better interactions',
+          'Respect local customs and traditions'
+        ],
+        weatherTips: [
+          'Current weather is perfect for outdoor activities',
+          'Carry light rain gear as afternoon showers are common',
+          'Morning temperatures are ideal for travel'
+        ],
+        culturalTips: [
+          'Each region has unique tribal customs - be respectful',
+          'Try regional specialties - distinct cuisine in each area',
+          'Respect photography permissions in tribal areas'
+        ]
+      };
+
+      // Cache fallback too
+      itineraryCache.set(cacheKey, mockItinerary);
+      
+      setGeneratedItinerary(mockItinerary);
+      setStep(3);
+    } finally {
+      setIsGenerating(false);
+    }
+  }, [preferences, itineraryCache]);
 
   const generateAreaBasedDays = (): ItineraryDay[] => {
     const days = parseInt(preferences.duration) || 3;
@@ -303,21 +429,119 @@ const AITripPlanner = () => {
   };
 
   const downloadItinerary = () => {
-    // In production, generate PDF using libraries like jsPDF
-    alert('PDF download feature will be implemented with jsPDF library');
+    if (!generatedItinerary) return;
+    
+    // Create formatted text version
+    let content = `${generatedItinerary.title}\n${'='.repeat(generatedItinerary.title.length)}\n\n`;
+    content += `${generatedItinerary.description}\n\n`;
+    content += `Total Cost: ${generatedItinerary.totalCost}\n\n`;
+    content += `${'='.repeat(50)}\n\n`;
+    
+    // Add day-by-day itinerary
+    generatedItinerary.days.forEach((day) => {
+      content += `DAY ${day.day}: ${day.title}\n`;
+      content += `${'-'.repeat(50)}\n\n`;
+      
+      content += `ACTIVITIES:\n`;
+      day.activities.forEach((activity) => {
+        content += `  ${activity.time} - ${activity.activity}\n`;
+        content += `    Location: ${activity.location}\n`;
+        content += `    ${activity.description}\n`;
+        content += `    Cost: ${activity.cost} | Type: ${activity.type}\n\n`;
+      });
+      
+      content += `MEALS:\n`;
+      day.meals.forEach((meal) => {
+        content += `  ${meal.time} - ${meal.restaurant}\n`;
+        content += `    Cuisine: ${meal.cuisine} | Cost: ${meal.cost}\n\n`;
+      });
+      
+      content += `ACCOMMODATION:\n`;
+      content += `  ${day.accommodation.name} (${day.accommodation.type})\n`;
+      content += `  Location: ${day.accommodation.location}\n`;
+      content += `  Cost: ${day.accommodation.cost}\n\n`;
+      
+      content += `Day Total: ${day.totalDayCost}\n\n`;
+      content += `${'='.repeat(50)}\n\n`;
+    });
+    
+    // Add recommendations
+    content += `RECOMMENDATIONS:\n`;
+    generatedItinerary.recommendations.forEach((rec, i) => {
+      content += `${i + 1}. ${rec}\n`;
+    });
+    content += `\n`;
+    
+    content += `WEATHER TIPS:\n`;
+    generatedItinerary.weatherTips.forEach((tip, i) => {
+      content += `${i + 1}. ${tip}\n`;
+    });
+    content += `\n`;
+    
+    content += `CULTURAL TIPS:\n`;
+    generatedItinerary.culturalTips.forEach((tip, i) => {
+      content += `${i + 1}. ${tip}\n`;
+    });
+    
+    content += `\n${'='.repeat(50)}\n`;
+    content += `Generated by ROOTSnROUTES AI Trip Planner\n`;
+    content += `Visit: https://rootsnroutes.com\n`;
+    
+    // Create and download text file
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `Jharkhand-Trip-Itinerary-${preferences.duration}Days.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
   };
 
   const shareItinerary = () => {
-    // In production, implement sharing functionality
+    if (!generatedItinerary) return;
+    
+    // Store itinerary in localStorage with unique ID
+    const itineraryId = `itinerary_${Date.now()}`;
+    localStorage.setItem(itineraryId, JSON.stringify({
+      itinerary: generatedItinerary,
+      preferences: preferences,
+      createdAt: new Date().toISOString()
+    }));
+    
+    // Create shareable URL
+    const shareableUrl = `${window.location.origin}${window.location.pathname}?itinerary=${itineraryId}`;
+    
+    // Try native share API first
     if (navigator.share) {
       navigator.share({
-        title: generatedItinerary?.title,
-        text: generatedItinerary?.description,
-        url: window.location.href
+        title: generatedItinerary.title,
+        text: `Check out my ${preferences.duration}-day Jharkhand trip itinerary! ${generatedItinerary.description}`,
+        url: shareableUrl
+      }).catch((error) => {
+        console.log('Error sharing:', error);
+        copyToClipboard(shareableUrl);
       });
     } else {
-      alert('Sharing functionality will be enhanced with Web Share API');
+      // Fallback: copy to clipboard
+      copyToClipboard(shareableUrl);
     }
+  };
+  
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      alert(`Shareable link copied to clipboard!\n\n${text}\n\nShare this link with friends and family!`);
+    }).catch(() => {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert(`Shareable link copied!\n\n${text}`);
+    });
   };
 
   const renderStepIndicator = () => (

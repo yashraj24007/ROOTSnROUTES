@@ -87,7 +87,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <Card className="p-6 text-center">
           <p className="text-muted-foreground mb-4">Please sign in to view your profile</p>
           <Button onClick={() => window.history.back()}>Go Back</Button>
@@ -478,8 +478,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ onClose }) => {
 
   const getMemberLevelColor = (level: string) => {
     switch (level) {
-      case 'ambassador': return 'bg-gradient-to-r from-purple-500 to-pink-500';
-      case 'adventurer': return 'bg-gradient-to-r from-blue-500 to-cyan-500';
+      case 'ambassador': return 'bg-gradient-to-r from-amber-500 to-orange-500';
+      case 'adventurer': return 'bg-gradient-to-r from-emerald-500 to-teal-500';
       default: return 'bg-gradient-to-r from-green-500 to-emerald-500';
     }
   };

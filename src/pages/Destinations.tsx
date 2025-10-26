@@ -246,7 +246,7 @@ const Destinations = () => {
                   
                   {/* Favorite Button */}
                   <FavoriteButton
-                    destinationId={destination.id}
+                    destinationId={destination.id.toString()}
                     destinationName={destination.name}
                     destinationType={destination.category}
                     destinationDistrict={destination.district}
@@ -325,18 +325,18 @@ const Destinations = () => {
 
                   {/* Reviews Preview */}
                   {destination.reviews.length > 0 && (
-                    <div className="mb-4 p-3 bg-blue-50 rounded-lg">
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="text-sm font-semibold text-blue-800">Latest Review</h4>
+                    <div className="mb-4 p-3 bg-emerald-50 rounded-lg">
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="text-sm font-semibold text-emerald-800">Latest Review</h4>
                         <div className="flex items-center gap-1">
-                          <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                          <span className="text-xs text-blue-700">{destination.reviews[0].rating}</span>
+                          <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                          <span className="text-xs text-emerald-700">{destination.reviews[0].rating}</span>
                         </div>
                       </div>
-                      <p className="text-xs text-blue-700 italic">
+                      <p className="text-xs text-emerald-700 italic">
                         "{destination.reviews[0].comment.substring(0, 80)}..."
                       </p>
-                      <p className="text-xs text-blue-600 mt-1">- {destination.reviews[0].author}</p>
+                      <p className="text-xs text-emerald-600 mt-1">- {destination.reviews[0].author}</p>
                     </div>
                   )}
 

@@ -78,11 +78,11 @@ const DistrictDestinations = () => {
 
       <CardContent className="p-6">
         <div className="flex items-center gap-2 mb-2">
-          <MapPin className="w-4 h-4 text-blue-600" />
+          <MapPin className="w-4 h-4 text-emerald-600" />
           <span className="text-sm text-gray-600 dark:text-gray-400">{destination.district} District</span>
         </div>
 
-        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-emerald-600 transition-colors">
           {destination.name}
         </h3>
 
@@ -91,12 +91,12 @@ const DistrictDestinations = () => {
         </p>
 
         {/* Why Famous Section */}
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-1 flex items-center gap-2">
+        <div className="mb-4 p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+          <h4 className="font-semibold text-emerald-800 dark:text-emerald-300 mb-1 flex items-center gap-2">
             <ThumbsUp className="w-4 h-4" />
             Why it's Special
           </h4>
-          <p className="text-sm text-blue-700 dark:text-blue-200">
+          <p className="text-sm text-emerald-700 dark:text-emerald-200">
             {destination.whyFamous}
           </p>
         </div>
@@ -128,14 +128,14 @@ const DistrictDestinations = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-blue-600" />
+            <Clock className="w-4 h-4 text-emerald-600" />
             <div>
               <div className="font-medium">Timing</div>
               <div className="text-gray-600 dark:text-gray-400">{destination.timing}</div>
             </div>
           </div>
           <div className="flex items-center gap-2 col-span-2">
-            <Calendar className="w-4 h-4 text-purple-600" />
+            <Calendar className="w-4 h-4 text-amber-600" />
             <div>
               <div className="font-medium">Best Time to Visit</div>
               <div className="text-gray-600 dark:text-gray-400">{destination.bestTime}</div>
@@ -163,7 +163,7 @@ const DistrictDestinations = () => {
           </div>
         )}
 
-        <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+        <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white">
           <Camera className="w-4 h-4 mr-2" />
           Explore Location
         </Button>
@@ -178,7 +178,7 @@ const DistrictDestinations = () => {
         <div className="container mx-auto px-6">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-orange-600 bg-clip-text text-transparent mb-4">
               Explore Hidden Gems of Jharkhand
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
@@ -189,7 +189,7 @@ const DistrictDestinations = () => {
             {/* Statistics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{districtsData.length}</div>
+                <div className="text-2xl font-bold text-emerald-600">{districtsData.length}</div>
                 <div className="text-sm text-gray-600">Total Places</div>
               </div>
               <div className="text-center">
@@ -197,7 +197,7 @@ const DistrictDestinations = () => {
                 <div className="text-sm text-gray-600">Districts</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">
+                <div className="text-2xl font-bold text-amber-600">
                   {districtsData.filter(d => d.type === 'hidden').length}
                 </div>
                 <div className="text-sm text-gray-600">Hidden Gems</div>
@@ -287,12 +287,12 @@ const DistrictDestinations = () => {
           )}
 
           {/* Call to Action */}
-          <div className="mt-16 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-2xl">
+          <div className="mt-16 text-center bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-8 rounded-2xl">
             <h2 className="text-2xl font-bold mb-4">Plan Your Jharkhand Adventure</h2>
             <p className="mb-6 opacity-90">
               Ready to explore these incredible destinations? Let our AI assistant help you plan the perfect itinerary.
             </p>
-            <Button variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
+            <Button variant="secondary" className="bg-white text-emerald-600 hover:bg-gray-100">
               Start Planning with AI
             </Button>
           </div>

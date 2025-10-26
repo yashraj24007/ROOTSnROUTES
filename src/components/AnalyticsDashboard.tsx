@@ -383,8 +383,8 @@ const AnalyticsDashboardRealtime: React.FC = () => {
           <CardContent>
             <div className="text-2xl font-bold">{liveMetrics.todayBookings}</div>
             <div className="flex items-center text-xs text-muted-foreground">
-              <Activity className="h-3 w-3 mr-1 text-blue-500" />
-              <span className="text-blue-500">Real-time</span>
+              <Activity className="h-3 w-3 mr-1 text-emerald-500" />
+              <span className="text-emerald-500">Real-time</span>
               <span className="ml-1">bookings today</span>
             </div>
           </CardContent>
@@ -569,8 +569,8 @@ const AnalyticsDashboardRealtime: React.FC = () => {
                     </div>
                     <div className="text-right">
                       <div className="flex items-center gap-2 mb-1">
-                        <Eye className="w-4 h-4 text-blue-500" />
-                        <span className="font-semibold text-blue-600">{attraction.currentViewers}</span>
+                        <Eye className="w-4 h-4 text-emerald-500" />
+                        <span className="font-semibold text-emerald-600">{attraction.currentViewers}</span>
                       </div>
                       <div className="text-xs text-muted-foreground">viewing now</div>
                     </div>
@@ -611,7 +611,7 @@ const AnalyticsDashboardRealtime: React.FC = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-blue-500" />
+                  <Activity className="w-5 h-5 text-emerald-500" />
                   System Health
                 </CardTitle>
                 <CardDescription>Real-time monitoring status</CardDescription>
@@ -631,11 +631,11 @@ const AnalyticsDashboardRealtime: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Update Frequency</span>
-                    <span className="text-blue-600">2 min</span>
+                    <span className="text-emerald-600">2 min</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Data Points</span>
-                    <span className="text-purple-600">{visitorHistory.length}/20</span>
+                    <span className="text-amber-600">{visitorHistory.length}/20</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Uptime</span>

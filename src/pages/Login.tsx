@@ -107,7 +107,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <Card className="w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-2xl">
           {/* Header */}
@@ -274,7 +274,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium text-base transition-all duration-200"
+                className="w-full h-11 bg-gradient-to-r from-emerald-600 to-orange-600 hover:from-emerald-700 hover:to-orange-700 text-white font-medium text-base transition-all duration-200"
                 disabled={loading}
               >
                 {loading ? (
@@ -316,7 +316,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
               </span>
               <Button
                 variant="link"
-                className="p-0 ml-1 h-auto text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+                className="p-0 ml-1 h-auto text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-medium"
                 onClick={toggleMode}
                 type="button"
               >
@@ -343,11 +343,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ onClose }) => {
         {/* Footer */}
         <div className="text-center text-xs text-gray-500 dark:text-gray-400 mt-4">
           By continuing, you agree to our{" "}
-          <Link to="/terms" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">
+          <Link to="/terms" className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400">
             Terms of Service
           </Link>{" "}
           and{" "}
-          <Link to="/privacy" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">
+          <Link to="/privacy" className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400">
             Privacy Policy
           </Link>
         </div>

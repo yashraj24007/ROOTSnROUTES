@@ -387,59 +387,134 @@ const SmartWeatherRecommendations = () => {
   const generateSmartSuggestions = (weather: WeatherData, activities: ActivityRecommendation[]): SmartRecommendation[] => {
     const suggestions: SmartRecommendation[] = [];
 
+    // Essential items based on temperature
+    if (weather.temperature < 15) {
+      suggestions.push({
+        title: '🧥 Cold Weather Essentials',
+        description: `Temperature is ${weather.temperature}°C. Pack warm clothing and layers.`,
+        priority: 'high',
+        type: 'equipment',
+        action: 'Carry: Warm jacket, sweater, thermal wear, gloves, warm socks, and cap'
+      });
+    } else if (weather.temperature > 32) {
+      suggestions.push({
+        title: '☀️ Hot Weather Essentials',
+        description: `Temperature is ${weather.temperature}°C. Stay cool and hydrated.`,
+        priority: 'high',
+        type: 'equipment',
+        action: 'Carry: Water bottle (2L), light cotton clothes, hat/cap, cooling towel, electrolyte drinks'
+      });
+    } else {
+      suggestions.push({
+        title: '🎒 Pleasant Weather Pack',
+        description: `Perfect ${weather.temperature}°C weather. Light packing recommended.`,
+        priority: 'medium',
+        type: 'equipment',
+        action: 'Carry: Comfortable clothes, water bottle, light jacket for evening'
+      });
+    }
+
     // Weather-based safety suggestions
     if (weather.uvIndex >= 7) {
       suggestions.push({
-        title: 'High UV Index Alert',
-        description: `UV Index is ${weather.uvIndex}. Take sun protection seriously for outdoor activities.`,
+        title: '🌞 High UV Index Alert',
+        description: `UV Index is ${weather.uvIndex}. Strong sun protection needed.`,
         priority: 'high',
         type: 'safety',
-        action: 'Pack sunscreen SPF 30+, hat, and sunglasses'
+        action: 'Pack: Sunscreen SPF 50+, UV protection sunglasses, wide-brim hat, long-sleeve shirt'
+      });
+    } else if (weather.uvIndex >= 4) {
+      suggestions.push({
+        title: '☀️ Moderate Sun Protection',
+        description: `UV Index is ${weather.uvIndex}. Basic sun protection recommended.`,
+        priority: 'medium',
+        type: 'safety',
+        action: 'Pack: Sunscreen SPF 30+, sunglasses, hat'
       });
     }
 
     if (weather.precipitation > 0) {
       suggestions.push({
-        title: 'Rain Gear Recommended',
-        description: `${weather.precipitation}mm precipitation expected. Waterproof gear will enhance your experience.`,
+        title: '☔ Rain Gear Required',
+        description: `${weather.precipitation}mm precipitation expected. Stay dry!`,
+        priority: 'high',
+        type: 'equipment',
+        action: 'Carry: Umbrella, waterproof rain jacket, waterproof bag covers, extra pair of socks, sealed plastic bags for electronics'
+      });
+    }
+
+    // Humidity-based suggestions
+    if (weather.humidity > 70) {
+      suggestions.push({
+        title: '💧 High Humidity Advisory',
+        description: `${weather.humidity}% humidity. Stay comfortable and fresh.`,
         priority: 'medium',
         type: 'equipment',
-        action: 'Carry umbrella, rain jacket, and waterproof bags'
+        action: 'Carry: Extra towels, moisture-wicking clothes, deodorant, face wipes, powder'
       });
     }
 
     // Air quality suggestions
     if (weather.airQuality === 'Poor') {
       suggestions.push({
-        title: 'Air Quality Advisory',
-        description: 'Air quality is poor today. Consider indoor activities or limit outdoor exposure.',
+        title: '😷 Air Quality Advisory',
+        description: 'Air quality is poor. Respiratory protection recommended.',
         priority: 'high',
         type: 'safety',
-        action: 'Carry N95 mask for outdoor activities'
+        action: 'Carry: N95 mask, avoid heavy outdoor exercise, stay hydrated, consider indoor activities'
+      });
+    }
+
+    // Wind-based suggestions
+    if (weather.windSpeed > 20) {
+      suggestions.push({
+        title: '💨 Windy Conditions',
+        description: `${weather.windSpeed}km/h winds. Secure your belongings.`,
+        priority: 'medium',
+        type: 'safety',
+        action: 'Carry: Windproof jacket, secure hat with strap, avoid loose items, be careful near edges'
       });
     }
 
     // Activity timing suggestions
     if (weather.temperature > 30) {
       suggestions.push({
-        title: 'Heat Advisory',
-        description: `Temperature is ${weather.temperature}°C. Plan outdoor activities for early morning or late afternoon.`,
-        priority: 'medium',
+        title: '⏰ Heat Advisory - Timing',
+        description: `Temperature is ${weather.temperature}°C. Plan strategically.`,
+        priority: 'high',
         type: 'planning',
-        action: 'Schedule activities before 11 AM or after 4 PM'
+        action: 'Schedule outdoor activities before 11 AM or after 4 PM. Take breaks in shade. Drink water every 20 minutes.'
       });
     }
 
     // Photography suggestions
     if (weather.condition === 'Partly Cloudy') {
       suggestions.push({
-        title: 'Excellent Photography Conditions',
-        description: 'Partly cloudy skies create perfect lighting for landscape photography.',
+        title: '📸 Excellent Photography Conditions',
+        description: 'Partly cloudy skies create perfect dramatic lighting.',
         priority: 'low',
         type: 'activity',
-        action: 'Bring camera gear for stunning shots'
+        action: 'Bring: Camera gear, extra batteries, polarizing filter, tripod for low-light shots'
       });
     }
+
+    // General health and safety
+    suggestions.push({
+      title: '🏥 Essential Safety Items',
+      description: 'Always travel prepared for emergencies.',
+      priority: 'high',
+      type: 'safety',
+      action: 'Carry: First-aid kit, personal medications, emergency contact numbers, ID proof, travel insurance, phone charger/power bank'
+    });
+
+    // Food and hydration
+    suggestions.push({
+      title: '🥤 Hydration & Snacks',
+      description: 'Stay energized throughout your trip.',
+      priority: 'medium',
+      type: 'equipment',
+      action: 'Carry: 2L water bottle, energy bars, dry fruits, glucose tablets, reusable water bottle'
+    });
 
     return suggestions;
   };

@@ -2,10 +2,10 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import VideoBackground from "@/components/VideoBackground";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
 
-const Hero = () => {
+const Hero = memo(() => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useLanguage();
   
@@ -158,6 +158,8 @@ const Hero = () => {
       </VideoBackground>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

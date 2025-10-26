@@ -281,7 +281,7 @@ const DestinationDetail = () => {
                       href={generateGoogleMapsUrl(formatLocationString(destination.name, destination.district), destination.coordinates)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
+                      className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition-colors text-sm font-medium"
                     >
                       <MapPin className="w-4 h-4" />
                       View on Google Maps

@@ -134,11 +134,12 @@ const Footer = () => {
                 className="w-12 h-12 object-contain"
                 onError={(e) => {
                   // Fallback if logo doesn't load - show the original R&R icon
-                  (e.target as HTMLImageElement).style.display = 'none';
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
                   const fallback = document.createElement('div');
                   fallback.className = "w-12 h-12 bg-gradient-card rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-pink";
                   fallback.textContent = "R&R";
-                  (e.target as HTMLImageElement).parentNode?.insertBefore(fallback, e.target);
+                  target.parentNode?.insertBefore(fallback, target as Node);
                 }}
               />
               <span className="text-xl font-bold text-foreground">ROOTSnROUTES</span>
@@ -290,7 +291,7 @@ const Footer = () => {
             {/* Social Media Icons */}
             <div className="flex justify-center gap-4">
               <a 
-                href="#facebook" 
+                href="https://www.facebook.com/rootsnroutes" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
@@ -299,7 +300,7 @@ const Footer = () => {
                 <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-blue-600 transition-colors" />
               </a>
               <a 
-                href="#youtube" 
+                href="https://www.youtube.com/@rootsnroutes" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"
@@ -308,7 +309,7 @@ const Footer = () => {
                 <Youtube className="w-5 h-5 text-muted-foreground group-hover:text-red-600 transition-colors" />
               </a>
               <a 
-                href="#instagram" 
+                href="https://www.instagram.com/rootsnroutes" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-3 bg-card hover:bg-primary/10 rounded-full transition-all duration-300 group shadow-sm hover:shadow-md"

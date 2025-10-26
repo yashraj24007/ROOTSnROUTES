@@ -66,7 +66,7 @@ const WeatherDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-blue-800 dark:from-purple-700 dark:via-blue-700 dark:to-blue-900">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-600 via-teal-600 to-green-800 dark:from-emerald-700 dark:via-teal-700 dark:to-green-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
@@ -237,10 +237,10 @@ const WeatherDashboard: React.FC = () => {
         )}
 
         {/* Footer Info */}
-        <Card className="mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <Card className="mt-8 bg-gradient-to-r from-emerald-600 to-teal-600 text-white">
           <CardContent className="p-6 text-center">
             <h3 className="text-xl font-bold mb-2">🎯 Smart Travel Planning</h3>
-            <p className="text-blue-100">
+            <p className="text-emerald-100">
               Make informed decisions with real-time weather data, safety recommendations, 
               and activity suggestions for every district in Jharkhand.
             </p>

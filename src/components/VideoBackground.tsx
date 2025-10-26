@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/hooks/useTheme';
@@ -16,9 +16,9 @@ interface VideoBackgroundProps {
   overlayOpacity?: number;
 }
 
-const VideoBackground: React.FC<VideoBackgroundProps> = ({
-  videoSrc = "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4", // Sample waterfall video
-  fallbackImage = "", // No fallback image to prevent old hero from showing
+const VideoBackground: React.FC<VideoBackgroundProps> = memo(({
+  videoSrc = "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+  fallbackImage = "",
   className = "",
   children,
   showControls = true,
@@ -61,7 +61,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
 
   useEffect(() => {
     // Update fallback image
-    if (fallbackRef.current) {
+    if (fallbackRef.current && fallbackImage) {
       fallbackRef.current.style.backgroundImage = `url(${fallbackImage})`;
     }
   }, [fallbackImage]);
@@ -207,6 +207,8 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
       </div>
     </div>
   );
-};
+});
+
+VideoBackground.displayName = 'VideoBackground';
 
 export default VideoBackground;

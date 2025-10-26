@@ -370,6 +370,10 @@ const LocalGuides = () => {
     window.open(`https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
+  const handlePhoneCall = (phone: string) => {
+    window.location.href = `tel:${phone}`;
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -471,7 +475,7 @@ const LocalGuides = () => {
                       <span className="text-gray-500 ml-1">({guide.reviews})</span>
                     </div>
                     <div className="flex items-center">
-                      <Users className="w-4 h-4 mr-1 text-blue-600" />
+                      <Users className="w-4 h-4 mr-1 text-emerald-600" />
                       <span>{guide.totalTours} tours</span>
                     </div>
                     <div className="flex items-center">
@@ -509,14 +513,14 @@ const LocalGuides = () => {
 
                   {/* Languages */}
                   <div className="flex items-center space-x-2 text-sm">
-                    <Globe className="w-4 h-4 text-blue-600" />
+                    <Globe className="w-4 h-4 text-emerald-600" />
                     <span className="text-gray-600">{guide.languages.join(', ')}</span>
                   </div>
 
                   {/* Key Features */}
                   <div className="flex flex-wrap gap-2 text-xs">
                     {guide.vehicleAvailable && (
-                      <Badge variant="outline" className="text-blue-600">
+                      <Badge variant="outline" className="text-emerald-600">
                         <Car className="w-3 h-3 mr-1" />
                         Vehicle Available
                       </Badge>
@@ -528,7 +532,7 @@ const LocalGuides = () => {
                       </Badge>
                     )}
                     {guide.photographySkills && (
-                      <Badge variant="outline" className="text-purple-600">
+                      <Badge variant="outline" className="text-amber-600">
                         <Camera className="w-3 h-3 mr-1" />
                         Photography
                       </Badge>
@@ -559,7 +563,7 @@ const LocalGuides = () => {
                     <Button 
                       onClick={() => handlePhoneCall(guide.phone)}
                       variant="outline" 
-                      className="border-blue-600 text-blue-600 hover:bg-blue-50"
+                      className="border-emerald-600 text-emerald-600 hover:bg-emerald-50"
                       size="sm"
                     >
                       <Phone className="w-4 h-4 mr-2" />
@@ -696,7 +700,7 @@ const LocalGuides = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3 text-blue-600">+ Additional Services</h4>
+                    <h4 className="font-semibold mb-3 text-emerald-600">+ Additional Services</h4>
                     <ul className="text-sm text-gray-600 space-y-2">
                       <li>• Transportation (where available)</li>
                       <li>• Photography assistance and tips</li>

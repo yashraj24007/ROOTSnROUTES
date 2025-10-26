@@ -70,6 +70,7 @@ interface District {
   icon: string;
   color: string;
   destinations: Destination[];
+  categories: string[]; // Categories for filtering: spiritual, nature, adventure, heritage
 }
 
 interface DistanceInfo {
@@ -137,7 +138,8 @@ const LeafletMap = () => {
       description: 'The capital city known for its scenic hills and urban attractions.',
       icon: '🏛️',
       color: 'hsl(var(--primary))',
-      destinations: getDistrictDestinations('Ranchi')
+      destinations: getDistrictDestinations('Ranchi'),
+      categories: ['nature', 'heritage']
     },
     {
       id: 'dhanbad',
@@ -148,7 +150,8 @@ const LeafletMap = () => {
       description: 'Industrial hub famous for coal mining and beautiful lakes.',
       icon: '⚡',
       color: '#D97706',
-      destinations: getDistrictDestinations('Dhanbad')
+      destinations: getDistrictDestinations('Dhanbad'),
+      categories: ['nature']
     },
     {
       id: 'jamshedpur',
@@ -159,7 +162,8 @@ const LeafletMap = () => {
       description: 'Planned industrial city with modern amenities and parks.',
       icon: '🏭',
       color: '#7C3AED',
-      destinations: getDistrictDestinations('Jamshedpur')
+      destinations: getDistrictDestinations('Jamshedpur'),
+      categories: ['nature', 'heritage']
     },
     {
       id: 'bokaro',
@@ -170,7 +174,8 @@ const LeafletMap = () => {
       description: 'Steel city surrounded by natural beauty and water bodies.',
       icon: '🌊',
       color: '#0891B2',
-      destinations: getDistrictDestinations('Bokaro')
+      destinations: getDistrictDestinations('Bokaro'),
+      categories: ['nature']
     },
     {
       id: 'deoghar',
@@ -181,7 +186,8 @@ const LeafletMap = () => {
       description: 'Sacred city famous for the Baidyanath Jyotirlinga temple.',
       icon: '🕉️',
       color: '#F59E0B',
-      destinations: getDistrictDestinations('Deoghar')
+      destinations: getDistrictDestinations('Deoghar'),
+      categories: ['spiritual', 'nature']
     },
     {
       id: 'hazaribag',
@@ -192,7 +198,8 @@ const LeafletMap = () => {
       description: 'Hill station known for wildlife sanctuary and scenic beauty.',
       icon: '🦌',
       color: '#059669',
-      destinations: getDistrictDestinations('Hazaribag')
+      destinations: getDistrictDestinations('Hazaribag'),
+      categories: ['nature', 'adventure']
     },
     {
       id: 'giridih',
@@ -203,7 +210,8 @@ const LeafletMap = () => {
       description: 'Sacred destination with highest peak of Jharkhand.',
       icon: '⛰️',
       color: '#DB2777',
-      destinations: getDistrictDestinations('Giridih')
+      destinations: getDistrictDestinations('Giridih'),
+      categories: ['spiritual', 'nature', 'adventure']
     },
     {
       id: 'palamu',
@@ -214,7 +222,8 @@ const LeafletMap = () => {
       description: 'Famous for Betla National Park and wildlife conservation.',
       icon: '🐅',
       color: '#EA580C',
-      destinations: getDistrictDestinations('Palamu')
+      destinations: getDistrictDestinations('Palamu'),
+      categories: ['nature', 'adventure', 'heritage']
     },
     {
       id: 'khunti',
@@ -225,7 +234,8 @@ const LeafletMap = () => {
       description: 'Rich in tribal culture and natural waterfalls.',
       icon: '💧',
       color: '#0D9488',
-      destinations: getDistrictDestinations('Khunti')
+      destinations: getDistrictDestinations('Khunti'),
+      categories: ['nature', 'heritage', 'adventure']
     },
     {
       id: 'gumla',
@@ -236,7 +246,8 @@ const LeafletMap = () => {
       description: 'Known for beautiful waterfalls and tribal heritage.',
       icon: '🏔️',
       color: '#9333EA',
-      destinations: getDistrictDestinations('Gumla')
+      destinations: getDistrictDestinations('Gumla'),
+      categories: ['nature', 'heritage']
     },
     {
       id: 'lohardaga',
@@ -247,7 +258,8 @@ const LeafletMap = () => {
       description: 'Gateway to Netarhat, the Queen of Chotanagpur.',
       icon: '🏞️',
       color: '#16A34A',
-      destinations: getDistrictDestinations('Lohardaga')
+      destinations: getDistrictDestinations('Lohardaga'),
+      categories: ['nature', 'adventure']
     },
     {
       id: 'simdega',
@@ -258,7 +270,8 @@ const LeafletMap = () => {
       description: 'Known for rich tribal heritage and scenic landscapes.',
       icon: '🎭',
       color: '#CA8A04',
-      destinations: getDistrictDestinations('Simdega')
+      destinations: getDistrictDestinations('Simdega'),
+      categories: ['heritage', 'nature']
     },
     {
       id: 'west-singhbhum',
@@ -269,7 +282,8 @@ const LeafletMap = () => {
       description: 'Home to Saranda forest and diverse tribal communities.',
       icon: '🌲',
       color: '#15803D',
-      destinations: getDistrictDestinations('West Singhbhum')
+      destinations: getDistrictDestinations('West Singhbhum'),
+      categories: ['nature', 'heritage', 'adventure']
     },
     {
       id: 'east-singhbhum',
@@ -280,7 +294,8 @@ const LeafletMap = () => {
       description: 'Combines industrial development with wildlife conservation.',
       icon: '🦅',
       color: '#7C2D12',
-      destinations: getDistrictDestinations('East Singhbhum')
+      destinations: getDistrictDestinations('East Singhbhum'),
+      categories: ['nature', 'adventure']
     },
     {
       id: 'saraikela-kharsawan',
@@ -291,7 +306,8 @@ const LeafletMap = () => {
       description: 'Famous for traditional Chhau dance and natural beauty.',
       icon: '💃',
       color: '#BE123C',
-      destinations: getDistrictDestinations('Saraikela Kharsawan')
+      destinations: getDistrictDestinations('Saraikela Kharsawan'),
+      categories: ['heritage', 'nature']
     },
     {
       id: 'ramgarh',
@@ -302,7 +318,8 @@ const LeafletMap = () => {
       description: 'Known for thermal power plant and scenic valleys.',
       icon: '⚙️',
       color: '#DC2626',
-      destinations: getDistrictDestinations('Ramgarh')
+      destinations: getDistrictDestinations('Ramgarh'),
+      categories: ['spiritual', 'nature']
     },
     {
       id: 'chatra',
@@ -313,7 +330,8 @@ const LeafletMap = () => {
       description: 'Blend of religious sites and wildlife sanctuaries.',
       icon: '🛕',
       color: '#B45309',
-      destinations: getDistrictDestinations('Chatra')
+      destinations: getDistrictDestinations('Chatra'),
+      categories: ['spiritual', 'nature', 'adventure']
     },
     {
       id: 'koderma',
@@ -324,7 +342,8 @@ const LeafletMap = () => {
       description: 'Major mica production center with scenic dam.',
       icon: '💎',
       color: '#4338CA',
-      destinations: getDistrictDestinations('Koderma')
+      destinations: getDistrictDestinations('Koderma'),
+      categories: ['nature', 'heritage']
     },
     {
       id: 'jamtara',
@@ -335,7 +354,8 @@ const LeafletMap = () => {
       description: 'Agricultural district with beautiful dam and rural charm.',
       icon: '🌾',
       color: '#65A30D',
-      destinations: getDistrictDestinations('Jamtara')
+      destinations: getDistrictDestinations('Jamtara'),
+      categories: ['nature', 'heritage']
     },
     {
       id: 'dumka',
@@ -346,7 +366,8 @@ const LeafletMap = () => {
       description: 'Capital of Santhal Pargana with rich tribal heritage.',
       icon: '🏺',
       color: '#DC2626',
-      destinations: getDistrictDestinations('Dumka')
+      destinations: getDistrictDestinations('Dumka'),
+      categories: ['heritage', 'spiritual', 'nature']
     },
     {
       id: 'pakur',
@@ -357,7 +378,8 @@ const LeafletMap = () => {
       description: 'Known for stone quarries and tribal freedom fighters.',
       icon: '🪨',
       color: '#78716C',
-      destinations: getDistrictDestinations('Pakur')
+      destinations: getDistrictDestinations('Pakur'),
+      categories: ['heritage', 'nature']
     },
     {
       id: 'godda',
@@ -368,7 +390,8 @@ const LeafletMap = () => {
       description: 'Emerging industrial district with thermal power plant.',
       icon: '🔥',
       color: '#EF4444',
-      destinations: getDistrictDestinations('Godda')
+      destinations: getDistrictDestinations('Godda'),
+      categories: ['heritage']
     },
     {
       id: 'sahebganj',
@@ -379,7 +402,8 @@ const LeafletMap = () => {
       description: 'Gateway to Jharkhand with Ganges river port.',
       icon: '⛴️',
       color: '#0EA5E9',
-      destinations: getDistrictDestinations('Sahebganj')
+      destinations: getDistrictDestinations('Sahebganj'),
+      categories: ['nature', 'heritage', 'adventure']
     },
     {
       id: 'latehar',
@@ -390,7 +414,8 @@ const LeafletMap = () => {
       description: 'Home to Netarhat and highest waterfall in Jharkhand.',
       icon: '🌄',
       color: '#8B5CF6',
-      destinations: getDistrictDestinations('Latehar')
+      destinations: getDistrictDestinations('Latehar'),
+      categories: ['nature', 'adventure']
     }
   ];
 
@@ -482,7 +507,7 @@ const LeafletMap = () => {
   const filteredDistricts = selectedCategory === 'all' 
     ? districts 
     : districts.filter(d => 
-        d.speciality.toLowerCase().includes(selectedCategory.toLowerCase())
+        d.categories.includes(selectedCategory)
       );
 
   return (
@@ -726,8 +751,8 @@ const LeafletMap = () => {
                           </p>
                         </div>
                       ) : !userLocation ? (
-                        <div className="p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                          <p className="text-xs text-center text-blue-700 dark:text-blue-300">
+                        <div className="p-3 bg-emerald-50 dark:bg-emerald-950/20 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                          <p className="text-xs text-center text-emerald-700 dark:text-emerald-300">
                             <Navigation className="w-4 h-4 inline mr-1" />
                             Enable location to see distance & travel time
                           </p>
@@ -835,18 +860,18 @@ const LeafletMap = () => {
               <p className="text-sm text-green-700 dark:text-green-400">Destinations</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-blue-200 dark:border-blue-800">
-            <CardContent className="pt-6 text-center">
-              <Users className="w-8 h-8 mx-auto mb-2 text-blue-600 dark:text-blue-500" />
-              <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">50K+</p>
-              <p className="text-sm text-blue-700 dark:text-blue-400">Travelers</p>
+          <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border-emerald-200 dark:border-emerald-800">
+            <CardContent className="p-4 text-center">
+              <Users className="w-8 h-8 mx-auto mb-2 text-emerald-600 dark:text-emerald-500" />
+              <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">50K+</p>
+              <p className="text-sm text-emerald-700 dark:text-emerald-400">Travelers</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border-purple-200 dark:border-purple-800">
-            <CardContent className="pt-6 text-center">
-              <Star className="w-8 h-8 mx-auto mb-2 text-purple-600 dark:text-purple-500" />
-              <p className="text-2xl font-bold text-purple-900 dark:text-purple-100">4.8</p>
-              <p className="text-sm text-purple-700 dark:text-purple-400">Rating</p>
+          <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border-amber-200 dark:border-amber-800">
+            <CardContent className="p-4 text-center">
+              <Star className="w-8 h-8 mx-auto mb-2 text-amber-600 dark:text-amber-500" />
+              <p className="text-2xl font-bold text-amber-900 dark:text-amber-100">4.8</p>
+              <p className="text-sm text-amber-700 dark:text-amber-400">Rating</p>
             </CardContent>
           </Card>
         </div>

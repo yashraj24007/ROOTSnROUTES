@@ -146,8 +146,8 @@ const ARVRPreview: React.FC<ARVRPreviewProps> = ({ destination }) => {
           <div className="relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950">
             <div className="flex items-center justify-center h-64 md:h-80">
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 bg-purple-500/20 rounded-full flex items-center justify-center">
-                  <RotateCw className="w-10 h-10 text-purple-600 dark:text-purple-400 animate-spin" />
+                <div className="w-20 h-20 mx-auto mb-4 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                  <RotateCw className="w-10 h-10 text-emerald-600 dark:text-emerald-400 animate-spin" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">AR Experience</h3>
                 <p className="text-muted-foreground mb-4 max-w-sm">
@@ -157,7 +157,7 @@ const ARVRPreview: React.FC<ARVRPreviewProps> = ({ destination }) => {
                 <div className="flex gap-2 justify-center">
                   <Button 
                     variant="default"
-                    className="bg-purple-600 hover:bg-purple-700 text-white"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white"
                   >
                     <Camera className="w-4 h-4 mr-2" />
                     Open Camera
@@ -169,7 +169,7 @@ const ARVRPreview: React.FC<ARVRPreviewProps> = ({ destination }) => {
               </div>
             </div>
             <div className="absolute top-4 right-4">
-              <Badge variant="secondary" className="bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+              <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">
                 AR Ready
               </Badge>
             </div>

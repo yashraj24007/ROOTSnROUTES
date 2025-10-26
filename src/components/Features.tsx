@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Zap, Shield, Users, Headphones, MapPin, Camera, Compass, Heart } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-const Features = () => {
+const Features = memo(() => {
   const { t } = useLanguage();
 
   const primaryFeatures = [
@@ -116,6 +117,8 @@ const Features = () => {
       </div>
     </section>
   );
-};
+});
+
+Features.displayName = 'Features';
 
 export default Features;

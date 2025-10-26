@@ -110,7 +110,7 @@ const Favorites = () => {
           Visited
         </Badge>;
       case 'planning':
-        return <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+        return <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300">
           <Calendar className="w-3 h-3 mr-1" />
           Planning
         </Badge>;
@@ -125,7 +125,7 @@ const Favorites = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'visited': return <Clock className="w-4 h-4 text-green-600" />;
-      case 'planning': return <Calendar className="w-4 h-4 text-blue-600" />;
+      case 'planning': return <Calendar className="w-4 h-4 text-emerald-600" />;
       default: return <Bookmark className="w-4 h-4 text-gray-600" />;
     }
   };
