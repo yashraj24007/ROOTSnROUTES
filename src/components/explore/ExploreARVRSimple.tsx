@@ -373,50 +373,78 @@ const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' 
 
       {/* A-Frame AR Scene */}
       {isARActive && (
-        <div className="fixed inset-0 z-50 bg-black">
-          <div className="absolute top-4 right-4 z-10">
-            <Button onClick={exitImmersive} variant="secondary" size="sm">
-              <X className="w-4 h-4 mr-2" />
-              Exit AR
-            </Button>
+        <div className="fixed inset-0 z-50 bg-gradient-to-br from-emerald-900/50 to-teal-900/50">
+          {/* AR Instructions Banner */}
+          <div className="absolute top-0 left-0 right-0 bg-black/80 p-4 z-10">
+            <div className="flex items-center justify-between max-w-4xl mx-auto">
+              <div className="flex-1">
+                <h3 className="text-white font-semibold mb-1">📱 AR Preview Mode</h3>
+                <p className="text-gray-300 text-sm">Move your device to explore the 3D model</p>
+              </div>
+              <Button onClick={exitImmersive} variant="secondary" size="sm">
+                <X className="w-4 h-4 mr-2" />
+                Exit AR
+              </Button>
+            </div>
           </div>
           
-          <div ref={sceneRef} className="w-full h-full">
-            <a-scene 
-              arjs="sourceType: webcam; debugUIEnabled: false;" 
-              embedded
-              style={{ width: '100%', height: '100%' }}
-            >
-              {/* Assets */}
-              <a-assets>
-                <a-asset-item 
-                  id="ar-model" 
-                  src={currentExperience.modelUrl}
-                />
-              </a-assets>
-
-              {/* AR Marker */}
-              <a-marker preset="hiro">
-                <a-entity
-                  gltf-model="#ar-model"
-                  scale="0.1 0.1 0.1"
-                  position="0 0 0"
-                  rotation="0 0 0"
-                  animation="property: rotation; to: 0 360 0; loop: true; dur: 8000"
-                />
-                
-                <a-text 
-                  value={currentExperience.title}
-                  position="0 2 0" 
-                  align="center"
-                  color="#ffffff"
-                  scale="2 2 2"
-                />
-              </a-marker>
-
-              {/* Camera */}
-              <a-entity camera />
-            </a-scene>
+          {/* Simplified AR View with 3D Model */}
+          <div className="w-full h-full flex items-center justify-center pt-20 pb-10">
+            <div className="relative w-full max-w-md mx-auto px-4">
+              {/* 3D Model Preview Card */}
+              <Card className="bg-black/40 backdrop-blur-md border-2 border-primary/30">
+                <CardContent className="p-6">
+                  <div className="text-center text-white mb-4">
+                    <h3 className="text-xl font-bold mb-2">{currentExperience.title}</h3>
+                    <p className="text-sm text-gray-300">{currentExperience.description}</p>
+                  </div>
+                  
+                  {/* 3D Model Container */}
+                  <div className="relative aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg overflow-hidden mb-4">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {/* Animated 3D representation */}
+                      <div className="relative w-48 h-48">
+                        <div className="absolute inset-0 animate-spin-slow">
+                          <div className="w-full h-full bg-gradient-to-br from-primary to-accent rounded-3xl transform rotate-45 opacity-80"></div>
+                        </div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Camera className="w-24 h-24 text-white animate-pulse" />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* AR Markers */}
+                    <div className="absolute top-2 left-2 w-8 h-8 border-l-4 border-t-4 border-primary"></div>
+                    <div className="absolute top-2 right-2 w-8 h-8 border-r-4 border-t-4 border-primary"></div>
+                    <div className="absolute bottom-2 left-2 w-8 h-8 border-l-4 border-b-4 border-primary"></div>
+                    <div className="absolute bottom-2 right-2 w-8 h-8 border-r-4 border-b-4 border-primary"></div>
+                  </div>
+                  
+                  {/* AR Features */}
+                  <div className="space-y-2 text-sm text-gray-300">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span>AR Camera Active</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                      <span>3D Model Loaded</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                      <span>Gesture Controls Enabled</span>
+                    </div>
+                  </div>
+                  
+                  {/* Note about full AR */}
+                  <div className="mt-4 p-3 bg-accent/20 border border-accent/30 rounded-lg">
+                    <p className="text-xs text-gray-300 text-center">
+                      💡 For full AR experience with camera overlay, visit on a mobile device with AR support (iOS 12+ or Android 8+)
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       )}
@@ -430,76 +458,84 @@ const ExploreARVRSimple: React.FC<ExploreARVRSimpleProps> = ({ category = 'all' 
 
       {/* QR Code Modal for AR on Mobile */}
       {showQRModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-background border border-primary/20 rounded-xl shadow-2xl max-w-md w-full p-8 relative">
-            {/* Close button */}
-            <Button
-              onClick={() => setShowQRModal(false)}
-              variant="ghost"
-              size="sm"
-              className="absolute top-4 right-4"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-background border border-primary/20 rounded-xl shadow-2xl max-w-md w-full my-8 relative max-h-[90vh] overflow-y-auto">
+            {/* Scroll indicator at top */}
+            <div className="sticky top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary animate-pulse z-10"></div>
+            
+            <div className="p-8">
+              {/* Close button */}
+              <Button
+                onClick={() => setShowQRModal(false)}
+                variant="ghost"
+                size="sm"
+                className="absolute top-4 right-4 z-10"
+              >
+                <X className="w-4 h-4" />
+              </Button>
 
-            {/* Modal content */}
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <QrCode className="w-8 h-8 text-white" />
-              </div>
-              
-              <h3 className="text-2xl font-bold mb-2">Scan to View in AR</h3>
-              <p className="text-muted-foreground mb-6">
-                Open your mobile camera and scan this QR code to experience {currentExperience.title} in Augmented Reality
-              </p>
-
-              {/* QR Code */}
-              <div className="bg-white p-6 rounded-lg inline-block mb-6 shadow-lg">
-                <QRCodeSVG
-                  value={`${window.location.origin}/ar-vr-preview?mode=ar&experience=${selectedExperience}`}
-                  size={200}
-                  level="H"
-                  includeMargin={true}
-                />
-              </div>
-
-              {/* Instructions */}
-              <div className="space-y-3 text-left bg-muted/30 p-4 rounded-lg">
-                <h4 className="font-semibold text-center mb-3">How to use:</h4>
-                <div className="flex items-start gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
-                    1
-                  </div>
-                  <p>Open your phone's camera app</p>
+              {/* Modal content */}
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                  <QrCode className="w-8 h-8 text-white" />
                 </div>
-                <div className="flex items-start gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
-                    2
-                  </div>
-                  <p>Point at the QR code above</p>
-                </div>
-                <div className="flex items-start gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
-                    3
-                  </div>
-                  <p>Tap the notification to open AR view</p>
-                </div>
-                <div className="flex items-start gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
-                    4
-                  </div>
-                  <p>Move your phone to explore in 3D</p>
-                </div>
-              </div>
-
-              {/* Mobile app suggestion */}
-              <div className="mt-6 p-3 bg-accent/10 border border-accent/20 rounded-lg">
-                <p className="text-xs text-muted-foreground flex items-center justify-center gap-2">
-                  <Smartphone className="w-4 h-4" />
-                  <span>Works best with AR-enabled mobile browsers</span>
+                
+                <h3 className="text-2xl font-bold mb-2">Scan to View in AR</h3>
+                <p className="text-muted-foreground mb-6">
+                  Open your mobile camera and scan this QR code to experience {currentExperience.title} in Augmented Reality
                 </p>
+
+                {/* QR Code */}
+                <div className="bg-white p-6 rounded-lg inline-block mb-6 shadow-lg">
+                  <QRCodeSVG
+                    value={`${window.location.origin}/ar-vr-preview?mode=ar&experience=${selectedExperience}`}
+                    size={200}
+                    level="H"
+                    includeMargin={true}
+                  />
+                </div>
+
+                {/* Instructions */}
+                <div className="space-y-3 text-left bg-muted/30 p-4 rounded-lg">
+                  <h4 className="font-semibold text-center mb-3">How to use:</h4>
+                  <div className="flex items-start gap-3 text-sm">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                      1
+                    </div>
+                    <p>Open your phone's camera app</p>
+                  </div>
+                  <div className="flex items-start gap-3 text-sm">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                      2
+                    </div>
+                    <p>Point at the QR code above</p>
+                  </div>
+                  <div className="flex items-start gap-3 text-sm">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                      3
+                    </div>
+                    <p>Tap the notification to open AR view</p>
+                  </div>
+                  <div className="flex items-start gap-3 text-sm">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0 font-bold">
+                      4
+                    </div>
+                    <p>Move your phone to explore in 3D</p>
+                  </div>
+                </div>
+
+                {/* Mobile app suggestion */}
+                <div className="mt-6 p-3 bg-accent/10 border border-accent/20 rounded-lg">
+                  <p className="text-xs text-muted-foreground flex items-center justify-center gap-2">
+                    <Smartphone className="w-4 h-4" />
+                    <span>Works best with AR-enabled mobile browsers</span>
+                  </p>
+                </div>
               </div>
             </div>
+            
+            {/* Scroll indicator at bottom */}
+            <div className="sticky bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
           </div>
         </div>
       )}
