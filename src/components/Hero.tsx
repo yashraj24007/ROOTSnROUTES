@@ -16,7 +16,7 @@ const Hero = memo(() => {
   
   return (
     <section 
-      className="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-screen h-screen flex items-center justify-center overflow-hidden overflow-x-hidden"
       style={{ 
         paddingTop: 'calc(var(--dev-notice-height, 0px) + 72px)',
         minHeight: 'calc(100vh - var(--dev-notice-height, 0px))'
@@ -52,34 +52,37 @@ const Hero = memo(() => {
             
             {/* Hero Headline */}
             <div className="mb-12">
-              <h1 className="mb-8 leading-tight animate-fade-in-up text-white whitespace-nowrap" style={{
+              <h1 className="mb-8 leading-tight animate-fade-in-up text-white" style={{
                 fontFamily: 'Poppins, sans-serif',
                 fontWeight: '700',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontSize: 'clamp(1.75rem, 5vw, 3.5rem)',
                 textShadow: '0px 2px 8px rgba(0, 0, 0, 0.8), 0px 4px 16px rgba(0, 0, 0, 0.6)',
                 letterSpacing: '-0.02em',
                 lineHeight: '1.2',
                 filter: 'drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5))',
-                animationDelay: '0.2s'
+                animationDelay: '0.2s',
+                wordWrap: 'break-word',
+                overflowWrap: 'break-word',
+                maxWidth: '100%'
               }}>
                 {t('hero.title')}
               </h1>
               
               {/* Subtext */}
-              <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-white/90 font-medium drop-shadow-lg" style={{ animationDelay: '0.3s' }}>
+              <p className="text-base md:text-xl max-w-3xl mx-auto leading-relaxed text-white/90 font-medium drop-shadow-lg px-4" style={{ animationDelay: '0.3s' }}>
                 {t('hero.description')}
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 md:mb-20" style={{ animationDelay: '0.6s' }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 md:mb-20 px-4" style={{ animationDelay: '0.6s' }}>
               {/* Primary CTA - Forest & Autumn theme */}
-              <Link to="/destinations">
+              <Link to="/destinations" className="w-full sm:w-auto">
                 <Button 
                   size="lg" 
-                  className="group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 dark:from-green-500 dark:to-emerald-500 dark:hover:from-green-400 dark:hover:to-emerald-400 text-white font-semibold px-10 py-4 rounded-full shadow-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-green-500/40 active:scale-95 text-lg"
+                  className="w-full sm:w-auto group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 dark:from-green-500 dark:to-emerald-500 dark:hover:from-green-400 dark:hover:to-emerald-400 text-white font-semibold px-10 py-4 rounded-full shadow-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-green-500/40 active:scale-95 text-base md:text-lg"
                 >
-                  <span className="relative z-10 flex items-center gap-3">
+                  <span className="relative z-10 flex items-center justify-center gap-3">
                     {t('hero.exploreButton')}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
@@ -87,13 +90,13 @@ const Hero = memo(() => {
               </Link>
               
               {/* Secondary CTA - Autumn accent */}
-              <Link to="/ai-trip-planner">
+              <Link to="/ai-trip-planner" className="w-full sm:w-auto">
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="group relative overflow-hidden bg-amber-50/10 dark:bg-amber-900/10 border-2 border-amber-100/40 dark:border-amber-400/40 hover:border-amber-200/60 dark:hover:border-amber-300/60 text-white hover:text-white font-medium px-8 py-4 rounded-full backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:bg-amber-100/15 dark:hover:bg-amber-800/15 active:scale-95 text-lg"
+                  className="w-full sm:w-auto group relative overflow-hidden bg-amber-50/10 dark:bg-amber-900/10 border-2 border-amber-100/40 dark:border-amber-400/40 hover:border-amber-200/60 dark:hover:border-amber-300/60 text-white hover:text-white font-medium px-8 py-4 rounded-full backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:bg-amber-100/15 dark:hover:bg-amber-800/15 active:scale-95 text-base md:text-lg"
                 >
-                  <span className="relative z-10 flex items-center gap-3">
+                  <span className="relative z-10 flex items-center justify-center gap-3">
                     {t('hero.aiPlanningButton')}
                     <Sparkles className="w-5 h-5" />
                   </span>

@@ -2,7 +2,8 @@
 .videoContainer {
   position: relative;
   overflow: hidden;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   height: 100vh;
   min-height: 100vh;
 }
@@ -11,7 +12,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   min-width: 100%;
   min-height: 100%;
@@ -27,7 +28,7 @@
 /* Ensure video covers edge cases with different aspect ratios */
 @media (min-aspect-ratio: 16/9) {
   .video {
-    width: 100vw;
+    width: 100%;
     height: 56.25vw; /* 16:9 aspect ratio */
     min-height: 100vh;
   }
@@ -37,7 +38,7 @@
   .video {
     width: 177.78vh; /* 16:9 aspect ratio */
     height: 100vh;
-    min-width: 100vw;
+    min-width: 100%;
   }
 }
 
@@ -53,7 +54,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   min-width: 100%;
   min-height: 100%;
@@ -70,7 +71,7 @@
 /* Ensure fallback image covers edge cases with different aspect ratios */
 @media (min-aspect-ratio: 16/9) {
   .fallbackImage {
-    width: 100vw;
+    width: 100%;
     height: 56.25vw;
     min-height: 100vh;
   }
@@ -80,7 +81,7 @@
   .fallbackImage {
     width: 177.78vh;
     height: 100vh;
-    min-width: 100vw;
+    min-width: 100%;
   }
 }
 

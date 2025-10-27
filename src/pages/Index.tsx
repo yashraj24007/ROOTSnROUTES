@@ -10,7 +10,7 @@ import DevelopmentNotice from "@/components/DevelopmentNotice";
 
 const Index = () => {
   return (
-    <main>
+    <main className="overflow-x-hidden w-full">
       <DevelopmentNotice />
       <Header />
       <Hero />
