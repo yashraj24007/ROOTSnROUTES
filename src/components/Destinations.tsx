@@ -7,6 +7,28 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import FavoriteButton from "@/components/FavoriteButton";
 
+// Helper function to get category-specific image keywords
+const getCategoryImage = (category: string, id: number) => {
+  const categoryKeywords: { [key: string]: string } = {
+    'waterfalls': 'waterfall,nature',
+    'hills': 'mountain,peak,landscape',
+    'temples': 'temple,architecture,religious',
+    'wildlife': 'wildlife,forest,nature',
+    'caves': 'cave,rock,formation',
+    'lakes': 'lake,water,serene',
+    'dams': 'dam,reservoir,water',
+    'parks': 'park,garden,nature',
+    'museums': 'museum,heritage,culture',
+    'monuments': 'monument,architecture,historic',
+    'forests': 'forest,trees,nature',
+    'villages': 'village,rural,traditional',
+    'markets': 'market,bazaar,local'
+  };
+  
+  const keyword = categoryKeywords[category] || 'nature,landscape,travel';
+  return `https://source.unsplash.com/800x600/?${keyword}&${id}`;
+};
+
 const Destinations = () => {
   const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -139,28 +161,50 @@ const Destinations = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {visibleDestinations.map((destination, index) => (
             <Card key={`${destination.id}-${currentIndex}-${index}`} className="overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300 group h-full">
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-64 overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600">
                 <img
-                  src={`https://picsum.photos/800/600?random=${destination.id}`}
+                  src={getCategoryImage(destination.category, destination.id)}
                   alt={destination.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
-                    // Fallback to a different image service if picsum fails
-                    e.currentTarget.src = `https://source.unsplash.com/800x600/?nature,travel,${destination.category}&sig=${destination.id}`;
+                    // Fallback to gradient background with category-specific emoji
+                    e.currentTarget.style.display = 'none';
+                    const parent = e.currentTarget.parentElement;
+                    if (parent && !parent.querySelector('.fallback-icon')) {
+                      const emojiMap: { [key: string]: string } = {
+                        'waterfalls': '💧',
+                        'hills': '⛰️',
+                        'temples': '🛕',
+                        'wildlife': '🦌',
+                        'caves': '🕳️',
+                        'lakes': '🌊',
+                        'dams': '🏞️',
+                        'parks': '🌳',
+                        'museums': '🏛️',
+                        'monuments': '🗿',
+                        'forests': '🌲',
+                        'villages': '🏘️',
+                        'markets': '🛒'
+                      };
+                      const fallback = document.createElement('div');
+                      fallback.className = 'fallback-icon absolute inset-0 flex items-center justify-center text-white text-6xl';
+                      fallback.textContent = emojiMap[destination.category] || '🏞️';
+                      parent.appendChild(fallback);
+                    }
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 
                 {/* Rating Badge */}
-                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
+                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1 z-20">
                   <Star className="w-4 h-4 text-yellow-400 fill-current" />
                   <span className="text-white text-sm font-medium">{destination.rating}</span>
                 </div>
 
                 {/* Type Badge */}
-                <div className="absolute top-4 left-4">
+                <div className="absolute top-4 left-4 z-20">
                   <div className={`px-2 py-1 rounded-full text-xs font-semibold ${
                     destination.type === 'hidden' 
                       ? 'bg-orange-500 text-white' 
@@ -171,20 +215,22 @@ const Destinations = () => {
                 </div>
 
                 {/* District Badge */}
-                <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">
+                <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 z-20">
                   <span className="text-white text-xs">{destination.district}</span>
                 </div>
                 
                 {/* Favorite Button */}
-                <FavoriteButton
-                  destinationId={destination.id}
-                  destinationName={destination.name}
-                  destinationType={destination.category}
-                  destinationDistrict={destination.district}
-                  destinationImageUrl={`https://picsum.photos/800/600?random=${destination.id}`}
-                  variant="floating"
-                  size="sm"
-                />
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+                  <FavoriteButton
+                    destinationId={destination.id}
+                    destinationName={destination.name}
+                    destinationType={destination.category}
+                    destinationDistrict={destination.district}
+                    destinationImageUrl={getCategoryImage(destination.category, destination.id)}
+                    variant="floating"
+                    size="sm"
+                  />
+                </div>
               </div>
               
               <div className="p-6">

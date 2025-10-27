@@ -16,29 +16,25 @@ const Hero = memo(() => {
   
   return (
     <section 
-      className="relative w-full min-h-screen flex items-start md:items-center justify-center overflow-hidden overflow-x-hidden"
+      className="relative w-full flex items-start md:items-center justify-center overflow-hidden overflow-x-hidden"
       style={{ 
-        paddingTop: 'calc(var(--dev-notice-height, 0px) + 72px)',
-        minHeight: 'max(100vh, calc(100vh + 40rem))',
-        paddingBottom: '4rem'
+        minHeight: '100vh'
       }}
     >
       {/* Fullscreen Animated Background with Waterfall/Forest */}
       <VideoBackground
-        videoSrc="/videos/hero_section.mp4.mp4"
+        videoSrc="/videos/hero_section.mp4"
         className="absolute inset-0 w-full h-full"
         autoPlay={true}
         muted={true}
-        overlay={true}
-        overlayOpacity={0.2}
+        overlay={false}
+        overlayOpacity={0}
         showControls={false}
       >
-        {/* Lighter overlay for brighter appearance */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-slate-800/15 to-slate-900/40 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/10 via-transparent to-teal-900/10 z-10" />
-        <div className="absolute inset-0 bg-black/15 z-10" />
+        {/* Minimal overlay only for text readability */}
+        <div className="absolute inset-0 bg-black/10 z-10" />
         
-        <div className="relative z-20 w-full flex flex-col justify-start md:justify-center px-4 py-8 md:py-20 pb-32 md:pb-32">
+        <div className="relative z-20 w-full flex flex-col justify-center px-4 py-8 md:py-12 pt-20 md:pt-24">
           {/* Main Hero Content - Centered */}
           <div className={`text-center max-w-5xl mx-auto transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -110,10 +106,11 @@ const Hero = memo(() => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 max-w-5xl mx-auto px-4">
                 {/* Natural Wonders Card */}
                 <Link to="/natural-wonders" className="group block relative z-30">
-                  <div className="text-center p-6 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/30 hover:border-white/55 hover:bg-white/25 relative overflow-hidden z-30">
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="text-center p-6 rounded-2xl bg-white/15 border border-white/30 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/50 hover:border-emerald-400/60 hover:bg-white/25 relative overflow-hidden z-30">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/30 to-teal-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 backdrop-blur-3xl"></div>
                     <div className="relative z-10">
-                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-xl">🏞️</div>
+                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-2xl">🏞️</div>
                       <h3 className="font-bold text-white text-xl mb-2 group-hover:text-emerald-100 transition-colors duration-300 tracking-wide drop-shadow-lg">
                         Natural Wonders
                       </h3>
@@ -126,10 +123,11 @@ const Hero = memo(() => {
                 
                 {/* Cultural Heritage Card */}
                 <Link to="/cultural-heritage" className="group block relative z-30">
-                  <div className="text-center p-6 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/30 hover:border-white/55 hover:bg-white/25 relative overflow-hidden z-30">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="text-center p-6 rounded-2xl bg-white/15 border border-white/30 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/50 hover:border-orange-400/60 hover:bg-white/25 relative overflow-hidden z-30">
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/30 to-amber-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 backdrop-blur-3xl"></div>
                     <div className="relative z-10">
-                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-xl">🎨</div>
+                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-2xl">🎨</div>
                       <h3 className="font-bold text-white text-xl mb-2 group-hover:text-orange-100 transition-colors duration-300 tracking-wide drop-shadow-lg">
                         Cultural Heritage
                       </h3>
@@ -142,10 +140,11 @@ const Hero = memo(() => {
                 
                 {/* Authentic Stays Card */}
                 <Link to="/stays" className="group block relative z-30">
-                  <div className="text-center p-6 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 hover:border-white/55 hover:bg-white/25 relative overflow-hidden z-30">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="text-center p-6 rounded-2xl bg-white/15 border border-white/30 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50 hover:border-blue-400/60 hover:bg-white/25 relative overflow-hidden z-30">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 backdrop-blur-3xl"></div>
                     <div className="relative z-10">
-                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-xl">🏡</div>
+                      <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-2xl">🏡</div>
                       <h3 className="font-bold text-white text-xl mb-2 group-hover:text-blue-100 transition-colors duration-300 tracking-wide drop-shadow-lg">
                         Authentic Stays
                       </h3>
