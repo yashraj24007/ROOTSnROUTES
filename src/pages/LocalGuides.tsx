@@ -9,9 +9,17 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import {
   Star, MapPin, Phone, Mail, MessageCircle, Award, Camera,
   Clock, Users, Globe, Search, Filter, MessageSquare, Calendar,
-  Shield, TrendingUp, Heart, Mountain, TreePine, Building, Car
+  Shield, TrendingUp, Heart, Mountain, TreePine, Building, Car, X, IndianRupee
 } from "lucide-react";
 import { useState, useMemo } from "react";
 
@@ -56,6 +64,8 @@ const LocalGuides = () => {
   const [selectedSpecialty, setSelectedSpecialty] = useState("all");
   const [selectedLanguage, setSelectedLanguage] = useState("all");
   const [activeTab, setActiveTab] = useState("all");
+  const [selectedGuide, setSelectedGuide] = useState<Guide | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const guides: Guide[] = [
     {
@@ -375,21 +385,19 @@ const LocalGuides = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden bg-forest-600">
+      <section className="relative pt-24 pb-16 overflow-hidden bg-gradient-to-br from-forest-500/90 via-autumn-500/80 to-forest-600/90">
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Meet Your Local Guides
             </h1>
-            <p className="text-xl text-forest-300 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
               Connect with certified local experts who know Jharkhand like the back of their hand
-            </p>
-            
-            {/* Search and Filters */}
+            </p>            {/* Search and Filters */}
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
                 <div className="relative lg:col-span-2">
@@ -449,37 +457,37 @@ const LocalGuides = () => {
       </section>
 
       {/* Guides Section */}
-      <section className="py-16">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredGuides.map((guide) => (
-              <Card key={guide.id} className="hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:scale-105">
+              <Card key={guide.id} className="hover:shadow-organic-lg transition-all duration-300 bg-card border border-border shadow-organic hover:scale-105">
                 <CardHeader className="text-center pb-4">
-                  <Avatar className="w-24 h-24 mx-auto mb-4 ring-4 ring-green-100">
+                  <Avatar className="w-24 h-24 mx-auto mb-4 ring-4 ring-forest-200 dark:ring-forest-700">
                     <AvatarImage src={guide.image} alt={guide.name} className="object-cover" />
-                    <AvatarFallback className="text-xl font-bold bg-gradient-to-r from-green-500 to-amber-500 text-white">
+                    <AvatarFallback className="text-xl font-bold bg-gradient-to-r from-forest-500 to-autumn-500 text-white">
                       {guide.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
-                  <CardTitle className="text-xl font-bold text-gray-900">{guide.name}</CardTitle>
-                  <div className="flex items-center justify-center text-gray-600 mb-2">
-                    <MapPin className="w-4 h-4 mr-1 text-green-600" />
+                  <CardTitle className="text-xl font-bold text-foreground">{guide.name}</CardTitle>
+                  <div className="flex items-center justify-center text-muted-foreground mb-2">
+                    <MapPin className="w-4 h-4 mr-1 text-autumn-600 dark:text-autumn-400" />
                     <span>{guide.location}, {guide.district}</span>
                   </div>
                   
                   {/* Rating and Stats */}
-                  <div className="flex items-center justify-center space-x-4 text-sm">
+                  <div className="flex items-center justify-center space-x-4 text-sm text-foreground">
                     <div className="flex items-center">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
+                      <Star className="w-4 h-4 text-yellow-500 dark:text-yellow-400 fill-current mr-1" />
                       <span className="font-semibold">{guide.rating}</span>
-                      <span className="text-gray-500 ml-1">({guide.reviews})</span>
+                      <span className="text-muted-foreground ml-1">({guide.reviews})</span>
                     </div>
                     <div className="flex items-center">
-                      <Users className="w-4 h-4 mr-1 text-emerald-600" />
+                      <Users className="w-4 h-4 mr-1 text-forest-600 dark:text-forest-400" />
                       <span>{guide.totalTours} tours</span>
                     </div>
                     <div className="flex items-center">
-                      <TrendingUp className="w-4 h-4 mr-1 text-green-600" />
+                      <TrendingUp className="w-4 h-4 mr-1 text-autumn-600 dark:text-autumn-400" />
                       <span>{guide.successRate}%</span>
                     </div>
                   </div>
@@ -488,12 +496,12 @@ const LocalGuides = () => {
                 <CardContent className="space-y-4">
                   {/* Experience and Price */}
                   <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-2 text-gray-600" />
+                    <div className="flex items-center text-muted-foreground">
+                      <Clock className="w-4 h-4 mr-2 text-forest-600 dark:text-forest-400" />
                       <span className="font-medium">{guide.experience}</span>
                     </div>
                     <div className="text-right">
-                      <span className="font-bold text-green-600">{guide.priceRange}</span>
+                      <span className="font-bold text-forest-600 dark:text-forest-400">{guide.priceRange}</span>
                     </div>
                   </div>
 
@@ -501,38 +509,38 @@ const LocalGuides = () => {
                   <div>
                     <div className="flex flex-wrap gap-1">
                       {guide.specialties.slice(0, 3).map((specialty, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs bg-green-100 text-green-800">
+                        <Badge key={index} variant="secondary" className="text-xs bg-forest-100 dark:bg-forest-900 text-forest-800 dark:text-forest-200 border-0">
                           {specialty}
                         </Badge>
                       ))}
                       {guide.specialties.length > 3 && (
-                        <Badge variant="secondary" className="text-xs">+{guide.specialties.length - 3}</Badge>
+                        <Badge variant="secondary" className="text-xs border-0">+{guide.specialties.length - 3}</Badge>
                       )}
                     </div>
                   </div>
 
                   {/* Languages */}
                   <div className="flex items-center space-x-2 text-sm">
-                    <Globe className="w-4 h-4 text-emerald-600" />
-                    <span className="text-gray-600">{guide.languages.join(', ')}</span>
+                    <Globe className="w-4 h-4 text-forest-600 dark:text-forest-400" />
+                    <span className="text-muted-foreground">{guide.languages.join(', ')}</span>
                   </div>
 
                   {/* Key Features */}
                   <div className="flex flex-wrap gap-2 text-xs">
                     {guide.vehicleAvailable && (
-                      <Badge variant="outline" className="text-emerald-600">
+                      <Badge variant="outline" className="text-forest-600 dark:text-forest-400 border-forest-300 dark:border-forest-700">
                         <Car className="w-3 h-3 mr-1" />
                         Vehicle Available
                       </Badge>
                     )}
                     {guide.emergencyTrained && (
-                      <Badge variant="outline" className="text-red-600">
+                      <Badge variant="outline" className="text-red-600 dark:text-red-400 border-red-300 dark:border-red-700">
                         <Shield className="w-3 h-3 mr-1" />
                         First Aid
                       </Badge>
                     )}
                     {guide.photographySkills && (
-                      <Badge variant="outline" className="text-amber-600">
+                      <Badge variant="outline" className="text-golden-600 dark:text-golden-400 border-golden-300 dark:border-golden-700">
                         <Camera className="w-3 h-3 mr-1" />
                         Photography
                       </Badge>
@@ -545,16 +553,16 @@ const LocalGuides = () => {
                       <div className={`w-2 h-2 rounded-full mr-2 ${
                         guide.availability === 'Available' ? 'bg-green-500' : 'bg-red-500'
                       }`}></div>
-                      <span className="text-sm font-medium">{guide.availability}</span>
+                      <span className="text-sm font-medium text-foreground">{guide.availability}</span>
                     </div>
-                    <div className="text-xs text-gray-500">{guide.groupSizeLimit}</div>
+                    <div className="text-xs text-muted-foreground">{guide.groupSizeLimit}</div>
                   </div>
 
                   {/* Contact Buttons */}
                   <div className="grid grid-cols-2 gap-2 pt-4">
                     <Button 
                       onClick={() => handleWhatsAppContact(guide.whatsapp, guide.name)}
-                      className="bg-green-600 hover:bg-green-700 text-white"
+                      className="bg-forest-600 hover:bg-forest-700 dark:bg-forest-500 dark:hover:bg-forest-600 text-white"
                       size="sm"
                     >
                       <MessageSquare className="w-4 h-4 mr-2" />
@@ -563,7 +571,7 @@ const LocalGuides = () => {
                     <Button 
                       onClick={() => handlePhoneCall(guide.phone)}
                       variant="outline" 
-                      className="border-emerald-600 text-emerald-600 hover:bg-emerald-50"
+                      className="border-forest-600 dark:border-forest-500 text-forest-600 dark:text-forest-400 hover:bg-forest-50 dark:hover:bg-forest-950"
                       size="sm"
                     >
                       <Phone className="w-4 h-4 mr-2" />
@@ -574,8 +582,12 @@ const LocalGuides = () => {
                   {/* View Details Button */}
                   <Button 
                     variant="ghost" 
-                    className="w-full text-gray-600 hover:text-green-600 hover:bg-green-50"
+                    className="w-full text-muted-foreground hover:text-autumn-600 dark:hover:text-autumn-400 hover:bg-autumn-50 dark:hover:bg-autumn-950"
                     size="sm"
+                    onClick={() => {
+                      setSelectedGuide(guide);
+                      setIsDialogOpen(true);
+                    }}
                   >
                     View Full Profile & Reviews
                   </Button>
@@ -587,11 +599,11 @@ const LocalGuides = () => {
           {/* No Results Message */}
           {filteredGuides.length === 0 && (
             <div className="text-center py-16">
-              <div className="text-gray-400 mb-4">
+              <div className="text-muted-foreground mb-4">
                 <Search className="w-16 h-16 mx-auto" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No guides found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your search criteria or filters</p>
+              <h3 className="text-xl font-semibold text-foreground mb-2">No guides found</h3>
+              <p className="text-muted-foreground mb-4">Try adjusting your search criteria or filters</p>
               <Button 
                 onClick={() => {
                   setSearchQuery("");
@@ -609,7 +621,7 @@ const LocalGuides = () => {
       </section>
 
       {/* Information Section */}
-      <section className="py-16 bg-forest-50 dark:bg-forest-900">
+      <section className="py-16 bg-forest-50 dark:bg-forest-950/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
@@ -689,8 +701,8 @@ const LocalGuides = () => {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold mb-3 text-green-600">✓ Standard Services</h4>
-                    <ul className="text-sm text-gray-600 space-y-2">
+                    <h4 className="font-semibold mb-3 text-forest-600 dark:text-forest-400">✓ Standard Services</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
                       <li>• Local area expertise and navigation</li>
                       <li>• Cultural interpretation and storytelling</li>
                       <li>• Hidden gems and off-beaten path locations</li>
@@ -700,8 +712,8 @@ const LocalGuides = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3 text-emerald-600">+ Additional Services</h4>
-                    <ul className="text-sm text-gray-600 space-y-2">
+                    <h4 className="font-semibold mb-3 text-autumn-600 dark:text-autumn-400">+ Additional Services</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
                       <li>• Transportation (where available)</li>
                       <li>• Photography assistance and tips</li>
                       <li>• First aid and emergency training</li>
@@ -739,8 +751,239 @@ const LocalGuides = () => {
         </div>
       </section>
 
+      {/* Guide Details Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          {selectedGuide && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-4 mb-4">
+                  <Avatar className="w-20 h-20 ring-4 ring-forest-200 dark:ring-forest-700">
+                    <AvatarImage src={selectedGuide.image} alt={selectedGuide.name} />
+                    <AvatarFallback className="text-xl font-bold bg-gradient-to-r from-forest-500 to-autumn-500 text-white">
+                      {selectedGuide.name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <DialogTitle className="text-2xl mb-2">{selectedGuide.name}</DialogTitle>
+                    <div className="flex items-center text-muted-foreground mb-2">
+                      <MapPin className="w-4 h-4 mr-1 text-autumn-600 dark:text-autumn-400" />
+                      <span>{selectedGuide.location}, {selectedGuide.district}</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-sm">
+                      <div className="flex items-center">
+                        <Star className="w-4 h-4 text-yellow-500 dark:text-yellow-400 fill-current mr-1" />
+                        <span className="font-semibold">{selectedGuide.rating}</span>
+                        <span className="text-muted-foreground ml-1">({selectedGuide.reviews} reviews)</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Users className="w-4 h-4 mr-1 text-forest-600 dark:text-forest-400" />
+                        <span>{selectedGuide.totalTours} tours</span>
+                      </div>
+                      <div className="flex items-center">
+                        <TrendingUp className="w-4 h-4 mr-1 text-autumn-600 dark:text-autumn-400" />
+                        <span>{selectedGuide.successRate}% success</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <Separator className="my-4" />
+
+              <div className="space-y-6">
+                {/* About */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">About {selectedGuide.name.split(' ')[0]}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{selectedGuide.description}</p>
+                </div>
+
+                {/* Quick Info */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-forest-50 dark:bg-forest-950/50 p-4 rounded-lg">
+                    <Clock className="w-5 h-5 text-forest-600 dark:text-forest-400 mb-2" />
+                    <p className="text-sm text-muted-foreground">Experience</p>
+                    <p className="font-semibold text-foreground">{selectedGuide.experience}</p>
+                  </div>
+                  <div className="bg-autumn-50 dark:bg-autumn-950/50 p-4 rounded-lg">
+                    <IndianRupee className="w-5 h-5 text-autumn-600 dark:text-autumn-400 mb-2" />
+                    <p className="text-sm text-muted-foreground">Price Range</p>
+                    <p className="font-semibold text-foreground">{selectedGuide.priceRange}</p>
+                  </div>
+                  <div className="bg-forest-50 dark:bg-forest-950/50 p-4 rounded-lg">
+                    <Users className="w-5 h-5 text-forest-600 dark:text-forest-400 mb-2" />
+                    <p className="text-sm text-muted-foreground">Group Size</p>
+                    <p className="font-semibold text-foreground">{selectedGuide.groupSizeLimit}</p>
+                  </div>
+                  <div className="bg-autumn-50 dark:bg-autumn-950/50 p-4 rounded-lg">
+                    <div className={`w-3 h-3 rounded-full mb-2 ${
+                      selectedGuide.availability === 'Available' ? 'bg-green-500' : 'bg-red-500'
+                    }`}></div>
+                    <p className="text-sm text-muted-foreground">Status</p>
+                    <p className="font-semibold text-foreground">{selectedGuide.availability}</p>
+                  </div>
+                </div>
+
+                {/* Specialties */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Specialties</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedGuide.specialties.map((specialty, index) => (
+                      <Badge key={index} variant="secondary" className="bg-forest-100 dark:bg-forest-900 text-forest-800 dark:text-forest-200 border-0">
+                        {specialty}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Areas of Expertise */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Areas of Expertise</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {selectedGuide.expertise.map((item, index) => (
+                      <div key={index} className="flex items-center text-sm text-muted-foreground">
+                        <Award className="w-4 h-4 mr-2 text-autumn-600 dark:text-autumn-400" />
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Languages */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Languages Spoken</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedGuide.languages.map((language, index) => (
+                      <Badge key={index} variant="outline" className="border-forest-300 dark:border-forest-700">
+                        <Globe className="w-3 h-3 mr-1" />
+                        {language}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Certifications */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Certifications & Training</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {selectedGuide.certifications.map((cert, index) => (
+                      <div key={index} className="flex items-center text-sm text-muted-foreground">
+                        <Shield className="w-4 h-4 mr-2 text-forest-600 dark:text-forest-400" />
+                        {cert}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Service Features */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Service Features</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedGuide.vehicleAvailable && (
+                      <Badge variant="outline" className="text-forest-600 dark:text-forest-400 border-forest-300 dark:border-forest-700">
+                        <Car className="w-3 h-3 mr-1" />
+                        Vehicle Available
+                      </Badge>
+                    )}
+                    {selectedGuide.emergencyTrained && (
+                      <Badge variant="outline" className="text-red-600 dark:text-red-400 border-red-300 dark:border-red-700">
+                        <Shield className="w-3 h-3 mr-1" />
+                        First Aid Certified
+                      </Badge>
+                    )}
+                    {selectedGuide.photographySkills && (
+                      <Badge variant="outline" className="text-golden-600 dark:text-golden-400 border-golden-300 dark:border-golden-700">
+                        <Camera className="w-3 h-3 mr-1" />
+                        Photography Guide
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+
+                {/* Preferred Areas */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Preferred Service Areas</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedGuide.preferredAreas.map((area, index) => (
+                      <Badge key={index} variant="secondary" className="bg-autumn-100 dark:bg-autumn-900 text-autumn-800 dark:text-autumn-200 border-0">
+                        <MapPin className="w-3 h-3 mr-1" />
+                        {area}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Testimonials */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-foreground">Client Reviews & Testimonials</h3>
+                  <div className="space-y-4">
+                    {selectedGuide.testimonials.map((testimonial, index) => (
+                      <Card key={index} className="bg-card border-border">
+                        <CardContent className="pt-6">
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <p className="font-semibold text-foreground">{testimonial.client}</p>
+                              <p className="text-xs text-muted-foreground">{new Date(testimonial.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                            </div>
+                            <div className="flex items-center">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-4 h-4 ${
+                                    i < testimonial.rating
+                                      ? 'text-yellow-500 dark:text-yellow-400 fill-current'
+                                      : 'text-gray-300 dark:text-gray-600'
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                          <p className="text-muted-foreground italic">"{testimonial.review}"</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Contact Actions */}
+                <div className="sticky bottom-0 bg-background pt-4 pb-2 border-t border-border">
+                  <div className="grid grid-cols-2 gap-4">
+                    <Button 
+                      onClick={() => handleWhatsAppContact(selectedGuide.whatsapp, selectedGuide.name)}
+                      className="bg-forest-600 hover:bg-forest-700 dark:bg-forest-500 dark:hover:bg-forest-600 text-white"
+                    >
+                      <MessageSquare className="w-4 h-4 mr-2" />
+                      WhatsApp Now
+                    </Button>
+                    <Button 
+                      onClick={() => handlePhoneCall(selectedGuide.phone)}
+                      variant="outline"
+                      className="border-forest-600 dark:border-forest-500 text-forest-600 dark:text-forest-400 hover:bg-forest-50 dark:hover:bg-forest-950"
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call Now
+                    </Button>
+                  </div>
+                  <div className="mt-3 text-center">
+                    <Button 
+                      variant="link" 
+                      size="sm"
+                      onClick={() => window.open(`mailto:${selectedGuide.email}`, '_blank')}
+                      className="text-muted-foreground hover:text-autumn-600 dark:hover:text-autumn-400"
+                    >
+                      <Mail className="w-3 h-3 mr-1" />
+                      Email: {selectedGuide.email}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <Footer />
-    </div>
+    </main>
   );
 };
 

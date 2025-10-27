@@ -42,3 +42,4 @@ dist-ssr
 # Security cleanup files
 cleanup-security.ps1
 SECURITY_BREACH_FIX.md
+.vercel
