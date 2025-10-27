@@ -22,7 +22,7 @@ const DevelopmentNotice = () => {
         <div className="flex items-center gap-2 justify-center">
           <Sparkles className="w-4 h-4 flex-shrink-0 animate-pulse text-autumn-200" />
           <p className="text-xs md:text-sm font-medium text-center">
-            <span className="font-semibold text-forest-100">🚀 We're building something amazing!</span> <span className="text-forest-200">Some features are still in development - Your Jharkhand adventure starts here</span> <span className="text-autumn-200">✨</span>
+            <span className="font-semibold text-white">🎯 Demo Implementation</span> <span className="text-forest-100">This project is implemented as a demonstration - Experience Jharkhand's digital tourism platform</span> <span className="text-autumn-200">✨</span>
           </p>
         </div>
       </div>

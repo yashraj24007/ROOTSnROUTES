@@ -33,6 +33,12 @@ dist-ssr
 *.env
 !.env.example
 
+# Security - Never commit these
+*_URLS.txt
+*_KEYS.txt
+*_SECRETS.txt
+*_CREDENTIALS.txt
+
 # Security cleanup files
 cleanup-security.ps1
 SECURITY_BREACH_FIX.md

@@ -5,6 +5,7 @@
 
 <h1 align="center">🌿 ROOTSnROUTES: Authentic Tourism of Jharkhand 🚀</h1>
 <p align="center">
+  <strong>🎯 Demo Implementation</strong><br>
   Discover, experience, and connect with Jharkhand through authentic local stays, cultural crafts, and AI-powered trip planning.
 </p>
 
@@ -12,6 +13,13 @@
   <img src="https://img.shields.io/badge/Frontend-React%20%2B%20Vite-blue?style=for-the-badge&logo=react" />
   <img src="https://img.shields.io/badge/Styling-TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css" />
   <img src="https://img.shields.io/badge/Backend-Supabase-3FCF8E?style=for-the-badge&logo=supabase" />
+  <img src="https://img.shields.io/badge/Live-Vercel-000000?style=for-the-badge&logo=vercel" />
+</p>
+
+<p align="center">
+  <a href="https://rootsnroutes-sigma.vercel.app" target="_blank">🌐 Live Demo</a> •
+  <a href="#-getting-started">Quick Start</a> •
+  <a href="#-tech-stack">Tech Stack</a>
 </p>
 
 ---
@@ -149,17 +157,53 @@ ROOTSnROUTES is now a complete, production-ready platform for digital tourism in
 
 ## 🔧 Getting Started
 
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
+- Supabase account (for authentication & database)
+
+### Installation
+
 ```bash
 # Clone the repository
 git clone https://github.com/yashraj24007/ROOTSnROUTES.git
 
-# Install dependencies
+# Navigate to project directory
 cd ROOTSnROUTES
+
+# Install dependencies
 npm install
+
+# Copy environment variables
+cp .env.example .env
+# Edit .env and add your API keys
 
 # Start development server
 npm run dev
-
-# Access at
-http://localhost:5173
 ```
+
+### Access the Application
+- **Local Development**: http://localhost:8080
+- **Production**: https://rootsnroutes-sigma.vercel.app
+
+### Environment Variables
+Create a `.env` file with:
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_GROQ_API_KEY=your_groq_api_key
+VITE_WEATHER_API_KEY=your_weather_api_key
+```
+
+See `.env.example` for complete configuration details.
+
+---
+
+## 🔐 Security Notes
+
+⚠️ **Important**: Never commit the `.env` file to version control. All secret keys are gitignored and should only be stored in:
+- Local `.env` file (development)
+- Vercel environment variables (production)
+- Supabase dashboard (OAuth configuration)
+
+For Google OAuth setup, see `GOOGLE_OAUTH_SETUP.md`
