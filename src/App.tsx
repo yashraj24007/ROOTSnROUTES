@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingChatbot from './components/FloatingChatbot';
+import AppErrorBoundary from './components/AppErrorBoundary';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -76,78 +77,80 @@ const App = () => {
         <LanguageProvider>
           <AuthProvider>
             <UserPreferencesProvider>
-              <Router 
-                future={{
-                  v7_startTransition: true,
-                  v7_relativeSplatPath: true
-                }}
-              >
-                <ScrollToTop />
-                <RedirectHandler />
-                <div className="flex flex-col bg-background text-foreground transition-colors duration-300 overflow-x-hidden">
-                  <Suspense fallback={<Loading />}>
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/about" element={<About />} />
-                      <Route path="/about-jharkhand" element={<About />} />
-                      <Route path="/explore" element={<Explore />} />
-                      <Route path="/destinations" element={<Destinations />} />
-                      <Route path="/destinations/:id" element={<DestinationDetail />} />
-                      <Route path="/destination/:id" element={<DestinationDetail />} />
-                      <Route path="/districts" element={<ExploreDistricts />} />
-                      <Route path="/explore-districts" element={<ExploreDistricts />} />
-                      <Route path="/districts/:districtName" element={<DistrictDestinations />} />
-                      <Route path="/destinations-list" element={<DestinationsList />} />
-                      <Route path="/restaurants" element={<Restaurants />} />
-                      <Route path="/services" element={<Services />} />
-                      <Route path="/tour-packages" element={<Services />} />
-                      <Route path="/stays" element={<AuthenticStays />} />
-                      <Route path="/homestays" element={<AuthenticStays />} />
-                      <Route path="/cultural-heritage" element={<CulturalHeritage />} />
-                      <Route path="/natural-wonders" element={<NaturalWonders />} />
-                      <Route path="/transport" element={<Transport />} />
-                      <Route path="/weather" element={<Weather />} />
-                      <Route path="/chatbot" element={<Chatbot />} />
-                      <Route path="/ai-itinerary" element={<AIItineraryPlanner />} />
-                      <Route path="/ai-planner" element={<AIItineraryPlanner />} />
-                      <Route path="/ai-trip-planner" element={<AITripPlannerPage />} />
-                      <Route path="/smart-weather" element={<SmartWeatherPage />} />
-                      <Route path="/predictive-booking" element={<PredictiveBookingPage />} />
-                      <Route path="/ar-vr-preview" element={<ARVRPreviewPage />} />
-                      <Route path="/marketplace" element={<Marketplace />} />
-                      <Route path="/marketplace/:id" element={<MarketplaceDetail />} />
-                      <Route path="/restaurants/:id" element={<RestaurantDetail />} />
-                      <Route path="/stays/:id" element={<HotelDetail />} />
-                      <Route path="/feedback-analysis" element={<FeedbackAnalysis />} />
-                      <Route path="/share-feedback" element={<FeedbackAnalysis />} />
-                      <Route path="/analytics-dashboard" element={<AnalyticsDashboard />} />
-                      <Route path="/tourism-insights" element={<AnalyticsDashboard />} />
-                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                      <Route path="/terms-of-service" element={<TermsOfService />} />
-                      <Route path="/handicrafts" element={<Handicrafts />} />
-                      <Route path="/local-guides" element={<LocalGuides />} />
-                      <Route path="/community" element={<CommunityChat />} />
-                      <Route path="/community-chat" element={<CommunityChat />} />
-                      <Route path="/support" element={<Support />} />
-                      <Route path="/help-center" element={<Support />} />
-                      <Route path="/contact-us" element={<Support />} />
-                      <Route path="/report-issues" element={<Support />} />
-                      <Route path="/profile" element={<UserProfile />} />
-                      <Route path="/settings" element={<Settings />} />
-                      <Route path="/favorites" element={<Favorites />} />
-                      <Route path="/google-auth-test" element={<GoogleAuthTestPage />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </Suspense>
-                </div>
-            </Router>
-            <FloatingChatbot />
-            <Toaster />
-          </UserPreferencesProvider>
-        </AuthProvider>
-      </LanguageProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+              <AppErrorBoundary>
+                <Router 
+                  future={{
+                    v7_startTransition: true,
+                    v7_relativeSplatPath: true
+                  }}
+                >
+                  <ScrollToTop />
+                  <RedirectHandler />
+                  <div className="flex flex-col bg-background text-foreground transition-colors duration-300 overflow-x-hidden">
+                    <Suspense fallback={<Loading />}>
+                      <Routes>
+                        <Route path="/" element={<Index />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/about-jharkhand" element={<About />} />
+                        <Route path="/explore" element={<Explore />} />
+                        <Route path="/destinations" element={<Destinations />} />
+                        <Route path="/destinations/:id" element={<DestinationDetail />} />
+                        <Route path="/destination/:id" element={<DestinationDetail />} />
+                        <Route path="/districts" element={<ExploreDistricts />} />
+                        <Route path="/explore-districts" element={<ExploreDistricts />} />
+                        <Route path="/districts/:districtName" element={<DistrictDestinations />} />
+                        <Route path="/destinations-list" element={<DestinationsList />} />
+                        <Route path="/restaurants" element={<Restaurants />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/tour-packages" element={<Services />} />
+                        <Route path="/stays" element={<AuthenticStays />} />
+                        <Route path="/homestays" element={<AuthenticStays />} />
+                        <Route path="/cultural-heritage" element={<CulturalHeritage />} />
+                        <Route path="/natural-wonders" element={<NaturalWonders />} />
+                        <Route path="/transport" element={<Transport />} />
+                        <Route path="/weather" element={<Weather />} />
+                        <Route path="/chatbot" element={<Chatbot />} />
+                        <Route path="/ai-itinerary" element={<AIItineraryPlanner />} />
+                        <Route path="/ai-planner" element={<AIItineraryPlanner />} />
+                        <Route path="/ai-trip-planner" element={<AITripPlannerPage />} />
+                        <Route path="/smart-weather" element={<SmartWeatherPage />} />
+                        <Route path="/predictive-booking" element={<PredictiveBookingPage />} />
+                        <Route path="/ar-vr-preview" element={<ARVRPreviewPage />} />
+                        <Route path="/marketplace" element={<Marketplace />} />
+                        <Route path="/marketplace/:id" element={<MarketplaceDetail />} />
+                        <Route path="/restaurants/:id" element={<RestaurantDetail />} />
+                        <Route path="/stays/:id" element={<HotelDetail />} />
+                        <Route path="/feedback-analysis" element={<FeedbackAnalysis />} />
+                        <Route path="/share-feedback" element={<FeedbackAnalysis />} />
+                        <Route path="/analytics-dashboard" element={<AnalyticsDashboard />} />
+                        <Route path="/tourism-insights" element={<AnalyticsDashboard />} />
+                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                        <Route path="/terms-of-service" element={<TermsOfService />} />
+                        <Route path="/handicrafts" element={<Handicrafts />} />
+                        <Route path="/local-guides" element={<LocalGuides />} />
+                        <Route path="/community" element={<CommunityChat />} />
+                        <Route path="/community-chat" element={<CommunityChat />} />
+                        <Route path="/support" element={<Support />} />
+                        <Route path="/help-center" element={<Support />} />
+                        <Route path="/contact-us" element={<Support />} />
+                        <Route path="/report-issues" element={<Support />} />
+                        <Route path="/profile" element={<UserProfile />} />
+                        <Route path="/settings" element={<Settings />} />
+                        <Route path="/favorites" element={<Favorites />} />
+                        <Route path="/google-auth-test" element={<GoogleAuthTestPage />} />
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </Suspense>
+                  </div>
+                </Router>
+              </AppErrorBoundary>
+              <FloatingChatbot />
+              <Toaster />
+            </UserPreferencesProvider>
+          </AuthProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

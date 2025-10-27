@@ -109,6 +109,12 @@ const FloatingChatbot: React.FC = () => {
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
 
   const testAPIConnection = useCallback(async () => {
+    // Only test if we have a valid API key
+    if (!apiKey || apiKey === 'your_groq_api_key_here') {
+      console.log('⚠️ API key not configured properly');
+      return;
+    }
+
     try {
       const response = await fetch('https://api.groq.com/openai/v1/models', {
         method: 'GET',
@@ -137,10 +143,12 @@ const FloatingChatbot: React.FC = () => {
     console.log('🔑 API Key length:', apiKey ? apiKey.length : 0);
     console.log('🔑 API Key starts with gsk_:', apiKey ? apiKey.startsWith('gsk_') : false);
     
-    // Test API connection
-    if (apiKey) {
+    // Test API connection only if we have a valid key
+    if (apiKey && apiKey !== 'your_groq_api_key_here') {
       console.log('🧪 Testing API connection...');
       testAPIConnection();
+    } else {
+      console.log('⚠️ Skipping API test - invalid or missing API key');
     }
   }, [apiKey, testAPIConnection]);
 
@@ -163,9 +171,26 @@ const FloatingChatbot: React.FC = () => {
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
 
-    if (!apiKey) {
-      console.error('❌ No API key found');
-      alert('Please set your VITE_GROQ_API_KEY in the environment variables');
+    if (!apiKey || apiKey === 'your_groq_api_key_here') {
+      console.error('❌ No valid API key found');
+      
+      // Add error message to chat
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: '⚠️ **API Configuration Required**\n\nTo use the AI chatbot, please:\n\n1. Get your Groq API key from [console.groq.com](https://console.groq.com/)\n2. Add it to your `.env` file:\n   `VITE_GROQ_API_KEY=your_actual_key_here`\n3. Restart the development server\n\nFor now, I can still help with basic information about Jharkhand tourism! 🏔️',
+        timestamp: new Date()
+      };
+      
+      const userMessage: Message = {
+        id: (Date.now() - 1).toString(),
+        role: 'user',
+        content: input,
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, userMessage, errorMessage]);
+      setInput('');
       return;
     }
 
