@@ -17,10 +17,12 @@ export default defineConfig(() => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      'three-dev': 'three'
     },
   },
   build: {
     rollupOptions: {
+      external: ['three-dev', 'aframe', 'aframe-extras', 'aframe-core'],
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
@@ -41,7 +43,6 @@ export default defineConfig(() => ({
     }
   },
   optimizeDeps: {
-    exclude: ['aframe', 'aframe-extras', 'aframe-core']
-  },
-  assetsInclude: ['**/*.html']
+    exclude: ['aframe', 'aframe-extras', 'aframe-core', 'three-dev']
+  }
 }));
