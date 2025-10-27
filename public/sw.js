@@ -1,9 +1,9 @@
 // Simple Service Worker for caching static assets
-const CACHE_NAME = 'rootsnroutes-v1';
+const CACHE_NAME = 'rootsnroutes-v2';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/manifest.json',
+  '/site.webmanifest',
 ];
 
 // Install event - cache static assets

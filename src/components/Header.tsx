@@ -13,6 +13,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/contexts/AuthContext";
 import LoginModal from "@/components/LoginModal";
 import ThemeToggle from "@/components/ThemeToggle";
+import Logo from "@/components/Logo";
 import { useState, useRef, useCallback } from "react";
 
 const Header = () => {
@@ -141,30 +142,10 @@ const Header = () => {
           {/* Logo */}
           <Link 
             to="/" 
-            className="logo-enhanced flex-shrink-0 flex items-center gap-2 hover:opacity-80 transition-opacity"
+            className="logo-enhanced flex-shrink-0 hover:opacity-80 transition-opacity"
             aria-label="ROOTSnROUTES - Go to homepage"
           >
-            <img 
-              src="/logo.png" 
-              alt="ROOTSnROUTES Logo" 
-              className="h-8 md:h-10 w-auto object-contain"
-              onError={(e) => {
-                // Fallback to text if logo doesn't load
-                console.log('Logo failed to load');
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
-            <span 
-              className="logo-text text-lg md:text-2xl font-bold"
-              style={{
-                background: 'linear-gradient(to right, hsl(140 40% 35%), hsl(25 75% 58%))',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}
-            >
-              ROOTSnROUTES
-            </span>
+            <Logo size={40} showText={true} />
           </Link>
 
           {/* Navigation */}
@@ -296,9 +277,7 @@ const Header = () => {
                 <div className="flex flex-col h-full">
                   {/* Mobile Menu Header */}
                   <div className="flex items-center justify-between p-4 border-b">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-bold text-lg">ROOTSnROUTES</span>
-                    </div>
+                    <Logo size={32} showText={true} />
                   </div>
                   
                   {/* Mobile Navigation Links */}

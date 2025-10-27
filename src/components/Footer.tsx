@@ -8,6 +8,7 @@ import { supabase } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
 import NewsletterService from "@/services/newsletterService";
 import CommunityChatLink from "./CommunityChatLink";
+import Logo from "@/components/Logo";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -127,22 +128,8 @@ const Footer = () => {
         <div className="flex flex-wrap items-start justify-between gap-6 mb-6">
           {/* Brand Section */}
           <div className="flex-shrink-0 max-w-xs">
-            <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src="/logo.png" 
-                alt="ROOTSnROUTES Logo" 
-                className="w-12 h-12 object-contain"
-                onError={(e) => {
-                  // Fallback if logo doesn't load - show the original R&R icon
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = document.createElement('div');
-                  fallback.className = "w-12 h-12 bg-gradient-card rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-pink";
-                  fallback.textContent = "R&R";
-                  target.parentNode?.insertBefore(fallback, target as Node);
-                }}
-              />
-              <span className="text-xl font-bold text-foreground">ROOTSnROUTES</span>
+            <div className="mb-4">
+              <Logo size={48} showText={true} />
             </div>
             <p className="text-muted-foreground mb-4 leading-relaxed">
               {t('footer.tagline')}
