@@ -16,11 +16,11 @@ const Hero = memo(() => {
   
   return (
     <section 
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden overflow-x-hidden"
+      className="relative w-full min-h-screen flex items-start md:items-center justify-center overflow-hidden overflow-x-hidden"
       style={{ 
         paddingTop: 'calc(var(--dev-notice-height, 0px) + 72px)',
-        minHeight: 'calc(100vh - var(--dev-notice-height, 0px))',
-        paddingBottom: '2rem'
+        minHeight: 'max(100vh, calc(100vh + 40rem))',
+        paddingBottom: '4rem'
       }}
     >
       {/* Fullscreen Animated Background with Waterfall/Forest */}
@@ -38,7 +38,7 @@ const Hero = memo(() => {
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/10 via-transparent to-teal-900/10 z-10" />
         <div className="absolute inset-0 bg-black/15 z-10" />
         
-        <div className="relative z-20 min-h-[calc(100vh-140px)] flex flex-col justify-center px-4 py-12 md:py-20 pb-24 md:pb-32">
+        <div className="relative z-20 w-full flex flex-col justify-start md:justify-center px-4 py-8 md:py-20 pb-32 md:pb-32">
           {/* Main Hero Content - Centered */}
           <div className={`text-center max-w-5xl mx-auto transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -52,8 +52,8 @@ const Hero = memo(() => {
             </div>
             
             {/* Hero Headline */}
-            <div className="mb-12">
-              <h1 className="mb-8 leading-tight animate-fade-in-up text-white" style={{
+            <div className="mb-8 md:mb-12">
+              <h1 className="mb-6 md:mb-8 leading-tight animate-fade-in-up text-white" style={{
                 fontFamily: 'Poppins, sans-serif',
                 fontWeight: '700',
                 fontSize: 'clamp(1.75rem, 5vw, 3.5rem)',
@@ -76,7 +76,7 @@ const Hero = memo(() => {
             </div>
 
             {/* Action Buttons */}
-            <div className="relative z-30 flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 md:mb-20 px-4" style={{ animationDelay: '0.6s' }}>
+            <div className="relative z-30 flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 md:mb-20 px-4" style={{ animationDelay: '0.6s' }}>
               {/* Primary CTA - Forest & Autumn theme */}
               <Link to="/destinations" className="w-full sm:w-auto relative z-30">
                 <Button 
@@ -106,8 +106,8 @@ const Hero = memo(() => {
             </div>
             
             {/* Feature Cards Section */}
-            <div className={`relative z-30 animate-fade-in-up mt-12 pb-16 md:pb-24 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ animationDelay: '1.0s' }}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
+            <div className={`relative z-30 animate-fade-in-up mt-8 md:mt-12 pb-16 md:pb-24 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ animationDelay: '1.0s' }}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 max-w-5xl mx-auto px-4">
                 {/* Natural Wonders Card */}
                 <Link to="/natural-wonders" className="group block relative z-30">
                   <div className="text-center p-6 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md shadow-xl transition-all duration-500 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/30 hover:border-white/55 hover:bg-white/25 relative overflow-hidden z-30">
